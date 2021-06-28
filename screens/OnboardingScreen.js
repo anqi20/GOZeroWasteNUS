@@ -55,7 +55,7 @@ export default function OnboardingScreen({ navigation }) {
 
   const handleDone = () => {
     return (
-      navigation.navigate("Login Screen")
+      navigation.navigate("Log In")
     )
   }
 

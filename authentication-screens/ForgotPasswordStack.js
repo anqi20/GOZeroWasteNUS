@@ -1,6 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import ForgotPasswordScreen from "./ForgotPasswordScreen";
 import ForgotPasswordVerificationScreen from "./ForgotPasswordVerificationScreen";
 import ForgotPasswordConfirmationScreen from "./ForgotPasswordConfirmationScreen";

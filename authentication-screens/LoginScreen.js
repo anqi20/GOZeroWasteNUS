@@ -7,16 +7,18 @@ import colors from "../assets/colors";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function LoginScreen({ navigation }) {
-
   return (
     <View style={styles.container}>
       <Formik
         initialValues={{username:"", password: ""}}
+        onSubmit={(values) => {
+
+        }}
       >
         {(props) => (
           <View>
             <Input 
-              containerStyle={globalStyles.inputContainer}
+              containerStyle={globalStyles.inputContainerTop}
               label="Your NUS email address"
               labelStyle={globalStyles.inputLabel}
               placeholder="username@u.nus.edu"
@@ -26,6 +28,8 @@ export default function LoginScreen({ navigation }) {
               }
               errorMessage="Username is invalid. Please check again."
               errorStyle={globalStyles.inputError}
+              onChangeText={props.handleChange("username")}
+              value={props.values.username}
             />
             <Input 
               containerStyle={globalStyles.inputContainer}
@@ -39,6 +43,8 @@ export default function LoginScreen({ navigation }) {
               secureTextEntry={true}
               errorMessage="Password is invalid. Please check again."
               errorStyle={globalStyles.inputError}
+              onChangeText={props.handleChange("password")}
+              value={props.values.password}
             />
             <TouchableOpacity
               style={styles.forgotPwdWrapper}
@@ -48,7 +54,8 @@ export default function LoginScreen({ navigation }) {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={globalStyles.button}
+              style={globalStyles.buttonTop}
+              onPress={props.handleSubmit}
               onPress={() => navigation.navigate("Main Tab Navigator")}
             >
               <Text style={globalStyles.buttonText}>Login</Text>
@@ -78,7 +85,6 @@ const styles = StyleSheet.create({
   },
   forgotPwd: {
     color: colors.darkGrey,
-    marginBottom: 90,
   }, 
   signUpWrapper: {
     marginHorizontal: 100,

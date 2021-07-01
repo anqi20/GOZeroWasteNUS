@@ -134,7 +134,6 @@ export default function HomeScreen({ navigation }) {
           icon={<Icon name="arrow-right" size={30} color="white" />}
           iconRight
           onPress={() => navigation.navigate("Rewards Screen")}
-          // type="outline"
         ></Button>
       </View>
       <SafeAreaView style={{ marginHorizontal: 20, marginBottom: 10 }}>

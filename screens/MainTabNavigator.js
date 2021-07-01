@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStack from "./HomeStack";
 import BorrowStack from "./BorrowStack";
 import ReturnStack from "./ReturnStack";
+import ModalHomeStack from "./ModalHomeStack";
 import LeaderboardStack from "./LeaderboardStack";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -33,7 +34,9 @@ export default function MainTabNavigator() {
         activeBackgroundColor: "black",
       }}
     >
-      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Home" component={ModalHomeStack} />
+
+      {/* <Tab.Screen name="Home" component={HomeStack} /> */}
       <Tab.Screen name="Borrow" component={BorrowStack} />
       <Tab.Screen name="Return" component={ReturnStack} />
       <Tab.Screen name="Leaderboard" component={LeaderboardStack} />

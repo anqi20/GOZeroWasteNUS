@@ -19,13 +19,21 @@ export default function HomeStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Settings Stack" component={SettingsStack} />
-      <Stack.Screen name="Rewards Screen" component={RewardsScreen} />
-      <Stack.Screen name="Stats Screen" component={StatsScreen} />
+      <Stack.Screen
+        name="Rewards Screen"
+        component={RewardsScreen}
+        options={{ title: "Your Rewards" }}
+      />
+      <Stack.Screen
+        name="Stats Screen"
+        component={StatsScreen}
+        options={{ title: "Personal Stats" }}
+      />
       <Stack.Screen name="How to use?" component={TutorialScreen} />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Successful Redemption Screen"
         component={SuccessfulRedemptionScreen}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }

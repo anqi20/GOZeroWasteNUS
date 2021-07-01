@@ -11,9 +11,6 @@ import colors from "../assets/colors";
 import { useNavigation } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
 
-export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-
 const CARD_WIDTH = Dimensions.get("window").width - 40;
 
 function CardItem({ item, index }) {
@@ -49,14 +46,14 @@ function renderContent(title) {
   } else if (title === "Credits:") {
     return (
       <View style={styles.cardContentView}>
-        <Text style={[styles.redNumber, { marginRight: 25 }]}>3</Text>
+        <Text style={styles.redNumber}>128</Text>
         <Icon
           name="money-bill-alt"
           type="font-awesome-5"
           size={50}
           color="black"
         />
-        <Text style={[styles.redNumber, { marginRight: 25 }]}>128</Text>
+        <Text style={styles.redNumber}>3</Text>
         <Icon name="coins" type="font-awesome-5" size={50} color="black" />
       </View>
     );

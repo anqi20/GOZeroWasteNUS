@@ -106,7 +106,10 @@ export default function HomeScreen({ navigation }) {
           <Text style={[styles.boldText, { marginBottom: 10 }]}>
             Personal ranking:
           </Text>
-          <FontAwesome5 name="crown" size={60} color="black" />
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <FontAwesome5 name="crown" size={40} color="black" />
+            <Text style={[styles.boldText, { marginLeft: 10 }]}>#11</Text>
+          </View>
         </View>
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}

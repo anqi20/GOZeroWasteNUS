@@ -30,10 +30,6 @@ export default function HomeStack() {
         options={{ title: "Personal Stats" }}
       />
       <Stack.Screen name="How to use?" component={TutorialScreen} />
-      <Stack.Screen
-        name="Successful Redemption Screen"
-        component={SuccessfulRedemptionScreen}
-      />
     </Stack.Navigator>
   );
 }

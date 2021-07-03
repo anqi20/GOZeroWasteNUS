@@ -18,7 +18,11 @@ export default function HomeStack() {
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Settings Stack" component={SettingsStack} />
+      <Stack.Screen
+        name="Settings Stack"
+        component={SettingsStack}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Rewards Screen"
         component={RewardsScreen}

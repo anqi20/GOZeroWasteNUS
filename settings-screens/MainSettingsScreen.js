@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
+import { globalStyles } from "../assets/globalStyles";
 
 function renderSeparator() {
   return (
@@ -43,10 +44,14 @@ export default function MainSettingsScreen({ navigation }) {
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={renderSeparator}
       />
-      <Button
-        title="log out"
-        onPress={() => navigation.navigate("Log In")}
-      ></Button>
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Log In")}
+          style={globalStyles.button}
+        >
+          <Text style={globalStyles.buttonText}>Log out</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }

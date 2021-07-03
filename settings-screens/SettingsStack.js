@@ -17,11 +17,11 @@ const Stack = createStackNavigator();
 
 export default function SettingsStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode="screen">
       <Stack.Screen
         name="Main settings screen"
         component={MainSettingsScreen}
-        options={{ headerShown: false }}
+        options={{ title: "Settings" }}
       ></Stack.Screen>
       <Stack.Screen
         name="Edit account details"

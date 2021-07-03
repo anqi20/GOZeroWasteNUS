@@ -45,7 +45,7 @@ export default function MainSettingsScreen({ navigation }) {
       />
       <Button
         title="log out"
-        onPress={() => navigation.navigate("Login Screen")}
+        onPress={() => navigation.navigate("Log In")}
       ></Button>
     </SafeAreaView>
   );

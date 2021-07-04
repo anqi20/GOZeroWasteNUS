@@ -37,6 +37,11 @@ export const globalStyles = StyleSheet.create({
       marginTop: 10, 
       paddingHorizontal: 30,
     },
+    //other formatting of input container 
+    inputContainerNormal: {
+      marginTop: -20,
+      paddingHorizontal: 30,
+    },
     inputLabel: {
       color: colors.black,
       marginBottom: -5,

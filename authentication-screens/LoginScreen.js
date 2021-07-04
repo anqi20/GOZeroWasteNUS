@@ -63,7 +63,7 @@ export default function LoginScreen({ navigation }) {
 
             <TouchableOpacity
               style={styles.signUpWrapper}
-              onPress={() => navigation.navigate("Sign Up Stack")}
+              onPress={() => navigation.navigate("Sign Up")}
             >
               <Text style={styles.signUp}>Don't have an account?{'\n'}Sign up here</Text>
             </TouchableOpacity>

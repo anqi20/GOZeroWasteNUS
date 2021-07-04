@@ -1,7 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import SignUpScreen from "./SignUpScreen";
+import SignUpVerificationScreen from "./SignUpVerificationScreen";
+import SignUpDetailScreen from "./SignUpDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -11,6 +12,16 @@ export default function SignUpStack() {
       <Stack.Screen
         name="Sign Up Screen"
         component={SignUpScreen}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Sign Up Verification Screen"
+        component={SignUpVerificationScreen}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Sign Up Detail Screen"
+        component={SignUpDetailScreen}
         options={{ headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>

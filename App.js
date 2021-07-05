@@ -22,6 +22,7 @@ export default function App() {
         <Stack.Screen
           name="Log In Screen"
           component={LoginScreen}
+          options={{ title: "Log In" }}
         ></Stack.Screen>
         <Stack.Screen
           name="Sign Up Stack"

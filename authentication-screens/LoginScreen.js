@@ -42,7 +42,7 @@ export default function LoginScreen({ navigation }) {
             />
             <TouchableOpacity
               style={styles.forgotPwdWrapper}
-              onPress={() => navigation.navigate("Forgot your password?")}
+              onPress={() => navigation.navigate("Forgot Password Stack")}
             >
               <Text style={styles.forgotPwd}>Forgot your password?</Text>
             </TouchableOpacity>
@@ -57,7 +57,7 @@ export default function LoginScreen({ navigation }) {
 
             <TouchableOpacity
               style={styles.signUpWrapper}
-              onPress={() => navigation.navigate("Sign Up")}
+              onPress={() => navigation.navigate("Sign Up Stack")}
             >
               <Text style={styles.signUp}>
                 Don't have an account?{"\n"}Sign up here

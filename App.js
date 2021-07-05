@@ -20,16 +20,18 @@ export default function App() {
           options={{ headerShown: false }}
         ></Stack.Screen>
         <Stack.Screen
-          name="Log In"
+          name="Log In Screen"
           component={LoginScreen}
         ></Stack.Screen>
         <Stack.Screen
-          name="Sign Up"
+          name="Sign Up Stack"
           component={SignUpStack}
+          options={{ title: "Sign Up" }}
         ></Stack.Screen>
         <Stack.Screen
-          name="Forgot your password?"
+          name="Forgot Password Stack"
           component={ForgotPasswordStack}
+          options={{ title: "Forgot your password?" }}
         ></Stack.Screen>
         <Stack.Screen
           name="Main Tab Navigator"

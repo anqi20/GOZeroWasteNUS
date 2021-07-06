@@ -34,7 +34,7 @@ export default function MainSettingsScreen({ navigation }) {
                 style={styles.listCell}
                 onPress={() => navigation.navigate(item.title)}
               >
-                <Text style={{ fontSize: 20, marginLeft: 10 }}>
+                <Text style={{ fontSize: 18, marginLeft: 10 }}>
                   {item.title}
                 </Text>
               </TouchableOpacity>

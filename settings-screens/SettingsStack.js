@@ -10,6 +10,7 @@ import VendorsScreen from "./VendorsScreen";
 import TermsScreen from "./TermsScreen";
 import TerminateAccountScreen from "./TerminateAccountScreen";
 import MainSettingsScreen from "./MainSettingsScreen";
+import ChangePasswordScreen from "./ChangePasswordScreen";
 import MainTabNavigator from "../screens/MainTabNavigator";
 import LoginScreen from "../authentication-screens/LoginScreen";
 
@@ -26,6 +27,10 @@ export default function SettingsStack() {
       <Stack.Screen
         name="Edit account details"
         component={EditAccountScreen}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Change password"
+        component={ChangePasswordScreen}
       ></Stack.Screen>
       <Stack.Screen
         name="How to use?"

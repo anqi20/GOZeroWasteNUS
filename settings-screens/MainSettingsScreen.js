@@ -46,7 +46,7 @@ export default function MainSettingsScreen({ navigation }) {
       />
       <View style={{ flex: 1, justifyContent: "center" }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Log In")}
+          onPress={() => navigation.navigate("Log In Screen")}
           style={globalStyles.button}
         >
           <Text style={globalStyles.buttonText}>Log out</Text>

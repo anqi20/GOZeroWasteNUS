@@ -11,8 +11,7 @@ import TermsScreen from "./TermsScreen";
 import TerminateAccountScreen from "./TerminateAccountScreen";
 import MainSettingsScreen from "./MainSettingsScreen";
 import ChangePasswordScreen from "./ChangePasswordScreen";
-import MainTabNavigator from "../screens/MainTabNavigator";
-import LoginScreen from "../authentication-screens/LoginScreen";
+import TerminateConfirmationScreen from "./TerminateConfirmationScreen";
 
 const Stack = createStackNavigator();
 
@@ -56,6 +55,11 @@ export default function SettingsStack() {
       <Stack.Screen
         name="Terminate my account"
         component={TerminateAccountScreen}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Account terminated"
+        component={TerminateConfirmationScreen}
+        options={{ headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>
   );

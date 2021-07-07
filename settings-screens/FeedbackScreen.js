@@ -181,9 +181,19 @@ function ReportFaultyMachine() {
 
 export default function FeedbackScreen() {
   const [submitted, setStatus] = useState(false);
+  const [submissionCount, setCount] = useState(0);
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const toggleSwitch = () => setIsEnabled(!isEnabled);
+  const toggleSwitch = () => {
+    setIsEnabled(!isEnabled);
+    setCount(0);
+    setStatus(false);
+  };
+
+  const onConfirmPress = () => {
+    setStatus(true);
+    setCount(submissionCount + 1);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -217,11 +227,22 @@ export default function FeedbackScreen() {
             {isEnabled ? <ReportFaultyMachine /> : <GeneralFeedback />}
 
             <TouchableOpacity
-              onPress={() => setStatus(true)}
+              onPress={onConfirmPress}
               style={[globalStyles.button, { marginBottom: 30 }]}
             >
               <Text style={globalStyles.buttonText}>Confirm</Text>
             </TouchableOpacity>
+            {submissionCount > 1 ? (
+              <Text
+                style={{
+                  color: colors.red,
+                  textAlign: "center",
+                  marginBottom: 10,
+                }}
+              >
+                Your feedback has already been received!
+              </Text>
+            ) : null}
             {submitted ? (
               <Text style={styles.boldText}>
                 Thank you for sending us your valuable feedback!

@@ -17,37 +17,59 @@ import { FontAwesome5, Entypo } from "@expo/vector-icons";
 import { Input } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Formik } from "formik";
 
-function GeneralFeedback() {
+function GeneralFeedback({ setStatus, submissionCount, setCount }) {
   return (
-    <View>
-      <Input
-        containerStyle={styles.inputContainer}
-        defaultValue={moment().format("DD/MM/YYYY")}
-        inputStyle={styles.inputInput}
-        editable={false}
-      />
-      <Input
-        containerStyle={styles.inputContainer}
-        defaultValue={moment().utcOffset("+08:00").format("h:mm a")}
-        inputStyle={styles.inputInput}
-        editable={false}
-      />
-      <Input
-        containerStyle={styles.inputContainer}
-        placeholder="Feedback"
-        inputStyle={styles.inputInput}
-        multiline={true}
-      />
-    </View>
+    <Formik
+      initialValues={{
+        submittedDate: `${moment().format("DD/MM/YYYY")}`,
+        submittedTime: `${moment().format("HH:mm")}`,
+        feedback: "",
+      }}
+      onSubmit={(values) => {
+        // console.log(values);
+        setStatus(true);
+        setCount(submissionCount + 1);
+      }}
+      enableReinitialize={true}
+    >
+      {({ handleChange, handleSubmit }) => (
+        <View>
+          <Input
+            containerStyle={styles.inputContainer}
+            defaultValue={moment().format("DD/MM/YYYY")}
+            inputStyle={styles.inputInput}
+            editable={false}
+          />
+          <Input
+            containerStyle={styles.inputContainer}
+            defaultValue={moment().utcOffset("+08:00").format("h:mm a")}
+            inputStyle={styles.inputInput}
+            editable={false}
+          />
+          <Input
+            containerStyle={styles.inputContainer}
+            placeholder="Feedback"
+            inputStyle={styles.inputInput}
+            multiline={true}
+            onChangeText={handleChange("feedback")}
+          />
+          <TouchableOpacity
+            onPress={handleSubmit}
+            style={[globalStyles.button, { marginBottom: 30 }]}
+          >
+            <Text style={globalStyles.buttonText}>Confirm</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </Formik>
   );
 }
 
-function ReportFaultyMachine() {
-  let timeWillUpdate = new Date();
-
+function ReportFaultyMachine({ setStatus, submissionCount, setCount }) {
   const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(timeWillUpdate);
+  const [time, setTime] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
   const [isDateConfirmed, setDateConfirmed] = useState(false);
@@ -62,17 +84,6 @@ function ReportFaultyMachine() {
     setDatePickerVisibility(false);
   };
 
-  const handleDateConfirm = (date) => {
-    hideDatePicker();
-    setDate(date);
-    setDateConfirmed(true);
-  };
-
-  const onDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setDate(currentDate);
-  };
-
   // Time picker methods
   const showTimePicker = () => {
     setTimePickerVisibility(true);
@@ -82,100 +93,153 @@ function ReportFaultyMachine() {
     setTimePickerVisibility(false);
   };
 
-  const handleTimeConfirm = (time) => {
-    hideTimePicker();
-    setTime(time);
-    setTimeConfirmed(true);
-  };
-
-  const onTimeChange = (event, selectedTime) => {
-    const currentTime = selectedTime || time;
-    setTime(currentTime);
-  };
-
   return (
-    <View>
-      <Input
-        containerStyle={styles.inputContainer}
-        defaultValue={moment().format("DD/MM/YYYY")}
-        inputStyle={styles.inputInput}
-        editable={false}
-      />
-      <Input
-        containerStyle={styles.inputContainer}
-        defaultValue={moment().utcOffset("+08:00").format("h:mm a")}
-        inputStyle={styles.inputInput}
-        editable={false}
-      />
-      <TouchableOpacity style={styles.dateTimePicker} onPress={showDatePicker}>
-        {isDateConfirmed ? (
-          <Text style={{ fontSize: 18, color: colors.black }}>
-            {moment(date).format("DD/MM/YYYY")}
-          </Text>
-        ) : (
-          <Text
-            style={{ fontSize: 18, color: colors.darkGrey, paddingRight: 10 }}
+    <Formik
+      initialValues={{
+        submittedDate: `${moment().format("DD/MM/YYYY")}`,
+        submittedTime: `${moment().format("HH:mm")}`,
+        incidentDate: "",
+        incidentTime: "",
+        location: "",
+        feedback: "",
+      }}
+      onSubmit={(values) => {
+        // console.log(values);
+        setStatus(true);
+        setCount(submissionCount + 1);
+      }}
+      enableReinitialize={true}
+    >
+      {({ handleChange, handleSubmit, setFieldValue }) => (
+        <View>
+          <Input
+            containerStyle={styles.inputContainer}
+            defaultValue={moment().format("DD/MM/YYYY")}
+            inputStyle={styles.inputInput}
+            editable={false}
+          />
+          <Input
+            containerStyle={styles.inputContainer}
+            defaultValue={moment().utcOffset("+08:00").format("h:mm a")}
+            inputStyle={styles.inputInput}
+            editable={false}
+          />
+          <TouchableOpacity
+            style={styles.dateTimePicker}
+            onPress={showDatePicker}
           >
-            Date of issue encountered
-          </Text>
-        )}
-        <Entypo name="chevron-down" size={24} color="black" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.dateTimePicker} onPress={showTimePicker}>
-        {isTimeConfirmed ? (
-          <Text style={{ fontSize: 18, color: colors.black }}>
-            {moment(time).format("hh:mm a")}
-          </Text>
-        ) : (
-          <Text
-            style={{ fontSize: 18, color: colors.darkGrey, paddingRight: 10 }}
+            {isDateConfirmed ? (
+              <Text style={{ fontSize: 18, color: colors.black }}>
+                {moment(date).format("DD/MM/YYYY")}
+              </Text>
+            ) : (
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: colors.darkGrey,
+                  paddingRight: 10,
+                }}
+              >
+                Date of issue encountered
+              </Text>
+            )}
+            <Entypo name="chevron-down" size={24} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.dateTimePicker}
+            onPress={showTimePicker}
           >
-            Time of issue encountered
-          </Text>
-        )}
-        <Entypo name="chevron-down" size={24} color="black" />
-      </TouchableOpacity>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleDateConfirm}
-        onCancel={hideDatePicker}
-        date={date}
-        onChange={onDateChange}
-      />
-      <DateTimePickerModal
-        isVisible={isTimePickerVisible}
-        mode="time"
-        onConfirm={handleTimeConfirm}
-        onCancel={hideTimePicker}
-        date={time}
-        onChange={onTimeChange}
-      />
+            {isTimeConfirmed ? (
+              <Text style={{ fontSize: 18, color: colors.black }}>
+                {moment(time).format("hh:mm a")}
+              </Text>
+            ) : (
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: colors.darkGrey,
+                  paddingRight: 10,
+                }}
+              >
+                Time of issue encountered
+              </Text>
+            )}
+            <Entypo name="chevron-down" size={24} color="black" />
+          </TouchableOpacity>
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={(date) => {
+              hideDatePicker();
+              setDate(date);
+              setFieldValue("incidentDate", moment(date).format("DD/MM/YYYY"));
+              setDateConfirmed(true);
+            }}
+            onCancel={hideDatePicker}
+            date={date}
+            onChange={(event, selectedDate) => {
+              const currentDate = selectedDate || date;
+              setDate(currentDate);
+              setFieldValue(
+                "incidentDate",
+                moment(selectedDate).format("DD/MM/YYYY")
+              );
+            }}
+          />
+          <DateTimePickerModal
+            isVisible={isTimePickerVisible}
+            mode="time"
+            onConfirm={(time) => {
+              hideTimePicker();
+              setTime(time);
+              setFieldValue("incidentTime", moment(time).format("HH:mm"));
+              setTimeConfirmed(true);
+            }}
+            onCancel={hideTimePicker}
+            date={time}
+            onChange={(event, selectedTime) => {
+              const currentTime = selectedTime || time;
+              setTime(currentTime);
+              setFieldValue(
+                "incidentTime",
+                moment(selectedTime).format("HH:mm")
+              );
+            }}
+          />
 
-      <RNPickerSelect
-        onValueChange={(value) => console.log(value)}
-        items={locations}
-        placeholder={{
-          label: "Location",
-          value: null,
-        }}
-        useNativeAndroidPickerStyle={false}
-        style={{
-          ...pickerSelectStyles,
-          iconContainer: { right: 30 },
-          placeholder: { color: colors.darkGrey },
-        }}
-        Icon={() => {
-          return <Entypo name="chevron-down" size={24} color="black" />;
-        }}
-      />
-      <Input
-        containerStyle={styles.inputContainer}
-        placeholder="Details"
-        inputStyle={styles.inputInput}
-        multiline={true}
-      />
-    </View>
+          <RNPickerSelect
+            onValueChange={(value) => setFieldValue("location", value)}
+            items={locations}
+            placeholder={{
+              label: "Location",
+              value: null,
+            }}
+            useNativeAndroidPickerStyle={false}
+            style={{
+              ...pickerSelectStyles,
+              iconContainer: { right: 30 },
+              placeholder: { color: colors.darkGrey },
+            }}
+            Icon={() => {
+              return <Entypo name="chevron-down" size={24} color="black" />;
+            }}
+          />
+          <Input
+            containerStyle={styles.inputContainer}
+            placeholder="Details"
+            inputStyle={styles.inputInput}
+            multiline={true}
+            onChangeText={handleChange("feedback")}
+          />
+          <TouchableOpacity
+            onPress={handleSubmit}
+            style={[globalStyles.button, { marginBottom: 30 }]}
+          >
+            <Text style={globalStyles.buttonText}>Confirm</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </Formik>
   );
 }
 
@@ -188,11 +252,6 @@ export default function FeedbackScreen() {
     setIsEnabled(!isEnabled);
     setCount(0);
     setStatus(false);
-  };
-
-  const onConfirmPress = () => {
-    setStatus(true);
-    setCount(submissionCount + 1);
   };
 
   return (
@@ -224,14 +283,20 @@ export default function FeedbackScreen() {
               />
             </View>
 
-            {isEnabled ? <ReportFaultyMachine /> : <GeneralFeedback />}
+            {isEnabled ? (
+              <ReportFaultyMachine
+                setStatus={setStatus}
+                submissionCount={submissionCount}
+                setCount={setCount}
+              />
+            ) : (
+              <GeneralFeedback
+                setStatus={setStatus}
+                submissionCount={submissionCount}
+                setCount={setCount}
+              />
+            )}
 
-            <TouchableOpacity
-              onPress={onConfirmPress}
-              style={[globalStyles.button, { marginBottom: 30 }]}
-            >
-              <Text style={globalStyles.buttonText}>Confirm</Text>
-            </TouchableOpacity>
             {submissionCount > 1 ? (
               <Text
                 style={{

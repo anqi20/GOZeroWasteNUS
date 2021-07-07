@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
 
 const CARD_WIDTH = Dimensions.get("window").width - 40;
+const CARD_HEIGHT = 150;
 
 function CardItem({ item, index }) {
   const navigation = useNavigation();
@@ -72,6 +73,7 @@ export default function CarouselView() {
         renderItem={({ item, index }) => <CardItem item={item} index={index} />}
         sliderWidth={CARD_WIDTH}
         itemWidth={CARD_WIDTH}
+        itemHeight={CARD_HEIGHT}
         onSnapToItem={(index) => setIndex(index)}
         useScrollView={true}
         loop={true}
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.black,
     borderRadius: 20,
-    height: 150,
+    height: CARD_HEIGHT,
     width: CARD_WIDTH,
     padding: 20,
   },

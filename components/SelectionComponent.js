@@ -63,18 +63,36 @@ export default function SelectionComponent({
   cupQuota,
   containerQuota,
 }) {
+  function Cube() {
+    return (
+      <Icon
+        name="cube"
+        type="font-awesome"
+        size={60}
+        color="black"
+        containerStyle={{ marginRight: 20 }}
+      />
+    );
+  }
+
+  function Cup() {
+    return (
+      <Icon
+        name="cup"
+        type="material-community"
+        size={60}
+        color="black"
+        containerStyle={{ marginRight: 20 }}
+      />
+    );
+  }
+
   function renderSelector() {
     if (hasContainers && hasCups) {
       return (
         <View>
           <View style={styles.iconAndSelector}>
-            <Icon
-              name="cube"
-              type="font-awesome"
-              size={60}
-              color="black"
-              containerStyle={{ marginRight: 20 }}
-            />
+            <Cube />
             <Selector
               isCupCounter={false}
               cupQuota={cupQuota}
@@ -82,13 +100,7 @@ export default function SelectionComponent({
             />
           </View>
           <View style={styles.iconAndSelector}>
-            <Icon
-              name="cup"
-              type="material-community"
-              size={60}
-              color="black"
-              containerStyle={{ marginRight: 20 }}
-            />
+            <Cup />
             <Selector
               isCupCounter={true}
               cupQuota={cupQuota}
@@ -100,13 +112,7 @@ export default function SelectionComponent({
     } else if (hasContainers) {
       return (
         <View style={styles.iconAndSelector}>
-          <Icon
-            name="cube"
-            type="font-awesome"
-            size={60}
-            color="black"
-            containerStyle={{ marginRight: 20 }}
-          />
+          <Cube />
           <Selector
             isCupCounter={false}
             cupQuota={cupQuota}
@@ -117,13 +123,7 @@ export default function SelectionComponent({
     } else if (hasCups) {
       return (
         <View style={styles.iconAndSelector}>
-          <Icon
-            name="cup"
-            type="material-community"
-            size={60}
-            color="black"
-            containerStyle={{ marginRight: 20 }}
-          />
+          <Cup />
           <Selector
             isCupCounter={true}
             cupQuota={cupQuota}

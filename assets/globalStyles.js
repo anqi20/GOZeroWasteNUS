@@ -60,5 +60,6 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 36,
     fontWeight: "bold",
+    textAlign: "center",
   },
 });

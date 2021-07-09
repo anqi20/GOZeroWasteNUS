@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import colors from "../assets/colors";
 import { globalStyles } from "../assets/globalStyles";
 import SelectionComponent from "../components/SelectionComponent";
+import FooterText from "../components/FooterText";
 
 export default function BorrowSelectionScreen({ navigation }) {
   //Temporary data
@@ -44,10 +45,7 @@ export default function BorrowSelectionScreen({ navigation }) {
           <Text style={globalStyles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.subtitle}>
-        If there is any error, please feedback to us or call the helpdesk{"\n"}
-        @1234 5678!
-      </Text>
+      <FooterText />
     </View>
   );
 }
@@ -85,11 +83,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     textAlign: "center",
-  },
-  subtitle: {
-    fontSize: 18,
-    color: colors.darkGrey,
-    textAlign: "center",
-    marginVertical: 20,
   },
 });

@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import colors from "../assets/colors";
 import { globalStyles } from "../assets/globalStyles";
+import FooterText from "../components/FooterText";
 
 export default function BorrowQRScreen({ navigation }) {
   return (
@@ -14,12 +15,11 @@ export default function BorrowQRScreen({ navigation }) {
         <TouchableOpacity
           onPress={() => navigation.navigate("Selection Screen")}
           style={styles.qrPlaceholder}
-        />
+        >
+          <Text>(Click here)</Text>
+        </TouchableOpacity>
       </View>
-      <Text style={styles.subtitle}>
-        If there is any error, please feedback to us or call the helpdesk{"\n"}
-        @1234 5678!
-      </Text>
+      <FooterText />
     </View>
   );
 }
@@ -47,12 +47,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginVertical: 20,
     fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 18,
-    color: colors.darkGrey,
-    textAlign: "center",
-    marginVertical: 20,
   },
   qrPlaceholder: {
     backgroundColor: colors.lightGrey,

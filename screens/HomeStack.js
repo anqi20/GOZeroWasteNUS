@@ -6,7 +6,7 @@ import SettingsStack from "../settings-screens/SettingsStack";
 import RewardsScreen from "./RewardsScreen";
 import StatsScreen from "./StatsScreen";
 import TutorialScreen from "../settings-screens/TutorialScreen";
-import SuccessfulRedemptionScreen from "./SuccessfulRedemptionScreen";
+import FeedbackScreen from "../settings-screens/FeedbackScreen";
 
 const Stack = createStackNavigator();
 
@@ -34,6 +34,10 @@ export default function HomeStack() {
         options={{ title: "Personal Stats" }}
       />
       <Stack.Screen name="How to use?" component={TutorialScreen} />
+      <Stack.Screen
+        name="Feedback to us!"
+        component={FeedbackScreen}
+      ></Stack.Screen>
     </Stack.Navigator>
   );
 }

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -9,8 +8,8 @@ import {
   Keyboard,
 } from "react-native";
 import { Input } from "react-native-elements";
-import colors from "../assets/colors";
-import { globalStyles } from "../assets/globalStyles";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
 
 export default function TerminateAccountScreen({ navigation }) {
   const [isMatching, setMatching] = useState(false);

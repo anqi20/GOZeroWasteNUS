@@ -2,19 +2,19 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import { Input } from "react-native-elements";
-import { globalStyles } from "../assets/globalStyles";
+import { globalStyles } from "../../assets/globalStyles";
 import { Ionicons } from "@expo/vector-icons";
-import colors from "../assets/colors";
+import colors from "../../assets/colors";
 
-export default function ForgotPasswordScreen({ navigation }) {
+export default function SignUpScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Formik initialValues={{ username: "" }} onSubmit={(values) => {}}>
         {(props) => (
           <View>
             <Text style={styles.text}>
-              Please submit your registered NUS email.{"\n"}Verification code
-              will be sent to your email shortly
+              Please submit your NUS email.{"\n"}Verification code will be sent
+              to your email shortly
             </Text>
             <Input
               containerStyle={globalStyles.inputContainerTop}
@@ -31,12 +31,17 @@ export default function ForgotPasswordScreen({ navigation }) {
             <TouchableOpacity
               style={globalStyles.buttonTop}
               onPress={props.handleSubmit}
-              onPress={() =>
-                navigation.navigate("Forgot Password Verification Screen")
-              }
+              onPress={() => navigation.navigate("Sign Up Verification Screen")}
             >
-              <Text style={globalStyles.buttonText}>
-                Send verification code
+              <Text style={globalStyles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.logInWrapper}
+              onPress={() => navigation.navigate("Log In Screen")}
+            >
+              <Text style={styles.logIn}>
+                Have an account?{"\n"}Log in here
               </Text>
             </TouchableOpacity>
           </View>
@@ -57,5 +62,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     color: colors.darkGrey,
+  },
+  logInWrapper: {
+    marginHorizontal: 100,
+    marginTop: 15,
+  },
+  logIn: {
+    textAlign: "center",
+    textDecorationLine: "underline",
   },
 });

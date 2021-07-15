@@ -1,10 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import colors from "../assets/colors";
-import { globalStyles } from "../assets/globalStyles";
-import SelectionComponent from "../components/SelectionComponent";
-import FooterText from "../components/FooterText";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
+import SelectionComponent from "../../components/SelectionComponent";
+import FooterText from "../../components/FooterText";
 
 export default function BorrowSelectionScreen({ navigation }) {
   //Temporary data

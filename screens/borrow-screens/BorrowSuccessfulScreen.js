@@ -1,10 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import SuccessBox from "../components/SuccessBox";
-import colors from "../assets/colors";
-import { globalStyles } from "../assets/globalStyles";
-import FooterText from "../components/FooterText";
+import { StyleSheet, Text, ScrollView } from "react-native";
+import SuccessBox from "../../components/SuccessBox";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
+import FooterText from "../../components/FooterText";
 
 export default function BorrowSuccessfulScreen({ route }) {
   const { numCups, numContainers } = route.params;

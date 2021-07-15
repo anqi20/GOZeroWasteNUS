@@ -1,11 +1,10 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function VendorsScreen() {
+export default function LocationsScreen() {
   return (
     <View style={styles.container}>
-      <Text>Hi I am the participating vendors screen!</Text>
+      <Text>Hi I am the machine locations screen!</Text>
     </View>
   );
 }

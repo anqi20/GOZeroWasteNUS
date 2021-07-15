@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
-import { Input } from "react-native-elements"; 
-import { globalStyles } from "../assets/globalStyles";
-import { Ionicons, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import colors from "../assets/colors";
+import { Input } from "react-native-elements";
+import { globalStyles } from "../../assets/globalStyles";
+import { Ionicons } from "@expo/vector-icons";
+import colors from "../../assets/colors";
 
-export default function ChangePasswordScreen({ navigation }) {
+export default function ForgotPasswordConfirmationScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Formik
@@ -44,26 +44,20 @@ export default function ChangePasswordScreen({ navigation }) {
             <TouchableOpacity
               style={globalStyles.buttonTop}
               onPress={props.handleSubmit}
-              onPress={() => navigation.navigate("Main settings screen")}
+              onPress={() => navigation.navigate("Main Tab Navigator")}
             >
-              <Text style={globalStyles.buttonText}>Update</Text>
+              <Text style={globalStyles.buttonText}>Submit</Text>
             </TouchableOpacity>
           </View>
         )}
       </Formik>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white, 
-    height: 600,
-    borderWidth: 2,
-    borderRadius: 20,
-    borderColor: colors.black,
-    marginTop: 32,
-    marginBottom: 32,
-    marginHorizontal: 20,
+    flex: 1,
+    backgroundColor: colors.white,
   },
 });

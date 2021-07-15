@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, ScrollView } from "react-native";
-import UnsuccessBox from "../components/UnsuccessBox";
-import colors from "../assets/colors";
-import { globalStyles } from "../assets/globalStyles";
+import UnsuccessBox from "../../components/UnsuccessBox";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
 
 export default function BorrowUnsuccessfulScreen() {
 

@@ -1,6 +1,5 @@
-import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import colors from "../assets/colors";
 
 export default function ConfirmationModal({ navigation }) {

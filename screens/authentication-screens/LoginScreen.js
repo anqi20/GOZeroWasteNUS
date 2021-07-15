@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import { Input } from "react-native-elements";
-import { globalStyles } from "../assets/globalStyles";
-import colors from "../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
+import colors from "../../assets/colors";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function LoginScreen({ navigation }) {

@@ -1,11 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import MainTabNavigator from "./screens/MainTabNavigator";
-import SignUpStack from "./authentication-screens/SignUpStack";
-import LoginScreen from "./authentication-screens/LoginScreen";
-import ForgotPasswordStack from "./authentication-screens/ForgotPasswordStack";
+import SignUpStack from "./screens/authentication-screens/SignUpStack";
+import LoginScreen from "./screens/authentication-screens/LoginScreen";
+import ForgotPasswordStack from "./screens/authentication-screens/ForgotPasswordStack";
 import OnboardingScreen from "./screens/OnboardingScreen";
 
 const Stack = createStackNavigator();

@@ -1,13 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import SuccessfulRedemptionScreen from "./SuccessfulRedemptionScreen";
 import HomeStack from "./HomeStack";
 import ConfirmationModal from "./ConfirmationModal";
-import {
-  CardStyleInterpolators,
-  TransitionPresets,
-} from "@react-navigation/stack";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 

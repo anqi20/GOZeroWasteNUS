@@ -1,6 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import HomeScreen from "./HomeScreen";
 import SettingsStack from "../settings-screens/SettingsStack";
 import RewardsScreen from "./RewardsScreen";

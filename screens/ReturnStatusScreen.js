@@ -13,7 +13,7 @@ export default function ReturnStatusScreen({ navigation }) {
 
   //Can change the initial state count to test if the interface works
   const [returnedContainers, setContainerCount] = useState(1);
-  const [returnedCups, setCupCount] = useState(2);
+  const [returnedCups, setCupCount] = useState(0);
 
   function renderText() {
     if (numContainers > 0 && numCups > 0) {
@@ -98,17 +98,40 @@ export default function ReturnStatusScreen({ navigation }) {
     }
   }
 
-  return (
-    <View style={styles.container}>
-      <Text style={globalStyles.header}>Return</Text>
-      <View style={styles.box}>
-        <Text style={styles.storeName}>{storeName}</Text>
-        <Text style={styles.text}>
-          Drop the {renderText()} in the holes that are flashing green now!
-        </Text>
+  function renderNextButton() {
+    const [isPressed, setPress] = useState(false);
 
-        {renderContent()}
+    function changeState() {
+      setPress(true);
+    }
 
+    if (returnedContainers == 0 && returnedCups == 0) {
+      return (
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <TouchableOpacity
+            style={[
+              globalStyles.button,
+              { width: "90%", backgroundColor: colors.lightGrey },
+            ]}
+            onPress={changeState}
+          >
+            <Text style={globalStyles.buttonText}>Next</Text>
+          </TouchableOpacity>
+          {isPressed ? (
+            <Text style={{ color: colors.red, marginTop: 20 }}>
+              Please return at least 1 item to proceed.
+            </Text>
+          ) : null}
+        </View>
+      );
+    } else {
+      return (
         <TouchableOpacity
           style={[globalStyles.button, { width: "90%" }]}
           onPress={() =>
@@ -121,6 +144,21 @@ export default function ReturnStatusScreen({ navigation }) {
         >
           <Text style={globalStyles.buttonText}>Next</Text>
         </TouchableOpacity>
+      );
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={globalStyles.header}>Return</Text>
+      <View style={styles.box}>
+        <Text style={styles.storeName}>{storeName}</Text>
+        <Text style={styles.text}>
+          Drop the {renderText()} in the holes that are flashing green now!
+        </Text>
+
+        {renderContent()}
+        {renderNextButton()}
       </View>
       <FooterText />
     </View>

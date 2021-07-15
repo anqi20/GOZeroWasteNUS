@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import ReturnQRScreen from "./ReturnQRScreen";
 import ReturnStatusScreen from "./ReturnStatusScreen";
 import ReturnSuccessfulScreen from "./ReturnSuccessfulScreen";
+import ReturnUnsuccessfulScreen from "./ReturnUnsuccessfulScreen";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,11 @@ export default function ReturnStack() {
       <Stack.Screen
         name="Return Success Screen"
         component={ReturnSuccessfulScreen}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Return Unsuccess Screen"
+        component={ReturnUnsuccessfulScreen}
         options={{ headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>

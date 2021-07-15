@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
-import colors from "../assets/colors";
+import colors from "../../assets/colors";
 import { Icon } from "react-native-elements";
-import { globalStyles } from "../assets/globalStyles";
-import FooterText from "../components/FooterText";
+import { globalStyles } from "../../assets/globalStyles";
+import FooterText from "../../components/FooterText";
 
 export default function BorrowExceededScreen({ navigation }) {
 

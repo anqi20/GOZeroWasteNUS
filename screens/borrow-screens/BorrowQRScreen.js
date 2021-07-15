@@ -1,10 +1,8 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Touchable } from "react-native";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import colors from "../assets/colors";
-import { globalStyles } from "../assets/globalStyles";
-import FooterText from "../components/FooterText";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
+import FooterText from "../../components/FooterText";
 
 export default function BorrowQRScreen({ navigation }) {
   return (

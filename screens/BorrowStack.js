@@ -1,11 +1,11 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import BorrowQRScreen from "./BorrowQRScreen";
-import BorrowSelectionScreen from "./BorrowSelectionScreen";
-import BorrowSuccessfulScreen from "./BorrowSuccessfulScreen";
-import BorrowExceededScreen from "./BorrowExceededScreen";
-import BorrowUnsuccessfulScreen from "./BorrowUnsuccessfulScreen";
+import BorrowQRScreen from "./borrow-screens/BorrowQRScreen";
+import BorrowSelectionScreen from "./borrow-screens/BorrowSelectionScreen";
+import BorrowSuccessfulScreen from "./borrow-screens/BorrowSuccessfulScreen";
+import BorrowExceededScreen from "./borrow-screens/BorrowExceededScreen";
+import BorrowUnsuccessfulScreen from "./borrow-screens/BorrowUnsuccessfulScreen";
 
 const Stack = createStackNavigator();
 

@@ -15,6 +15,10 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
       return (
         <View>
           <View style={styles.variableContent}>
+            <Text style={styles.number}>{numContainers}</Text>
+            <Icon name="cube" type="font-awesome" size={48} color="black" />
+          </View>
+          <View style={styles.variableContent}>
             <Text style={styles.number}>{numCups}</Text>
             <Icon
               name="cup"
@@ -22,10 +26,6 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
               size={48}
               color="black"
             />
-          </View>
-          <View style={styles.variableContent}>
-            <Text style={styles.number}>{numContainers}</Text>
-            <Icon name="cube" type="font-awesome" size={48} color="black" />
           </View>
         </View>
       );

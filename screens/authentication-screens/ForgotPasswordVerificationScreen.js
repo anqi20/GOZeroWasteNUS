@@ -2,46 +2,43 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import { Input } from "react-native-elements";
-import { globalStyles } from "../assets/globalStyles";
+import { globalStyles } from "../../assets/globalStyles";
 import { Ionicons } from "@expo/vector-icons";
-import colors from "../assets/colors";
+import colors from "../../assets/colors";
 
-export default function SignUpScreen({ navigation }) {
+export default function ForgetPasswordVerificationScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Formik initialValues={{ username: "" }} onSubmit={(values) => {}}>
+      <Formik initialValues={{ code: "" }} onSubmit={(values) => {}}>
         {(props) => (
           <View>
             <Text style={styles.text}>
-              Please submit your NUS email.{"\n"}Verification code will be sent
-              to your email shortly
+              Please check your email for the verification code
             </Text>
             <Input
               containerStyle={globalStyles.inputContainerTop}
-              label="Your NUS email address"
+              label="Your verification code"
               labelStyle={globalStyles.inputLabel}
-              placeholder="username@u.nus.edu"
+              placeholder="Verification code"
               inputStyle={globalStyles.inputInput}
-              leftIcon={<Ionicons name="mail" size={24} />}
-              errorMessage="Username is invalid. Please check again."
+              leftIcon={<Ionicons name="shield-checkmark" size={24} />}
+              errorMessage="Verification code is incorrect. Please check again."
               errorStyle={globalStyles.inputError}
-              onChangeText={props.handleChange("username")}
-              value={props.values.username}
+              onChangeText={props.handleChange("code")}
+              value={props.values.code}
             />
             <TouchableOpacity
               style={globalStyles.buttonTop}
               onPress={props.handleSubmit}
-              onPress={() => navigation.navigate("Sign Up Verification Screen")}
+              onPress={() =>
+                navigation.navigate("Forgot Password Confirmation Screen")
+              }
             >
               <Text style={globalStyles.buttonText}>Submit</Text>
             </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.logInWrapper}
-              onPress={() => navigation.navigate("Log In Screen")}
-            >
-              <Text style={styles.logIn}>
-                Have an account?{"\n"}Log in here
+            <TouchableOpacity style={globalStyles.button}>
+              <Text style={globalStyles.buttonText}>
+                Resend verification code
               </Text>
             </TouchableOpacity>
           </View>
@@ -54,7 +51,7 @@ export default function SignUpScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: "#fff",
     paddingTop: 20,
   },
   text: {
@@ -62,13 +59,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     color: colors.darkGrey,
-  },
-  logInWrapper: {
-    marginHorizontal: 100,
-    marginTop: 15,
-  },
-  logIn: {
-    textAlign: "center",
-    textDecorationLine: "underline",
   },
 });

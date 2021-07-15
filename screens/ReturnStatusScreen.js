@@ -12,8 +12,8 @@ export default function ReturnStatusScreen({ navigation }) {
   const numCups = data[2].numCups;
 
   //Can change the initial state count to test if the interface works
-  const [returnedContainers, setContainerCount] = useState(0);
-  const [returnedCups, setCupCount] = useState(0);
+  const [returnedContainers, setContainerCount] = useState(1);
+  const [returnedCups, setCupCount] = useState(2);
 
   function renderText() {
     if (numContainers > 0 && numCups > 0) {

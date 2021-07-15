@@ -6,11 +6,13 @@ import colors from "../assets/colors";
 import { globalStyles } from "../assets/globalStyles";
 import FooterText from "../components/FooterText";
 
-export default function BorrowSuccessfulScreen() {
+export default function BorrowSuccessfulScreen({ route }) {
+  const { numCups, numContainers } = route.params;
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={globalStyles.header}>Borrow</Text>
-      <SuccessBox numCups={2} numContainers={3} />
+      <SuccessBox numCups={numCups} numContainers={numContainers} />
       <FooterText />
     </ScrollView>
   );

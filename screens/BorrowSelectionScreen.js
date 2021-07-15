@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import colors from "../assets/colors";
 import { globalStyles } from "../assets/globalStyles";
@@ -13,6 +13,8 @@ export default function BorrowSelectionScreen({ navigation }) {
   const storeName = data[2].storeName;
   const hasContainers = data[2].hasContainers;
   const hasCups = data[2].hasCups;
+  const [numCups, setCupNum] = useState(0);
+  const [numContainers, setContainerNum] = useState(0);
 
   function renderText() {
     if (hasContainers && hasCups) {
@@ -37,10 +39,19 @@ export default function BorrowSelectionScreen({ navigation }) {
           hasCups={hasCups}
           cupQuota={cupQuota}
           containerQuota={containerQuota}
+          numCups={numCups}
+          numContainers={numContainers}
+          setCupNum={setCupNum}
+          setContainerNum={setContainerNum}
         />
         <TouchableOpacity
           style={[globalStyles.button, { width: "90%" }]}
-          onPress={() => navigation.navigate("Success Screen")}
+          onPress={() =>
+            navigation.navigate("Success Screen", {
+              numCups: numCups,
+              numContainers: numContainers,
+            })
+          }
         >
           <Text style={globalStyles.buttonText}>Submit</Text>
         </TouchableOpacity>

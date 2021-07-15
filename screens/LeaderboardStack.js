@@ -11,6 +11,7 @@ export default function LeaderboardStack() {
       <Stack.Screen
         name="Leaderboard Screen"
         component={LeaderboardScreen}
+        options={{title: "Leaderboard"}}
       ></Stack.Screen>
     </Stack.Navigator>
   );

@@ -79,7 +79,7 @@ export default function HomeScreen({ navigation }) {
           <Text style={[styles.text, { textAlign: "center" }]}>
             You have saved{" "}
             <Text style={[styles.boldText, { fontSize: 24 }]}>132</Text>{" "}
-            reuseables!
+            reusables!
           </Text>
         </View>
         <View

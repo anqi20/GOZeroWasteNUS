@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { Touchable } from "react-native";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import colors from "../assets/colors";
 import { globalStyles } from "../assets/globalStyles";
@@ -10,7 +11,14 @@ export default function BorrowQRScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={globalStyles.header}>Borrow</Text>
       <View style={styles.box}>
-        <View style={styles.imagePlaceholder} />
+        {/*<View style={styles.imagePlaceholder} />*/}
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Unsuccess Screen")}
+          style={styles.imagePlaceholder}
+        >
+          <Text>(Unsuccessful Screen)</Text>
+        </TouchableOpacity>
+
         <Text style={styles.text}>Scan the QR code!</Text>
         <TouchableOpacity
           onPress={() => navigation.navigate("Selection Screen")}

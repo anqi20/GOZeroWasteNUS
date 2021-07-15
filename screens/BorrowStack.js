@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from "react-native";
 import BorrowQRScreen from "./BorrowQRScreen";
 import BorrowSelectionScreen from "./BorrowSelectionScreen";
 import BorrowSuccessfulScreen from "./BorrowSuccessfulScreen";
+import BorrowExceededScreen from "./BorrowExceededScreen";
+import BorrowUnsuccessfulScreen from "./BorrowUnsuccessfulScreen";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +26,16 @@ export default function BorrowStack() {
         name="Success Screen"
         component={BorrowSuccessfulScreen}
         options={{ headerShown: false }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Quota Exceeded"
+        component={BorrowExceededScreen}
+        options={{headerShown: false}}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Unsuccess Screen"
+        component={BorrowUnsuccessfulScreen}
+        options={{ headerShown: false}}
       ></Stack.Screen>
     </Stack.Navigator>
   );

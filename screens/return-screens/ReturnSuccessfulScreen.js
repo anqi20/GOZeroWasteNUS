@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, ScrollView } from "react-native";
-import SuccessBox from "../components/SuccessBox";
-import colors from "../assets/colors";
-import { globalStyles } from "../assets/globalStyles";
-import FooterText from "../components/FooterText";
+import SuccessBox from "../../components/SuccessBox";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
+import FooterText from "../../components/FooterText";
 
 export default function ReturnSuccessfulScreen({ route }) {
   const { numCups, numContainers, location } = route.params;

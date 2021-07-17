@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { globalStyles } from "../assets/globalStyles";
+import { globalStyles } from "../../assets/globalStyles";
 
 function renderSeparator() {
   return (

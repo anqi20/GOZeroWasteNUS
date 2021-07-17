@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { globalStyles } from "../assets/globalStyles";
-import colors from "../assets/colors";
-import FooterText from "../components/FooterText";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
+import FooterText from "../../components/FooterText";
 import { Icon } from "react-native-elements";
 
 export default function ReturnStatusScreen({ navigation }) {

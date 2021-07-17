@@ -1,11 +1,11 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import HomeScreen from "./HomeScreen";
-import SettingsStack from "../settings-screens/SettingsStack";
+import SettingsStack from "../screens/settings-screens/SettingsStack";
 import RewardsScreen from "./RewardsScreen";
 import StatsScreen from "./StatsScreen";
-import TutorialScreen from "../settings-screens/TutorialScreen";
-import FeedbackScreen from "../settings-screens/FeedbackScreen";
+import TutorialScreen from "../screens/settings-screens/TutorialScreen";
+import FeedbackScreen from "../screens/settings-screens/FeedbackScreen";
 
 const Stack = createStackNavigator();
 

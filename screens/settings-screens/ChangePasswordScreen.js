@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
-import { Input } from "react-native-elements"; 
-import { globalStyles } from "../assets/globalStyles";
+import { Input } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
-import colors from "../assets/colors";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
 
 export default function ChangePasswordScreen({ navigation }) {
   return (
@@ -52,12 +52,12 @@ export default function ChangePasswordScreen({ navigation }) {
         )}
       </Formik>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white, 
+    backgroundColor: colors.white,
     height: 600,
     borderWidth: 2,
     borderRadius: 20,

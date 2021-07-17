@@ -10,8 +10,8 @@ import {
   KeyboardAvoidingView,
   Switch,
 } from "react-native";
-import colors from "../assets/colors";
-import { globalStyles } from "../assets/globalStyles";
+import colors from "../../assets/colors";
+import { globalStyles } from "../../assets/globalStyles";
 import moment from "moment";
 import { FontAwesome5, Entypo } from "@expo/vector-icons";
 import { Input } from "react-native-elements";

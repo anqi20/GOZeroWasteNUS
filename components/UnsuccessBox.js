@@ -6,7 +6,7 @@ import { globalStyles } from "../assets/globalStyles";
 import { useNavigation } from "@react-navigation/native";
 import FooterText from "./FooterText";
 
-export default function SuccessBox() {
+export default function UnsuccessBox() {
   const navigation = useNavigation();
 
   return (
@@ -19,18 +19,20 @@ export default function SuccessBox() {
         size={80}
       />
       <Text style={[styles.header, { marginBottom: 20 }]}>Error!</Text>
-      <Text style={styles.warningText}>Oops, there seems to be an error with our system!</Text>
+      <Text style={styles.warningText}>
+        Oops, there seems to be an error with our system!
+      </Text>
 
       <View style={styles.icons}>
-        <Icon 
-          containerStyle={{marginVertical: 15, marginRight: 80}}
+        <Icon
+          containerStyle={{ marginVertical: 15, marginRight: 80 }}
           name="phone"
           type="Feather"
           color="#0CF574"
           size={40}
         />
-        <Icon 
-          containerStyle={{marginVertical: 15}}
+        <Icon
+          containerStyle={{ marginVertical: 15 }}
           name="email"
           type="MaterialIcons"
           color="#0CF574"
@@ -40,7 +42,9 @@ export default function SuccessBox() {
 
       <FooterText />
 
-      <Text style={styles.warningText}>We apologise for the inconvenience!</Text>
+      <Text style={styles.warningText}>
+        We apologise for the inconvenience!
+      </Text>
 
       <TouchableOpacity
         style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     marginVertical: 10,
-  }, 
+  },
   icons: {
     flexDirection: "row",
     justifyContent: "center",

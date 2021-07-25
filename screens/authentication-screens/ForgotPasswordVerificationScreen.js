@@ -1,5 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import * as yup from "yup";
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  TouchableOpacity, 
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  ScrollView
+} from "react-native";
 import { Formik } from "formik";
 import { Input } from "react-native-elements";
 import { globalStyles } from "../../assets/globalStyles";
@@ -7,13 +17,32 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
 
 export default function ForgetPasswordVerificationScreen({ navigation }) {
+
+  const validationSchema = yup.object().shape({
+    code: yup.string()
+      .label('code')
+      .length(6, 'Please enter a valid verification code')
+      .required('Please enter your verification code')
+  })
+
   return (
-    <View style={styles.container}>
-      <Formik initialValues={{ code: "" }} onSubmit={(values) => {}}>
-        {(props) => (
+    <KeyboardAvoidingView 
+      behavior="position"
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <Formik 
+        initialValues={{ code: "" }} 
+        validationSchema = {validationSchema}
+        onSubmit={(values) => {
+          navigation.navigate("Forgot Password Confirmation Screen")
+        }}
+      >
+        {({ handleChange, handleSubmit, errors, isValid }) => (
           <View>
             <Text style={styles.text}>
-              Please check your email for the verification code
+              Enter the verification code sent to your email.
             </Text>
             <Input
               containerStyle={globalStyles.inputContainerTop}
@@ -22,20 +51,18 @@ export default function ForgetPasswordVerificationScreen({ navigation }) {
               placeholder="Verification code"
               inputStyle={globalStyles.inputInput}
               leftIcon={<Ionicons name="shield-checkmark" size={24} />}
-              errorMessage="Verification code is incorrect. Please check again."
-              errorStyle={globalStyles.inputError}
-              onChangeText={props.handleChange("code")}
-              value={props.values.code}
+              onChangeText={handleChange("code")}
+              secureTextEntry={true}
             />
+            <Text style={globalStyles.inputError}>{errors.code}</Text>
             <TouchableOpacity
               style={globalStyles.buttonTop}
-              onPress={props.handleSubmit}
-              onPress={() =>
-                navigation.navigate("Forgot Password Confirmation Screen")
-              }
+              onPress={handleSubmit}
+              disabled={!isValid}
             >
               <Text style={globalStyles.buttonText}>Submit</Text>
             </TouchableOpacity>
+
             <TouchableOpacity style={globalStyles.button}>
               <Text style={globalStyles.buttonText}>
                 Resend verification code
@@ -44,7 +71,9 @@ export default function ForgetPasswordVerificationScreen({ navigation }) {
           </View>
         )}
       </Formik>
-    </View>
+      </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -1,5 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import * as yup from "yup";
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  TouchableOpacity, 
+  KeyboardAvoidingView, 
+  TouchableWithoutFeedback,
+  Keyboard, 
+  ScrollView
+} from "react-native";
 import { Formik } from "formik";
 import { Input } from "react-native-elements";
 import { globalStyles } from "../../assets/globalStyles";
@@ -7,26 +17,49 @@ import colors from "../../assets/colors";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function LoginScreen({ navigation }) {
+
+  const validationSchema = yup.object().shape({
+    email: yup.string()
+      .label('Email')
+      .matches(/e[0-9][0-9][0-9][0-9][0-9][0-9][0-9](@u.nus.edu)/, 'Please enter a valid NUS email')
+      .required('Please enter your email')
+      .length(18, 'Please enter a valid NUS email'),
+    password: yup.string()
+      .label('Password')
+      .required('Please enter your password')
+      .min(8, 'Password must have at least 8 characters')
+  })
+
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView 
+      behavior="position"
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <Formik
-        initialValues={{ username: "", password: "" }}
-        onSubmit={(values) => {}}
+        initialValues={{ email: "", password: "" }}
+        validationSchema = {validationSchema}
+        onSubmit={(values) => {
+          //console.log(values)
+          navigation.navigate("Main Tab Navigator")
+        }}
       >
-        {(props) => (
+        {({ handleChange, handleSubmit, errors, isValid }) => (
           <View>
             <Input
               containerStyle={globalStyles.inputContainerTop}
-              label="Your NUS email address"
+              label="NUS email"
               labelStyle={globalStyles.inputLabel}
-              placeholder="username@u.nus.edu"
+              placeholder="e1234567@u.nus.edu"
               inputStyle={globalStyles.inputInput}
               leftIcon={<Ionicons name="mail" size={24} />}
-              errorMessage="Username is invalid. Please check again."
-              errorStyle={globalStyles.inputError}
-              onChangeText={props.handleChange("username")}
-              value={props.values.username}
+              onChangeText={handleChange("email")}
+              autoCapitalize="none"
             />
+
+            <Text style={globalStyles.inputError}>{errors.email}</Text>
+
             <Input
               containerStyle={globalStyles.inputContainer}
               label="Password"
@@ -35,11 +68,11 @@ export default function LoginScreen({ navigation }) {
               inputStyle={globalStyles.inputInput}
               leftIcon={<Ionicons name="lock-closed" size={24} />}
               secureTextEntry={true}
-              errorMessage="Password is invalid. Please check again."
-              errorStyle={globalStyles.inputError}
-              onChangeText={props.handleChange("password")}
-              value={props.values.password}
+              onChangeText={handleChange("password")}
             />
+
+            <Text style={globalStyles.inputError}>{errors.password}</Text>
+
             <TouchableOpacity
               style={styles.forgotPwdWrapper}
               onPress={() => navigation.navigate("Forgot Password Stack")}
@@ -49,8 +82,8 @@ export default function LoginScreen({ navigation }) {
 
             <TouchableOpacity
               style={globalStyles.buttonTop}
-              onPress={props.handleSubmit}
-              onPress={() => navigation.navigate("Main Tab Navigator")}
+              onPress={handleSubmit}
+              disabled={!isValid}
             >
               <Text style={globalStyles.buttonText}>Login</Text>
             </TouchableOpacity>
@@ -66,7 +99,9 @@ export default function LoginScreen({ navigation }) {
           </View>
         )}
       </Formik>
-    </View>
+      </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -51,6 +51,8 @@ export const globalStyles = StyleSheet.create({
     fontSize: 14,
   },
   inputError: {
+    marginTop: -20,
+    marginBottom: 10,
     alignSelf: "center",
     color: colors.red,
   },

@@ -1,5 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import * as yup from "yup";
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  TouchableOpacity, 
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard, 
+  ScrollView
+} from "react-native";
 import { Formik } from "formik";
 import { Input } from "react-native-elements";
 import { globalStyles } from "../../assets/globalStyles";
@@ -7,33 +17,48 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
 
 export default function ForgotPasswordScreen({ navigation }) {
+
+  const validationSchema = yup.object().shape({
+    email: yup.string()
+      .label('Email')
+      .matches(/e[0-9][0-9][0-9][0-9][0-9][0-9][0-9](@u.nus.edu)/, 'Please enter a valid NUS email')
+      .required('Please enter your email')
+      .length(18, 'Please enter a valid NUS email')
+  })
+
   return (
-    <View style={styles.container}>
-      <Formik initialValues={{ username: "" }} onSubmit={(values) => {}}>
-        {(props) => (
+    <KeyboardAvoidingView 
+      behavior="position"
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <Formik 
+        initialValues={{ email: "" }} 
+        validationSchema = {validationSchema}
+        onSubmit={(values) => {
+          navigation.navigate("Forgot Password Verification Screen")
+        }}
+      >
+        {({ handleChange, handleSubmit, errors, isValid }) => (
           <View>
-            <Text style={styles.text}>
-              Please submit your registered NUS email.{"\n"}Verification code
-              will be sent to your email shortly
-            </Text>
             <Input
               containerStyle={globalStyles.inputContainerTop}
-              label="Your NUS email address"
+              label="NUS email"
               labelStyle={globalStyles.inputLabel}
-              placeholder="username@u.nus.edu"
+              placeholder="e1234567@u.nus.edu"
               inputStyle={globalStyles.inputInput}
               leftIcon={<Ionicons name="mail" size={24} />}
-              errorMessage="Username is invalid. Please check again."
-              errorStyle={globalStyles.inputError}
-              onChangeText={props.handleChange("username")}
-              value={props.values.username}
+              onChangeText={handleChange("email")}
+              autoCapitalize="none"
             />
+
+            <Text style={globalStyles.inputError}>{errors.email}</Text>
+
             <TouchableOpacity
               style={globalStyles.buttonTop}
-              onPress={props.handleSubmit}
-              onPress={() =>
-                navigation.navigate("Forgot Password Verification Screen")
-              }
+              onPress={handleSubmit}
+              disabled={!isValid}
             >
               <Text style={globalStyles.buttonText}>
                 Send verification code
@@ -42,7 +67,9 @@ export default function ForgotPasswordScreen({ navigation }) {
           </View>
         )}
       </Formik>
-    </View>
+      </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

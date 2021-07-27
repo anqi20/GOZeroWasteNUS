@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import * as yup from "yup";
 import { 
   StyleSheet, 
@@ -17,7 +17,6 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
 
 export default function ForgotPasswordConfirmationScreen({ navigation }) {
-  const [submitted, setStatus] = useState(false);
 
   const validationSchema = yup.object().shape({
     password: yup.string()
@@ -44,7 +43,6 @@ export default function ForgotPasswordConfirmationScreen({ navigation }) {
         initialValues={{ password: "", confirmPassword: "" }}
         validationSchema = {validationSchema}
         onSubmit={(values) => {
-          setStatus(true)
           navigation.navigate("Main Tab Navigator")
         }}
       >
@@ -79,14 +77,6 @@ export default function ForgotPasswordConfirmationScreen({ navigation }) {
             >
               <Text style={globalStyles.buttonText}>Submit</Text>
             </TouchableOpacity>
-
-            {submitted ? (
-              <Text style={styles.boldText}>
-                Your password has been updated!
-              </Text>
-            ):(
-              <View></View>
-            )}
 
           </View>
         )}

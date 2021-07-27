@@ -27,7 +27,6 @@ export default function LoginScreen({ navigation }) {
     password: yup.string()
       .label('Password')
       .required('Please enter your password')
-      .min(8, 'Password must have at least 8 characters')
   })
 
   return (

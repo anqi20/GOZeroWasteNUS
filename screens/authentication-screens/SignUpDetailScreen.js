@@ -36,14 +36,19 @@ export default function SignUpDetailScreen({ navigation }) {
 
   const validationSchema = yup.object().shape({
     firstName: yup.string()
+      .label('firstName')
       .required('Please enter your first name'),
     lastName: yup.string()
+      .label('lastName')
       .required('Please enter your last name'),
     gender: yup.string()
+      .label('gender')
       .required('Please choose your gender'),
     dOB: yup.string()
+      .label('dOB')
       .required('Please choose your date of birth'),
     faculty: yup.string()
+      .label('faculty')
       .required('Please choose your faculty'),
     password: yup.string()
       .label('Password')
@@ -90,7 +95,6 @@ export default function SignUpDetailScreen({ navigation }) {
               placeholder="NUS email"
               inputStyle={globalStyles.inputInput}
               leftIcon={<Ionicons name="mail" size={24}/>}
-              onChangeText={handleChange("email")}
               autoCapitalize="none"
               editable={false}
             />
@@ -174,7 +178,7 @@ export default function SignUpDetailScreen({ navigation }) {
               items={faculty}
               placeholder={{
                 label: "Faculty", 
-                value: null,
+                value: "",
               }}
               useNativeAndroidPickerStyle={false}
               style={{
@@ -260,9 +264,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.darkGrey,
   },
-  genderButton: {
-    color: "#ff0000",
-  },
   dropdownPlaceholder: {
     color: colors.darkGrey, 
     paddingLeft: 30,
@@ -272,7 +273,6 @@ const styles = StyleSheet.create({
     marginTop: -5,
     marginHorizontal: 30,
     flexDirection: "row",
-
   },
   dOBPlaceholderText: {
     marginLeft: 5,

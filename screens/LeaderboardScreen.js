@@ -4,6 +4,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import colors from "../assets/colors";
 import { Table, Row, Rows } from "react-native-table-component";
 import Constants from "expo-constants";
+import { globalStyles } from "../assets/globalStyles";
 
 export default class LeaderboardScreen extends Component {
   constructor(props) {
@@ -27,32 +28,35 @@ export default class LeaderboardScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {/*Crown icon + total count text*/}
-        <View style={styles.headerWrapper}>
-          <View style={styles.headerIcon}>
-            <FontAwesome5 name="crown" size={40} color="black" />
-            <Text style={[styles.boldText, { marginLeft: 10 }]}>#11</Text>
+      <View style={{ flex: 1 }}>
+        <Text style={globalStyles.header}>Leaderboard</Text>
+        <View style={styles.container}>
+          {/*Crown icon + total count text*/}
+          <View style={styles.headerWrapper}>
+            <View style={styles.headerIcon}>
+              <FontAwesome5 name="crown" size={40} color="black" />
+              <Text style={[styles.boldText, { marginLeft: 10 }]}>#11</Text>
+            </View>
+
+            <Text style={[styles.text, { textAlign: "center", marginTop: 10 }]}>
+              We have saved a total of{"\n"}
+              <Text style={[styles.boldText, { fontSize: 24 }]}>132</Text>
+              {"\n"}
+              containers and cups!
+            </Text>
           </View>
 
-          <Text style={[styles.text, { textAlign: "center", marginTop: 10 }]}>
-            We have saved a total of{"\n"}
-            <Text style={[styles.boldText, { fontSize: 24 }]}>132</Text>
-            {"\n"}
-            containers and cups!
-          </Text>
-        </View>
-
-        {/*Table*/}
-        <View>
-          <Table>
-            <Row
-              data={this.state.HeaderTable}
-              style={styles.TableHeader}
-              textStyle={styles.TableHeaderText}
-            />
-            <Rows data={this.state.DataTable} textStyle={styles.TableText} />
-          </Table>
+          {/*Table*/}
+          <View>
+            <Table>
+              <Row
+                data={this.state.HeaderTable}
+                style={styles.TableHeader}
+                textStyle={styles.TableHeaderText}
+              />
+              <Rows data={this.state.DataTable} textStyle={styles.TableText} />
+            </Table>
+          </View>
         </View>
       </View>
     );
@@ -65,9 +69,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
     borderColor: colors.black,
-    marginBottom: 20,
+    marginVertical: 20,
     marginHorizontal: 20,
-    marginTop: Constants.statusBarHeight + 40,
   },
   headerWrapper: {
     flexDirection: "row",

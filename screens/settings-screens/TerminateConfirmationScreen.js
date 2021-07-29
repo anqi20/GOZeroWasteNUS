@@ -8,9 +8,9 @@ export default function TerminateConfirmationScreen({ navigation }) {
       <Text style={styles.boldText}>Account successfully terminated.</Text>
       <TouchableOpacity
         style={globalStyles.button}
-        onPress={() => navigation.navigate("Log In Screen")}
+        onPress={() => navigation.navigate("Sign Up Stack")}
       >
-        <Text style={globalStyles.buttonText}>Go to log in page</Text>
+        <Text style={globalStyles.buttonText}>Go to sign in page</Text>
       </TouchableOpacity>
     </View>
   );

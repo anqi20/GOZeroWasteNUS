@@ -10,7 +10,7 @@ export default function LeaderboardStack() {
       <Stack.Screen
         name="Leaderboard Screen"
         component={LeaderboardScreen}
-        options={{title: "Leaderboard"}}
+        options={{ title: "Leaderboard", headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>
   );

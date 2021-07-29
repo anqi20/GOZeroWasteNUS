@@ -9,12 +9,17 @@ export default function BorrowQRScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={globalStyles.header}>Borrow</Text>
       <View style={styles.box}>
-        {/*<View style={styles.imagePlaceholder} />*/}
         <TouchableOpacity
           onPress={() => navigation.navigate("Unsuccess Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Unsuccessful Screen)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Quota Exceeded")}
+          style={styles.imagePlaceholder}
+        >
+          <Text>(Quota exceeded screen)</Text>
         </TouchableOpacity>
 
         <Text style={styles.text}>Scan the QR code!</Text>
@@ -62,6 +67,7 @@ const styles = StyleSheet.create({
   imagePlaceholder: {
     backgroundColor: colors.lightGrey,
     width: "70%",
-    height: "30%",
+    height: 50,
+    marginBottom: 10,
   },
 });

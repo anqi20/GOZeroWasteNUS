@@ -256,7 +256,7 @@ export default function FeedbackScreen() {
 
   return (
     <KeyboardAvoidingView
-      behavior="position"
+      behavior={Platform.OS === "ios" ? "position" : null}
       style={{ flex: 1, backgroundColor: colors.white }}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

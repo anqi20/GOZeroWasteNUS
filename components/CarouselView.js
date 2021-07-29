@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
 
 const CARD_WIDTH = Dimensions.get("window").width - 40;
-const CARD_HEIGHT = 150;
+const CARD_HEIGHT = 200;
 
 function CardItem({ item, index }) {
   const navigation = useNavigation();
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
     padding: 20,
+    justifyContent: "space-around",
   },
   cardContentView: {
     flexDirection: "row",

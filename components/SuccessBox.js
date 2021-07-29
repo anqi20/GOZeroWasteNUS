@@ -107,9 +107,9 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
 
       <TouchableOpacity
         style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.popToTop()}
       >
-        <Text style={globalStyles.buttonText}>Home</Text>
+        <Text style={globalStyles.buttonText}>Back</Text>
       </TouchableOpacity>
     </View>
   );

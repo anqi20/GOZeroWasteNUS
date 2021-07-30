@@ -1,10 +1,59 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default function BorrowQRScreen({ navigation }) {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    })();
+  }, []);
+
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    navigation.navigate("Selection Screen");
+    setScanned(false);
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+  };
+
+  if (hasPermission === null) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ fontSize: 32, textAlign: "center" }}>
+          Requesting for camera permission.
+        </Text>
+      </View>
+    );
+  }
+  if (hasPermission === false) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ fontSize: 32, textAlign: "center", marginBottom: 30 }}>
+          Please allow camera access to use the borrow function.
+        </Text>
+        <TouchableOpacity
+          style={[globalStyles.button, , { width: "80%" }]}
+          onPress={() => Linking.openURL("app-settings:")}
+        >
+          <Text style={globalStyles.buttonText}>Go to settings</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Text style={globalStyles.header}>Borrow</Text>
@@ -23,12 +72,10 @@ export default function BorrowQRScreen({ navigation }) {
         </TouchableOpacity>
 
         <Text style={styles.text}>Scan the QR code!</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Selection Screen")}
-          style={styles.qrPlaceholder}
-        >
-          <Text>(Click here)</Text>
-        </TouchableOpacity>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={styles.qr}
+        />
       </View>
       <FooterText />
     </View>
@@ -59,7 +106,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     fontWeight: "bold",
   },
-  qrPlaceholder: {
+  qr: {
     backgroundColor: colors.lightGrey,
     width: "70%",
     aspectRatio: 1,

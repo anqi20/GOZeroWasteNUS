@@ -5,7 +5,7 @@ import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import moment from "moment";
 import { globalStyles } from "../assets/globalStyles";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, StackActions } from "@react-navigation/native";
 
 export default function SuccessBox({ numCups, numContainers, text, location }) {
   const navigation = useNavigation();
@@ -107,9 +107,12 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
 
       <TouchableOpacity
         style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
-        onPress={() => navigation.popToTop()}
+        onPress={() => {
+          navigation.dispatch(StackActions.popToTop());
+          navigation.navigate("Home");
+        }}
       >
-        <Text style={globalStyles.buttonText}>Back</Text>
+        <Text style={globalStyles.buttonText}>Home</Text>
       </TouchableOpacity>
     </View>
   );

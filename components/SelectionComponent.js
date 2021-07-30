@@ -38,14 +38,15 @@ export default function SelectionComponent({
     );
   }
 
+  const [isOverQuota, setBoolean] = useState(false);
+
   function CupSelector({ cupQuota, numCups, setCupNum }) {
     function increment() {
       if (numCups >= cupQuota) {
-        // When quota is exceeded navigate to over quota error screen
-        // navigation.navigate("");
+        setBoolean(true);
       } else {
-        // setCupCount(cupCount + 1);
         setCupNum(numCups + 1);
+        setBoolean(false);
       }
     }
 
@@ -53,8 +54,8 @@ export default function SelectionComponent({
       if (numCups <= 0) {
         return null;
       } else {
-        // setCupCount(cupCount - 1);
         setCupNum(numCups - 1);
+        setBoolean(false);
       }
     }
 
@@ -81,11 +82,10 @@ export default function SelectionComponent({
   }) {
     function increment() {
       if (numContainers >= containerQuota) {
-        // When quota is exceeded navigate to over quota error screen
-        // navigation.navigate("");
+        setBoolean(true);
       } else {
-        // setContainerCount(containerCount + 1);
         setContainerNum(numContainers + 1);
+        setBoolean(false);
       }
     }
 
@@ -93,8 +93,8 @@ export default function SelectionComponent({
       if (numContainers <= 0) {
         return null;
       } else {
-        // setContainerCount(containerCount - 1);
         setContainerNum(numContainers - 1);
+        setBoolean(false);
       }
     }
 
@@ -149,7 +149,16 @@ export default function SelectionComponent({
     }
   }
 
-  return <View style={styles.container}>{renderSelector()}</View>;
+  return (
+    <View style={styles.container}>
+      {renderSelector()}
+      {isOverQuota ? (
+        <Text style={{ color: colors.red }}>
+          You cannot select more than this number.
+        </Text>
+      ) : null}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

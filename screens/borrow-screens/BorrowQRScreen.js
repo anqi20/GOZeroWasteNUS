@@ -10,6 +10,17 @@ import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import Constants from "expo-constants";
+import * as IntentLauncher from "expo-intent-launcher";
+
+/*
+If we are using expo application, our package name will be host.exp.exponent. 
+If we are using the published version of our application (standalone build)
+ then we get the package name we defined in the app.json file.
+*/
+const pkg = Constants.manifest.releaseChannel
+  ? Constants.manifest.android.package
+  : "host.exp.exponent";
 
 export default function BorrowQRScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -46,7 +57,16 @@ export default function BorrowQRScreen({ navigation }) {
         </Text>
         <TouchableOpacity
           style={[globalStyles.button, , { width: "80%" }]}
-          onPress={() => Linking.openURL("app-settings:")}
+          onPress={() => {
+            if (Platform.OS === "ios") {
+              Linking.openURL("app-settings:");
+            } else {
+              IntentLauncher.startActivityAsync(
+                IntentLauncher.ACTION_APPLICATION_DETAILS_SETTINGS,
+                { data: "package:" + pkg }
+              );
+            }
+          }}
         >
           <Text style={globalStyles.buttonText}>Go to settings</Text>
         </TouchableOpacity>

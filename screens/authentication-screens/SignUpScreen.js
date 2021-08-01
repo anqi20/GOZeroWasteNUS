@@ -1,14 +1,14 @@
 import React from "react";
 import * as yup from "yup";
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  TouchableOpacity, 
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView 
+  ScrollView,
 } from "react-native";
 import { Formik } from "formik";
 import { Input } from "react-native-elements";
@@ -17,66 +17,66 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
 
 export default function SignUpScreen({ navigation }) {
-
   const validationSchema = yup.object().shape({
-    email: yup.string()
-      .label('Email')
-      .matches(/e[0-9][0-9][0-9][0-9][0-9][0-9][0-9](@u.nus.edu)/, 'Please enter a valid NUS email')
-      .required('Please enter your email')
-      .length(18, 'Please enter a valid NUS email')
-  })
+    email: yup
+      .string()
+      .label("Email")
+      .matches(
+        /e[0-9][0-9][0-9][0-9][0-9][0-9][0-9](@u.nus.edu)/,
+        "Please enter a valid NUS email"
+      )
+      .required("Please enter your email")
+      .length(18, "Please enter a valid NUS email"),
+  });
 
   return (
-    <KeyboardAvoidingView 
-      behavior="position"
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-      <Formik 
-        initialValues={{ email: "" }} 
-        validationSchema = {validationSchema}
-        onSubmit={(values) => {
-          navigation.navigate("Sign Up Verification Screen")
-        }}
-      >
-        {({ handleChange, handleSubmit, errors, isValid }) => (
-          <View>
-            <Input
-              containerStyle={globalStyles.inputContainerTop}
-              label="NUS email"
-              labelStyle={globalStyles.inputLabel}
-              placeholder="e1234567@u.nus.edu"
-              inputStyle={globalStyles.inputInput}
-              leftIcon={<Ionicons name="mail" size={24} />}
-              onChangeText={handleChange("email")}
-              autoCapitalize="none"
-            />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Formik
+            initialValues={{ email: "" }}
+            validationSchema={validationSchema}
+            onSubmit={(values) => {
+              navigation.navigate("Sign Up Verification Screen");
+            }}
+          >
+            {({ handleChange, handleSubmit, errors, isValid }) => (
+              <View>
+                <Input
+                  containerStyle={globalStyles.inputContainerTop}
+                  label="NUS email"
+                  labelStyle={globalStyles.inputLabel}
+                  placeholder="e1234567@u.nus.edu"
+                  inputStyle={globalStyles.inputInput}
+                  leftIcon={<Ionicons name="mail" size={24} />}
+                  onChangeText={handleChange("email")}
+                  autoCapitalize="none"
+                />
 
-            <Text style={globalStyles.inputError}>{errors.email}</Text>
+                <Text style={globalStyles.inputError}>{errors.email}</Text>
 
-            <TouchableOpacity
-              style={globalStyles.buttonTop}
-              onPress={handleSubmit}
-              disabled={!isValid}
-            >
-              <Text style={globalStyles.buttonText}>Submit</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                  style={globalStyles.buttonTop}
+                  onPress={handleSubmit}
+                  disabled={!isValid}
+                >
+                  <Text style={globalStyles.buttonText}>Submit</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.logInWrapper}
-              onPress={() => navigation.navigate("Log In Screen")}
-            >
-              <Text style={styles.logIn}>
-                Have an account?{"\n"}Log in here
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </Formik>
-      </ScrollView>
+                <TouchableOpacity
+                  style={styles.logInWrapper}
+                  onPress={() => navigation.navigate("Log In Screen")}
+                >
+                  <Text style={styles.logIn}>
+                    Have an account?{"\n"}Log in here
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </Formik>
+        </ScrollView>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 

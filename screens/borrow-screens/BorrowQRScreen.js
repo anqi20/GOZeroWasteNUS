@@ -35,7 +35,7 @@ export default function BorrowQRScreen({ navigation }) {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    navigation.navigate("Selection Screen");
+    navigation.navigate("Selection Screen", { store: data });
     setScanned(false);
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
@@ -78,6 +78,12 @@ export default function BorrowQRScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={globalStyles.header}>Borrow</Text>
       <View style={styles.box}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("QR Generator")}
+          style={styles.imagePlaceholder}
+        >
+          <Text>(QR generator)</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("Unsuccess Screen")}
           style={styles.imagePlaceholder}
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
   imagePlaceholder: {
     backgroundColor: colors.lightGrey,
     width: "70%",
-    height: 50,
+    height: 20,
     marginBottom: 10,
   },
 });

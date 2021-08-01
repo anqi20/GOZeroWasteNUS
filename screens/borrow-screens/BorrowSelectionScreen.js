@@ -5,7 +5,10 @@ import { globalStyles } from "../../assets/globalStyles";
 import SelectionComponent from "../../components/SelectionComponent";
 import FooterText from "../../components/FooterText";
 
-export default function BorrowSelectionScreen({ navigation }) {
+export default function BorrowSelectionScreen({ navigation, route }) {
+  //Based on this store name, grab data from firebase
+  const { store } = route.params;
+
   //Temporary data
   const cupQuota = 3;
   const containerQuota = 5;
@@ -29,7 +32,8 @@ export default function BorrowSelectionScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={globalStyles.header}>Borrow</Text>
       <View style={styles.box}>
-        <Text style={styles.storeName}>{storeName}</Text>
+        {/* <Text style={styles.storeName}>{storeName}</Text> */}
+        <Text style={styles.storeName}>{store}</Text>
         <Text style={styles.text}>
           Choose the number of {renderText()} you are borrowing
         </Text>

@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import { globalStyles } from "../../assets/globalStyles";
+import firebase from "../../database/firebaseDB";
 
 function renderSeparator() {
   return (
@@ -20,6 +21,13 @@ function renderSeparator() {
     />
   );
 }
+
+const logoutUser = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => console.log("User signed out!"));
+};
 
 export default function MainSettingsScreen({ navigation }) {
   return (
@@ -45,7 +53,11 @@ export default function MainSettingsScreen({ navigation }) {
       />
       <View style={{ flex: 1, justifyContent: "center" }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Log In Screen")}
+          onPress={() => {
+            logoutUser();
+            navigation.navigate("Log In Screen");
+            // navigation.popToTop();
+          }}
           style={globalStyles.button}
         >
           <Text style={globalStyles.buttonText}>Log out</Text>

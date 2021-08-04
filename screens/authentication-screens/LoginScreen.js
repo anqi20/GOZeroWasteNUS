@@ -80,7 +80,6 @@ export default function LoginScreen({ navigation }) {
             validationSchema={validationSchema}
             onSubmit={(values) => {
               loginUser();
-              // navigation.navigate("Main Tab Navigator");
               // console.log(values);
             }}
           >

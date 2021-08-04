@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
@@ -37,7 +36,10 @@ export default function SignUpScreen({ navigation }) {
             initialValues={{ email: "" }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              navigation.navigate("Sign Up Verification Screen");
+              // console.log(values);
+              navigation.navigate("Sign Up Verification Screen", {
+                email: values.email,
+              });
             }}
           >
             {({ handleChange, handleSubmit, errors, isValid }) => (

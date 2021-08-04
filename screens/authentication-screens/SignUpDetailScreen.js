@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import {
   StyleSheet,
@@ -24,8 +24,11 @@ import RNPickerSelect from "react-native-picker-select";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Icon } from "react-native-elements";
 import { useHeaderHeight } from "@react-navigation/stack";
+import firebase from "../../database/firebaseDB";
 
-export default function SignUpDetailScreen({ navigation }) {
+export default function SignUpDetailScreen({ navigation, route }) {
+  // const { email } = route.params;
+
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDateConfirmed, setDateConfirmed] = useState(false);
@@ -75,6 +78,56 @@ export default function SignUpDetailScreen({ navigation }) {
       ),
   });
 
+  // ---------------- AUTHENTICATION ---------------------------
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const createUser = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        console.log("User account created!");
+        // console.log(userCredential);
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          setErrorMsg("This email address is already in use!");
+        }
+
+        // console.log(error.code);
+        // console.error(error);
+      });
+  };
+
+  // ---------------- DATA STORAGE ---------------------------
+  const [enteredData, setEnteredData] = useState();
+  console.log(enteredData);
+
+  // function createUserData() {
+  //   const user = firebase.auth().currentUser;
+  //   const db = firebase.firestore();
+
+  //   if (user !== null) {
+  //     const uid = user.uid;
+  //     const userData = {
+  //       userName: userName,
+  //       loggedInBefore: true,
+  //       uid: uid,
+  //       // email: ,
+  //       //       firstName: "",
+  //       //       lastName: "",
+  //       //       gender: "",
+  //       //       dOB: "",
+  //       //       faculty: "",
+  //     };
+  //     db.collection("users").doc(uid).set(userData, { merge: true });
+  //     console.log(userData);
+  //     setUserData(userData);
+  //   }
+  // }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : null}
@@ -88,7 +141,7 @@ export default function SignUpDetailScreen({ navigation }) {
         >
           <Formik
             initialValues={{
-              email: "email",
+              email: "",
               firstName: "",
               lastName: "",
               gender: "",
@@ -97,9 +150,12 @@ export default function SignUpDetailScreen({ navigation }) {
               password: "",
               confirmPassword: "",
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
-              navigation.navigate("Main Tab Navigator");
+              // console.log(values.email);
+              setEnteredData(values);
+              createUser();
+              navigation.navigate("Sign Up Verification Screen");
             }}
           >
             {({
@@ -113,10 +169,16 @@ export default function SignUpDetailScreen({ navigation }) {
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
                   placeholder="NUS email"
+                  // defaultValue={email}
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
                   autoCapitalize="none"
-                  editable={false}
+                  onChangeText={(value) => {
+                    setErrorMsg("");
+                    setEmail(value);
+                    setFieldValue("email", value);
+                  }}
+                  // editable={false}
                 />
                 <Input
                   containerStyle={globalStyles.inputContainerNormal}
@@ -237,15 +299,26 @@ export default function SignUpDetailScreen({ navigation }) {
                   placeholder="Confirm your password"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="lock-closed" size={24} />}
-                  onChangeText={handleChange("confirmPassword")}
+                  onChangeText={(value) => {
+                    setErrorMsg("");
+                    setPassword(value);
+                    setFieldValue("confirmPassword", value);
+                  }}
                   secureTextEntry={true}
                 />
                 <Text style={globalStyles.inputError}>
                   {errors.confirmPassword}
                 </Text>
 
+                {errorMsg === "" ? null : (
+                  <Text style={styles.signupError}>{errorMsg}</Text>
+                )}
+
                 <TouchableOpacity
-                  style={globalStyles.buttonTop}
+                  style={[
+                    globalStyles.buttonTop,
+                    { marginTop: 20, marginBottom: 50 },
+                  ]}
                   onPress={handleSubmit}
                   disabled={!isValid}
                 >
@@ -320,6 +393,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#aeb3b8",
     marginTop: 8,
     marginBottom: 23,
+  },
+  signupError: {
+    color: colors.red,
+    textAlign: "center",
+    marginHorizontal: 30,
+    marginTop: 30,
   },
 });
 

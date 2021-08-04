@@ -78,18 +78,36 @@ export default function SignUpDetailScreen({ navigation, route }) {
       ),
   });
 
-  // ---------------- AUTHENTICATION ---------------------------
+  // ---------------- AUTHENTICATION & DATA STORE ---------------------------
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [enteredData, setEnteredData] = useState();
 
   const createUser = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        console.log("User account created!");
+      .then((response) => {
         // console.log(userCredential);
+        console.log("User account created!");
+        const uid = response.user.uid;
+        const db = firebase.firestore().collection("users");
+        const data = {
+          id: uid,
+          email: email,
+          firstName: enteredData.firstName,
+          lastName: enteredData.lastName,
+          gender: enteredData.gender,
+          dateOfBirth: enteredData.dOB,
+          faculty: enteredData.faculty,
+        };
+        db.doc(uid)
+          .set(data, { merge: true })
+          .then(() => {
+            navigation.navigate("Sign Up Verification Screen");
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
@@ -100,33 +118,6 @@ export default function SignUpDetailScreen({ navigation, route }) {
         // console.error(error);
       });
   };
-
-  // ---------------- DATA STORAGE ---------------------------
-  const [enteredData, setEnteredData] = useState();
-  console.log(enteredData);
-
-  // function createUserData() {
-  //   const user = firebase.auth().currentUser;
-  //   const db = firebase.firestore();
-
-  //   if (user !== null) {
-  //     const uid = user.uid;
-  //     const userData = {
-  //       userName: userName,
-  //       loggedInBefore: true,
-  //       uid: uid,
-  //       // email: ,
-  //       //       firstName: "",
-  //       //       lastName: "",
-  //       //       gender: "",
-  //       //       dOB: "",
-  //       //       faculty: "",
-  //     };
-  //     db.collection("users").doc(uid).set(userData, { merge: true });
-  //     console.log(userData);
-  //     setUserData(userData);
-  //   }
-  // }
 
   return (
     <KeyboardAvoidingView
@@ -155,7 +146,6 @@ export default function SignUpDetailScreen({ navigation, route }) {
               // console.log(values.email);
               setEnteredData(values);
               createUser();
-              navigation.navigate("Sign Up Verification Screen");
             }}
           >
             {({

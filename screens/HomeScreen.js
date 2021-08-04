@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,8 +13,26 @@ import colors from "../assets/colors";
 import { Button, Icon } from "react-native-elements";
 import CarouselView from "../components/CarouselView";
 import RewardListView from "../components/RewardListView";
+import firebase from "../database/firebaseDB";
 
 export default function HomeScreen({ navigation }) {
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
   return (
     <ScrollView
       style={{ backgroundColor: colors.white }}
@@ -23,7 +41,10 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.header}>
         <View style={styles.welcomeContainer}>
           <Text style={styles.text}>Hi,</Text>
-          <Text style={[styles.boldText, { fontSize: 36 }]}>ReNuse</Text>
+          {/* <Text style={[styles.boldText, { fontSize: 36 }]}>ReNuse</Text> */}
+          <Text style={[styles.boldText, { fontSize: 36 }]}>
+            {user !== null ? user.email : "Anonymous"}
+          </Text>
         </View>
         <View style={styles.settingsContainer}>
           <TouchableOpacity

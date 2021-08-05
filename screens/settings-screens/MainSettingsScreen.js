@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { globalStyles } from "../../assets/globalStyles";
 import firebase from "../../database/firebaseDB";
+import { AuthContext } from "../../assets/AuthContext";
 
 function renderSeparator() {
   return (
@@ -22,14 +23,13 @@ function renderSeparator() {
   );
 }
 
-const logoutUser = () => {
-  firebase
-    .auth()
-    .signOut()
-    .then(() => console.log("User signed out!"));
-};
-
 export default function MainSettingsScreen({ navigation }) {
+  const { logOut } = useContext(AuthContext);
+
+  const logoutUser = () => {
+    logOut();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -55,8 +55,6 @@ export default function MainSettingsScreen({ navigation }) {
         <TouchableOpacity
           onPress={() => {
             logoutUser();
-            navigation.navigate("Log In Screen");
-            // navigation.popToTop();
           }}
           style={globalStyles.button}
         >

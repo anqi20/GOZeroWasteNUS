@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import BorrowStack from "./borrow-screens/BorrowStack";
 import ReturnStack from "./return-screens/ReturnStack";
 import ModalHomeStack from "./ModalHomeStack";
 import LeaderboardStack from "./LeaderboardStack";
 import { Ionicons } from "@expo/vector-icons";
+import { AuthContext } from "../assets/AuthContext";
 
 const Tab = createBottomTabNavigator();
 

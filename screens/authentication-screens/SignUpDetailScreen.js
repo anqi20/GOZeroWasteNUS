@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as yup from "yup";
 import {
   StyleSheet,
@@ -25,10 +25,9 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Icon } from "react-native-elements";
 import { useHeaderHeight } from "@react-navigation/stack";
 import firebase from "../../database/firebaseDB";
+import { AuthContext } from "../../assets/AuthContext";
 
 export default function SignUpDetailScreen({ navigation, route }) {
-  // const { email } = route.params;
-
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDateConfirmed, setDateConfirmed] = useState(false);
@@ -79,44 +78,35 @@ export default function SignUpDetailScreen({ navigation, route }) {
   });
 
   // ---------------- AUTHENTICATION & DATA STORE ---------------------------
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [enteredData, setEnteredData] = useState();
+  const { signUp } = useContext(AuthContext);
+
+  const [enteredEmail, setEmail] = useState(" ");
+  const [enteredPassword, setPassword] = useState(" ");
+  const [enteredFN, setFN] = useState(" ");
+  const [enteredLN, setLN] = useState(" ");
+  const [enteredGender, setGender] = useState(" ");
+  const [enteredDOB, setDOB] = useState(" ");
+  const [enteredFaculty, setFaculty] = useState(" ");
+  const [errorMsg, setErrorMsg] = useState(" ");
 
   const createUser = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((response) => {
-        // console.log(userCredential);
-        console.log("User account created!");
-        const uid = response.user.uid;
-        const db = firebase.firestore().collection("users");
-        const data = {
-          id: uid,
-          email: email,
-          firstName: enteredData.firstName,
-          lastName: enteredData.lastName,
-          gender: enteredData.gender,
-          dateOfBirth: enteredData.dOB,
-          faculty: enteredData.faculty,
-        };
-        db.doc(uid)
-          .set(data, { merge: true })
-          .then(() => {
-            navigation.navigate("Sign Up Verification Screen");
-          })
-          .catch((error) => console.log(error));
-      })
-      .catch((error) => {
-        if (error.code === "auth/email-already-in-use") {
-          setErrorMsg("This email address is already in use!");
-        }
-
-        // console.log(error.code);
-        // console.error(error);
-      });
+    const email = enteredEmail;
+    const password = enteredPassword;
+    const firstName = enteredFN;
+    const lastName = enteredLN;
+    const gender = enteredGender;
+    const dateOfBirth = enteredDOB;
+    const faculty = enteredFaculty;
+    signUp({
+      email,
+      password,
+      firstName,
+      lastName,
+      gender,
+      dateOfBirth,
+      faculty,
+      setErrorMsg,
+    });
   };
 
   return (
@@ -132,19 +122,19 @@ export default function SignUpDetailScreen({ navigation, route }) {
         >
           <Formik
             initialValues={{
-              email: "",
-              firstName: "",
-              lastName: "",
-              gender: "",
-              dOB: "",
-              faculty: "",
-              password: "",
-              confirmPassword: "",
+              email: " ",
+              firstName: " ",
+              lastName: " ",
+              gender: " ",
+              dOB: " ",
+              faculty: " ",
+              password: " ",
+              confirmPassword: " ",
             }}
             // validationSchema={validationSchema}
             onSubmit={(values) => {
-              // console.log(values.email);
-              setEnteredData(values);
+              // console.log(values);
+              // setEnteredData(values);
               createUser();
             }}
           >
@@ -175,7 +165,11 @@ export default function SignUpDetailScreen({ navigation, route }) {
                   placeholder="First Name (Family Name)"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<FontAwesome5 name="user-alt" size={24} />}
-                  onChangeText={handleChange("firstName")}
+                  onChangeText={(value) => {
+                    setFN(value);
+                    setFieldValue("firstName", value);
+                  }}
+                  // onChangeText={handleChange("firstName")}
                 />
                 <Text style={globalStyles.inputError}>{errors.firstName}</Text>
 
@@ -184,12 +178,19 @@ export default function SignUpDetailScreen({ navigation, route }) {
                   placeholder="Last Name"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<FontAwesome5 name="user-alt" size={24} />}
-                  onChangeText={handleChange("lastName")}
+                  onChangeText={(value) => {
+                    setLN(value);
+                    setFieldValue("lastName", value);
+                  }}
+                  // onChangeText={handleChange("lastName")}
                 />
                 <Text style={globalStyles.inputError}>{errors.lastName}</Text>
 
                 <RNPickerSelect
-                  onValueChange={(value) => setFieldValue("gender", value)}
+                  onValueChange={(value) => {
+                    setGender(value);
+                    setFieldValue("gender", value);
+                  }}
                   items={gender}
                   placeholder={{
                     label: "Gender",
@@ -241,6 +242,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
                     setDate(date);
                     setFieldValue("dOB", moment(date).format("DD/MM/YYYY"));
                     setDateConfirmed(true);
+                    setDOB(moment(date).format("DD/MM/YYYY"));
                   }}
                   onCancel={hideDatePicker}
                   date={date}
@@ -256,7 +258,10 @@ export default function SignUpDetailScreen({ navigation, route }) {
                 <Text style={globalStyles.inputError}>{errors.dOB}</Text>
 
                 <RNPickerSelect
-                  onValueChange={(value) => setFieldValue("faculty", value)}
+                  onValueChange={(value) => {
+                    setFaculty(value);
+                    setFieldValue("faculty", value);
+                  }}
                   items={faculty}
                   placeholder={{
                     label: "Faculty",

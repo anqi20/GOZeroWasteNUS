@@ -136,6 +136,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
               // console.log(values);
               // setEnteredData(values);
               createUser();
+              navigation.navigate("Sign Up Verification Screen");
             }}
           >
             {({

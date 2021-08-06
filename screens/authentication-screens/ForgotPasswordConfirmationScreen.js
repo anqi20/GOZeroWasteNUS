@@ -42,9 +42,11 @@ export default function ForgotPasswordConfirmationScreen({ navigation }) {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Formik
             initialValues={{ password: "", confirmPassword: "" }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
-              navigation.navigate("Main Tab Navigator");
+              navigation.navigate("Log In Screen", {
+                confirmationMsg: "Password successfully changed!",
+              });
             }}
           >
             {({ handleChange, handleSubmit, errors, isValid }) => (

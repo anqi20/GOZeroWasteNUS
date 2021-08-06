@@ -15,10 +15,9 @@ import { Input } from "react-native-elements";
 import { globalStyles } from "../../assets/globalStyles";
 import colors from "../../assets/colors";
 import { Ionicons } from "@expo/vector-icons";
-import firebase from "../../database/firebaseDB";
 import { AuthContext } from "../../assets/AuthContext";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation, route }) {
   const validationSchema = yup.object().shape({
     email: yup
       .string()
@@ -37,6 +36,13 @@ export default function LoginScreen({ navigation }) {
 
   // ---------------- AUTHENTICATION ---------------------------
   const { logIn } = useContext(AuthContext);
+
+  // Monitor route.params for password change message and show if exists
+  useEffect(() => {
+    if (route.params?.confirmationMsg) {
+      setErrorMsg(route.params?.confirmationMsg);
+    }
+  }, [route.params?.confirmationMsg]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

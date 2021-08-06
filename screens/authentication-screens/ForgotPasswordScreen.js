@@ -35,7 +35,7 @@ export default function ForgotPasswordScreen({ navigation }) {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Formik
             initialValues={{ email: "" }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
               navigation.navigate("Forgot Password Verification Screen");
             }}

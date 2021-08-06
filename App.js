@@ -133,7 +133,27 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {user ? <MainTabNavigator /> : <AuthStack />}
+        <Stack.Navigator>
+          {user ? (
+            <Stack.Screen
+              name="Main Tab Navigator"
+              component={MainTabNavigator}
+              options={{
+                headerShown: false,
+              }}
+              initialParams={user}
+            />
+          ) : (
+            <Stack.Screen
+              name="Auth Stack"
+              component={AuthStack}
+              options={{
+                animationTypeForReplace: "pop",
+                headerShown: false,
+              }}
+            />
+          )}
+        </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
   );

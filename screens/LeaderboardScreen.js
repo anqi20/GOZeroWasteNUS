@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import colors from "../assets/colors";
 import { Table, Row, Rows } from "react-native-table-component";
-import Constants from "expo-constants";
 import { globalStyles } from "../assets/globalStyles";
 
 export default class LeaderboardScreen extends Component {
@@ -22,13 +21,28 @@ export default class LeaderboardScreen extends Component {
         ["#8", "John Lim", "103", "FoE"],
         ["#9", "John Lim", "103", "FoE"],
         ["#10", "John Lim", "103", "FoE"],
+        ["#103", "Lim SiHui", "10", "SoC"],
       ],
     };
   }
 
+  //Restriction: To show only the first 8 characters of usernames
+  nameConstraint = (data) => {
+    for(let i=0; i< data.length; i++) {
+      if(data[i][1].length > 8) {
+        data[i][1] = data[i][1].substring(0, 8)
+      }
+    }
+    return data;
+  }
+
   render() {
+
+    const ConstraintDataTable = this.nameConstraint(this.state.DataTable)
+
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colors.white }}>
+        <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={globalStyles.header}>Leaderboard</Text>
         <View style={styles.container}>
           {/*Crown icon + total count text*/}
@@ -54,10 +68,11 @@ export default class LeaderboardScreen extends Component {
                 style={styles.TableHeader}
                 textStyle={styles.TableHeaderText}
               />
-              <Rows data={this.state.DataTable} textStyle={styles.TableText} />
+              <Rows data={ConstraintDataTable} textStyle={styles.TableText} />
             </Table>
           </View>
         </View>
+        </ScrollView>
       </View>
     );
   }

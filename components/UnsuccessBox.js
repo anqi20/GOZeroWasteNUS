@@ -18,9 +18,9 @@ export default function UnsuccessBox() {
         color="#FE2C2C"
         size={80}
       />
-      <Text style={[styles.header, { marginBottom: 20 }]}>Error!</Text>
+      <Text style={[styles.header, { marginBottom: 20 }]}>Oops!</Text>
       <Text style={styles.warningText}>
-        Oops, there seems to be an error with our system!
+        Oops, there seems to be an error!
       </Text>
 
       <View style={styles.icons}>

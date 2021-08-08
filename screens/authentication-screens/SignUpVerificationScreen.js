@@ -33,7 +33,7 @@ export default function SignUpVerificationScreen({ navigation }) {
             initialValues={{ code: "" }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              navigation.navigate("Sign Up Detail Screen");
+              navigation.navigate("Sign Up Success");
             }}
           >
             {({ handleChange, handleSubmit, errors, isValid }) => (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,8 @@ import {
   FlatList,
 } from "react-native";
 import { globalStyles } from "../../assets/globalStyles";
+import firebase from "../../database/firebaseDB";
+import { AuthContext } from "../../assets/AuthContext";
 
 function renderSeparator() {
   return (
@@ -22,6 +24,12 @@ function renderSeparator() {
 }
 
 export default function MainSettingsScreen({ navigation }) {
+  const { logOut } = useContext(AuthContext);
+
+  const logoutUser = () => {
+    logOut();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -45,7 +53,9 @@ export default function MainSettingsScreen({ navigation }) {
       />
       <View style={{ flex: 1, justifyContent: "center" }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Log In Screen")}
+          onPress={() => {
+            logoutUser();
+          }}
           style={globalStyles.button}
         >
           <Text style={globalStyles.buttonText}>Log out</Text>

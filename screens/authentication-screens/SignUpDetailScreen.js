@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as yup from "yup";
 import {
   StyleSheet,
@@ -24,8 +24,10 @@ import RNPickerSelect from "react-native-picker-select";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Icon } from "react-native-elements";
 import { useHeaderHeight } from "@react-navigation/stack";
+import firebase from "../../database/firebaseDB";
+import { AuthContext } from "../../assets/AuthContext";
 
-export default function SignUpDetailScreen({ navigation }) {
+export default function SignUpDetailScreen({ navigation, route }) {
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDateConfirmed, setDateConfirmed] = useState(false);
@@ -75,6 +77,38 @@ export default function SignUpDetailScreen({ navigation }) {
       ),
   });
 
+  // ---------------- AUTHENTICATION & DATA STORE ---------------------------
+  const { signUp } = useContext(AuthContext);
+
+  const [enteredEmail, setEmail] = useState(" ");
+  const [enteredPassword, setPassword] = useState(" ");
+  const [enteredFN, setFN] = useState(" ");
+  const [enteredLN, setLN] = useState(" ");
+  const [enteredGender, setGender] = useState(" ");
+  const [enteredDOB, setDOB] = useState(" ");
+  const [enteredFaculty, setFaculty] = useState(" ");
+  const [errorMsg, setErrorMsg] = useState(" ");
+
+  const createUser = () => {
+    const email = enteredEmail;
+    const password = enteredPassword;
+    const firstName = enteredFN;
+    const lastName = enteredLN;
+    const gender = enteredGender;
+    const dateOfBirth = enteredDOB;
+    const faculty = enteredFaculty;
+    signUp({
+      email,
+      password,
+      firstName,
+      lastName,
+      gender,
+      dateOfBirth,
+      faculty,
+      setErrorMsg,
+    });
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : null}
@@ -88,18 +122,21 @@ export default function SignUpDetailScreen({ navigation }) {
         >
           <Formik
             initialValues={{
-              email: "email",
-              firstName: "",
-              lastName: "",
-              gender: "",
-              dOB: "",
-              faculty: "",
-              password: "",
-              confirmPassword: "",
+              email: " ",
+              firstName: " ",
+              lastName: " ",
+              gender: " ",
+              dOB: " ",
+              faculty: " ",
+              password: " ",
+              confirmPassword: " ",
             }}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={(values) => {
-              navigation.navigate("Main Tab Navigator");
+              // console.log(values);
+              // setEnteredData(values);
+              createUser();
+              navigation.navigate("Sign Up Verification Screen");
             }}
           >
             {({
@@ -113,17 +150,27 @@ export default function SignUpDetailScreen({ navigation }) {
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
                   placeholder="NUS email"
+                  // defaultValue={email}
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
                   autoCapitalize="none"
-                  editable={false}
+                  onChangeText={(value) => {
+                    setErrorMsg("");
+                    setEmail(value);
+                    setFieldValue("email", value);
+                  }}
+                  // editable={false}
                 />
                 <Input
                   containerStyle={globalStyles.inputContainerNormal}
                   placeholder="First Name (Family Name)"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<FontAwesome5 name="user-alt" size={24} />}
-                  onChangeText={handleChange("firstName")}
+                  onChangeText={(value) => {
+                    setFN(value);
+                    setFieldValue("firstName", value);
+                  }}
+                  // onChangeText={handleChange("firstName")}
                 />
                 <Text style={globalStyles.inputError}>{errors.firstName}</Text>
 
@@ -132,12 +179,19 @@ export default function SignUpDetailScreen({ navigation }) {
                   placeholder="Last Name"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<FontAwesome5 name="user-alt" size={24} />}
-                  onChangeText={handleChange("lastName")}
+                  onChangeText={(value) => {
+                    setLN(value);
+                    setFieldValue("lastName", value);
+                  }}
+                  // onChangeText={handleChange("lastName")}
                 />
                 <Text style={globalStyles.inputError}>{errors.lastName}</Text>
 
                 <RNPickerSelect
-                  onValueChange={(value) => setFieldValue("gender", value)}
+                  onValueChange={(value) => {
+                    setGender(value);
+                    setFieldValue("gender", value);
+                  }}
                   items={gender}
                   placeholder={{
                     label: "Gender",
@@ -189,6 +243,7 @@ export default function SignUpDetailScreen({ navigation }) {
                     setDate(date);
                     setFieldValue("dOB", moment(date).format("DD/MM/YYYY"));
                     setDateConfirmed(true);
+                    setDOB(moment(date).format("DD/MM/YYYY"));
                   }}
                   onCancel={hideDatePicker}
                   date={date}
@@ -204,7 +259,10 @@ export default function SignUpDetailScreen({ navigation }) {
                 <Text style={globalStyles.inputError}>{errors.dOB}</Text>
 
                 <RNPickerSelect
-                  onValueChange={(value) => setFieldValue("faculty", value)}
+                  onValueChange={(value) => {
+                    setFaculty(value);
+                    setFieldValue("faculty", value);
+                  }}
                   items={faculty}
                   placeholder={{
                     label: "Faculty",
@@ -237,15 +295,26 @@ export default function SignUpDetailScreen({ navigation }) {
                   placeholder="Confirm your password"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="lock-closed" size={24} />}
-                  onChangeText={handleChange("confirmPassword")}
+                  onChangeText={(value) => {
+                    setErrorMsg("");
+                    setPassword(value);
+                    setFieldValue("confirmPassword", value);
+                  }}
                   secureTextEntry={true}
                 />
                 <Text style={globalStyles.inputError}>
                   {errors.confirmPassword}
                 </Text>
 
+                {errorMsg === "" ? null : (
+                  <Text style={styles.signupError}>{errorMsg}</Text>
+                )}
+
                 <TouchableOpacity
-                  style={globalStyles.buttonTop}
+                  style={[
+                    globalStyles.buttonTop,
+                    { marginTop: 20, marginBottom: 50 },
+                  ]}
                   onPress={handleSubmit}
                   disabled={!isValid}
                 >
@@ -320,6 +389,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#aeb3b8",
     marginTop: 8,
     marginBottom: 23,
+  },
+  signupError: {
+    color: colors.red,
+    textAlign: "center",
+    marginHorizontal: 30,
+    marginTop: 30,
   },
 });
 

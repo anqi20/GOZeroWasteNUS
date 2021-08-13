@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import { globalStyles } from "../assets/globalStyles";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, StackActions } from "@react-navigation/native";
 import FooterText from "./FooterText";
 
 export default function UnsuccessBox() {
@@ -18,9 +18,9 @@ export default function UnsuccessBox() {
         color="#FE2C2C"
         size={80}
       />
-      <Text style={[styles.header, { marginBottom: 20 }]}>Error!</Text>
+      <Text style={[styles.header, { marginBottom: 20 }]}>Oops!</Text>
       <Text style={styles.warningText}>
-        Oops, there seems to be an error with our system!
+        Oops, there seems to be an error!
       </Text>
 
       <View style={styles.icons}>
@@ -48,7 +48,10 @@ export default function UnsuccessBox() {
 
       <TouchableOpacity
         style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
-        onPress={() => navigation.popToTop()}
+        onPress={() => {
+          navigation.dispatch(StackActions.popToTop());
+          navigation.navigate("Home");
+        }}
       >
         <Text style={globalStyles.buttonText}>Back</Text>
       </TouchableOpacity>

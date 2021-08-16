@@ -48,7 +48,7 @@ export default function App() {
   }, []);
 
   const authContext = {
-    validateEmail: () => {
+    signUpSuccess: () => {
       if (!isValidated) {
         setValidated(true);
       }
@@ -110,6 +110,7 @@ export default function App() {
         });
     },
     signUp: async (data) => {
+      // Create user profile on firebase authentication
       firebase
         .auth()
         .createUserWithEmailAndPassword(data.email, data.password)
@@ -124,6 +125,32 @@ export default function App() {
             dateOfBirth: data.dateOfBirth,
             faculty: data.faculty,
           };
+          // Update user profile
+          response.user
+            .updateProfile({
+              displayName: userData.firstName + " " + userData.lastName,
+            })
+            .then(() => {
+              console.log("User's display name updated successfully!");
+              console.log(response.user.displayName);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          // Send verification email
+          response.user
+            .sendEmailVerification()
+            .then(() => {
+              console.log("Email verification sent!");
+              console.log(response.user.email);
+            })
+            .catch((error) => {
+              data.setErrorMsg(
+                "Error sending out verification email, are you sure this email is valid?"
+              );
+            });
+
+          // Add user's profile information in firestore
           const usersRef = firebase.firestore().collection("users");
           usersRef
             .doc(uid)
@@ -152,7 +179,6 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {/* {console.log(isValidated)} */}
         {user && isValidated ? (
           <Stack.Navigator>
             <Stack.Screen

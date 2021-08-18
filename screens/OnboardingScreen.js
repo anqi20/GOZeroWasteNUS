@@ -7,7 +7,7 @@ const data = [
   {
     title: "Why Borrow ",
     title2: "reusables from us?",
-    text: "We understand bringing and washing your own reusables from home maybe a hassle.",
+    text: "We understand bringing and washing your own reusables from home may be a hassle.",
   },
   {
     title: "Why Use ",

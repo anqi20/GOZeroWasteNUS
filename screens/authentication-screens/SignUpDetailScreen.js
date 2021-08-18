@@ -87,7 +87,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [enteredGender, setGender] = useState(" ");
   const [enteredDOB, setDOB] = useState(" ");
   const [enteredFaculty, setFaculty] = useState(" ");
-  const [errorMsg, setErrorMsg] = useState(" ");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const createUser = () => {
     const email = enteredEmail;
@@ -136,7 +136,9 @@ export default function SignUpDetailScreen({ navigation, route }) {
               // console.log(values);
               // setEnteredData(values);
               createUser();
-              navigation.navigate("Sign Up Verification Screen");
+              if (errorMsg == "") {
+                navigation.navigate("Sign Up Verification Screen");
+              }
             }}
           >
             {({

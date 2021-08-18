@@ -4,15 +4,15 @@ import { globalStyles } from "../../assets/globalStyles";
 import colors from "../../assets/colors";
 import { AuthContext } from "../../assets/AuthContext";
 
-export default function SignUpSuccess({ navigation }) {
-  const { validateEmail } = useContext(AuthContext);
+export default function SignUpSuccess() {
+  const { signUpSuccess } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Account successfully created!</Text>
       <TouchableOpacity
         style={[globalStyles.button, { width: "80%" }]}
-        onPress={() => validateEmail()}
+        onPress={() => signUpSuccess()}
       >
         <Text style={globalStyles.buttonText}>Get started!</Text>
       </TouchableOpacity>

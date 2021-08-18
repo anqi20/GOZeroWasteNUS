@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as yup from "yup";
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
@@ -15,8 +14,9 @@ import { Input } from "react-native-elements";
 import { globalStyles } from "../../assets/globalStyles";
 import colors from "../../assets/colors";
 import { Ionicons } from "@expo/vector-icons";
+import { AuthContext } from "../../assets/AuthContext";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation, route }) {
   const validationSchema = yup.object().shape({
     email: yup
       .string()
@@ -33,6 +33,24 @@ export default function LoginScreen({ navigation }) {
       .required("Please enter your password"),
   });
 
+  // ---------------- AUTHENTICATION ---------------------------
+  const { logIn } = useContext(AuthContext);
+
+  // Monitor route.params for password change message and show if exists
+  useEffect(() => {
+    if (route.params?.confirmationMsg) {
+      setErrorMsg(route.params?.confirmationMsg);
+    }
+  }, [route.params?.confirmationMsg]);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const loginUser = () => {
+    logIn({ email, password, setErrorMsg });
+  };
+
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -41,11 +59,11 @@ export default function LoginScreen({ navigation }) {
             initialValues={{ email: "", password: "" }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              //console.log(values)
-              navigation.navigate("Main Tab Navigator");
+              loginUser();
+              // console.log(values);
             }}
           >
-            {({ handleChange, handleSubmit, errors, isValid }) => (
+            {({ setFieldValue, handleSubmit, errors, isValid }) => (
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
@@ -54,7 +72,11 @@ export default function LoginScreen({ navigation }) {
                   placeholder="e1234567@u.nus.edu"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
-                  onChangeText={handleChange("email")}
+                  onChangeText={(value) => {
+                    setErrorMsg("");
+                    setFieldValue("email", value);
+                    setEmail(value);
+                  }}
                   autoCapitalize="none"
                 />
 
@@ -68,7 +90,11 @@ export default function LoginScreen({ navigation }) {
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="lock-closed" size={24} />}
                   secureTextEntry={true}
-                  onChangeText={handleChange("password")}
+                  onChangeText={(value) => {
+                    setErrorMsg("");
+                    setFieldValue("password", value);
+                    setPassword(value);
+                  }}
                 />
 
                 <Text style={globalStyles.inputError}>{errors.password}</Text>
@@ -80,8 +106,12 @@ export default function LoginScreen({ navigation }) {
                   <Text style={styles.forgotPwd}>Forgot your password?</Text>
                 </TouchableOpacity>
 
+                {errorMsg === "" ? null : (
+                  <Text style={styles.loginError}>{errorMsg}</Text>
+                )}
+
                 <TouchableOpacity
-                  style={globalStyles.buttonTop}
+                  style={[globalStyles.buttonTop, { marginTop: 50 }]}
                   onPress={handleSubmit}
                   disabled={!isValid}
                 >
@@ -124,5 +154,11 @@ const styles = StyleSheet.create({
   signUp: {
     textAlign: "center",
     textDecorationLine: "underline",
+  },
+  loginError: {
+    color: colors.red,
+    textAlign: "center",
+    marginHorizontal: 30,
+    marginTop: 90,
   },
 });

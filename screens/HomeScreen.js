@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,8 +13,15 @@ import colors from "../assets/colors";
 import { Button, Icon } from "react-native-elements";
 import CarouselView from "../components/CarouselView";
 import RewardListView from "../components/RewardListView";
+import { UserContext } from "../assets/UserContext";
 
 export default function HomeScreen({ navigation }) {
+  const userData = useContext(UserContext);
+  // {
+  //   console.log("Home page");
+  //   console.log(userData);
+  // }
+
   return (
     <ScrollView
       style={{ backgroundColor: colors.white }}
@@ -23,7 +30,9 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.header}>
         <View style={styles.welcomeContainer}>
           <Text style={styles.text}>Hi,</Text>
-          <Text style={[styles.boldText, { fontSize: 36 }]}>ReNuse</Text>
+          <Text style={[styles.boldText, { fontSize: 36 }]}>
+            {userData !== undefined ? userData.lastName : "Anonymous"}
+          </Text>
         </View>
         <View style={styles.settingsContainer}>
           <TouchableOpacity

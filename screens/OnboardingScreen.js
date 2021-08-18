@@ -5,25 +5,36 @@ import colors from "../assets/colors";
 
 const data = [
   {
-    title: "Borrow",
-    text: "Borrow your reusable cups and containers from participating store",
+    title: "Why Borrow ",
+    title2: "reusables from us?",
+    text: "We understand bringing and washing your own reusables from home maybe a hassle.",
   },
   {
-    title: "Use",
-    text: "Enjoy your delicious meal",
+    title: "Why Use ",
+    title2: "reusables?",
+    text: "We are building a NUS wide-movement to achieve Singapore's first disposable free mass canteen. It is in your hands.",
   },
   {
-    title: "Return",
-    text: "Find any of our return machines and drop it in",
+    title: "Why Return ",
+    title2: "our reusables?",
+    text: "Returning our reusables will help keep costs low for our stallholders. The return points are convenient too!",
   },
 ];
+
+const endMsg = "That's why UGO."
 
 export default function OnboardingScreen({ navigation }) {
   const renderItem = ({ item }) => {
     return (
       <View style={styles.slide}>
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.image}>Image</Text>
+        <View style={styles.titleWrapper}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title2}>{item.title2}</Text>
+        </View>
+
         <Text style={styles.text}>{item.text}</Text>
+        <Text style={styles.title}>{endMsg}</Text>
       </View>
     );
   };
@@ -84,14 +95,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  image: {
+    backgroundColor: colors.darkGrey,
+    width: 260, 
+    height: 260,
+  },
+  titleWrapper: {
+    flexDirection: "row",
+    marginVertical: 20,
+  },
   title: {
     fontSize: 24,
     fontWeight: "700",
-    marginBottom: 30,
+  },
+  title2: {
+    fontSize: 24,
+    fontWeight: "500",
   },
   text: {
-    textAlign: "center",
-    marginHorizontal: 70,
+    textAlign: "justify",
+    marginHorizontal: 60,
+    marginVertical: 20,
   },
   rightTextWrapper: {
     width: 40,

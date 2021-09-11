@@ -144,7 +144,7 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
 
-        {/* Reward redemption */}
+        {/* Reward navigation */}
         <View
           style={{
             flexDirection: "row",
@@ -163,93 +163,6 @@ export default function HomeScreen({ navigation }) {
             onPress={() => navigation.navigate("Reward")}
           ></Button>
         </View>
-
-        {/* How to use quick navigation*/}
-        <TouchableOpacity
-          style={[styles.contentContainer, styles.shadow]}
-          onPress={() => navigation.navigate("Tutorial Screen")}
-        >
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Icon name="help-circle" type="ionicon" size={60} color="black" />
-          </View>
-          <View
-            style={{
-              flex: 3,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={[styles.boldText, { textAlign: "center" }]}>
-              Looking for a quick guide?
-            </Text>
-            <Text style={[styles.text, { textAlign: "center" }]}>
-              Click here to learn how to use!
-            </Text>
-          </View>
-        </TouchableOpacity>
-
-        {/* Saved reuseables */}
-        <View style={styles.contentContainer}>
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={[styles.text, { textAlign: "center" }]}>
-              You have saved{" "}
-              <Text style={[styles.boldText, { fontSize: 24 }]}>132</Text>{" "}
-              reusables!
-            </Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <FontAwesome5 name="save" size={60} color="black" />
-          </View>
-        </View>
-
-        {/* Personal ranking */}
-        <View style={styles.contentContainer}>
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 10,
-            }}
-          >
-            <Text style={[styles.boldText, { marginBottom: 10 }]}>
-              Personal ranking:
-            </Text>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <FontAwesome5 name="crown" size={40} color="black" />
-              <Text style={[styles.boldText, { marginLeft: 10 }]}>#11</Text>
-            </View>
-          </View>
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            <Text style={[styles.text, { textAlign: "center" }]}>
-              3 reusables till #11!{"\n"}Keep going!
-            </Text>
-          </View>
-        </View>
-
-        {/* <SafeAreaView style={{ marginHorizontal: 20, marginBottom: 10 }}>
-        <RewardListView />
-      </SafeAreaView> */}
       </ScrollView>
     </View>
   );

@@ -1,13 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import SuccessfulRedemptionScreen from "./SuccessfulRedemptionScreen";
-import HomeStack from "./HomeStack";
-import ConfirmationModal from "./reward-screens/ConfirmationModal";
+import SuccessfulRedemptionScreen from "../SuccessfulRedemptionScreen";
+import ConfirmationModal from "./ConfirmationModal";
+import RewardsScreen from "./RewardsScreen";
 import { CardStyleInterpolators } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-export default function ModalHomeStack() {
+export default function ModalRewardStack() {
   return (
     <Stack.Navigator
       mode="modal"
@@ -16,8 +16,12 @@ export default function ModalHomeStack() {
         cardStyle: { backgroundColor: "transparent" },
       }}
     >
-      <Stack.Screen name="Home Stack" component={HomeStack} />
-      {/* <Stack.Screen
+      <Stack.Screen
+        name="Reward Screen"
+        component={RewardsScreen}
+        options={{ title: "My Rewards", headerShown: true }}
+      />
+      <Stack.Screen
         name="Confirmation Modal"
         component={ConfirmationModal}
         options={{
@@ -30,7 +34,7 @@ export default function ModalHomeStack() {
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }

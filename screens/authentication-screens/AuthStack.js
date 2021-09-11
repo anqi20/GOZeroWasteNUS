@@ -3,12 +3,18 @@ import React from "react";
 import ForgotPasswordStack from "./ForgotPasswordStack";
 import LoginScreen from "./LoginScreen";
 import SignUpStack from "./SignUpStack";
+import OnboardingScreen from "../OnboardingScreen";
 
 const Stack = createStackNavigator();
 
 export default function AuthStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Onboarding Screen"
+        component={OnboardingScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Log In Screen"
         component={LoginScreen}

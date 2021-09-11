@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import SuccessfulRedemptionScreen from "../SuccessfulRedemptionScreen";
+import SuccessfulRedemptionScreen from "./SuccessfulRedemptionScreen";
 import ConfirmationModal from "./ConfirmationModal";
 import RewardsScreen from "./RewardsScreen";
 import { CardStyleInterpolators } from "@react-navigation/stack";

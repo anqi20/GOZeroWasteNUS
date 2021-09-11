@@ -5,10 +5,10 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import colors from "../assets/colors";
 import { useNavigation } from "@react-navigation/native";
-import { Icon } from "react-native-elements";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
 export function RenderIcon({ category, size }) {
@@ -29,32 +29,31 @@ function ListItem({ item }) {
       style={styles.rewardItem}
       onPress={() => navigation.navigate("Confirmation Modal")}
     >
-      <Text
-        numberOfLines={2}
-        style={[styles.boldText, { textAlign: "center" }]}
-      >
-        {item.reward}
-      </Text>
-      <View style={{ alignItems: "center", margin: 10 }}>
-        <RenderIcon category={item.category} size={30} />
+      <View style={{ alignItems: "center", margin: 10, flex: 1 }}>
+        <RenderIcon category={item.category} size={60} />
       </View>
-      <Text numberOfLines={1}>@{item.location}</Text>
+      <View style={{ flex: 3, alignItems: "center", justifyContent: "center" }}>
+        <Text
+          style={[styles.boldText, { textAlign: "center", marginBottom: 10 }]}
+        >
+          {item.reward}
+        </Text>
+        <Text>@{item.location}</Text>
+      </View>
     </TouchableOpacity>
   );
 }
 
 export default function RewardListView() {
   const navigation = useNavigation();
-  const [modalVisible, setVisibility] = useState(false);
 
   return (
     <View>
       <FlatList
-        horizontal
         data={dummyData}
         renderItem={({ item }) => <ListItem item={item} />}
         keyExtractor={(item) => item.id}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
   },
   rewardItem: {
     height: 150,
-    width: 120,
+    width: Dimensions.get("window").width - 40,
     backgroundColor: colors.lightGrey,
     margin: 10,
     padding: 10,
@@ -115,6 +114,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
 
     shadowOpacity: 0.25,
     shadowRadius: 5,

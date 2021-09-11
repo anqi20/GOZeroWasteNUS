@@ -145,11 +145,11 @@ export default function HomeScreen({ navigation }) {
           title="See all!"
           icon={<Icon name="arrow-right" size={30} color="white" />}
           iconRight
-          onPress={() => navigation.navigate("Rewards Screen")}
+          onPress={() => navigation.navigate("Reward")}
         ></Button>
       </View>
       <SafeAreaView style={{ marginHorizontal: 20, marginBottom: 10 }}>
-        <RewardListView />
+        {/* <RewardListView /> */}
       </SafeAreaView>
     </ScrollView>
   );

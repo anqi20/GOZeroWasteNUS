@@ -27,7 +27,9 @@ function ListItem({ item }) {
   return (
     <TouchableOpacity
       style={styles.rewardItem}
-      onPress={() => navigation.navigate("Confirmation Modal")}
+      onPress={() =>
+        navigation.navigate("Confirmation Modal", { text: item.reward })
+      }
     >
       <View style={{ alignItems: "center", margin: 10, flex: 1 }}>
         <RenderIcon category={item.category} size={60} />

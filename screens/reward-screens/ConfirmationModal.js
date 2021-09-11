@@ -2,7 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import colors from "../../assets/colors";
 
-export default function ConfirmationModal({ navigation }) {
+export default function ConfirmationModal({ navigation, route }) {
+  const { text } = route.params;
+
   return (
     <View style={styles.container}>
       <View style={[styles.modalContainer, styles.shadow]}>
@@ -18,7 +20,11 @@ export default function ConfirmationModal({ navigation }) {
         >
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={() => navigation.navigate("Successful Redemption Screen")}
+            onPress={() =>
+              navigation.navigate("Successful Redemption Screen", {
+                text: text,
+              })
+            }
           >
             <Text style={styles.buttonText}>Yes</Text>
           </TouchableOpacity>

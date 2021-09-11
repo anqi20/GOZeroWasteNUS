@@ -2,11 +2,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import HomeScreen from "./HomeScreen";
 import SettingsStack from "../screens/settings-screens/SettingsStack";
-// import RewardsScreen from "./reward-screens/RewardsScreen";
 import StatsScreen from "./StatsScreen";
-import TutorialScreen from "../screens/settings-screens/TutorialScreen";
-import FeedbackScreen from "../screens/settings-screens/FeedbackScreen";
-import ModalRewardStack from "./reward-screens/ModalRewardStack";
+import TutorialScreen from "./settings-screens/TutorialScreen";
+import FeedbackScreen from "./settings-screens/FeedbackScreen";
+import LocationsScreen from "./settings-screens/LocationsScreen";
+import BYOScreen from "./BYOScreen";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +23,7 @@ export default function HomeStack() {
         component={SettingsStack}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="BYO Screen" component={BYOScreen} />
       {/* <Stack.Screen
         name="Rewards Screen"
         component={RewardsScreen}
@@ -38,11 +39,13 @@ export default function HomeStack() {
         component={StatsScreen}
         options={{ title: "Personal Stats" }}
       />
-      <Stack.Screen name="How to use?" component={TutorialScreen} />
       <Stack.Screen
-        name="Feedback to us!"
-        component={FeedbackScreen}
-      ></Stack.Screen>
+        name="Locations Screen"
+        component={LocationsScreen}
+        options={{ title: "Locations" }}
+      />
+      <Stack.Screen name="Tutorial Screen" component={TutorialScreen} />
+      <Stack.Screen name="Feedback Screen" component={FeedbackScreen} />
     </Stack.Navigator>
   );
 }

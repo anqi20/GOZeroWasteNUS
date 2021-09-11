@@ -23,135 +23,148 @@ export default function HomeScreen({ navigation }) {
   // }
 
   return (
-    <ScrollView
-      style={{ backgroundColor: colors.white }}
-      showsVerticalScrollIndicator={false}
-    >
-      <View style={styles.header}>
-        <View style={styles.welcomeContainer}>
-          <Text style={styles.text}>Hi,</Text>
-          <Text style={[styles.boldText, { fontSize: 36 }]}>
-            {userData !== undefined ? userData.lastName : "Anonymous"}
-          </Text>
-        </View>
-        <View style={styles.settingsContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Settings Stack")}
-          >
-            <Ionicons name="settings-outline" size={40} color="black" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* Overall scroll view */}
-      <CarouselView />
-
-      {/* How to use quick navigation*/}
-      <TouchableOpacity
-        style={[styles.contentContainer, styles.shadow]}
-        onPress={() => navigation.navigate("How to use?")}
+    <View style={{ marginTop: Constants.statusBarHeight }}>
+      <ScrollView
+        style={{ backgroundColor: colors.white }}
+        showsVerticalScrollIndicator={false}
       >
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Icon name="help-circle" type="ionicon" size={60} color="black" />
-        </View>
-        <View
-          style={{
-            flex: 3,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={[styles.boldText, { textAlign: "center" }]}>
-            Looking for a quick guide?
-          </Text>
-          <Text style={[styles.text, { textAlign: "center" }]}>
-            Click here to learn how to use!
-          </Text>
-        </View>
-      </TouchableOpacity>
-
-      {/* Saved reuseables */}
-      <View style={styles.contentContainer}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={[styles.text, { textAlign: "center" }]}>
-            You have saved{" "}
-            <Text style={[styles.boldText, { fontSize: 24 }]}>132</Text>{" "}
-            reusables!
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <FontAwesome5 name="save" size={60} color="black" />
-        </View>
-      </View>
-
-      {/* Personal ranking */}
-      <View style={styles.contentContainer}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            marginRight: 10,
-          }}
-        >
-          <Text style={[styles.boldText, { marginBottom: 10 }]}>
-            Personal ranking:
-          </Text>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <FontAwesome5 name="crown" size={40} color="black" />
-            <Text style={[styles.boldText, { marginLeft: 10 }]}>#11</Text>
+        <View style={styles.header}>
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.text}>Hi,</Text>
+            <Text style={[styles.boldText, { fontSize: 36 }]}>
+              {userData !== undefined ? userData.lastName : "Anonymous"}
+            </Text>
+          </View>
+          <View style={styles.settingsContainer}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Settings Stack")}
+            >
+              <Ionicons name="settings-outline" size={40} color="black" />
+            </TouchableOpacity>
           </View>
         </View>
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Text style={[styles.text, { textAlign: "center" }]}>
-            3 reusables till #11!{"\n"}Keep going!
-          </Text>
-        </View>
-      </View>
 
-      {/* Reward redemption */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 10,
-          marginHorizontal: 20,
-        }}
-      >
-        <Text style={styles.boldText}>Rewards redemption:</Text>
-        <Button
-          buttonStyle={styles.button}
-          title="See all!"
-          icon={<Icon name="arrow-right" size={30} color="white" />}
-          iconRight
-          onPress={() => navigation.navigate("Reward")}
-        ></Button>
-      </View>
-      <SafeAreaView style={{ marginHorizontal: 20, marginBottom: 10 }}>
-        {/* <RewardListView /> */}
-      </SafeAreaView>
-    </ScrollView>
+        {/* Icons */}
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginHorizontal: 20,
+            marginBottom: 32,
+          }}
+        >
+          <View style={styles.topIcon}>
+            <TouchableOpacity
+              style={styles.topIconBox}
+              onPress={() => navigation.navigate("Borrow")}
+            >
+              <Text style={{ padding: 10 }}>Image here</Text>
+            </TouchableOpacity>
+            <Text style={styles.boldText}>Borrow</Text>
+          </View>
+          <View style={styles.topIcon}>
+            <TouchableOpacity
+              style={styles.topIconBox}
+              onPress={() => navigation.navigate("BYO Screen")}
+            >
+              <Text style={{ padding: 10 }}>Image here</Text>
+            </TouchableOpacity>
+            <Text style={styles.boldText}>BYO</Text>
+          </View>
+          <View style={styles.topIcon}>
+            <TouchableOpacity
+              style={styles.topIconBox}
+              onPress={() => navigation.navigate("Return")}
+            >
+              <Text style={{ padding: 10 }}>Image here</Text>
+            </TouchableOpacity>
+            <Text style={styles.boldText}>Return</Text>
+          </View>
+        </View>
+
+        {/* Due reusables scroll view */}
+        <CarouselView />
+
+        {/* Quick navigation icons */}
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginHorizontal: 20,
+            marginBottom: 32,
+          }}
+        >
+          <View style={styles.quickNav}>
+            <Icon
+              reverse
+              name="person"
+              type="ionicon"
+              color={colors.darkGrey}
+              size={30}
+              onPress={() => navigation.navigate("Stats Screen")}
+            />
+            <Text style={styles.text}>Stats</Text>
+          </View>
+          <View style={styles.quickNav}>
+            <Icon
+              reverse
+              name="location"
+              type="ionicon"
+              color={colors.darkGrey}
+              size={30}
+              onPress={() => navigation.navigate("Locations Screen")}
+            />
+            <Text style={styles.text}>Location</Text>
+          </View>
+          <View style={styles.quickNav}>
+            <Icon
+              reverse
+              name="comment-text"
+              type="material-community"
+              color={colors.darkGrey}
+              size={30}
+              onPress={() => navigation.navigate("Feedback Screen")}
+            />
+            <Text style={styles.text}>Feedback</Text>
+          </View>
+          <View style={styles.quickNav}>
+            <Icon
+              reverse
+              name="question"
+              type="font-awesome"
+              color={colors.darkGrey}
+              size={30}
+              onPress={() => navigation.navigate("Tutorial Screen")}
+            />
+            <Text style={styles.text}>Tutorial</Text>
+          </View>
+        </View>
+
+        {/* Reward navigation */}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 32,
+            marginHorizontal: 20,
+          }}
+        >
+          <Text style={styles.boldText}>Rewards redemption:</Text>
+          <Button
+            buttonStyle={styles.button}
+            title="See all!"
+            icon={<Icon name="arrow-right" size={30} color="white" />}
+            iconRight
+            onPress={() => navigation.navigate("Reward")}
+          ></Button>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -162,16 +175,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     // marginTop: Platform.OS === "android" ? Constants.statusBarHeight + 20 : 0,
-    marginTop: Constants.statusBarHeight + 20,
+    // marginTop: Constants.statusBarHeight,
     marginBottom: 32,
+    padding: 20,
+    backgroundColor: colors.lightGrey,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
   },
   welcomeContainer: {
-    marginLeft: 20,
+    // marginLeft: 20,
     flex: 1,
     flexGrow: 1,
   },
   settingsContainer: {
-    marginRight: 20,
+    // marginRight: 20,
   },
   contentContainer: {
     backgroundColor: colors.white,
@@ -185,6 +202,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  topIcon: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  topIconBox: {
+    flex: 1,
+    height: 80,
+    borderWidth: 2,
+    borderColor: colors.black,
+    borderRadius: 20,
+    backgroundColor: colors.lightGrey,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  quickNav: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   text: {
     fontSize: 18,

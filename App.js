@@ -1,3 +1,4 @@
+import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
@@ -173,7 +174,11 @@ export default function App() {
   };
 
   if (loading) {
-    return <ActivityIndicator size="large" />;
+    return (
+      <View style={{ justifyContent: "center", alignItem: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
 
   return (

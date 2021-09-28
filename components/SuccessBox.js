@@ -109,7 +109,7 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
         style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
         onPress={() => {
           navigation.dispatch(StackActions.popToTop());
-          navigation.navigate("Home");
+          navigation.navigate("Home Screen");
         }}
       >
         <Text style={globalStyles.buttonText}>Home</Text>

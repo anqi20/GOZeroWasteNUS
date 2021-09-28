@@ -5,9 +5,9 @@ import { globalStyles } from "../../assets/globalStyles";
 import SelectionComponent from "../../components/SelectionComponent";
 import FooterText from "../../components/FooterText";
 
-export default function BorrowSelectionScreen({ navigation, route }) {
+export default function BYOSelectionScreen({ navigation, route }) {
   //Based on this store name, grab data from firebase
-  // const { store } = route.params;
+  //   const { store } = route.params;
 
   //Temporary data
   const cupQuota = 3;
@@ -50,7 +50,7 @@ export default function BorrowSelectionScreen({ navigation, route }) {
         <TouchableOpacity
           style={[globalStyles.button, { width: "90%" }]}
           onPress={() =>
-            navigation.navigate("Success Screen", {
+            navigation.navigate("BYO Success Screen", {
               numCups: numCups,
               numContainers: numContainers,
             })

@@ -19,9 +19,7 @@ export default function UnsuccessBox() {
         size={80}
       />
       <Text style={[styles.header, { marginBottom: 20 }]}>Oops!</Text>
-      <Text style={styles.warningText}>
-        Oops, there seems to be an error!
-      </Text>
+      <Text style={styles.warningText}>Oops, there seems to be an error!</Text>
 
       <View style={styles.icons}>
         <Icon
@@ -50,7 +48,7 @@ export default function UnsuccessBox() {
         style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
         onPress={() => {
           navigation.dispatch(StackActions.popToTop());
-          navigation.navigate("Home");
+          navigation.navigate("Home Screen");
         }}
       >
         <Text style={globalStyles.buttonText}>Back</Text>

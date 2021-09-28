@@ -76,7 +76,7 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.topIcon}>
             <TouchableOpacity
               style={styles.topIconBox}
-              onPress={() => navigation.navigate("BYO Screen")}
+              onPress={() => navigation.navigate("BYO Stack")}
             >
               <Text style={{ padding: 10 }}>Image here</Text>
             </TouchableOpacity>

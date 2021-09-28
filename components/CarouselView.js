@@ -10,52 +10,62 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import colors from "../assets/colors";
 import { useNavigation } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
+import moment from "moment";
 
 const CARD_WIDTH = Dimensions.get("window").width - 40;
 const CARD_HEIGHT = 200;
 
 function CardItem({ item, index }) {
-  const navigation = useNavigation();
-
   return (
-    <TouchableOpacity
-      style={styles.cardContainer}
-      key={index}
-      onPress={() => navigation.navigate("Stats Screen")}
-    >
+    <View style={styles.cardContainer} key={index}>
       <Text style={styles.header}>{item.title}</Text>
-      <View>{renderContent(item.title)}</View>
-    </TouchableOpacity>
+      {renderContent(item.title)}
+    </View>
   );
 }
 
 function renderContent(title) {
-  if (title === "Containers borrowed:") {
+  if (title === "Items borrowed:") {
     return (
       <View style={styles.cardContentView}>
-        <Text style={[styles.redNumber, { marginRight: 25 }]}>3</Text>
-        <Icon name="cube" type="font-awesome" size={60} color="black" />
+        <View style={styles.numIconContainer}>
+          <Text style={styles.redNumber}>128</Text>
+          <Icon name="cube" type="font-awesome" size={50} color="black" />
+        </View>
+        <View style={styles.numIconContainer}>
+          <Text style={styles.redNumber}>3</Text>
+          <Icon name="cup" type="material-community" size={50} color="black" />
+        </View>
+      </View>
+    );
+  } else if (title === "Containers borrowed:") {
+    return (
+      <View style={styles.cardContentView}>
+        <View style={styles.numIconContainer}>
+          <Text style={styles.redNumber}>3</Text>
+          <Icon name="cube" type="font-awesome" size={60} color="black" />
+        </View>
+        <View style={{ marginLeft: 30, flex: 1 }}>
+          <Text>Return by:{"\n"}</Text>
+          <Text>({moment("23/08/21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
+          <Text>({moment("24/8/21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
+          <Text>({moment("26/8/21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+        </View>
       </View>
     );
   } else if (title === "Cups borrowed:") {
     return (
       <View style={styles.cardContentView}>
-        <Text style={styles.redNumber}>3</Text>
-        <Icon name="cup" type="material-community" size={60} color="black" />
-      </View>
-    );
-  } else if (title === "Credits:") {
-    return (
-      <View style={styles.cardContentView}>
-        <Text style={styles.redNumber}>128</Text>
-        <Icon
-          name="money-bill-alt"
-          type="font-awesome-5"
-          size={50}
-          color="black"
-        />
-        <Text style={styles.redNumber}>3</Text>
-        <Icon name="coins" type="font-awesome-5" size={50} color="black" />
+        <View style={styles.numIconContainer}>
+          <Text style={styles.redNumber}>3</Text>
+          <Icon name="cup" type="material-community" size={60} color="black" />
+        </View>
+        <View style={{ marginLeft: 30, flex: 1 }}>
+          <Text>Return by:{"\n"}</Text>
+          <Text>({moment("23/08/21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
+          <Text>({moment("24/8/21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
+          <Text>({moment("26/8/21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+        </View>
       </View>
     );
   }
@@ -129,16 +139,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginHorizontal: 16,
   },
+  numIconContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 const data = [
+  {
+    title: "Items borrowed:",
+  },
   {
     title: "Containers borrowed:",
   },
   {
     title: "Cups borrowed:",
-  },
-  {
-    title: "Credits:",
   },
 ];

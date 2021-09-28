@@ -54,6 +54,7 @@ export default function SettingsStack() {
       <Stack.Screen
         name="Terminate my account"
         component={TerminateAccountScreen}
+        options={{ headerShown: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Account terminated"

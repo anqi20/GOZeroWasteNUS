@@ -6,6 +6,8 @@ import colors from "../assets/colors";
 import moment from "moment";
 import { globalStyles } from "../assets/globalStyles";
 import { useNavigation, StackActions } from "@react-navigation/native";
+import * as Animatable from "react-native-animatable";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function SuccessBox({ numCups, numContainers, text, location }) {
   const navigation = useNavigation();
@@ -75,6 +77,16 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
 
   return (
     <View style={styles.box}>
+      <View style={{ alignSelf: "center" }}>
+        <Animatable.Text
+          animation="bounce"
+          easing="linear"
+          iterationCount="infinite"
+          direction="alternate"
+        >
+          <MaterialIcons name="celebration" size={60} color="black" />{" "}
+        </Animatable.Text>
+      </View>
       <Icon
         containerStyle={{ marginBottom: 20 }}
         name="checkcircle"
@@ -109,7 +121,7 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
         style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
         onPress={() => {
           navigation.dispatch(StackActions.popToTop());
-          navigation.navigate("Home");
+          navigation.navigate("Home Screen");
         }}
       >
         <Text style={globalStyles.buttonText}>Home</Text>

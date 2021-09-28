@@ -22,7 +22,7 @@ const pkg = Constants.manifest.releaseChannel
   ? Constants.manifest.android.package
   : "host.exp.exponent";
 
-export default function BorrowQRScreen({ navigation }) {
+export default function BYOScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -76,33 +76,20 @@ export default function BorrowQRScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={globalStyles.header}>Borrow</Text>
+      <Text style={globalStyles.header}>BYO</Text>
       <View style={styles.box}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("QR Generator")}
-          style={styles.imagePlaceholder}
-        >
-          <Text>(QR generator)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Unsuccess Screen")}
+          onPress={() => navigation.navigate("BYO Unsuccessful Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Unsuccessful Screen)</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Quota Exceeded")}
-          style={styles.imagePlaceholder}
-        >
-          <Text>(Quota exceeded screen)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Selection Screen")}
+          onPress={() => navigation.navigate("BYO Selection Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Selection screen)</Text>
         </TouchableOpacity>
-
         <Text style={styles.text}>Scan the QR code!</Text>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  Linking,
 } from "react-native";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import Constants from "expo-constants";
@@ -14,6 +15,7 @@ import { Button, Icon } from "react-native-elements";
 import CarouselView from "../components/CarouselView";
 import RewardListView from "../components/RewardListView";
 import { UserContext } from "../assets/UserContext";
+import { globalStyles } from "../assets/globalStyles";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
@@ -21,6 +23,13 @@ export default function HomeScreen({ navigation }) {
   //   console.log("Home page");
   //   console.log(userData);
   // }
+
+  //Feedback form website
+  const website = "https://forms.gle/n3TQ53uVNLgxJoFJ7";
+
+  function goToSite() {
+    Linking.openURL(`${website}`);
+  }
 
   return (
     <View style={{ marginTop: Constants.statusBarHeight }}>
@@ -67,7 +76,7 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.topIcon}>
             <TouchableOpacity
               style={styles.topIconBox}
-              onPress={() => navigation.navigate("BYO Screen")}
+              onPress={() => navigation.navigate("BYO Stack")}
             >
               <Text style={{ padding: 10 }}>Image here</Text>
             </TouchableOpacity>
@@ -127,7 +136,7 @@ export default function HomeScreen({ navigation }) {
               type="material-community"
               color={colors.darkGrey}
               size={30}
-              onPress={() => navigation.navigate("Feedback Screen")}
+              onPress={goToSite}
             />
             <Text style={styles.text}>Feedback</Text>
           </View>
@@ -163,6 +172,12 @@ export default function HomeScreen({ navigation }) {
             onPress={() => navigation.navigate("Reward")}
           ></Button>
         </View>
+        <TouchableOpacity
+          style={[globalStyles.button, { marginBottom: 20 }]}
+          onPress={() => navigation.navigate("Leaderboard")}
+        >
+          <Text style={globalStyles.buttonText}>Leaderboard (remove)</Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );

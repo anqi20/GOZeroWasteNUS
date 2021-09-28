@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import BorrowStack from "./borrow-screens/BorrowStack";
 import ReturnStack from "./return-screens/ReturnStack";
 import ModalHomeStack from "./ModalHomeStack";
-import LeaderboardStack from "./LeaderboardStack";
 import { Ionicons } from "@expo/vector-icons";
 import { UserContext } from "../assets/UserContext";
 // import RewardsScreen from "./reward-screens/RewardsScreen";
@@ -29,8 +28,6 @@ export default function MainTabNavigator({ route }) {
               iconName = focused ? "camera" : "camera-outline";
             } else if (route.name === "Return") {
               iconName = focused ? "qr-code-sharp" : "qr-code-outline";
-            } else if (route.name === "Leaderboard") {
-              iconName = focused ? "trophy" : "trophy-outline";
             } else if (route.name === "Reward") {
               iconName = focused ? "gift" : "gift-outline";
             }
@@ -46,7 +43,6 @@ export default function MainTabNavigator({ route }) {
         <Tab.Screen name="Home" component={ModalHomeStack} />
         <Tab.Screen name="Borrow" component={BorrowStack} />
         <Tab.Screen name="Return" component={ReturnStack} />
-        <Tab.Screen name="Leaderboard" component={LeaderboardStack} />
         <Tab.Screen name="Reward" component={ModalRewardStack} />
       </Tab.Navigator>
     </UserContext.Provider>

@@ -45,8 +45,12 @@ export default function ReturnStatusScreen({ navigation }) {
         }}
       >
         <Text style={styles.boldText}>
-          {returnedContainers}{" "}
-          <Text style={styles.greyedText}>out of {numContainers}</Text>
+          {/* {returnedContainers}{" "} */}
+          {numContainers}{" "}
+          <Text style={[styles.text, { fontWeight: "normal" }]}>
+            {" "}
+            remaining
+          </Text>
         </Text>
         <Cube />
       </View>
@@ -75,7 +79,9 @@ export default function ReturnStatusScreen({ navigation }) {
         }}
       >
         <Text style={styles.boldText}>
-          {returnedCups} <Text style={styles.greyedText}>out of {numCups}</Text>
+          {/* {returnedCups}{" "} */}
+          {numCups}{" "}
+          <Text style={[styles.text, { fontWeight: "normal" }]}>remaining</Text>
         </Text>
         <Cup />
       </View>

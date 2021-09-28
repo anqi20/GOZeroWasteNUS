@@ -82,30 +82,18 @@ const tabs = [
   },
   {
     id: "1",
-    title: "How to use?",
-  },
-  {
-    id: "2",
     title: "Logs",
   },
   {
-    id: "3",
-    title: "Feedback to us!",
-  },
-  {
-    id: "4",
-    title: "Location of our collection machines",
-  },
-  {
-    id: "5",
+    id: "2",
     title: "Participating vendors",
   },
   {
-    id: "6",
+    id: "3",
     title: "Terms and conditions",
   },
   {
-    id: "7",
+    id: "4",
     title: "Terminate my account",
   },
 ];

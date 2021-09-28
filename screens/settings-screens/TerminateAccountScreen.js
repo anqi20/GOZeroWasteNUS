@@ -10,6 +10,7 @@ import {
 import { Input } from "react-native-elements";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
+import { Entypo } from "@expo/vector-icons";
 
 export default function TerminateAccountScreen({ navigation }) {
   const [isMatching, setMatching] = useState(false);
@@ -35,16 +36,18 @@ export default function TerminateAccountScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Text style={styles.boldText}>We're sad to see you go.</Text>
+        <Entypo
+          name="emoji-sad"
+          size={60}
+          color="black"
+          style={{ textAlign: "center", marginBottom: 20 }}
+        />
         <Text style={styles.boldText}>
           Are you sure you want to terminate your account?
         </Text>
-        <Text style={{ fontSize: 18, textAlign: "center" }}>
-          If so, please type 'TERMINATE' and click terminate.
-        </Text>
         <Input
           containerStyle={styles.terminateContainer}
-          placeholder="TERMINATE"
+          placeholder="Type 'TERMINATE'"
           autoCapitalize="characters"
           onChangeText={(text) => validate(text)}
         ></Input>

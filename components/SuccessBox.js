@@ -84,7 +84,7 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
           iterationCount="infinite"
           direction="alternate"
         >
-          <MaterialIcons name="celebration" size={60} color="purple" />{" "}
+          <MaterialIcons name="celebration" size={60} color="black" />{" "}
         </Animatable.Text>
       </View>
       <Icon

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  Linking,
 } from "react-native";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import Constants from "expo-constants";
@@ -21,6 +22,13 @@ export default function HomeScreen({ navigation }) {
   //   console.log("Home page");
   //   console.log(userData);
   // }
+
+  //Feedback form website
+  const website = "https://forms.gle/n3TQ53uVNLgxJoFJ7";
+
+  function goToSite() {
+    Linking.openURL(`${website}`);
+  }
 
   return (
     <View style={{ marginTop: Constants.statusBarHeight }}>
@@ -127,7 +135,7 @@ export default function HomeScreen({ navigation }) {
               type="material-community"
               color={colors.darkGrey}
               size={30}
-              onPress={() => navigation.navigate("Feedback Screen")}
+              onPress={goToSite}
             />
             <Text style={styles.text}>Feedback</Text>
           </View>

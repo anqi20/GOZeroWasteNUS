@@ -7,6 +7,7 @@ import TutorialScreen from "./settings-screens/TutorialScreen";
 import FeedbackScreen from "./settings-screens/FeedbackScreen";
 import LocationsScreen from "./settings-screens/LocationsScreen";
 import BYOScreen from "./BYOScreen";
+import LeaderboardStack from "./LeaderboardStack";
 
 const Stack = createStackNavigator();
 
@@ -45,7 +46,10 @@ export default function HomeStack() {
         options={{ title: "Locations" }}
       />
       <Stack.Screen name="Tutorial Screen" component={TutorialScreen} />
+
+      {/*To be removed*/}
       <Stack.Screen name="Feedback Screen" component={FeedbackScreen} />
+      <Stack.Screen name="Leaderboard" component={LeaderboardStack} />
     </Stack.Navigator>
   );
 }

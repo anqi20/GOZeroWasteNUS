@@ -15,6 +15,7 @@ import { Button, Icon } from "react-native-elements";
 import CarouselView from "../components/CarouselView";
 import RewardListView from "../components/RewardListView";
 import { UserContext } from "../assets/UserContext";
+import { globalStyles } from "../assets/globalStyles";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
@@ -171,6 +172,12 @@ export default function HomeScreen({ navigation }) {
             onPress={() => navigation.navigate("Reward")}
           ></Button>
         </View>
+        <TouchableOpacity
+          style={[globalStyles.button, { marginBottom: 20 }]}
+          onPress={() => navigation.navigate("Leaderboard")}
+        >
+          <Text style={globalStyles.buttonText}>Leaderboard (remove)</Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );

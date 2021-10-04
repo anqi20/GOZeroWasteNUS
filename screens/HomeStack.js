@@ -42,7 +42,7 @@ export default function HomeStack() {
       <Stack.Screen
         name="Stats Screen"
         component={StatsScreen}
-        options={{ title: "Personal Stats" }}
+        options={{ title: "My Stats" }}
       />
       <Stack.Screen
         name="Locations Screen"

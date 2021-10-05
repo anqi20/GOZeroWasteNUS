@@ -4,17 +4,16 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import colors from "../assets/colors";
 import { Table, Row, Rows } from "react-native-table-component";
 import ProgressCircle from "react-native-progress-circle";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       HeaderTable: ["#Rank", "Name", "Number", "Faculty"],
-      DataTable: [
-        ["#1", "John Lim", "103", "FoE"],
-        ["#2", "John Lim", "103", "FoE"],
-        ["#3", "John Lim", "103", "FoE"],
+      FirstTable: ["#1", "John Lim", "103", "FoE"],
+      SecondTable: ["#2", "John Lim", "103", "FoE"],
+      ThirdTable: ["#3", "John Lim", "103", "FoE"],
+      MainDataTable: [
         ["#4", "John Lim", "103", "FoE"],
         ["#5", "John Lim", "103", "FoE"],
         ["#6", "John Lim", "103", "FoE"],
@@ -38,7 +37,10 @@ export default class Leaderboard extends Component {
   }
 
   render() {
-    const ConstraintDataTable = this.nameConstraint(this.state.DataTable)
+    const FirstTable = this.nameConstraint(this.state.FirstTable)
+    const SecondTable = this.nameConstraint(this.state.SecondTable)
+    const ThirdTable = this.nameConstraint(this.state.ThirdTable)
+    const MainDataTable = this.nameConstraint(this.state.MainDataTable)
 
     return (
       <View style={{ flex: 1, backgroundColor: colors.white }}>
@@ -94,9 +96,20 @@ export default class Leaderboard extends Component {
                 <Row
                 data={this.state.HeaderTable}
                 style={styles.TableHeader}
-                textStyle={styles.TableHeaderText}
-                />
-                <Rows data={ConstraintDataTable} textStyle={styles.TableText} />
+                textStyle={styles.TableHeaderText} />
+                <Row
+                data={FirstTable}
+                style={{backgroundColor: "#FFD700"}}
+                textStyle={styles.TableText} />
+                <Row
+                data={SecondTable}
+                style={{backgroundColor: "#C0C0C0"}}
+                textStyle={styles.TableText} />
+                <Row
+                data={ThirdTable}
+                style={{backgroundColor: "#C9AE5D"}}
+                textStyle={styles.TableText} />
+                <Rows data={MainDataTable} textStyle={styles.TableText} />
             </Table>
         </View>
         
@@ -152,14 +165,15 @@ const styles = StyleSheet.create({
   TableHeader: {
     height: 40,
     alignContent: "center",
-    backgroundColor: colors.lightGrey,
-    marginVertical: 10,
+    backgroundColor: colors.black,
+    marginTop: 10,
   },
   TableHeaderText: {
     margin: 10,
     fontSize: 15,
     fontWeight: "bold",
     alignSelf: "center",
+    color: colors.white,
   },
   TableText: {
     margin: 10,

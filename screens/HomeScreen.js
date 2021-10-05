@@ -172,12 +172,6 @@ export default function HomeScreen({ navigation }) {
             onPress={() => navigation.navigate("Reward")}
           ></Button>
         </View>
-        <TouchableOpacity
-          style={[globalStyles.button, { marginBottom: 20 }]}
-          onPress={() => navigation.navigate("Leaderboard")}
-        >
-          <Text style={globalStyles.buttonText}>Leaderboard (remove)</Text>
-        </TouchableOpacity>
       </ScrollView>
     </View>
   );

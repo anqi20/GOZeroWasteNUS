@@ -4,10 +4,8 @@ import HomeScreen from "./HomeScreen";
 import SettingsStack from "../screens/settings-screens/SettingsStack";
 import StatsScreen from "./StatsScreen";
 import TutorialScreen from "./settings-screens/TutorialScreen";
-import FeedbackScreen from "./settings-screens/FeedbackScreen";
 import LocationsScreen from "./settings-screens/LocationsScreen";
 import BYOStack from "./byo-screens/BYOStack";
-import LeaderboardStack from "./LeaderboardStack";
 
 const Stack = createStackNavigator();
 
@@ -42,7 +40,7 @@ export default function HomeStack() {
       <Stack.Screen
         name="Stats Screen"
         component={StatsScreen}
-        options={{ title: "Personal Stats" }}
+        options={{ title: "My Stats" }}
       />
       <Stack.Screen
         name="Locations Screen"
@@ -51,9 +49,6 @@ export default function HomeStack() {
       />
       <Stack.Screen name="Tutorial Screen" component={TutorialScreen} />
 
-      {/*To be removed*/}
-      <Stack.Screen name="Feedback Screen" component={FeedbackScreen} />
-      <Stack.Screen name="Leaderboard" component={LeaderboardStack} />
     </Stack.Navigator>
   );
 }

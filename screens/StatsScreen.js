@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import moment from "moment";
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import Leaderboard from "../components/Leaderboard";
 
-export default function StatsScreen() {
-  return (
-    <View style={{ flex: 1, backgroundColor: colors.white }}>
+const ReturnDatesTab = () => (
+  <View style={{ flex: 1, backgroundColor: colors.white }}>
       <View style={styles.contentContainer}>
         <Text style={[styles.redNumber, { marginRight: 25 }]}>3</Text>
         <Icon name="cube" type="font-awesome" size={60} color="black" />
@@ -41,7 +42,38 @@ export default function StatsScreen() {
         <Icon name="coins" type="font-awesome-5" size={50} color="black" />
       </View>
     </View>
-  );
+)
+
+const LeaderboardTab = () => (
+  <Leaderboard />
+)
+
+const renderScene = SceneMap({
+  first: ReturnDatesTab, 
+  second: LeaderboardTab,
+})
+
+export default function StatsScreen() {
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: 'first', title: 'Return Dates'},
+    {key: 'second', title: 'Leaderboard'},
+  ])
+
+  return (
+      <TabView 
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        renderTabBar={props => <TabBar 
+          {...props} 
+          style={{backgroundColor: colors.black}}
+          inactiveColor={colors.darkGrey}
+          activeColor={colors.white}
+          indicatorStyle={{ backgroundColor: 'white', height: 3 }}
+        />}
+      />
+  )
 }
 
 const styles = StyleSheet.create({

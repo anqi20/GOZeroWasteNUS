@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
@@ -25,24 +26,30 @@ function ListItem({ item }) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
-      style={styles.rewardItem}
-      onPress={() =>
-        navigation.navigate("Confirmation Modal", { text: item.reward })
-      }
-    >
-      <View style={{ alignItems: "center", margin: 10, flex: 1 }}>
-        <RenderIcon category={item.category} size={60} />
-      </View>
-      <View style={{ flex: 3, alignItems: "center", justifyContent: "center" }}>
-        <Text
-          style={[styles.boldText, { textAlign: "center", marginBottom: 10 }]}
-        >
-          {item.reward}
-        </Text>
-        <Text>@{item.location}</Text>
-      </View>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("Confirmation Modal", { text: item.reward })
+        }
+      >
+        <View style={styles.container}>
+
+          <View style={{alignItems: "center", marginLeft: 10}}>
+            <RenderIcon category={item.category} size={60} />
+            <Text style={{marginTop: 5}}>@{item.location}</Text>
+          </View>
+
+          <View style={{ flex: 3, alignItems: "center", justifyContent: "center", marginRight: 10 }}>
+            <Text style={[styles.boldText, { textAlign: "center", marginBottom: 10 }]}>{item.reward}</Text>
+            <View style={{flexDirection: "row"}}>
+              <Text style={{ marginRight: 10}}>{item.price}</Text>
+              <Icon name="coins" type="font-awesome-5" size={20} color="black" />
+            </View>
+          </View>
+
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -61,62 +68,26 @@ export default function RewardListView() {
   );
 }
 
-// Icon will be allocated according to category of item
-const dummyData = [
-  {
-    id: "0",
-    location: "TechnoEdge",
-    category: "Food",
-    reward: "Welcome gift! 1 free coffee!",
-  },
-  {
-    id: "1",
-    location: "TechnoEdge",
-    category: "Item",
-    reward: "Free soft toy!",
-  },
-  {
-    id: "2",
-    location: "TechnoEdge",
-    category: "Voucher",
-    reward: "Voucher for vegetarian store",
-  },
-  {
-    id: "3",
-    location: "TechnoEdge",
-    category: "Food",
-    reward: "Free bread",
-  },
-  {
-    id: "4",
-    location: "TechnoEdge",
-    category: "Food",
-    reward: "Free soft drink",
-  },
-];
-
 const styles = StyleSheet.create({
   text: {
     fontSize: 18,
-    // fontFamily: "Roboto",
   },
   boldText: {
     fontSize: 18,
-    // fontFamily: "Roboto",
     fontWeight: "bold",
   },
-  rewardItem: {
-    height: 150,
+  container: {
     width: Dimensions.get("window").width - 40,
-    backgroundColor: colors.lightGrey,
-    margin: 10,
-    padding: 10,
+    alignItems: "center", 
+    justifyContent: "center", 
+    backgroundColor: colors.white,
     borderRadius: 20,
     borderColor: colors.black,
     borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
+    margin: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    flexDirection: "row", 
 
     shadowOpacity: 0.25,
     shadowRadius: 5,
@@ -124,12 +95,45 @@ const styles = StyleSheet.create({
       width: 5,
       height: 5,
     },
-
     elevation: 10,
   },
-  button: {
-    backgroundColor: "black",
-    borderRadius: 10,
-    width: 130,
-  },
 });
+
+// Icon will be allocated according to category of item
+const dummyData = [
+  {
+    id: "0",
+    location: "TechnoEdge",
+    category: "Food",
+    reward: "Welcome gift! 1 free coffee!",
+    price: 100,
+  },
+  {
+    id: "1",
+    location: "TechnoEdge",
+    category: "Item",
+    reward: "Free soft toy!",
+    price: 120,
+  },
+  {
+    id: "2",
+    location: "TechnoEdge",
+    category: "Voucher",
+    reward: "Voucher for vegetarian store",
+    price: 150,
+  },
+  {
+    id: "3",
+    location: "TechnoEdge",
+    category: "Food",
+    reward: "Free bread",
+    price: 80,
+  },
+  {
+    id: "4",
+    location: "TechnoEdge",
+    category: "Food",
+    reward: "Free soft drink",
+    price: 95,
+  },
+];

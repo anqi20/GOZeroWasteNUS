@@ -30,9 +30,9 @@ function renderDate() {
   var duration = moment.duration(earlistDueDate.diff(currDate));
   var daysDiff = duration.asDays();
 
-  {
-    console.log(daysDiff);
-  }
+  // {
+  //   console.log(daysDiff);
+  // }
 
   if (daysDiff > 3) {
     // Due date more than 3 days away from today

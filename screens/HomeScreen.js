@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,7 @@ import {
   ScrollView,
   Linking,
 } from "react-native";
-import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import colors from "../assets/colors";
 import { Button, Icon } from "react-native-elements";
@@ -16,10 +16,11 @@ import CarouselView from "../components/CarouselView";
 import RewardListView from "../components/RewardListView";
 import { UserContext } from "../assets/UserContext";
 import { globalStyles } from "../assets/globalStyles";
-import { MaterialIcons } from "@expo/vector-icons";
+import Announcements from "../components/Announcements";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
+  const [hasAnnouncement, setBoolean] = useState(true);
   // {
   //   console.log("Home page");
   //   console.log(userData);
@@ -38,6 +39,7 @@ export default function HomeScreen({ navigation }) {
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}
       >
+        {/* Header */}
         <View style={styles.header}>
           <View style={styles.welcomeContainer}>
             <Text style={styles.text}>Hi,</Text>
@@ -47,7 +49,7 @@ export default function HomeScreen({ navigation }) {
           </View>
           <View style={styles.coinsContainer}>
             <MaterialIcons name="attach-money" size={24} color="black" />
-            <Text style={styles.text}>100</Text>
+            <Text style={styles.boldText}>100</Text>
           </View>
           <View style={styles.settingsContainer}>
             <TouchableOpacity
@@ -57,6 +59,16 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+
+        {/* Announcements */}
+        {hasAnnouncement ? (
+          <View style={{ alignItems: "center", marginBottom: 32 }}>
+            <Announcements
+              header={true}
+              text="Return 1 reusables to get x2 coins today!"
+            />
+          </View>
+        ) : null}
 
         {/* Icons */}
         <View
@@ -188,7 +200,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 10,
     flexDirection: "row",
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 20,

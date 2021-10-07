@@ -24,17 +24,58 @@ function CardItem({ item, index }) {
   );
 }
 
+function renderDate() {
+  var currDate = moment(new Date());
+  var earlistDueDate = moment("2021/10/08");
+  var duration = moment.duration(earlistDueDate.diff(currDate));
+  var daysDiff = duration.asDays();
+
+  // {
+  //   console.log(daysDiff);
+  // }
+
+  if (daysDiff > 3) {
+    // Due date more than 3 days away from today
+    return null;
+  } else if (daysDiff <= 3 && daysDiff > 0) {
+    // Due date is 3 days away from today (exclusive)
+    return (
+      <Text style={{ color: "orange", textAlign: "center", fontSize: 18 }}>
+        {earlistDueDate.format("DD/MM/YYYY")}
+      </Text>
+    );
+  } else {
+    // Overdue
+    return (
+      <Text style={{ color: "red", textAlign: "center", fontSize: 18 }}>
+        {earlistDueDate.format("DD/MM/YYYY")}
+      </Text>
+    );
+  }
+}
+
 function renderContent(title) {
   if (title === "Items borrowed:") {
     return (
       <View style={styles.cardContentView}>
-        <View style={styles.numIconContainer}>
-          <Text style={styles.redNumber}>128</Text>
-          <Icon name="cube" type="font-awesome" size={50} color="black" />
+        <View style={styles.dateContainer}>
+          {renderDate()}
+          <View style={styles.numIconContainer}>
+            <Text style={styles.redNumber}>128</Text>
+            <Icon name="cube" type="font-awesome" size={50} color="black" />
+          </View>
         </View>
-        <View style={styles.numIconContainer}>
-          <Text style={styles.redNumber}>3</Text>
-          <Icon name="cup" type="material-community" size={50} color="black" />
+        <View style={styles.dateContainer}>
+          {renderDate()}
+          <View style={styles.numIconContainer}>
+            <Text style={styles.redNumber}>3</Text>
+            <Icon
+              name="cup"
+              type="material-community"
+              size={50}
+              color="black"
+            />
+          </View>
         </View>
       </View>
     );
@@ -140,10 +181,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   numIconContainer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  dateContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
   },
 });
 

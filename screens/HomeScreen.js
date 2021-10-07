@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,7 @@ import {
   ScrollView,
   Linking,
 } from "react-native";
-import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import colors from "../assets/colors";
 import { Button, Icon } from "react-native-elements";
@@ -16,9 +16,11 @@ import CarouselView from "../components/CarouselView";
 import RewardListView from "../components/RewardListView";
 import { UserContext } from "../assets/UserContext";
 import { globalStyles } from "../assets/globalStyles";
+import Announcements from "../components/Announcements";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
+  const [hasAnnouncement, setBoolean] = useState(true);
   // {
   //   console.log("Home page");
   //   console.log(userData);
@@ -37,12 +39,17 @@ export default function HomeScreen({ navigation }) {
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}
       >
+        {/* Header */}
         <View style={styles.header}>
           <View style={styles.welcomeContainer}>
             <Text style={styles.text}>Hi,</Text>
             <Text style={[styles.boldText, { fontSize: 36 }]}>
               {userData !== undefined ? userData.lastName : "Anonymous"}
             </Text>
+          </View>
+          <View style={styles.coinsContainer}>
+            <MaterialIcons name="attach-money" size={24} color="black" />
+            <Text style={styles.boldText}>100</Text>
           </View>
           <View style={styles.settingsContainer}>
             <TouchableOpacity
@@ -52,6 +59,16 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+
+        {/* Announcements */}
+        {hasAnnouncement ? (
+          <View style={{ alignItems: "center", marginBottom: 32 }}>
+            <Announcements
+              header={true}
+              text="Return 1 reusables to get x2 coins today!"
+            />
+          </View>
+        ) : null}
 
         {/* Icons */}
         <View
@@ -152,26 +169,6 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.text}>Tutorial</Text>
           </View>
         </View>
-
-        {/* Reward navigation */}
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 32,
-            marginHorizontal: 20,
-          }}
-        >
-          <Text style={styles.boldText}>Rewards redemption:</Text>
-          <Button
-            buttonStyle={styles.button}
-            title="See all!"
-            icon={<Icon name="arrow-right" size={30} color="white" />}
-            iconRight
-            onPress={() => navigation.navigate("Reward")}
-          ></Button>
-        </View>
       </ScrollView>
     </View>
   );
@@ -181,7 +178,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     // marginTop: Platform.OS === "android" ? Constants.statusBarHeight + 20 : 0,
     // marginTop: Constants.statusBarHeight,
@@ -192,12 +189,22 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
   },
   welcomeContainer: {
-    // marginLeft: 20,
     flex: 1,
     flexGrow: 1,
   },
   settingsContainer: {
-    // marginRight: 20,
+    justifyContent: "center",
+    alignItems: "flex-end",
+  },
+  coinsContainer: {
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    flexDirection: "row",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 20,
   },
   contentContainer: {
     backgroundColor: colors.white,

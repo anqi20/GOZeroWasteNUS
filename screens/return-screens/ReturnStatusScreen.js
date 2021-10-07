@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
@@ -154,7 +160,7 @@ export default function ReturnStatusScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={globalStyles.header}>Return</Text>
       <View style={styles.box}>
         <Text style={styles.storeName}>{storeName}</Text>
@@ -163,10 +169,25 @@ export default function ReturnStatusScreen({ navigation }) {
         </Text>
 
         {renderContent()}
+        <View
+          style={{
+            margin: 15,
+            backgroundColor: "rgba(237, 51, 26, 0.4)",
+            padding: 20,
+            borderRadius: 20,
+          }}
+        >
+          <Text style={styles.text}>- Please do not stack the reusables. </Text>
+          <Text style={styles.text}>
+            - Please return the lid and reusable together.
+          </Text>
+        </View>
         {renderNextButton()}
       </View>
-      <FooterText />
-    </View>
+      <View style={{ marginHorizontal: 40 }}>
+        <FooterText />
+      </View>
+    </ScrollView>
   );
 }
 
@@ -179,21 +200,17 @@ const data = [
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 40,
   },
   box: {
     borderWidth: 2,
     borderColor: colors.black,
     borderRadius: 15,
-    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 30,
     paddingHorizontal: 10,
+    marginHorizontal: 40,
   },
   storeName: {
     fontSize: 18,

@@ -5,14 +5,17 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function FooterText() {
   const navigation = useNavigation();
+  const website = "https://forms.gle/n3TQ53uVNLgxJoFJ7";
+
+  function goToSite() {
+    Linking.openURL(`${website}`);
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>
         If there is any error, please{" "}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Feedback to us!")}
-        >
+        <TouchableOpacity onPress={goToSite}>
           <Text style={styles.clickable}>feedback to us</Text>
         </TouchableOpacity>{" "}
         or call the helpdesk{"\n"}

@@ -125,6 +125,12 @@ export default function App() {
             gender: data.gender,
             dateOfBirth: data.dateOfBirth,
             faculty: data.faculty,
+            byo: 0,
+            coin: 0,
+            containerDate: [],
+            containerReturned: 0,
+            cupDate: [],
+            cupReturned: 0,
           };
           // Update user profile
           response.user
@@ -164,6 +170,11 @@ export default function App() {
             .catch((error) => {
               console.log(error);
             });
+          usersRef
+            .doc(uid)
+            .collection("logs")
+            .doc("initialDoc")
+            .set({ new: 0 });
         })
         .catch((error) => {
           if (error.code === "auth/email-already-in-use") {

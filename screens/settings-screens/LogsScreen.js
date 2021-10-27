@@ -144,23 +144,6 @@ export default function LogsScreen() {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {/*Top bar*/}
-        <View
-          style={[styles.contentContainer, styles.shadow, { marginTop: 20 }]}
-        >
-          <Text style={{ fontWeight: "bold" }}>Total Returns:{"\n"}</Text>
-          <View style={styles.containerCups}>
-            <Text style={[styles.blackNumber, { marginRight: 25 }]}>3</Text>
-            <Icon name="cube" type="font-awesome" size={60} color="black" />
-            <Text style={[styles.blackNumber, { marginRight: 25 }]}>3</Text>
-            <Icon
-              name="cup"
-              type="material-community"
-              size={60}
-              color="black"
-            />
-          </View>
-        </View>
 
         {/*List*/}
         <View>

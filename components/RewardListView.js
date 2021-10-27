@@ -24,14 +24,12 @@ export function RenderIcon({ category, size }) {
 
 function ListItem({ item }) {
   const navigation = useNavigation();
+  const wallet = 100;
 
   return (
     <View>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("Confirmation Modal", { text: item.reward })
-        }
-      >
+      {wallet >= item.price? 
+      <TouchableOpacity onPress={() =>navigation.navigate("Confirmation Modal", { text: item.reward })}>
         <View style={styles.container}>
 
           <View style={{alignItems: "center", marginLeft: 10}}>
@@ -42,13 +40,36 @@ function ListItem({ item }) {
           <View style={{ flex: 3, alignItems: "center", justifyContent: "center", marginRight: 10 }}>
             <Text style={[styles.boldText, { textAlign: "center", marginBottom: 10 }]}>{item.reward}</Text>
             <View style={{flexDirection: "row"}}>
-              <Text style={{ marginRight: 10}}>{item.price}</Text>
+              <Text style={{ marginRight: 10, color: colors.black}}>{item.price}</Text>
               <Icon name="coins" type="font-awesome-5" size={20} color="black" />
             </View>
           </View>
 
         </View>
       </TouchableOpacity>
+    :
+
+      <View>
+        <View style={[styles.container, {backgroundColor: colors.lightGrey}]}>
+
+          <View style={{alignItems: "center", marginLeft: 10}}>
+            <RenderIcon category={item.category} size={60} />
+            <Text style={{marginTop: 5}}>@{item.location}</Text>
+          </View>
+
+          <View style={{ flex: 3, alignItems: "center", justifyContent: "center", marginRight: 10 }}>
+            <Text style={[styles.boldText, { textAlign: "center", marginBottom: 10 }]}>{item.reward}</Text>
+            <View style={{flexDirection: "row"}}>
+              <Text style={{ marginRight: 10, color: colors.red, fontWeight: "bold"}}>{item.price}</Text>
+              <Icon name="coins" type="font-awesome-5" size={20} color="black" />
+            </View>
+          </View>
+
+        </View>
+      </View>
+    }
+
+      
     </View>
   );
 }

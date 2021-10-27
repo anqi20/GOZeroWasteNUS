@@ -89,7 +89,14 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [enteredFaculty, setFaculty] = useState(" ");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const createUser = () => {
+  function noErrorsNavigate() {
+    if (errorMsg == "") {
+      navigation.navigate("Sign Up Verification Screen");
+      return null;
+    }
+  }
+
+  function createUser(callback) {
     const email = enteredEmail;
     const password = enteredPassword;
     const firstName = enteredFN;
@@ -107,7 +114,8 @@ export default function SignUpDetailScreen({ navigation, route }) {
       faculty,
       setErrorMsg,
     });
-  };
+    callback(); // Callback, ensures error message is set before navigate executes
+  }
 
   return (
     <KeyboardAvoidingView
@@ -135,10 +143,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
             onSubmit={(values) => {
               // console.log(values);
               // setEnteredData(values);
-              createUser();
-              if (errorMsg == "") {
-                navigation.navigate("Sign Up Verification Screen");
-              }
+              createUser(noErrorsNavigate);
             }}
           >
             {({

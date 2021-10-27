@@ -125,6 +125,13 @@ export default function App() {
             gender: data.gender,
             dateOfBirth: data.dateOfBirth,
             faculty: data.faculty,
+            byo: 0,
+            coin: 0,
+            containerDate: [],
+            containerReturned: 0,
+            cupDate: [],
+            cupReturned: 0,
+            userNum: 0,
           };
           // Update user profile
           response.user
@@ -151,6 +158,22 @@ export default function App() {
               );
             });
 
+          // Set total users count to increment by 1 for each sign in
+          const overallRef = firebase
+            .firestore()
+            .collection("overall")
+            .doc("overallStats");
+          overallRef.update({
+            totalUsers: firebase.firestore.FieldValue.increment(1),
+          });
+
+          // COME BACK TO THIS. Why is totalUser count always 1
+          // const userCount = overallRef.get().then((doc) => {
+          //   if (doc.exists) {
+          //     console.log("Document data:", doc.data().totalUsers);
+          //   }
+          // });
+
           // Add user's profile information in firestore
           const usersRef = firebase.firestore().collection("users");
           usersRef
@@ -164,6 +187,14 @@ export default function App() {
             .catch((error) => {
               console.log(error);
             });
+          // usersRef.doc(uid).update({ userNum: userCount });
+
+          // Add logs collection to each user
+          usersRef
+            .doc(uid)
+            .collection("logs")
+            .doc("initialDoc")
+            .set({ new: 0 });
         })
         .catch((error) => {
           if (error.code === "auth/email-already-in-use") {

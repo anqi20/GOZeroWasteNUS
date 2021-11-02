@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
@@ -44,6 +44,7 @@ export default function App() {
           });
       } else {
         setLoading(false);
+        setUser(null);
       }
     });
   }, []);

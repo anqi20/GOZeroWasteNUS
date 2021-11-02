@@ -26,7 +26,7 @@ function CardItem({ item, index }) {
 
 function renderDate() {
   var currDate = moment(new Date());
-  var earlistDueDate = moment("2021/10/08");
+  var earlistDueDate = moment(new Date("08/10/2021"));
   var duration = moment.duration(earlistDueDate.diff(currDate));
   var daysDiff = duration.asDays();
 
@@ -88,9 +88,9 @@ function renderContent(title) {
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
           <Text>Return by:{"\n"}</Text>
-          <Text>({moment("23/08/21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
-          <Text>({moment("24/8/21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
-          <Text>({moment("26/8/21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+          <Text>({moment("23-08-21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
+          <Text>({moment("24-8-21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
+          <Text>({moment("26-8-21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
         </View>
       </View>
     );
@@ -103,9 +103,9 @@ function renderContent(title) {
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
           <Text>Return by:{"\n"}</Text>
-          <Text>({moment("23/08/21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
-          <Text>({moment("24/8/21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
-          <Text>({moment("26/8/21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+          <Text>({moment("23-08-21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
+          <Text>({moment("24-8-21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
+          <Text>({moment("26-8-21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
         </View>
       </View>
     );

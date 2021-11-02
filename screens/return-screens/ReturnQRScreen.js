@@ -10,7 +10,7 @@ export default function ReturnQRScreen({ navigation }) {
       <Text style={globalStyles.header}>Return</Text>
       <View style={styles.box}>
         {/*<View style={styles.imagePlaceholder} />*/}
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => navigation.navigate("Return Unsuccess Screen")}
           style={styles.imagePlaceholder}
         >

@@ -27,7 +27,15 @@ export function setStallDetails(
 }
 
 // Set quotas of cup and containers
-export function setQuotas(setCupQuota, setContainerQuota) {
+// Quota also takes into account the cup/containers that are already on hand
+export function setQuotas(
+  uid,
+  cupQuota,
+  containerQuota,
+  setCupQuota,
+  setContainerQuota
+) {
+  // Update quota
   firebase
     .firestore()
     .collection("overall")
@@ -44,7 +52,20 @@ export function setQuotas(setCupQuota, setContainerQuota) {
     .catch((error) => {
       console.log("Error getting stall details: ", error);
     });
+
+  // Remove from quota the borrowed items
+  firebase
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .get()
+    .then((document) => {
+      setCupQuota(cupQuota - document.data().numCup);
+      setContainerQuota(containerQuota - document.data().numContainer);
+    });
 }
+
+export function reduceQuotaByBorrows() {}
 
 // Helper function for uploadBorrowData
 function addCupDates(uid, cups) {

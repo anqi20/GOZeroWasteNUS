@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -6,10 +6,13 @@ import SelectionComponent from "../../components/SelectionComponent";
 import FooterText from "../../components/FooterText";
 import firebase from "../../database/firebaseDB";
 import { setStallDetails, setQuotas } from "./BorrowApi";
+import { UserContext } from "../../assets/UserContext";
 
 export default function BorrowSelectionScreen({ navigation, route }) {
   // Stall name from scanning QR code
   const { stall } = route.params;
+  const userData = useContext(UserContext);
+  const uid = userData.id;
 
   //Temporary data
   // const cupQuota = 3;
@@ -27,7 +30,7 @@ export default function BorrowSelectionScreen({ navigation, route }) {
 
   // Set up stall details on intial render
   useEffect(() => {
-    setQuotas(setCupQuota, setContainerQuota);
+    setQuotas(uid, cupQuota, containerQuota, setCupQuota, setContainerQuota);
     setStallDetails(stall, setContainersBoolean, setCupsBoolean);
   }, []);
 

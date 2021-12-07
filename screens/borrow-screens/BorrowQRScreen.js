@@ -34,10 +34,10 @@ export default function BorrowQRScreen({ navigation }) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
+    // console.log(typeof data);
     setScanned(true);
-    navigation.navigate("Selection Screen", { store: data });
+    navigation.navigate("Selection Screen", { stall: data });
     setScanned(false);
-    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {

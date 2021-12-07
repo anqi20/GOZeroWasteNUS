@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import SelectionComponent from "../../components/SelectionComponent";
 import FooterText from "../../components/FooterText";
+import firebase from "../../database/firebaseDB";
+import { setStallDetails, setQuotas } from "./BorrowApi";
 
 export default function BorrowSelectionScreen({ navigation, route }) {
-  //Based on this store name, grab data from firebase
-  // const { store } = route.params;
+  // Stall name from scanning QR code
+  const { stall } = route.params;
 
   //Temporary data
-  const cupQuota = 3;
-  const containerQuota = 5;
-  const storeName = data[2].storeName;
-  const hasContainers = data[2].hasContainers;
-  const hasCups = data[2].hasCups;
+  // const cupQuota = 3;
+  // const containerQuota = 5;
+  // const storeName = data[2].storeName;
+  // const hasContainers = data[2].hasContainers;
+  // const hasCups = data[2].hasCups;
+
+  const [cupQuota, setCupQuota] = useState(0);
+  const [containerQuota, setContainerQuota] = useState(0);
+  const [hasContainers, setContainersBoolean] = useState(false);
+  const [hasCups, setCupsBoolean] = useState(false);
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
+
+  // Set up stall details on intial render
+  useEffect(() => {
+    setQuotas(setCupQuota, setContainerQuota);
+    setStallDetails(stall, setContainersBoolean, setCupsBoolean);
+  }, []);
 
   function renderText() {
     if (hasContainers && hasCups) {
@@ -32,8 +45,7 @@ export default function BorrowSelectionScreen({ navigation, route }) {
     <View style={styles.container}>
       <Text style={globalStyles.header}>Borrow</Text>
       <View style={styles.box}>
-        <Text style={styles.storeName}>{storeName}</Text>
-        {/* <Text style={styles.storeName}>{store}</Text> */}
+        <Text style={styles.storeName}>{stall}</Text>
         <Text style={styles.text}>
           Choose the number of {renderText()} you are borrowing
         </Text>
@@ -65,11 +77,11 @@ export default function BorrowSelectionScreen({ navigation, route }) {
 }
 
 // Data for testing different interfaces
-const data = [
-  { storeName: "Vegetarian Store", hasContainers: true, hasCups: false },
-  { storeName: "Fruit Juice Store", hasContainers: false, hasCups: true },
-  { storeName: "Hong Kong Store", hasContainers: true, hasCups: true },
-];
+// const data = [
+//   { storeName: "Vegetarian Store", hasContainers: true, hasCups: false },
+//   { storeName: "Fruit Juice Store", hasContainers: false, hasCups: true },
+//   { storeName: "Hong Kong Store", hasContainers: true, hasCups: true },
+// ];
 
 const styles = StyleSheet.create({
   container: {

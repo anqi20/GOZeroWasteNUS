@@ -1,11 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import colors from "../assets/colors";
 import { useNavigation } from "@react-navigation/native";
 
 export default function FooterText() {
   const navigation = useNavigation();
-  const website = "https://forms.gle/n3TQ53uVNLgxJoFJ7";
+  const website = "https://forms.gle/o846pa7z4Xan2m6P8";
 
   function goToSite() {
     Linking.openURL(`${website}`);

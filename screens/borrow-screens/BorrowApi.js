@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import firebase from "../../database/firebaseDB";
 import moment from "moment";
 
@@ -68,7 +67,7 @@ export function getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer) {
 }
 
 // Helper function for uploadBorrowData
-function addCupDates(uid, cups) {
+function addCupDates(uid, cups, setError) {
   const currDate = moment().format("DD/MM/YYYY");
   const currTime = moment().format("hh:mm a");
   const userRef = firebase.firestore().collection("users").doc(uid);
@@ -93,22 +92,28 @@ function addCupDates(uid, cups) {
         userRef.set(
           {
             cupDate: [
-              { time: currTime, numCups: cups, date: currDate },
+              {
+                time: currTime,
+                numCups: cups,
+                date: currDate,
+              },
               ...retrievedData,
             ],
           },
           { merge: true }
         );
       }
+      updateTotalCups(uid, cups);
       console.log("Borrow data successfully added for cup!");
     })
     .catch((error) => {
       console.log(error);
+      setError(true);
     });
 }
 
 // Helper function for uploadBorrowData
-function addContainerDates(uid, containers) {
+function addContainerDates(uid, containers, setError) {
   const currDate = moment().format("DD/MM/YYYY");
   const currTime = moment().format("hh:mm a");
   const userRef = firebase.firestore().collection("users").doc(uid);
@@ -140,10 +145,12 @@ function addContainerDates(uid, containers) {
           { merge: true }
         );
       }
+      updateTotalContainers(uid, containers);
       console.log("Borrow data successfully added for container!");
     })
     .catch((error) => {
       console.log(error);
+      setError(true);
     });
 }
 
@@ -164,29 +171,17 @@ function updateTotalContainers(uid, numContainers) {
 }
 
 // Upload date that each item is borrowed
-export function uploadBorrowData(uid, numCups, numContainers) {
+export function uploadBorrowData(uid, numCups, numContainers, setError) {
   if (numCups > 0 && numContainers > 0) {
     // Both cups and containers are selected
-    for (let i = 0; i < numCups; i++) {
-      addCupDates(uid, numCups);
-    }
-    for (let i = 0; i < numContainers; i++) {
-      addContainerDates(uid, numContainers);
-    }
-    updateTotalCups(uid, numCups);
-    updateTotalContainers(uid, numContainers);
+    addCupDates(uid, numCups, setError);
+    addContainerDates(uid, numContainers, setError);
   } else if (numCups > 0) {
     // Only cups are selected
-    for (let i = 0; i < numCups; i++) {
-      addCupDates(uid, numCups);
-    }
-    updateTotalCups(uid, numCups);
+    addCupDates(uid, numCups, setError);
   } else if (numContainers > 0) {
     // Only containers are selected
-    for (let i = 0; i < numContainers; i++) {
-      addContainerDates(uid, numContainers);
-    }
-    updateTotalContainers(uid, numContainers);
+    addContainerDates(uid, numContainers, setError);
   } else {
     return null;
   }

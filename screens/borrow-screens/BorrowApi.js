@@ -27,14 +27,7 @@ export function setStallDetails(
 }
 
 // Set quotas of cup and containers
-// Quota also takes into account the cup/containers that are already on hand
-export function setQuotas(
-  uid,
-  cupQuota,
-  containerQuota,
-  setCupQuota,
-  setContainerQuota
-) {
+export function setQuotas(setCupQuota, setContainerQuota) {
   // Update quota
   firebase
     .firestore()
@@ -50,7 +43,27 @@ export function setQuotas(
       }
     })
     .catch((error) => {
-      console.log("Error getting stall details: ", error);
+      console.log("Error getting quota details: ", error);
+    });
+}
+
+// Get number of reusables that are already borrowed
+export function getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer) {
+  firebase
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .get()
+    .then((document) => {
+      if (document.exists) {
+        setBorrowedCup(document.data().numCup);
+        setBorrowedContainer(document.data().numContainer);
+      } else {
+        console.log("No such document");
+      }
+    })
+    .catch((error) => {
+      console.log("Error getting borrowed num details: ", error);
     });
 }
 

@@ -5,7 +5,7 @@ import { globalStyles } from "../../assets/globalStyles";
 import SelectionComponent from "../../components/SelectionComponent";
 import FooterText from "../../components/FooterText";
 import firebase from "../../database/firebaseDB";
-import { setStallDetails, setQuotas } from "./BorrowApi";
+import { setStallDetails, setQuotas, getBorrowedNum } from "./BorrowApi";
 import { UserContext } from "../../assets/UserContext";
 
 export default function BorrowSelectionScreen({ navigation, route }) {
@@ -23,15 +23,19 @@ export default function BorrowSelectionScreen({ navigation, route }) {
 
   const [cupQuota, setCupQuota] = useState(0);
   const [containerQuota, setContainerQuota] = useState(0);
+  const [borrowedCup, setBorrowedCup] = useState(0);
+  const [borrowedContainer, setBorrowedContainer] = useState(0);
   const [hasContainers, setContainersBoolean] = useState(false);
   const [hasCups, setCupsBoolean] = useState(false);
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
 
-  // Set up stall details on intial render
+  // Set up stall details / quotas on intial render
   useEffect(() => {
-    setQuotas(uid, cupQuota, containerQuota, setCupQuota, setContainerQuota);
+    setQuotas(setCupQuota, setContainerQuota);
+    getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer);
     setStallDetails(stall, setContainersBoolean, setCupsBoolean);
+    console.log("Setting up stall and quota details");
   }, []);
 
   function renderText() {
@@ -106,8 +110,8 @@ export default function BorrowSelectionScreen({ navigation, route }) {
         <SelectionComponent
           hasContainers={hasContainers}
           hasCups={hasCups}
-          cupQuota={cupQuota}
-          containerQuota={containerQuota}
+          cupQuota={cupQuota - borrowedCup}
+          containerQuota={containerQuota - borrowedContainer}
           numCups={numCups}
           numContainers={numContainers}
           setCupNum={setCupNum}

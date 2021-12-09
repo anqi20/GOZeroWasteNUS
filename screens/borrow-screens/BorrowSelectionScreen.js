@@ -44,6 +44,57 @@ export default function BorrowSelectionScreen({ navigation, route }) {
     }
   }
 
+  function renderNextButton() {
+    const [isPressed, setPress] = useState(false);
+
+    function changeState() {
+      setPress(true);
+    }
+
+    if (numCups == 0 && numContainers == 0) {
+      return (
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <TouchableOpacity
+            style={[
+              globalStyles.button,
+              { width: "90%", backgroundColor: colors.lightGrey },
+            ]}
+            onPress={changeState}
+          >
+            <Text style={globalStyles.buttonText}>Next</Text>
+          </TouchableOpacity>
+          {isPressed ? (
+            <Text
+              style={{ color: colors.red, marginTop: 20, textAlign: "center" }}
+            >
+              Please borrow at least 1 item to proceed!
+            </Text>
+          ) : null}
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          style={[globalStyles.button, { width: "90%" }]}
+          onPress={() =>
+            navigation.navigate("Success Screen", {
+              numCups: numCups,
+              numContainers: numContainers,
+            })
+          }
+        >
+          <Text style={globalStyles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      );
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Text style={globalStyles.header}>Borrow</Text>
@@ -62,7 +113,8 @@ export default function BorrowSelectionScreen({ navigation, route }) {
           setCupNum={setCupNum}
           setContainerNum={setContainerNum}
         />
-        <TouchableOpacity
+        {renderNextButton()}
+        {/* <TouchableOpacity
           style={[globalStyles.button, { width: "90%" }]}
           onPress={() =>
             navigation.navigate("Success Screen", {
@@ -70,9 +122,9 @@ export default function BorrowSelectionScreen({ navigation, route }) {
               numContainers: numContainers,
             })
           }
-        >
+        > 
           <Text style={globalStyles.buttonText}>Submit</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
       </View>
       <FooterText />
     </View>

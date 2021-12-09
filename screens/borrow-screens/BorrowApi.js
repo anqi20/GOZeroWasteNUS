@@ -52,20 +52,7 @@ export function setQuotas(
     .catch((error) => {
       console.log("Error getting stall details: ", error);
     });
-
-  // Remove from quota the borrowed items
-  firebase
-    .firestore()
-    .collection("users")
-    .doc(uid)
-    .get()
-    .then((document) => {
-      setCupQuota(cupQuota - document.data().numCup);
-      setContainerQuota(containerQuota - document.data().numContainer);
-    });
 }
-
-export function reduceQuotaByBorrows() {}
 
 // Helper function for uploadBorrowData
 function addCupDates(uid, cups) {

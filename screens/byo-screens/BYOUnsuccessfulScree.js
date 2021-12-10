@@ -7,7 +7,7 @@ import { globalStyles } from "../../assets/globalStyles";
 export default function BYOUnsuccessfulScreen() {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Text style={globalStyles.header}>BYO</Text>
+      <Text style={globalStyles.header}>I have my own</Text>
       <UnsuccessBox />
     </ScrollView>
   );

@@ -76,7 +76,7 @@ export default function BYOScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={globalStyles.header}>BYO</Text>
+      <Text style={globalStyles.header}>I have my own</Text>
       <View style={styles.box}>
         <TouchableOpacity
           onPress={() => navigation.navigate("BYO Unsuccessful Screen")}

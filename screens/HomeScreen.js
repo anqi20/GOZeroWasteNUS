@@ -4,27 +4,22 @@ import {
   Text,
   View,
   TouchableOpacity,
-  SafeAreaView,
   ScrollView,
   Linking,
+  Dimensions,
 } from "react-native";
-import { Ionicons, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import colors from "../assets/colors";
-import { Button, Icon } from "react-native-elements";
+import { Icon } from "react-native-elements";
 import CarouselView from "../components/CarouselView";
-import RewardListView from "../components/RewardListView";
 import { UserContext } from "../assets/UserContext";
-import { globalStyles } from "../assets/globalStyles";
 import Announcements from "../components/Announcements";
+import { color } from "react-native-reanimated";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
   const [hasAnnouncement, setBoolean] = useState(true);
-  // {
-  //   console.log("Home page");
-  //   console.log(userData);
-  // }
 
   //Feedback form website
   const website = "https://forms.gle/n3TQ53uVNLgxJoFJ7";
@@ -49,7 +44,7 @@ export default function HomeScreen({ navigation }) {
           </View>
           <View style={styles.coinsContainer}>
             <MaterialIcons name="attach-money" size={24} color="black" />
-            <Text style={styles.boldText}>100</Text>
+            <Text style={styles.boldText}>{userData.coin}</Text>
           </View>
           <View style={styles.settingsContainer}>
             <TouchableOpacity
@@ -71,59 +66,46 @@ export default function HomeScreen({ navigation }) {
         ) : null}
 
         {/* Icons */}
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginHorizontal: 20,
-            marginBottom: 32,
-          }}
-        >
-          <View style={styles.topIcon}>
-            <TouchableOpacity
-              style={styles.topIconBox}
+        <View style={{flexDirection: "row", justifyContent: "center"}}> 
+          <View style={{alignItems: "center"}}>
+            <TouchableOpacity 
+              style={[styles.topIconBox]}
               onPress={() => navigation.navigate("Borrow")}
             >
-              <Text style={{ padding: 10 }}>Image here</Text>
+              <Text>Image here</Text>
             </TouchableOpacity>
-            <Text style={styles.boldText}>Borrow</Text>
+            <Text style={[styles.boldText2, {alignSelf: "center"}]}>Borrow</Text>
           </View>
-          <View style={styles.topIcon}>
-            <TouchableOpacity
-              style={styles.topIconBox}
+
+          <View style={{alignItems: "center"}}>
+            <TouchableOpacity 
+              style={[styles.topIconBox, {marginHorizontal: 15}]}
               onPress={() => navigation.navigate("BYO Stack")}
             >
-              <Text style={{ padding: 10 }}>Image here</Text>
+              <Text>Image here</Text>
             </TouchableOpacity>
-            <Text style={styles.boldText}>BYO</Text>
+            <Text style={[styles.boldText2]}>I have my own</Text>
           </View>
-          <View style={styles.topIcon}>
-            <TouchableOpacity
-              style={styles.topIconBox}
+
+          <View style={{alignItems: "center"}}>
+            <TouchableOpacity 
+              style={[styles.topIconBox]}
               onPress={() => navigation.navigate("Return")}
             >
-              <Text style={{ padding: 10 }}>Image here</Text>
+              <Text>Image here</Text>
             </TouchableOpacity>
-            <Text style={styles.boldText}>Return</Text>
+            <Text style={[styles.boldText2, {alignSelf: "center"}]}>Return</Text>
           </View>
         </View>
 
         {/* Due reusables scroll view */}
-        <CarouselView />
+        <CarouselView 
+          containerDate={userData.containerDate} 
+          cupDate={userData.cupDate} 
+        />
 
         {/* Quick navigation icons */}
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginHorizontal: 20,
-            marginBottom: 32,
-          }}
-        >
+        <View style={styles.navigationIcons}>
           <View style={styles.quickNav}>
             <Icon
               reverse
@@ -131,7 +113,11 @@ export default function HomeScreen({ navigation }) {
               type="ionicon"
               color={colors.darkGrey}
               size={30}
-              onPress={() => navigation.navigate("Stats Screen")}
+              onPress={() => navigation.navigate("Stats Screen", {
+                containerDate: userData.containerDate,
+                cupDate: userData.cupDate, 
+                coin: userData.coin,
+              })}
             />
             <Text style={styles.text}>Stats</Text>
           </View>
@@ -219,6 +205,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  icons: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+    marginBottom: 30,
+  },
   topIcon: {
     flex: 1,
     alignItems: "center",
@@ -227,6 +221,7 @@ const styles = StyleSheet.create({
   topIconBox: {
     flex: 1,
     height: 80,
+    width: (Dimensions.get("window").width - 80)/3,
     borderWidth: 2,
     borderColor: colors.black,
     borderRadius: 20,
@@ -235,6 +230,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 10,
   },
+  boldText2: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  navigationIcons: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+    marginBottom: 32,
+  },
   quickNav: {
     flex: 1,
     alignItems: "center",
@@ -242,11 +250,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    // fontFamily: "Roboto",
   },
   boldText: {
     fontSize: 18,
-    // fontFamily: "Roboto",
     fontWeight: "bold",
   },
   button: {

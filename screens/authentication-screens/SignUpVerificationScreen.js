@@ -23,45 +23,44 @@ export default function SignUpVerificationScreen({ navigation }) {
   const [showError, setError] = useState("");
 
   function validateEmail() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        user
-          .reload()
-          .then(() => {
-            // console.log(user.emailVerified);
-            if (user.emailVerified) {
-              setError("");
-              navigation.navigate("Sign Up Success");
-            } else {
-              setError(
-                "Please ensure you have validated your email then try again."
-              );
-            }
-          })
-          .catch((error) => console.log(error));
-      } else {
-        console.log("No user");
-      }
-    });
+    const currUser = firebase.auth().currentUser;
+    if (currUser !== null) {
+      console.log("User id: " + firebase.auth().currentUser.uid);
+      currUser
+        .reload()
+        .then(() => {
+          console.log(`Is user verified: ${currUser.emailVerified}`);
+          if (currUser.emailVerified) {
+            setError("");
+            navigation.navigate("Sign Up Success");
+          } else {
+            setError(
+              "Please ensure you have validated your email then try again."
+            );
+          }
+        })
+        .catch((error) => console.log(error));
+    } else {
+      console.log("No user found");
+    }
   }
 
   function resendEmail() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        user
-          .sendEmailVerification()
-          .then(() => {
-            console.log("Email verification sent!");
-          })
-          .catch((error) => {
-            setError(
-              "Please check your email again or try resending again after 1 minute."
-            );
-          });
-      } else {
-        console.log("No user");
-      }
-    });
+    const currUser = firebase.auth().currentUser;
+    if (currUser !== null) {
+      currUser
+        .sendEmailVerification()
+        .then(() => {
+          console.log("Email verification resent!");
+        })
+        .catch((error) => {
+          setError(
+            "Please check your email again or try resending again after 1 minute."
+          );
+        });
+    } else {
+      console.log("No user");
+    }
   }
 
   return (

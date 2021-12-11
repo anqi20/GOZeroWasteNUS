@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
@@ -14,11 +15,11 @@ import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
 export function RenderIcon({ category, size }) {
   if (category === "Voucher") {
-    return <FontAwesome5 name="money-bill-wave" size={size} color="black" />;
+    return <Image source={require("../assets/AppImages/voucher.png")} />;
   } else if (category === "Food") {
-    return <Ionicons name="fast-food" size={size} color="black" />;
+    return <Image source={require("../assets/AppImages/food.png")} />;
   } else if (category === "Item") {
-    return <FontAwesome5 name="shopping-bag" size={size} color="black" />;
+    return <Image source={require("../assets/AppImages/giftbox.png")} />;
   }
 }
 
@@ -31,23 +32,39 @@ function ListItem({ item }) {
       {wallet >= item.price? 
       <TouchableOpacity onPress={() =>navigation.navigate("Confirmation Modal", { text: item.reward })}>
         <View style={styles.container}>
-
-          <View style={{alignItems: "center", marginLeft: 10}}>
+          <View style={{ alignItems: "center", marginLeft: 10 }}>
             <RenderIcon category={item.category} size={60} />
-            <Text style={{marginTop: 5}}>@{item.location}</Text>
+            <Text style={{ marginTop: 5 }}>@{item.location}</Text>
           </View>
 
-          <View style={{ flex: 3, alignItems: "center", justifyContent: "center", marginRight: 10 }}>
-            <Text style={[styles.boldText, { textAlign: "center", marginBottom: 10 }]}>{item.reward}</Text>
-            <View style={{flexDirection: "row"}}>
-              <Text style={{ marginRight: 10, color: colors.black}}>{item.price}</Text>
-              <Icon name="coins" type="font-awesome-5" size={20} color="black" />
+          <View
+            style={{
+              flex: 3,
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: 10,
+            }}
+          >
+            <Text
+              style={[
+                styles.boldText,
+                { textAlign: "center", marginBottom: 10 },
+              ]}
+            >
+              {item.reward}
+            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ marginRight: 10 }}>{item.price}</Text>
+              <Image
+                source={require("../assets/AppImages/coin.png")}
+                style={{ height: 30, width: 30 }}
+              />
+
             </View>
           </View>
-
         </View>
       </TouchableOpacity>
-    :
+    
 
       <View>
         <View style={[styles.container, {backgroundColor: colors.lightGrey}]}>
@@ -99,8 +116,8 @@ const styles = StyleSheet.create({
   },
   container: {
     width: Dimensions.get("window").width - 40,
-    alignItems: "center", 
-    justifyContent: "center", 
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: colors.white,
     borderRadius: 20,
     borderColor: colors.black,
@@ -108,7 +125,7 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingVertical: 20,
     paddingHorizontal: 10,
-    flexDirection: "row", 
+    flexDirection: "row",
 
     shadowOpacity: 0.25,
     shadowRadius: 5,

@@ -7,6 +7,9 @@ import {
   SafeAreaView,
   ScrollView,
   Linking,
+  Image,
+  ImageBackground,
+  Dimensions,
 } from "react-native";
 import { Ionicons, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import Constants from "expo-constants";
@@ -40,24 +43,29 @@ export default function HomeScreen({ navigation }) {
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <View style={styles.welcomeContainer}>
-            <Text style={styles.text}>Hi,</Text>
-            <Text style={[styles.boldText, { fontSize: 36 }]}>
-              {userData !== undefined ? userData.lastName : "Anonymous"}
-            </Text>
-          </View>
-          <View style={styles.coinsContainer}>
-            <MaterialIcons name="attach-money" size={24} color="black" />
-            <Text style={styles.boldText}>100</Text>
-          </View>
-          <View style={styles.settingsContainer}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Settings Stack")}
-            >
-              <Ionicons name="settings-outline" size={40} color="black" />
-            </TouchableOpacity>
-          </View>
+        <View style={styles.headerContainer}>
+          <ImageBackground
+            source={require("../assets/AppImages/homeHeader.png")}
+            style={styles.header}
+          >
+            <View style={styles.welcomeContainer}>
+              <Text style={styles.text}>Hi,</Text>
+              <Text style={[styles.boldText, { fontSize: 36 }]}>
+                {userData !== undefined ? userData.lastName : "Anonymous"}
+              </Text>
+            </View>
+            <View style={styles.coinsContainer}>
+              <MaterialIcons name="attach-money" size={24} color="black" />
+              <Text style={styles.boldText}>100</Text>
+            </View>
+            <View style={styles.settingsContainer}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Settings Stack")}
+              >
+                <Ionicons name="settings-outline" size={40} color="black" />
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </View>
 
         {/* Announcements */}
@@ -82,29 +90,29 @@ export default function HomeScreen({ navigation }) {
           }}
         >
           <View style={styles.topIcon}>
-            <TouchableOpacity
-              style={styles.topIconBox}
-              onPress={() => navigation.navigate("Borrow")}
-            >
-              <Text style={{ padding: 10 }}>Image here</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Borrow")}>
+              <Image
+                source={require("../assets/AppImages/borrowIcon.png")}
+                style={styles.topIconBox}
+              />
             </TouchableOpacity>
             <Text style={styles.boldText}>Borrow</Text>
           </View>
           <View style={styles.topIcon}>
-            <TouchableOpacity
-              style={styles.topIconBox}
-              onPress={() => navigation.navigate("BYO Stack")}
-            >
-              <Text style={{ padding: 10 }}>Image here</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("BYO Stack")}>
+              <Image
+                source={require("../assets/AppImages/byoIcon.png")}
+                style={styles.topIconBox}
+              />
             </TouchableOpacity>
             <Text style={styles.boldText}>BYO</Text>
           </View>
           <View style={styles.topIcon}>
-            <TouchableOpacity
-              style={styles.topIconBox}
-              onPress={() => navigation.navigate("Return")}
-            >
-              <Text style={{ padding: 10 }}>Image here</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Return")}>
+              <Image
+                source={require("../assets/AppImages/returnIcon.png")}
+                style={styles.topIconBox}
+              />
             </TouchableOpacity>
             <Text style={styles.boldText}>Return</Text>
           </View>
@@ -125,47 +133,48 @@ export default function HomeScreen({ navigation }) {
           }}
         >
           <View style={styles.quickNav}>
-            <Icon
-              reverse
-              name="person"
-              type="ionicon"
-              color={colors.darkGrey}
-              size={30}
+            <TouchableOpacity
               onPress={() => navigation.navigate("Stats Screen")}
-            />
+              style={styles.quickNavButton}
+            >
+              <Image
+                source={require("../assets/AppImages/statsIcon.png")}
+                style={styles.quickNavButton}
+              />
+            </TouchableOpacity>
             <Text style={styles.text}>Stats</Text>
           </View>
           <View style={styles.quickNav}>
-            <Icon
-              reverse
-              name="location"
-              type="ionicon"
-              color={colors.darkGrey}
-              size={30}
+            <TouchableOpacity
               onPress={() => navigation.navigate("Locations Screen")}
-            />
+              style={styles.quickNavButton}
+            >
+              <Image
+                source={require("../assets/AppImages/locationIcon.png")}
+                style={styles.quickNavButton}
+              />
+            </TouchableOpacity>
             <Text style={styles.text}>Location</Text>
           </View>
           <View style={styles.quickNav}>
-            <Icon
-              reverse
-              name="comment-text"
-              type="material-community"
-              color={colors.darkGrey}
-              size={30}
-              onPress={goToSite}
-            />
+            <TouchableOpacity onPress={goToSite} style={styles.quickNavButton}>
+              <Image
+                source={require("../assets/AppImages/feedbackIcon.png")}
+                style={styles.quickNavButton}
+              />
+            </TouchableOpacity>
             <Text style={styles.text}>Feedback</Text>
           </View>
           <View style={styles.quickNav}>
-            <Icon
-              reverse
-              name="question"
-              type="font-awesome"
-              color={colors.darkGrey}
-              size={30}
+            <TouchableOpacity
               onPress={() => navigation.navigate("Tutorial Screen")}
-            />
+              style={styles.quickNavButton}
+            >
+              <Image
+                source={require("../assets/AppImages/tutorialIcon.png")}
+                style={styles.quickNavButton}
+              />
+            </TouchableOpacity>
             <Text style={styles.text}>Tutorial</Text>
           </View>
         </View>
@@ -175,18 +184,22 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    flex: 1,
+  },
   header: {
+    flex: 1,
     flexDirection: "row",
-    width: "100%",
+    width: Dimensions.get("window").width,
     justifyContent: "center",
     alignItems: "center",
     // marginTop: Platform.OS === "android" ? Constants.statusBarHeight + 20 : 0,
     // marginTop: Constants.statusBarHeight,
     marginBottom: 32,
     padding: 20,
-    backgroundColor: colors.lightGrey,
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
+    // backgroundColor: colors.lightGrey,
+    // borderBottomRightRadius: 20,
+    // borderBottomLeftRadius: 20,
   },
   welcomeContainer: {
     flex: 1,
@@ -225,20 +238,28 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   topIconBox: {
-    flex: 1,
-    height: 80,
+    // flex: 1,
+    // height: 80,
+    // borderWidth: 2,
+    // borderColor: colors.black,
+    // borderRadius: 20,
+    // backgroundColor: colors.lightGrey,
+    // alignItems: "center",
+    // justifyContent: "center",
+    // marginBottom: 10,
+    borderRadius: 10,
     borderWidth: 2,
     borderColor: colors.black,
-    borderRadius: 20,
-    backgroundColor: colors.lightGrey,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10,
   },
   quickNav: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  quickNavButton: {
+    height: 60,
+    width: 60,
+    marginBottom: 8,
   },
   text: {
     fontSize: 18,

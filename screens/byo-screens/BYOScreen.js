@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Linking,
+  Image,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -76,7 +77,9 @@ export default function BYOScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={globalStyles.header}>BYO</Text>
+      <Image source={require("../../assets/AppImages/byoHeader.png")} />
+
+      {/* <Text style={globalStyles.header}>BYO</Text> */}
       <View style={styles.box}>
         <TouchableOpacity
           onPress={() => navigation.navigate("BYO Unsuccessful Screen")}
@@ -108,6 +111,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
+    marginTop: Constants.statusBarHeight,
   },
   box: {
     width: "100%",

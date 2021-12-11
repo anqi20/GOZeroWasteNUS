@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from "react-native";
+import Constants from "expo-constants";
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import moment from "moment";
@@ -93,17 +94,24 @@ export default function SuccessBox({ numCups, numContainers, text, location, num
             <Text style={styles.number}>{numCups}</Text>
             <Icon name="cup" type="material-community" size={48} color="black" />
           </View>
-        );
-      } else if (numContainers > 0) {
-        return (
-          <View style={styles.variableContent}>
-            <Text style={styles.number}>{numContainers}</Text>
-            <Icon name="cube" type="font-awesome" size={48} color="black" />
-          </View>
-        );
-      } else {
-        return null;
-      }
+        </View>
+      );
+    } else if (numCups > 0) {
+      return (
+        <View style={styles.variableContent}>
+          <Text style={styles.number}>{numCups}</Text>
+          <Image source={require("../assets/AppImages/cup.png")} />
+        </View>
+      );
+    } else if (numContainers > 0) {
+      return (
+        <View style={styles.variableContent}>
+          <Text style={styles.number}>{numContainers}</Text>
+          <Image source={require("../assets/AppImages/container.png")} />
+        </View>
+      );
+    } else {
+      return null;
     }
   }
 

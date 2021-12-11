@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import { globalStyles } from "../assets/globalStyles";
@@ -11,12 +11,9 @@ export default function UnsuccessBox() {
 
   return (
     <View style={styles.box}>
-      <Icon
-        containerStyle={{ marginBottom: 20 }}
-        name="closecircle"
-        type="antdesign"
-        color="#FE2C2C"
-        size={80}
+      <Image
+        source={require("../assets/AppImages/cross.png")}
+        style={{ alignSelf: "center", marginBottom: 10 }}
       />
       <Text style={[styles.header, { marginBottom: 20 }]}>Oops!</Text>
       <Text style={styles.warningText}>Oops, there seems to be an error!</Text>

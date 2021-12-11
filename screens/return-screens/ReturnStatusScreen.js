@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -33,12 +34,9 @@ export default function ReturnStatusScreen({ navigation }) {
   function ContainerCounter() {
     function Cube() {
       return (
-        <Icon
-          name="cube"
-          type="font-awesome"
-          size={60}
-          color="black"
-          containerStyle={{ marginLeft: 20 }}
+        <Image
+          source={require("../../assets/AppImages/container.png")}
+          style={{ marginLeft: 10 }}
         />
       );
     }
@@ -66,12 +64,9 @@ export default function ReturnStatusScreen({ navigation }) {
   function CupCounter() {
     function Cup() {
       return (
-        <Icon
-          name="cup"
-          type="material-community"
-          size={60}
-          color="black"
-          containerStyle={{ marginLeft: 20 }}
+        <Image
+          source={require("../../assets/AppImages/cup.png")}
+          style={{ marginLeft: 10 }}
         />
       );
     }
@@ -164,7 +159,9 @@ export default function ReturnStatusScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={globalStyles.header}>Return</Text>
+      <Image source={require("../../assets/AppImages/returnHeader.png")} />
+
+      {/* <Text style={globalStyles.header}>Return</Text> */}
       <View style={styles.box}>
         <Text style={styles.storeName}>{storeName}</Text>
         <Text style={styles.text}>

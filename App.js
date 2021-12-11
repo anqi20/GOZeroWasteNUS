@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
@@ -6,7 +6,10 @@ import MainTabNavigator from "./screens/MainTabNavigator";
 import AuthStack from "./screens/authentication-screens/AuthStack";
 import firebase from "./database/firebaseDB";
 import { ActivityIndicator } from "react-native";
-import { AuthContext } from "./assets/AuthContext";
+import { AuthContext, authContext } from "./assets/AuthContext";
+import { LogBox } from "react-native";
+
+LogBox.ignoreLogs(["Setting a timer"]);
 
 const Stack = createStackNavigator();
 
@@ -28,6 +31,7 @@ export default function App() {
   // On initial loading of the app, if user is previously logged in, this
   // function will get the user data
   useEffect(() => {
+    console.log("Getting user data on startup");
     const usersRef = firebase.firestore().collection("users");
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -44,6 +48,7 @@ export default function App() {
           });
       } else {
         setLoading(false);
+        setUser(null);
       }
     });
   }, []);
@@ -51,10 +56,27 @@ export default function App() {
   const authContext = {
     signUpSuccess: () => {
       if (!isValidated) {
+        console.log("sign up success");
         setValidated(true);
       }
     },
-    changePassword: (data) => {},
+    forgotPassword: async (data) => {
+      firebase
+        .auth()
+        .sendPasswordResetEmail(data.email)
+        .then(() => {
+          data.setStatusMsg("Password reset email sent!");
+          console.log("Password reset email sent!");
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.code === "auth/user-not-found") {
+            data.setErrorMsg(
+              "This email does not have an account yet! Create one?"
+            );
+          }
+        });
+    },
     logIn: async (data) => {
       firebase
         .auth()
@@ -67,7 +89,7 @@ export default function App() {
             .get()
             .then((firestoreDocument) => {
               if (!firestoreDocument.exists) {
-                console.log("User does not exist anymore.");
+                console.log("User's document does not exist anymore.");
                 return;
               }
               const userData = firestoreDocument.data();
@@ -111,13 +133,15 @@ export default function App() {
         });
     },
     signUp: async (data) => {
+      // console.log(data);
       // Create user profile on firebase authentication
       firebase
         .auth()
         .createUserWithEmailAndPassword(data.email, data.password)
-        .then((response) => {
-          const uid = response.user.uid;
-          const userData = {
+        .then((cred) => {
+          const uid = cred.user.uid;
+          // Add user's profile information in firestore
+          firebase.firestore().collection("users").doc(uid).set({
             id: uid,
             email: data.email,
             firstName: data.firstName,
@@ -132,71 +156,47 @@ export default function App() {
             cupDate: [],
             cupReturned: 0,
             userNum: 0,
-          };
-          // Update user profile
-          response.user
-            .updateProfile({
-              displayName: userData.firstName + " " + userData.lastName,
-            })
-            .then(() => {
-              console.log("User's display name updated successfully!");
-              console.log(response.user.displayName);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          // Send verification email
-          response.user
-            .sendEmailVerification()
-            .then(() => {
-              console.log("Email verification sent!");
-              console.log(response.user.email);
-            })
-            .catch((error) => {
-              data.setErrorMsg(
-                "Error sending out verification email, are you sure this email is valid?"
-              );
-            });
-
-          // Set total users count to increment by 1 for each sign in
-          const overallRef = firebase
-            .firestore()
-            .collection("overall")
-            .doc("overallStats");
-          overallRef.update({
-            totalUsers: firebase.firestore.FieldValue.increment(1),
+            numCup: 0,
+            numContainer: 0,
           });
-
-          // COME BACK TO THIS. Why is totalUser count always 1
-          // const userCount = overallRef.get().then((doc) => {
-          //   if (doc.exists) {
-          //     console.log("Document data:", doc.data().totalUsers);
-          //   }
-          // });
-
-          // Add user's profile information in firestore
-          const usersRef = firebase.firestore().collection("users");
-          usersRef
-            .doc(uid)
-            .set(userData)
-            .then(() => {
-              setUser(userData);
-              setValidated(false);
-              console.log("User account created!");
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          // usersRef.doc(uid).update({ userNum: userCount });
-
           // Add logs collection to each user
-          usersRef
+          firebase
+            .firestore()
+            .collection("users")
             .doc(uid)
             .collection("logs")
             .doc("initialDoc")
             .set({ new: 0 });
+          // Set total users count to increment by 1 for each sign in
+          firebase
+            .firestore()
+            .collection("overall")
+            .doc("overallStats")
+            .update({
+              totalUsers: firebase.firestore.FieldValue.increment(1),
+            });
+
+          // Send email verification to user
+          cred.user
+            .sendEmailVerification()
+            .then(() => {
+              console.log(`Email verification sent to ${cred.user.email}`);
+              console.log(
+                `Initial email verification state: ${cred.user.emailVerified}`
+              );
+            })
+            .catch((error) => {
+              console.log(error);
+              data.setErrorMsg(
+                "Error sending out verification email, are you sure this email is valid?"
+              );
+            });
+        })
+        .then(() => {
+          console.log("User Account created!");
         })
         .catch((error) => {
+          console.log(error);
           if (error.code === "auth/email-already-in-use") {
             data.setErrorMsg("This email address is already in use!");
           }
@@ -215,6 +215,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
+        {console.log(isValidated)}
         {user && isValidated ? (
           <Stack.Navigator>
             <Stack.Screen

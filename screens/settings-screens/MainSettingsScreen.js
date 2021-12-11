@@ -92,8 +92,8 @@ const tabs = [
     id: "3",
     title: "Terms and conditions",
   },
-  {
-    id: "4",
-    title: "Terminate my account",
-  },
+  // {
+  //   id: "4",
+  //   title: "Terminate my account",
+  // },
 ];

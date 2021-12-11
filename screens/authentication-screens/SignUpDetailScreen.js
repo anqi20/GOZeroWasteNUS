@@ -93,6 +93,8 @@ export default function SignUpDetailScreen({ navigation, route }) {
     if (errorMsg == "") {
       navigation.navigate("Sign Up Verification Screen");
       return null;
+    } else {
+      return null;
     }
   }
 

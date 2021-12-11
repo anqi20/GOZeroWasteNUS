@@ -155,6 +155,7 @@ export default function SuccessBox({ numCups, numContainers, text, location, num
         color="#0CF574"
         size={80}
       />
+
       <Text style={[styles.header, { marginBottom: 20 }]}>Successful!</Text>
 
       <View style={styles.underlined}>

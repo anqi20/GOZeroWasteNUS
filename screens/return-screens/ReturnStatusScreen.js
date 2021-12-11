@@ -17,7 +17,7 @@ export default function ReturnStatusScreen({ navigation }) {
   const numCups = data[2].numCups;
 
   //Can change the initial state count to test if the interface works
-  const [returnedContainers, setContainerCount] = useState(1);
+  const [returnedContainers, setContainerCount] = useState(0);
   const [returnedCups, setCupCount] = useState(0);
 
   function renderText() {
@@ -135,8 +135,11 @@ export default function ReturnStatusScreen({ navigation }) {
             <Text style={globalStyles.buttonText}>Next</Text>
           </TouchableOpacity>
           {isPressed ? (
-            <Text style={{ color: colors.red, marginTop: 20 }}>
-              Please return at least 1 item to proceed.
+            <Text
+              style={{ color: colors.red, marginTop: 20, textAlign: "center" }}
+            >
+              Please return at least 1 item to proceed. {"\n"} If your returns
+              are not updated, please appeal through the feedback link!
             </Text>
           ) : null}
         </View>

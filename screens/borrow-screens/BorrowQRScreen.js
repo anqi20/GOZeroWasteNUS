@@ -34,10 +34,10 @@ export default function BorrowQRScreen({ navigation }) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
+    // console.log(typeof data);
     setScanned(true);
-    navigation.navigate("Selection Screen", { store: data });
+    navigation.navigate("Selection Screen", { stall: data });
     setScanned(false);
-    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {
@@ -84,24 +84,24 @@ export default function BorrowQRScreen({ navigation }) {
         >
           <Text>(QR generator)</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("Unsuccess Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Unsuccessful Screen)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("Quota Exceeded")}
           style={styles.imagePlaceholder}
         >
           <Text>(Quota exceeded screen)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("Selection Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Selection screen)</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <Text style={styles.text}>Scan the QR code!</Text>
         <BarCodeScanner

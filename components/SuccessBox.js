@@ -1,6 +1,6 @@
 import React from "react";
 import Constants from "expo-constants";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import moment from "moment";
@@ -9,25 +9,90 @@ import { useNavigation, StackActions } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function SuccessBox({ numCups, numContainers, text, location }) {
+export default function SuccessBox({ numCups, numContainers, text, location, numCoins }) {
   const navigation = useNavigation();
 
   function renderContent() {
-    if (numCups > 0 && numContainers > 0) {
-      return (
-        <View>
-          <View style={styles.variableContent}>
-            <Text style={styles.number}>{numContainers}</Text>
-            <Icon name="cube" type="font-awesome" size={48} color="black" />
+    //Successful returns / BYO
+    if(numCoins > 0) {
+      if (numCups > 0 && numContainers > 0) {
+        return (
+          <View>
+            <Text>You have returned:</Text>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numContainers}</Text>
+              <Icon name="cube" type="font-awesome" size={48} color="black" />
+            </View>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numCups}</Text>
+              <Icon name="cup" type="material-community" size={48} color="black" />
+            </View>
+            <Text>You have earned:</Text>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numCoins}</Text>
+              <Icon name="coins" type="font-awesome-5" size={48} color="black" />
+            </View>
           </View>
+        );
+      } else if (numCups > 0) {
+        return (
+          <View>
+            <Text>You have returned:</Text>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numCups}</Text>
+              <Icon name="cup" type="material-community" size={48} color="black" />
+            </View>
+            <Text>You have earned:</Text>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numCoins}</Text>
+              <Icon name="coins" type="font-awesome-5" size={48} color="black" />
+            </View>
+          </View>
+        );
+      } else if (numContainers > 0) {
+        return (
+          <View>
+            <Text>You have returned:</Text>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numContainers}</Text>
+              <Icon name="cube" type="font-awesome" size={48} color="black" />
+            </View>
+            <Text>You have earned:</Text>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numCoins}</Text>
+              <Icon name="coins" type="font-awesome-5" size={48} color="black" />
+            </View>
+          </View>
+        );
+      } else {
+        return null;
+      }
+    }
+    //Borrow Screens
+    else {
+      if (numCups > 0 && numContainers > 0) {
+        return (
+          <View>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numContainers}</Text>
+              <Icon name="cube" type="font-awesome" size={48} color="black" />
+            </View>
+            <View style={styles.variableContent}>
+              <Text style={styles.number}>{numCups}</Text>
+              <Icon
+                name="cup"
+                type="material-community"
+                size={48}
+                color="black"
+              />
+            </View>
+          </View>
+        );
+      } else if (numCups > 0) {
+        return (
           <View style={styles.variableContent}>
             <Text style={styles.number}>{numCups}</Text>
-            <Icon
-              name="cup"
-              type="material-community"
-              size={48}
-              color="black"
-            />
+            <Icon name="cup" type="material-community" size={48} color="black" />
           </View>
         </View>
       );
@@ -76,6 +141,10 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
   }
 
   return (
+    <ScrollView
+      style={{ backgroundColor: colors.white }}
+      showsVerticalScrollIndicator={false}
+    >
     <View style={styles.box}>
       <View style={{ alignSelf: "center" }}>
         <Animatable.Text
@@ -128,6 +197,7 @@ export default function SuccessBox({ numCups, numContainers, text, location }) {
         <Text style={globalStyles.buttonText}>Home</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
   );
 }
 

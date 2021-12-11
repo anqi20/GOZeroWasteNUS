@@ -15,6 +15,7 @@ export default function ReturnSuccessfulScreen({ route }) {
         numCups={numCups}
         numContainers={numContainers}
         location={location}
+        numCoins={numCups+numContainers}
       />
       <FooterText />
     </ScrollView>

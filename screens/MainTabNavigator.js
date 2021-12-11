@@ -75,6 +75,9 @@ export default function MainTabNavigator({ route }) {
         tabBarOptions={{
           inactiveBackgroundColor: "black",
           activeBackgroundColor: "black",
+          safeAreaInsets:{
+            bottom: 0,
+          }
         }}
       >
         <Tab.Screen name="Home" component={ModalHomeStack} />

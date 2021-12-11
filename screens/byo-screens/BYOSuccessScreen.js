@@ -11,7 +11,7 @@ export default function BYOSuccessScreen({ route }) {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={globalStyles.header}>BYO</Text>
-      <SuccessBox numCups={numCups} numContainers={numContainers} />
+      <SuccessBox numCups={numCups} numContainers={numContainers} numCoins={numCups+numContainers} />
       <FooterText />
     </ScrollView>
   );

@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text, Dimensions, Image } from "react-native";
+
+import { StyleSheet, View, Text, Dimensions, Image, SafeAreaView } from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../../assets/colors";
 import RewardListView from "../../components/RewardListView";
@@ -36,7 +37,9 @@ export default function RewardsScreen({ navigation }) {
       <View style={styles.line} />
 
       {/*List of rewards*/}
-      <RewardListView />
+      <SafeAreaView style={{flex: 1}}>
+        <RewardListView />
+      </SafeAreaView>
     </View>
   );
 }

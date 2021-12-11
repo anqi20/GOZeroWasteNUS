@@ -36,13 +36,6 @@ export default function LoginScreen({ navigation, route }) {
   // ---------------- AUTHENTICATION ---------------------------
   const { logIn } = useContext(AuthContext);
 
-  // Monitor route.params for password change message and show if exists
-  useEffect(() => {
-    if (route.params?.confirmationMsg) {
-      setErrorMsg(route.params?.confirmationMsg);
-    }
-  }, [route.params?.confirmationMsg]);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");

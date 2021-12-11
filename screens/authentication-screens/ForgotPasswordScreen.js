@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import * as yup from "yup";
 import {
   StyleSheet,
@@ -15,8 +15,15 @@ import { Input } from "react-native-elements";
 import { globalStyles } from "../../assets/globalStyles";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
+import { AuthContext } from "../../assets/AuthContext";
 
 export default function ForgotPasswordScreen({ navigation }) {
+  const { forgotPassword } = useContext(AuthContext);
+
+  const [email, setEmail] = useState("");
+  const [statusMsg, setStatusMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
   const validationSchema = yup.object().shape({
     email: yup
       .string()
@@ -37,10 +44,11 @@ export default function ForgotPasswordScreen({ navigation }) {
             initialValues={{ email: "" }}
             // validationSchema={validationSchema}
             onSubmit={(values) => {
-              navigation.navigate("Forgot Password Verification Screen");
+              // navigation.navigate("Forgot Password Verification Screen");
+              forgotPassword({ email, setStatusMsg, setErrorMsg });
             }}
           >
-            {({ handleChange, handleSubmit, errors, isValid }) => (
+            {({ setFieldValue, handleSubmit, errors, isValid }) => (
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
@@ -49,7 +57,10 @@ export default function ForgotPasswordScreen({ navigation }) {
                   placeholder="e1234567@u.nus.edu"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
-                  onChangeText={handleChange("email")}
+                  onChangeText={(value) => {
+                    setFieldValue("email", value);
+                    setEmail(value);
+                  }}
                   autoCapitalize="none"
                 />
 
@@ -61,9 +72,35 @@ export default function ForgotPasswordScreen({ navigation }) {
                   disabled={!isValid}
                 >
                   <Text style={globalStyles.buttonText}>
-                    Send verification code
+                    Send password reset email
                   </Text>
                 </TouchableOpacity>
+                {statusMsg == "" ? null : (
+                  <View>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Log In Screen")}
+                      style={[globalStyles.buttonTop, { marginTop: 30 }]}
+                    >
+                      <Text style={globalStyles.buttonText}>
+                        Return to login screen
+                      </Text>
+                    </TouchableOpacity>
+                    <Text style={styles.statusMsg}>{statusMsg}</Text>
+                  </View>
+                )}
+                {errorMsg == "" ? null : (
+                  <View>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Log In Screen")}
+                      style={[globalStyles.buttonTop, { marginTop: 30 }]}
+                    >
+                      <Text style={globalStyles.buttonText}>
+                        Return to login screen
+                      </Text>
+                    </TouchableOpacity>
+                    <Text style={styles.errorMsg}>{errorMsg}</Text>
+                  </View>
+                )}
               </View>
             )}
           </Formik>
@@ -84,5 +121,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     color: colors.darkGrey,
+  },
+  statusMsg: {
+    color: colors.black,
+    textAlign: "center",
+    marginHorizontal: 30,
+    marginTop: 90,
+  },
+  errorMsg: {
+    color: colors.black,
+    textAlign: "center",
+    marginHorizontal: 30,
+    marginTop: 90,
   },
 });

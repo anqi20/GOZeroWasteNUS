@@ -14,7 +14,7 @@ export default function ForgotPasswordStack() {
         component={ForgotPasswordScreen}
         options={{ headerShown: false }}
       ></Stack.Screen>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Forgot Password Verification Screen"
         component={ForgotPasswordVerificationScreen}
         options={{ headerShown: false }}
@@ -23,7 +23,7 @@ export default function ForgotPasswordStack() {
         name="Forgot Password Confirmation Screen"
         component={ForgotPasswordConfirmationScreen}
         options={{ headerShown: false }}
-      ></Stack.Screen>
+      ></Stack.Screen> */}
     </Stack.Navigator>
   );
 }

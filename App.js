@@ -56,10 +56,27 @@ export default function App() {
   const authContext = {
     signUpSuccess: () => {
       if (!isValidated) {
+        console.log("sign up success");
         setValidated(true);
       }
     },
-    changePassword: (data) => {},
+    forgotPassword: async (data) => {
+      firebase
+        .auth()
+        .sendPasswordResetEmail(data.email)
+        .then(() => {
+          data.setStatusMsg("Password reset email sent!");
+          console.log("Password reset email sent!");
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.code === "auth/user-not-found") {
+            data.setErrorMsg(
+              "This email does not have an account yet! Create one?"
+            );
+          }
+        });
+    },
     logIn: async (data) => {
       firebase
         .auth()
@@ -196,6 +213,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
+        {console.log(isValidated)}
         {user && isValidated ? (
           <Stack.Navigator>
             <Stack.Screen

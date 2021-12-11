@@ -14,9 +14,9 @@ import firebase from "../../database/firebaseDB";
 export default function QRGenerator() {
   const windowWidth = Dimensions.get("window").width;
 
-  // const stallName = "Fresh Fruits & Juices";
+  const stallName = "Fresh Fruits & Juices";
   // const stallName = "Mixed Vegetable";
-  const stallName = "Vegetarian";
+  // const stallName = "Vegetarian";
 
   return (
     <View style={styles.container}>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import SelectionComponent from "../../components/SelectionComponent";
 import FooterText from "../../components/FooterText";
+import Constants from "expo-constants";
 
 export default function BYOSelectionScreen({ navigation, route }) {
   //Based on this store name, grab data from firebase
@@ -30,7 +31,9 @@ export default function BYOSelectionScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Text style={globalStyles.header}>Borrow</Text>
+      <Image source={require("../../assets/AppImages/byoHeader.png")} />
+
+      {/* <Text style={globalStyles.header}>Borrow</Text> */}
       <View style={styles.box}>
         <Text style={styles.storeName}>{storeName}</Text>
         {/* <Text style={styles.storeName}>{store}</Text> */}
@@ -78,6 +81,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
+    marginTop: Constants.statusBarHeight,
   },
   box: {
     borderWidth: 2,

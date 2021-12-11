@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import colors from "../assets/colors";
@@ -62,19 +63,14 @@ function renderContent(title) {
           {renderDate()}
           <View style={styles.numIconContainer}>
             <Text style={styles.redNumber}>128</Text>
-            <Icon name="cube" type="font-awesome" size={50} color="black" />
+            <Image source={require("../assets/AppImages/container.png")} />
           </View>
         </View>
         <View style={styles.dateContainer}>
           {renderDate()}
           <View style={styles.numIconContainer}>
             <Text style={styles.redNumber}>3</Text>
-            <Icon
-              name="cup"
-              type="material-community"
-              size={50}
-              color="black"
-            />
+            <Image source={require("../assets/AppImages/cup.png")} />
           </View>
         </View>
       </View>
@@ -84,7 +80,7 @@ function renderContent(title) {
       <View style={styles.cardContentView}>
         <View style={styles.numIconContainer}>
           <Text style={styles.redNumber}>3</Text>
-          <Icon name="cube" type="font-awesome" size={60} color="black" />
+          <Image source={require("../assets/AppImages/container.png")} />
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
           <Text>Return by:{"\n"}</Text>
@@ -99,7 +95,7 @@ function renderContent(title) {
       <View style={styles.cardContentView}>
         <View style={styles.numIconContainer}>
           <Text style={styles.redNumber}>3</Text>
-          <Icon name="cup" type="material-community" size={60} color="black" />
+          <Image source={require("../assets/AppImages/cup.png")} />
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
           <Text>Return by:{"\n"}</Text>

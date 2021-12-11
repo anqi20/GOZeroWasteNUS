@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Dimensions, Image } from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../../assets/colors";
 import RewardListView from "../../components/RewardListView";
@@ -8,14 +8,13 @@ import Announcements from "../../components/Announcements";
 export default function RewardsScreen({ navigation }) {
   return (
     <View style={styles.container}>
-
       {/*Top container: Announcements + Coins*/}
       <View style={styles.topContainer}>
         {/*Annoucements*/}
         <View>
-          <Announcements 
-            header = {true}
-            text = "Return 1 reusables to get x2 coins today!"
+          <Announcements
+            header={true}
+            text="Return 1 reusables to get x2 coins today!"
           />
         </View>
 
@@ -24,12 +23,17 @@ export default function RewardsScreen({ navigation }) {
           <Text style={styles.text}>Return reusables to collect coins!</Text>
           <View style={styles.icon}>
             <Text style={[styles.blackNumber, { marginRight: 25 }]}>3</Text>
-            <Icon name="coins" type="font-awesome-5" size={25} color="black" />
+            <Image
+              source={require("../../assets/AppImages/coin.png")}
+              style={{ height: 30, width: 30 }}
+            />
+
+            {/* <Icon name="coins" type="font-awesome-5" size={25} color="black" /> */}
           </View>
         </View>
       </View>
 
-      <View style={styles.line}/>
+      <View style={styles.line} />
 
       {/*List of rewards*/}
       <RewardListView />
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   topContainer: {
-    backgroundColor: colors.black, 
+    backgroundColor: colors.black,
     width: Dimensions.get("window").width,
     alignItems: "center",
     paddingTop: 10,
@@ -76,6 +80,6 @@ const styles = StyleSheet.create({
   },
   line: {
     borderWidth: 1,
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width,
   },
 });

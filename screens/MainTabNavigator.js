@@ -8,6 +8,7 @@ import { UserContext } from "../assets/UserContext";
 // import RewardsScreen from "./reward-screens/RewardsScreen";
 import ModalRewardStack from "./reward-screens/ModalRewardStack";
 import firebase from "../database/firebaseDB";
+import { Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
 

@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -12,6 +13,8 @@ import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
 import QRCode from "react-native-qrcode-svg";
 import moment from "moment";
+import Constants from "expo-constants";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function ReturnQRScreen({ navigation }) {
   const userData = useContext(UserContext);
@@ -48,20 +51,40 @@ export default function ReturnQRScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={globalStyles.header}>Return</Text>
-      <View style={styles.box}>
-        {/*<View style={styles.imagePlaceholder} />*/}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Return Unsuccess Screen")}
-          style={styles.imagePlaceholder}
-        >
-          <Text>(Unsuccessful Screen)</Text>
-        </TouchableOpacity>
-        <Text style={styles.text}>Flash the QR code!</Text>
-        {renderUserQr()}
-      </View>
-      <FooterText />
+    <View style={{ marginTop: Constants.statusBarHeight }}>
+      <ScrollView
+        style={{ backgroundColor: colors.white }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.container}>
+          <Image source={require("../../assets/AppImages/returnHeader.png")} />
+
+          {/* <Text style={globalStyles.header}>Return</Text> */}
+          <View style={styles.box}>
+            {/*<View style={styles.imagePlaceholder} />*/}
+            <Image
+              source={require("../../assets/AppImages/returnPicture.png")}
+            />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Return Unsuccess Screen")}
+              style={{ margin: 10, backgroundColor: "lightgrey" }}
+            >
+              <Text>(Unsuccessful Screen)</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Return Status Screen")}
+              style={{ margin: 10, backgroundColor: "lightgrey" }}
+            >
+              <Text>(Status Screen)</Text>
+            </TouchableOpacity>
+            <Text style={styles.text}>Flash the QR code!</Text>
+            {renderUserQr()}
+          </View>
+          <View style={{ flex: 1 }}>
+            <FooterText />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -69,20 +92,22 @@ export default function ReturnQRScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    // backgroundColor: "grey",
     alignItems: "center",
-    justifyContent: "center",
-    padding: 40,
+    // justifyContent: "center",
+    paddingHorizontal: 40,
   },
   box: {
     width: "100%",
-    height: "80%",
+    // backgroundColor: "yellow",
+    // height: "80%",
     borderWidth: 2,
     borderColor: colors.black,
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 20,
+    alignSelf: "center",
   },
   text: {
     fontSize: 18,

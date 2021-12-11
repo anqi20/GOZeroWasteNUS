@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Linking,
+  Image,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -76,7 +77,7 @@ export default function BorrowQRScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={globalStyles.header}>Borrow</Text>
+      <Image source={require("../../assets/AppImages/borrowHeader.png")} />
       <View style={styles.box}>
         <TouchableOpacity
           onPress={() => navigation.navigate("QR Generator")}
@@ -121,10 +122,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
+    marginTop: Constants.statusBarHeight,
   },
   box: {
     width: "100%",
-    height: "80%",
+    // height: "80%",
     borderWidth: 2,
     borderColor: colors.black,
     borderRadius: 15,

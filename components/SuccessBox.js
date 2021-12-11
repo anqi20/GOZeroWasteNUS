@@ -1,6 +1,13 @@
 import React from "react";
 import Constants from "expo-constants";
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import moment from "moment";
@@ -9,12 +16,18 @@ import { useNavigation, StackActions } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function SuccessBox({ numCups, numContainers, text, location, numCoins }) {
+export default function SuccessBox({
+  numCups,
+  numContainers,
+  text,
+  location,
+  numCoins,
+}) {
   const navigation = useNavigation();
 
   function renderContent() {
     //Successful returns / BYO
-    if(numCoins > 0) {
+    if (numCoins > 0) {
       if (numCups > 0 && numContainers > 0) {
         return (
           <View>
@@ -25,12 +38,22 @@ export default function SuccessBox({ numCups, numContainers, text, location, num
             </View>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCups}</Text>
-              <Icon name="cup" type="material-community" size={48} color="black" />
+              <Icon
+                name="cup"
+                type="material-community"
+                size={48}
+                color="black"
+              />
             </View>
             <Text>You have earned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCoins}</Text>
-              <Icon name="coins" type="font-awesome-5" size={48} color="black" />
+              <Icon
+                name="coins"
+                type="font-awesome-5"
+                size={48}
+                color="black"
+              />
             </View>
           </View>
         );
@@ -40,12 +63,22 @@ export default function SuccessBox({ numCups, numContainers, text, location, num
             <Text>You have returned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCups}</Text>
-              <Icon name="cup" type="material-community" size={48} color="black" />
+              <Icon
+                name="cup"
+                type="material-community"
+                size={48}
+                color="black"
+              />
             </View>
             <Text>You have earned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCoins}</Text>
-              <Icon name="coins" type="font-awesome-5" size={48} color="black" />
+              <Icon
+                name="coins"
+                type="font-awesome-5"
+                size={48}
+                color="black"
+              />
             </View>
           </View>
         );
@@ -60,7 +93,12 @@ export default function SuccessBox({ numCups, numContainers, text, location, num
             <Text>You have earned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCoins}</Text>
-              <Icon name="coins" type="font-awesome-5" size={48} color="black" />
+              <Icon
+                name="coins"
+                type="font-awesome-5"
+                size={48}
+                color="black"
+              />
             </View>
           </View>
         );
@@ -92,26 +130,19 @@ export default function SuccessBox({ numCups, numContainers, text, location, num
         return (
           <View style={styles.variableContent}>
             <Text style={styles.number}>{numCups}</Text>
-            <Icon name="cup" type="material-community" size={48} color="black" />
+            <Image source={require("../assets/AppImages/cup.png")} />
           </View>
-        </View>
-      );
-    } else if (numCups > 0) {
-      return (
-        <View style={styles.variableContent}>
-          <Text style={styles.number}>{numCups}</Text>
-          <Image source={require("../assets/AppImages/cup.png")} />
-        </View>
-      );
-    } else if (numContainers > 0) {
-      return (
-        <View style={styles.variableContent}>
-          <Text style={styles.number}>{numContainers}</Text>
-          <Image source={require("../assets/AppImages/container.png")} />
-        </View>
-      );
-    } else {
-      return null;
+        );
+      } else if (numContainers > 0) {
+        return (
+          <View style={styles.variableContent}>
+            <Text style={styles.number}>{numContainers}</Text>
+            <Image source={require("../assets/AppImages/container.png")} />
+          </View>
+        );
+      } else {
+        return null;
+      }
     }
   }
 
@@ -145,58 +176,58 @@ export default function SuccessBox({ numCups, numContainers, text, location, num
       style={{ backgroundColor: colors.white }}
       showsVerticalScrollIndicator={false}
     >
-    <View style={styles.box}>
-      <View style={{ alignSelf: "center" }}>
-        <Animatable.Text
-          animation="bounce"
-          easing="linear"
-          iterationCount="infinite"
-          direction="alternate"
+      <View style={styles.box}>
+        <View style={{ alignSelf: "center" }}>
+          <Animatable.Text
+            animation="bounce"
+            easing="linear"
+            iterationCount="infinite"
+            direction="alternate"
+          >
+            <MaterialIcons name="celebration" size={60} color="black" />{" "}
+          </Animatable.Text>
+        </View>
+        <Icon
+          containerStyle={{ marginBottom: 20 }}
+          name="checkcircle"
+          type="antdesign"
+          color="#0CF574"
+          size={80}
+        />
+
+        <Text style={[styles.header, { marginBottom: 20 }]}>Successful!</Text>
+
+        <View style={styles.underlined}>
+          <Text style={{ color: colors.darkGrey, fontSize: 18 }}>
+            Date:{"  "}
+            <Text style={{ color: colors.black, fontSize: 18 }}>
+              ({moment().format("ddd")}) {moment().format("DD/MM/YYYY")}
+            </Text>
+          </Text>
+        </View>
+        <View style={styles.underlined}>
+          <Text style={{ color: colors.darkGrey, fontSize: 18 }}>
+            Time:{"  "}
+            <Text style={{ color: colors.black, fontSize: 18 }}>
+              {moment().format("hh:mm a")}
+            </Text>
+          </Text>
+        </View>
+
+        {renderLocation()}
+        {renderContent()}
+        {renderText()}
+
+        <TouchableOpacity
+          style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
+          onPress={() => {
+            navigation.dispatch(StackActions.popToTop());
+            navigation.navigate("Home Screen");
+          }}
         >
-          <MaterialIcons name="celebration" size={60} color="black" />{" "}
-        </Animatable.Text>
+          <Text style={globalStyles.buttonText}>Home</Text>
+        </TouchableOpacity>
       </View>
-      <Icon
-        containerStyle={{ marginBottom: 20 }}
-        name="checkcircle"
-        type="antdesign"
-        color="#0CF574"
-        size={80}
-      />
-
-      <Text style={[styles.header, { marginBottom: 20 }]}>Successful!</Text>
-
-      <View style={styles.underlined}>
-        <Text style={{ color: colors.darkGrey, fontSize: 18 }}>
-          Date:{"  "}
-          <Text style={{ color: colors.black, fontSize: 18 }}>
-            ({moment().format("ddd")}) {moment().format("DD/MM/YYYY")}
-          </Text>
-        </Text>
-      </View>
-      <View style={styles.underlined}>
-        <Text style={{ color: colors.darkGrey, fontSize: 18 }}>
-          Time:{"  "}
-          <Text style={{ color: colors.black, fontSize: 18 }}>
-            {moment().format("hh:mm a")}
-          </Text>
-        </Text>
-      </View>
-
-      {renderLocation()}
-      {renderContent()}
-      {renderText()}
-
-      <TouchableOpacity
-        style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
-        onPress={() => {
-          navigation.dispatch(StackActions.popToTop());
-          navigation.navigate("Home Screen");
-        }}
-      >
-        <Text style={globalStyles.buttonText}>Home</Text>
-      </TouchableOpacity>
-    </View>
     </ScrollView>
   );
 }

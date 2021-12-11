@@ -29,64 +29,91 @@ function ListItem({ item }) {
 
   return (
     <View>
-      {wallet >= item.price? 
-      <TouchableOpacity onPress={() =>navigation.navigate("Confirmation Modal", { text: item.reward })}>
-        <View style={styles.container}>
-          <View style={{ alignItems: "center", marginLeft: 10 }}>
-            <RenderIcon category={item.category} size={60} />
-            <Text style={{ marginTop: 5 }}>@{item.location}</Text>
-          </View>
+      {wallet >= item.price ? (
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Confirmation Modal", { text: item.reward })
+          }
+        >
+          <View style={styles.container}>
+            <View style={{ alignItems: "center", marginLeft: 10 }}>
+              <RenderIcon category={item.category} size={60} />
+              <Text style={{ marginTop: 5 }}>@{item.location}</Text>
+            </View>
 
-          <View
-            style={{
-              flex: 3,
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 10,
-            }}
-          >
-            <Text
-              style={[
-                styles.boldText,
-                { textAlign: "center", marginBottom: 10 },
-              ]}
+            <View
+              style={{
+                flex: 3,
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: 10,
+              }}
             >
-              {item.reward}
-            </Text>
-            <View style={{ flexDirection: "row" }}>
-              <Text style={{ marginRight: 10 }}>{item.price}</Text>
-              <Image
-                source={require("../assets/AppImages/coin.png")}
-                style={{ height: 30, width: 30 }}
-              />
+              <Text
+                style={[
+                  styles.boldText,
+                  { textAlign: "center", marginBottom: 10 },
+                ]}
+              >
+                {item.reward}
+              </Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ marginRight: 10 }}>{item.price}</Text>
+                <Image
+                  source={require("../assets/AppImages/coin.png")}
+                  style={{ height: 30, width: 30 }}
+                />
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <View>
+          <View
+            style={[styles.container, { backgroundColor: colors.lightGrey }]}
+          >
+            <View style={{ alignItems: "center", marginLeft: 10 }}>
+              <RenderIcon category={item.category} size={60} />
+              <Text style={{ marginTop: 5 }}>@{item.location}</Text>
+            </View>
 
+            <View
+              style={{
+                flex: 3,
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: 10,
+              }}
+            >
+              <Text
+                style={[
+                  styles.boldText,
+                  { textAlign: "center", marginBottom: 10 },
+                ]}
+              >
+                {item.reward}
+              </Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text
+                  style={{
+                    marginRight: 10,
+                    color: colors.red,
+                    fontWeight: "bold",
+                  }}
+                >
+                  {item.price}
+                </Text>
+                <Icon
+                  name="coins"
+                  type="font-awesome-5"
+                  size={20}
+                  color="black"
+                />
+              </View>
             </View>
           </View>
         </View>
-      </TouchableOpacity>
-    
-
-      <View>
-        <View style={[styles.container, {backgroundColor: colors.lightGrey}]}>
-
-          <View style={{alignItems: "center", marginLeft: 10}}>
-            <RenderIcon category={item.category} size={60} />
-            <Text style={{marginTop: 5}}>@{item.location}</Text>
-          </View>
-
-          <View style={{ flex: 3, alignItems: "center", justifyContent: "center", marginRight: 10 }}>
-            <Text style={[styles.boldText, { textAlign: "center", marginBottom: 10 }]}>{item.reward}</Text>
-            <View style={{flexDirection: "row"}}>
-              <Text style={{ marginRight: 10, color: colors.red, fontWeight: "bold"}}>{item.price}</Text>
-              <Icon name="coins" type="font-awesome-5" size={20} color="black" />
-            </View>
-          </View>
-
-        </View>
-      </View>
-    }
-
-      
+      )}
     </View>
   );
 }

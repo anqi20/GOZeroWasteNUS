@@ -156,6 +156,8 @@ export default function App() {
             cupDate: [],
             cupReturned: 0,
             userNum: 0,
+            numCup: 0,
+            numContainer: 0,
           });
           // Add logs collection to each user
           firebase

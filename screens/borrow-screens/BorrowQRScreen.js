@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Linking,
+  Image,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -34,10 +35,10 @@ export default function BorrowQRScreen({ navigation }) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
+    // console.log(typeof data);
     setScanned(true);
-    navigation.navigate("Selection Screen", { store: data });
+    navigation.navigate("Selection Screen", { stall: data });
     setScanned(false);
-    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {
@@ -76,7 +77,7 @@ export default function BorrowQRScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={globalStyles.header}>Borrow</Text>
+      <Image source={require("../../assets/AppImages/borrowHeader.png")} />
       <View style={styles.box}>
         <TouchableOpacity
           onPress={() => navigation.navigate("QR Generator")}
@@ -84,24 +85,24 @@ export default function BorrowQRScreen({ navigation }) {
         >
           <Text>(QR generator)</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("Unsuccess Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Unsuccessful Screen)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("Quota Exceeded")}
           style={styles.imagePlaceholder}
         >
           <Text>(Quota exceeded screen)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("Selection Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Selection screen)</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <Text style={styles.text}>Scan the QR code!</Text>
         <BarCodeScanner
@@ -121,10 +122,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 40,
+    marginTop: Constants.statusBarHeight,
   },
   box: {
     width: "100%",
-    height: "80%",
+    // height: "80%",
     borderWidth: 2,
     borderColor: colors.black,
     borderRadius: 15,

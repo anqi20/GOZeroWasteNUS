@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import colors from "../assets/colors";
 import { Entypo } from "@expo/vector-icons";
 import { Icon } from "react-native-elements";
@@ -14,26 +14,20 @@ export default function SelectionComponent({
   setCupNum,
   setContainerNum,
 }) {
-  function Cube() {
+  function Container() {
     return (
-      <Icon
-        name="cube"
-        type="font-awesome"
-        size={60}
-        color="black"
-        containerStyle={{ marginRight: 20 }}
+      <Image
+        source={require("../assets/AppImages/container.png")}
+        style={{ marginRight: 10 }}
       />
     );
   }
 
   function Cup() {
     return (
-      <Icon
-        name="cup"
-        type="material-community"
-        size={60}
-        color="black"
-        containerStyle={{ marginRight: 20 }}
+      <Image
+        source={require("../assets/AppImages/cup.png")}
+        style={{ marginRight: 10 }}
       />
     );
   }
@@ -100,7 +94,7 @@ export default function SelectionComponent({
 
     return (
       <View style={styles.iconAndSelector}>
-        <Cube />
+        <Container />
         <View style={styles.selectorContainer}>
           <TouchableOpacity style={styles.button} onPress={decrement}>
             <Entypo name="minus" size={36} color="black" />
@@ -154,7 +148,8 @@ export default function SelectionComponent({
       {renderSelector()}
       {isOverQuota ? (
         <Text style={{ color: colors.red }}>
-          You cannot select more than this number.
+          You cannot select more than this number. Return the ones you have to
+          borrow more!
         </Text>
       ) : null}
     </View>

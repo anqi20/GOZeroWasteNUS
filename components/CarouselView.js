@@ -4,6 +4,8 @@ import {
   Text,
   StyleSheet,
   Dimensions,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import colors from "../assets/colors";
@@ -30,7 +32,7 @@ function renderDate(dates) {
   //dates[0] = oldest date 
 
   var currDate = moment(new Date());
-  var earlistDueDate = moment("2021/10/08");
+  var earlistDueDate = moment(new Date("08/10/2021"));
   var duration = moment.duration(earlistDueDate.diff(currDate));
   var daysDiff = duration.asDays();
 
@@ -65,19 +67,14 @@ function renderContent({ item, containerDate, cupDate }) {
           {renderDate(containerDate)}
           <View style={styles.numIconContainer}>
             <Text style={styles.redNumber}>{containerNum}</Text>
-            <Icon name="cube" type="font-awesome" size={50} color="black" />
+            <Image source={require("../assets/AppImages/container.png")} />
           </View>
         </View>
         <View style={styles.dateContainer}>
           {renderDate(cupDate)}
           <View style={styles.numIconContainer}>
             <Text style={styles.redNumber}>{cupNum}</Text>
-            <Icon
-              name="cup"
-              type="material-community"
-              size={50}
-              color="black"
-            />
+            <Image source={require("../assets/AppImages/cup.png")} />
           </View>
         </View>
       </View>
@@ -87,13 +84,13 @@ function renderContent({ item, containerDate, cupDate }) {
       <View style={styles.cardContentView}>
         <View style={styles.numIconContainer}>
           <Text style={styles.redNumber}>{containerNum}</Text>
-          <Icon name="cube" type="font-awesome" size={60} color="black" />
+          <Image source={require("../assets/AppImages/container.png")} />
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
           <Text>Return by:{"\n"}</Text>
-          <Text>({moment("23/08/21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
-          <Text>({moment("24/8/21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
-          <Text>({moment("26/8/21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+          <Text>({moment("23-08-21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
+          <Text>({moment("24-8-21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
+          <Text>({moment("26-8-21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
         </View>
       </View>
     );
@@ -102,13 +99,13 @@ function renderContent({ item, containerDate, cupDate }) {
       <View style={styles.cardContentView}>
         <View style={styles.numIconContainer}>
           <Text style={styles.redNumber}>{cupNum}</Text>
-          <Icon name="cup" type="material-community" size={60} color="black" />
+          <Image source={require("../assets/AppImages/cup.png")} />
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
           <Text>Return by:{"\n"}</Text>
-          <Text>({moment("23/08/21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
-          <Text>({moment("24/8/21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
-          <Text>({moment("26/8/21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+          <Text>({moment("23-08-21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
+          <Text>({moment("24-8-21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
+          <Text>({moment("26-8-21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
         </View>
       </View>
     );

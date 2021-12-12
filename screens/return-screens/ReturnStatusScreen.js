@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -23,7 +24,7 @@ export default function ReturnStatusScreen({ navigation }) {
   //const numCups = userData.cupDate.length;
 
   //Can change the initial state count to test if the interface works
-  const [returnedContainers, setContainerCount] = useState(1);
+  const [returnedContainers, setContainerCount] = useState(0);
   const [returnedCups, setCupCount] = useState(0);
 
   function renderText() {
@@ -39,12 +40,9 @@ export default function ReturnStatusScreen({ navigation }) {
   function ContainerCounter() {
     function Cube() {
       return (
-        <Icon
-          name="cube"
-          type="font-awesome"
-          size={60}
-          color="black"
-          containerStyle={{ marginLeft: 20 }}
+        <Image
+          source={require("../../assets/AppImages/container.png")}
+          style={{ marginLeft: 10 }}
         />
       );
     }
@@ -72,12 +70,9 @@ export default function ReturnStatusScreen({ navigation }) {
   function CupCounter() {
     function Cup() {
       return (
-        <Icon
-          name="cup"
-          type="material-community"
-          size={60}
-          color="black"
-          containerStyle={{ marginLeft: 20 }}
+        <Image
+          source={require("../../assets/AppImages/cup.png")}
+          style={{ marginLeft: 10 }}
         />
       );
     }
@@ -141,8 +136,11 @@ export default function ReturnStatusScreen({ navigation }) {
             <Text style={globalStyles.buttonText}>Next</Text>
           </TouchableOpacity>
           {isPressed ? (
-            <Text style={{ color: colors.red, marginTop: 20 }}>
-              Please return at least 1 item to proceed.
+            <Text
+              style={{ color: colors.red, marginTop: 20, textAlign: "center" }}
+            >
+              Please return at least 1 item to proceed. {"\n"} If your returns
+              are not updated, please appeal through the feedback link!
             </Text>
           ) : null}
         </View>
@@ -167,7 +165,9 @@ export default function ReturnStatusScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={globalStyles.header}>Return</Text>
+      <Image source={require("../../assets/AppImages/returnHeader.png")} />
+
+      {/* <Text style={globalStyles.header}>Return</Text> */}
       <View style={styles.box}>
         <Text style={styles.machineName}>{machineName}</Text>
         <Text style={styles.text}>

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Icon } from "react-native-elements";
+import { MaterialIcons } from "@expo/vector-icons";
 import colors from "../assets/colors";
 import moment from "moment";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { TabView, TabBar } from 'react-native-tab-view';
 import Leaderboard from "../components/Leaderboard";
 
-const ReturnDatesTab = () => (
+function ReturnDatesTab({ containerDate, cupDate, coin }) {
+  return (
   <View style={{ flex: 1, backgroundColor: colors.white }}>
     <View style={styles.contentContainer}>
-      <Text style={[styles.redNumber, { marginRight: 25 }]}>3</Text>
+      <Text style={[styles.redNumber, { marginRight: 25 }]}>{containerDate.length}</Text>
       <Image source={require("../assets/AppImages/container.png")} />
       <View style={{ marginLeft: 30 }}>
         <Text>Return by:{"\n"}</Text>
@@ -20,7 +22,7 @@ const ReturnDatesTab = () => (
     </View>
 
     <View style={styles.contentContainer}>
-      <Text style={styles.redNumber}>3</Text>
+      <Text style={styles.redNumber}>{cupDate.length}</Text>
       <Image source={require("../assets/AppImages/cup.png")} />
       <View style={{ marginLeft: 30 }}>
         <Text>Return by:{"\n"}</Text>
@@ -31,25 +33,31 @@ const ReturnDatesTab = () => (
     </View>
 
     <View style={styles.contentContainer}>
-      <Text style={styles.redNumber}>3</Text>
       <Image source={require("../assets/AppImages/coin.png")} />
+      <Text style={styles.number}>{coin}</Text>
     </View>
   </View>
 );
 
-const LeaderboardTab = () => <Leaderboard />;
-
-const renderScene = SceneMap({
-  first: ReturnDatesTab,
-  second: LeaderboardTab,
-});
-
-export default function StatsScreen() {
+export default function StatsScreen({ route }) {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "first", title: "Return Dates" },
     { key: "second", title: "Leaderboard" },
   ]);
+
+  const containerDate = route.params.containerDate
+  const cupDate = route.params.cupDate
+  const coin = route.params.coin;
+
+  const renderScene = ({ route }) => {
+    switch(route.key) {
+      case "first": 
+        return <ReturnDatesTab containerDate={containerDate} cupDate={cupDate} coin={coin} />
+      case "second": 
+        return <Leaderboard />
+    }
+  }
 
   return (
     <TabView
@@ -91,6 +99,12 @@ const styles = StyleSheet.create({
   redNumber: {
     fontSize: 48,
     color: colors.red,
+    fontWeight: "bold",
+    marginHorizontal: 16,
+  },
+  number: {
+    fontSize: 48,
+    color: colors.black,
     fontWeight: "bold",
     marginHorizontal: 16,
   },

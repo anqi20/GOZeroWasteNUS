@@ -77,9 +77,9 @@ export default function BYOScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+
       <Image source={require("../../assets/AppImages/byoHeader.png")} />
 
-      {/* <Text style={globalStyles.header}>BYO</Text> */}
       <View style={styles.box}>
         <TouchableOpacity
           onPress={() => navigation.navigate("BYO Unsuccessful Screen")}

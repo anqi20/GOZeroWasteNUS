@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,11 +11,17 @@ import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { Icon } from "react-native-elements";
+//import { UserContext } from "../../assets/UserContext";
 
 export default function ReturnStatusScreen({ navigation }) {
-  const storeName = data[2].storeName;
-  const numContainers = data[2].numContainers;
-  const numCups = data[2].numCups;
+  const machineName = data[1].machineName;
+  const numContainers = data[1].numContainers;
+  const numCups = data[1].numCups;
+
+  //Get user data from database
+  //const userData = useContext(UserContext);
+  //const numContainers = userData.containerDate.length;
+  //const numCups = userData.cupDate.length;
 
   //Can change the initial state count to test if the interface works
   const [returnedContainers, setContainerCount] = useState(0);
@@ -147,7 +153,7 @@ export default function ReturnStatusScreen({ navigation }) {
             navigation.navigate("Return Success Screen", {
               numCups: returnedCups,
               numContainers: returnedContainers,
-              location: storeName,
+              location: machineName,
             })
           }
         >
@@ -163,7 +169,7 @@ export default function ReturnStatusScreen({ navigation }) {
 
       {/* <Text style={globalStyles.header}>Return</Text> */}
       <View style={styles.box}>
-        <Text style={styles.storeName}>{storeName}</Text>
+        <Text style={styles.machineName}>{machineName}</Text>
         <Text style={styles.text}>
           Drop the {renderText()} in the holes that are flashing green now!
         </Text>
@@ -193,9 +199,9 @@ export default function ReturnStatusScreen({ navigation }) {
 
 // Data for testing different interfaces
 const data = [
-  { storeName: "Vegetarian Store", numContainers: 2, numCups: 0 },
-  { storeName: "Fruit Juice Store", numContainers: 0, numCups: 3 },
-  { storeName: "Hong Kong Store", numContainers: 3, numCups: 4 },
+  { machineName: "Vegetarian Store", numContainers: 2, numCups: 0 },
+  { machineName: "Fruit Juice Store", numContainers: 0, numCups: 3 },
+  { machineName: "Hong Kong Store", numContainers: 3, numCups: 4 },
 ];
 
 const styles = StyleSheet.create({
@@ -212,7 +218,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 40,
   },
-  storeName: {
+  machineName: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 30,

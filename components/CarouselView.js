@@ -9,31 +9,32 @@ import {
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import colors from "../assets/colors";
-import { useNavigation } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
 import moment from "moment";
 
 const CARD_WIDTH = Dimensions.get("window").width - 40;
 const CARD_HEIGHT = 200;
 
-function CardItem({ item, index }) {
+function CardItem({ item, index, containerDate, cupDate }) {
   return (
     <View style={styles.cardContainer} key={index}>
       <Text style={styles.header}>{item.title}</Text>
-      {renderContent(item.title)}
+      {renderContent({item, containerDate, cupDate})}
     </View>
   );
 }
 
-function renderDate() {
+function renderDate(dates) {
+  //console.log("Container Date:");
+  //var date = dates[0].toDate().toDateString();
+  //console.log(date)
+
+  //dates[0] = oldest date 
+
   var currDate = moment(new Date());
   var earlistDueDate = moment(new Date("08/10/2021"));
   var duration = moment.duration(earlistDueDate.diff(currDate));
   var daysDiff = duration.asDays();
-
-  // {
-  //   console.log(daysDiff);
-  // }
 
   if (daysDiff > 3) {
     // Due date more than 3 days away from today
@@ -55,31 +56,34 @@ function renderDate() {
   }
 }
 
-function renderContent(title) {
-  if (title === "Items borrowed:") {
+function renderContent({ item, containerDate, cupDate }) {
+  var containerNum = containerDate.length; 
+  var cupNum = cupDate.length; 
+
+  if (item.title === "Items borrowed:") {
     return (
       <View style={styles.cardContentView}>
         <View style={styles.dateContainer}>
-          {renderDate()}
+          {renderDate(containerDate)}
           <View style={styles.numIconContainer}>
-            <Text style={styles.redNumber}>128</Text>
+            <Text style={styles.redNumber}>{containerNum}</Text>
             <Image source={require("../assets/AppImages/container.png")} />
           </View>
         </View>
         <View style={styles.dateContainer}>
-          {renderDate()}
+          {renderDate(cupDate)}
           <View style={styles.numIconContainer}>
-            <Text style={styles.redNumber}>3</Text>
+            <Text style={styles.redNumber}>{cupNum}</Text>
             <Image source={require("../assets/AppImages/cup.png")} />
           </View>
         </View>
       </View>
     );
-  } else if (title === "Containers borrowed:") {
+  } else if (item.title === "Containers borrowed:") {
     return (
       <View style={styles.cardContentView}>
         <View style={styles.numIconContainer}>
-          <Text style={styles.redNumber}>3</Text>
+          <Text style={styles.redNumber}>{containerNum}</Text>
           <Image source={require("../assets/AppImages/container.png")} />
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
@@ -90,11 +94,11 @@ function renderContent(title) {
         </View>
       </View>
     );
-  } else if (title === "Cups borrowed:") {
+  } else if (item.title === "Cups borrowed:") {
     return (
       <View style={styles.cardContentView}>
         <View style={styles.numIconContainer}>
-          <Text style={styles.redNumber}>3</Text>
+          <Text style={styles.redNumber}>{cupNum}</Text>
           <Image source={require("../assets/AppImages/cup.png")} />
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
@@ -108,16 +112,16 @@ function renderContent(title) {
   }
 }
 
-export default function CarouselView() {
+export default function CarouselView({ containerDate, cupDate }) {
   const [index, setIndex] = useState(0);
   const isCarousel = useRef(null);
-
+  
   return (
     <View style={styles.carouselContainer}>
       <Carousel
         ref={isCarousel}
         data={data}
-        renderItem={({ item, index }) => <CardItem item={item} index={index} />}
+        renderItem={({ item, index }) => <CardItem item={item} index={index} containerDate={containerDate} cupDate={cupDate} />}
         sliderWidth={CARD_WIDTH}
         itemWidth={CARD_WIDTH}
         itemHeight={CARD_HEIGHT}

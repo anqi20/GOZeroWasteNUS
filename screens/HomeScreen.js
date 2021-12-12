@@ -13,7 +13,6 @@ import {
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import colors from "../assets/colors";
-import { Icon } from "react-native-elements";
 import CarouselView from "../components/CarouselView";
 import { UserContext } from "../assets/UserContext";
 import Announcements from "../components/Announcements";
@@ -72,67 +71,42 @@ export default function HomeScreen({ navigation }) {
         ) : null}
 
         {/* Icons */}
-        {/*<View style={{flexDirection: "row", justifyContent: "center"}}> 
+        <View style={{flexDirection: "row", justifyContent: "center"}}> 
           <View style={{alignItems: "center"}}>
             <TouchableOpacity 
               style={[styles.topIconBox2]}
               onPress={() => navigation.navigate("Borrow")}
             >
-              <Text>Image here</Text>*/}
-
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginHorizontal: 20,
-            marginBottom: 32,
-          }}
-        >
-          <View style={styles.topIcon}>
-            <TouchableOpacity onPress={() => navigation.navigate("Borrow")}>
               <Image
                 source={require("../assets/AppImages/borrowIcon.png")}
                 style={styles.topIconBox}
               />
-
             </TouchableOpacity>
             <Text style={[styles.boldText2, {alignSelf: "center"}]}>Borrow</Text>
           </View>
 
-          {/*<View style={{alignItems: "center"}}>
+          <View style={{alignItems: "center"}}>
             <TouchableOpacity 
               style={[styles.topIconBox2, {marginHorizontal: 15}]}
               onPress={() => navigation.navigate("BYO Stack")}
             >
-              <Text>Image here</Text>*/}
-
-          <View style={styles.topIcon}>
-            <TouchableOpacity onPress={() => navigation.navigate("BYO Stack")}>
               <Image
                 source={require("../assets/AppImages/byoIcon.png")}
                 style={styles.topIconBox}
               />
-
             </TouchableOpacity>
             <Text style={[styles.boldText2]}>I have my own</Text>
           </View>
 
-          {/*<View style={{alignItems: "center"}}>
+          <View style={{alignItems: "center"}}>
             <TouchableOpacity 
               style={[styles.topIconBox2]}
               onPress={() => navigation.navigate("Return")}
             >
-              <Text>Image here</Text>*/}
-
-          <View style={styles.topIcon}>
-            <TouchableOpacity onPress={() => navigation.navigate("Return")}>
               <Image
                 source={require("../assets/AppImages/returnIcon.png")}
                 style={styles.topIconBox}
-              />
-                  
+              /> 
             </TouchableOpacity>
             <Text style={[styles.boldText2, {alignSelf: "center"}]}>Return</Text>
           </View>
@@ -273,8 +247,8 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 80,
     width: (Dimensions.get("window").width - 80)/3,
-    borderWidth: 2,
-    borderColor: colors.black,
+    //borderWidth: 2,
+    //borderColor: colors.black,
   },
   boldText2: {
     fontSize: 18,

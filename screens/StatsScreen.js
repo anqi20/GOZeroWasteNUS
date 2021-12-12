@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Icon } from "react-native-elements";
-import { MaterialIcons } from "@expo/vector-icons";
 import colors from "../assets/colors";
 import moment from "moment";
 import { TabView, TabBar } from 'react-native-tab-view';
@@ -37,7 +35,8 @@ function ReturnDatesTab({ containerDate, cupDate, coin }) {
       <Text style={styles.number}>{coin}</Text>
     </View>
   </View>
-);
+  )
+}
 
 export default function StatsScreen({ route }) {
   const [index, setIndex] = useState(0);

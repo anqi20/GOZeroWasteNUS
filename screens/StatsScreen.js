@@ -4,6 +4,7 @@ import colors from "../assets/colors";
 import moment from "moment";
 import { TabView, TabBar } from 'react-native-tab-view';
 import Leaderboard from "../components/Leaderboard";
+import { renderAllDates } from "./BasicApi";
 
 function ReturnDatesTab({ containerDate, cupDate, coin }) {
   return (
@@ -13,9 +14,7 @@ function ReturnDatesTab({ containerDate, cupDate, coin }) {
       <Image source={require("../assets/AppImages/container.png")} />
       <View style={{ marginLeft: 30 }}>
         <Text>Return by:{"\n"}</Text>
-        <Text>({moment("23/08/21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
-        <Text>({moment("24/8/21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
-        <Text>({moment("26/8/21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+        {renderAllDates(containerDate)}
       </View>
     </View>
 
@@ -24,9 +23,7 @@ function ReturnDatesTab({ containerDate, cupDate, coin }) {
       <Image source={require("../assets/AppImages/cup.png")} />
       <View style={{ marginLeft: 30 }}>
         <Text>Return by:{"\n"}</Text>
-        <Text>({moment("23/08/21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
-        <Text>({moment("24/8/21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
-        <Text>({moment("26/8/21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+        {renderAllDates(cupDate)}
       </View>
     </View>
 

@@ -1,23 +1,36 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Dimensions, Image, SafeAreaView } from "react-native";
-import { Icon } from "react-native-elements";
 import colors from "../../assets/colors";
 import RewardListView from "../../components/RewardListView";
 import Announcements from "../../components/Announcements";
+import { setAnnouncementDetail } from "../BasicApi";
 
 export default function RewardsScreen({ navigation }) {
+  const [hasAnnouncement, setBoolean] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
+
+  useEffect(() => {
+    setAnnouncementDetail(setAnnouncement);
+    if(announcement != "") {
+      setBoolean(true);
+    } else {
+      setBoolean(false);
+    }
+  })
+
   return (
     <View style={styles.container}>
       {/*Top container: Announcements + Coins*/}
       <View style={styles.topContainer}>
         {/*Annoucements*/}
-        <View>
-          <Announcements
-            header={true}
-            text="Return 1 reusables to get x2 coins today!"
-          />
-        </View>
+        {hasAnnouncement ? (
+          <View>
+            <Announcements
+              header={true}
+              text={announcement}
+            />
+          </View>
+        ) : null}
 
         {/*Coins*/}
         <View style={styles.box}>

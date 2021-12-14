@@ -38,7 +38,7 @@ export function setQuotas(setCupQuota, setContainerQuota) {
         setCupQuota(document.data().cupQuota);
         setContainerQuota(document.data().containerQuota);
       } else {
-        console.log("No such document");
+        console.log("No such document (overallStats)");
       }
     })
     .catch((error) => {

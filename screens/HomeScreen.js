@@ -16,10 +16,21 @@ import colors from "../assets/colors";
 import CarouselView from "../components/CarouselView";
 import { UserContext } from "../assets/UserContext";
 import Announcements from "../components/Announcements";
+import { setAnnouncementDetail } from "./BasicApi";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
-  const [hasAnnouncement, setBoolean] = useState(true);
+  const [hasAnnouncement, setBoolean] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
+
+  useEffect(() => {
+    setAnnouncementDetail(setAnnouncement);
+    if(announcement != "") {
+      setBoolean(true);
+    } else {
+      setBoolean(false);
+    }
+  })
 
   //Feedback form website
   const website = "https://forms.gle/o846pa7z4Xan2m6P8";
@@ -29,7 +40,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-    <View style={{ marginTop: Constants.statusBarHeight }}>
+    <View style={{ flex:1, marginTop: Constants.statusBarHeight, backgroundColor: colors.white }}>
       <ScrollView
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}
@@ -65,7 +76,7 @@ export default function HomeScreen({ navigation }) {
           <View style={{ alignItems: "center", marginBottom: 32 }}>
             <Announcements
               header={true}
-              text="Return 1 reusables to get x2 coins today!"
+              text={announcement}
             />
           </View>
         ) : null}

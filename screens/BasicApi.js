@@ -1,7 +1,26 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import firebase from "../database/firebaseDB";
 import moment from "moment"; 
+
+// Set announcement details 
+export function setAnnouncementDetail(setAnnouncement) {
+  firebase
+    .firestore()
+    .collection("overall")
+    .doc("overallStats")
+    .get()
+    .then((document) => {
+      if(document.exists) {
+        setAnnouncement(document.data().announcement);
+      } else {
+        console.log("No such document (overallStats)")
+      }
+    })
+    .catch((error) => {
+      console.log("Error getting announcement details: ", error);
+    })
+}
 
 export function renderAllDates(dates) {
   if(dates.length == 1) {

@@ -75,6 +75,7 @@ export default function MainTabNavigator({ route }) {
         tabBarOptions={{
           inactiveBackgroundColor: "black",
           activeBackgroundColor: "black",
+          activeTintColor: "#EE8066",
           safeAreaInsets:{
             bottom: 0,
           }

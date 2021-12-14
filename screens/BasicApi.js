@@ -3,6 +3,25 @@ import { View, Text } from "react-native";
 import firebase from "../database/firebaseDB";
 import moment from "moment"; 
 
+// Get user details
+export function setUserDetails(uid, setCoins) {
+  firebase
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .get()
+    .then((document) => {
+      if(document.exists) {
+        setCoins(document.data().coin);
+      } else {
+        console.log("No such document");
+      }
+    })
+    .catch((error) => {
+      console.log("Error in getting user details: ", error)
+    })
+}
+
 // Set announcement details 
 export function setAnnouncementDetail(setAnnouncement) {
   firebase

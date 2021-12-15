@@ -92,6 +92,10 @@ export default function BYOScreen({ navigation }) {
       >
         <View style={styles.box}>
           {/* <TouchableOpacity
+      <Image source={require("../../assets/AppImages/byoHeader.png")} />
+
+      <View style={styles.box}>
+        <TouchableOpacity
           onPress={() => navigation.navigate("BYO Unsuccessful Screen")}
           style={styles.imagePlaceholder}
         >

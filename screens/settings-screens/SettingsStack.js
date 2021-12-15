@@ -34,7 +34,10 @@ export default function SettingsStack() {
         name="How to use?"
         component={TutorialScreen}
       ></Stack.Screen>
-      <Stack.Screen name="Logs" component={LogsScreen}></Stack.Screen>
+      <Stack.Screen 
+        name="Logs" 
+        component={LogsScreen}
+      ></Stack.Screen>
       <Stack.Screen
         name="Feedback to us!"
         component={FeedbackScreen}

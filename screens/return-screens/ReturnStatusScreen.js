@@ -19,7 +19,7 @@ export default function ReturnStatusScreen({ navigation }) {
   const uid = userData.id;
 
   // Location currently hardcoded, to be changed when linked up with machine
-  const locationName = data[2].locationName;
+  const machineName = data[2].machineName;
   const [borrowedCup, setBorrowedCup] = useState(0);
   const [borrowedContainer, setBorrowedContainer] = useState(0);
 
@@ -161,7 +161,7 @@ export default function ReturnStatusScreen({ navigation }) {
             navigation.navigate("Return Success Screen", {
               numCups: returnedCups,
               numContainers: returnedContainers,
-              location: locationName,
+              location: machineName,
             })
           }
         >
@@ -177,7 +177,7 @@ export default function ReturnStatusScreen({ navigation }) {
 
       {/* <Text style={globalStyles.header}>Return</Text> */}
       <View style={styles.box}>
-        <Text style={styles.locationName}>{locationName}</Text>
+        <Text style={styles.machineName}>{machineName}</Text>
         <Text style={styles.text}>
           Drop the {renderText()} in the holes that are flashing green now!
         </Text>
@@ -207,9 +207,9 @@ export default function ReturnStatusScreen({ navigation }) {
 
 // Data for testing different interfaces
 const data = [
-  { locationName: "TechnoEdge Canteen", numContainers: 2, numCups: 0 },
-  { locationName: "E4", numContainers: 0, numCups: 3 },
-  { locationName: "SDE4", numContainers: 3, numCups: 4 },
+  { machineName: "TechnoEdge Canteen", numContainers: 2, numCups: 0 },
+  { machineName: "E4", numContainers: 0, numCups: 3 },
+  { machineName: "SDE4", numContainers: 3, numCups: 4 },
 ];
 
 const styles = StyleSheet.create({
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 40,
   },
-  locationName: {
+  machineName: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 30,

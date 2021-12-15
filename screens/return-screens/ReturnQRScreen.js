@@ -58,7 +58,10 @@ export default function ReturnQRScreen({ navigation }) {
         marginTop: Constants.statusBarHeight,
       }}
     >
-      <Image source={require("../../assets/AppImages/returnHeader.png")} />
+      <Image
+        source={require("../../assets/AppImages/returnHeader.png")}
+        style={{ width: "100%" }}
+      />
 
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <View
@@ -81,7 +84,10 @@ export default function ReturnQRScreen({ navigation }) {
     //     showsVerticalScrollIndicator={false}
     //   >
     //     <View style={styles.container}>
-    //       <Image source={require("../../assets/AppImages/returnHeader.png")} />
+    //       <Image
+    //         source={require("../../assets/AppImages/returnHeader.png")}
+    //         style={{ width: Dimensions.get("window").width }}
+    //       />
 
     //       {/* <Text style={globalStyles.header}>Return</Text> */}
     //       <View style={styles.box}>

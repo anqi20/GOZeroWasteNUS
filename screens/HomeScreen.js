@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     justifyContent: "center",
     alignItems: "center",
+    height: 150,
     // marginTop: Platform.OS === "android" ? Constants.statusBarHeight + 20 : 0,
     // marginTop: Constants.statusBarHeight,
     marginBottom: 32,

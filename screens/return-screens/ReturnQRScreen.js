@@ -51,41 +51,71 @@ export default function ReturnQRScreen({ navigation }) {
   }
 
   return (
-    <View style={{ marginTop: Constants.statusBarHeight }}>
-      <ScrollView
-        style={{ backgroundColor: colors.white }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.container}>
-          <Image source={require("../../assets/AppImages/returnHeader.png")} />
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: colors.white,
+        marginTop: Constants.statusBarHeight,
+      }}
+    >
+      <Image
+        source={require("../../assets/AppImages/returnHeader.png")}
+        style={{ width: "100%" }}
+      />
 
-          {/* <Text style={globalStyles.header}>Return</Text> */}
-          <View style={styles.box}>
-            {/*<View style={styles.imagePlaceholder} />*/}
-            <Image
-              source={require("../../assets/AppImages/returnPicture.png")}
-            />
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Return Unsuccess Screen")}
-              style={{ margin: 10, backgroundColor: "lightgrey" }}
-            >
-              <Text>(Unsuccessful Screen)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Return Status Screen")}
-              style={{ margin: 10, backgroundColor: "lightgrey" }}
-            >
-              <Text>(Status Screen)</Text>
-            </TouchableOpacity>
-            <Text style={styles.text}>Flash the QR code!</Text>
-            {renderUserQr()}
-          </View>
-          <View style={{ flex: 1 }}>
-            <FooterText />
-          </View>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <View
+          style={{
+            backgroundColor: "coral",
+            height: 40,
+            width: "80%",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 20,
+          }}
+        >
+          <Text>Feature coming soon! Stay tuned {";)"}</Text>
         </View>
-      </ScrollView>
+      </View>
     </View>
+    // <View style={{ marginTop: Constants.statusBarHeight }}>
+    //   <ScrollView
+    //     style={{ backgroundColor: colors.white }}
+    //     showsVerticalScrollIndicator={false}
+    //   >
+    //     <View style={styles.container}>
+    //       <Image
+    //         source={require("../../assets/AppImages/returnHeader.png")}
+    //         style={{ width: Dimensions.get("window").width }}
+    //       />
+
+    //       {/* <Text style={globalStyles.header}>Return</Text> */}
+    //       <View style={styles.box}>
+    //         {/*<View style={styles.imagePlaceholder} />*/}
+    //         <Image
+    //           source={require("../../assets/AppImages/returnPicture.png")}
+    //         />
+    //         <TouchableOpacity
+    //           onPress={() => navigation.navigate("Return Unsuccess Screen")}
+    //           style={{ margin: 10, backgroundColor: "lightgrey" }}
+    //         >
+    //           <Text>(Unsuccessful Screen)</Text>
+    //         </TouchableOpacity>
+    //         <TouchableOpacity
+    //           onPress={() => navigation.navigate("Return Status Screen")}
+    //           style={{ margin: 10, backgroundColor: "lightgrey" }}
+    //         >
+    //           <Text>(Status Screen)</Text>
+    //         </TouchableOpacity>
+    //         <Text style={styles.text}>Flash the QR code!</Text>
+    //         {renderUserQr()}
+    //       </View>
+    //       <View style={{ flex: 1 }}>
+    //         <FooterText />
+    //       </View>
+    //     </View>
+    //   </ScrollView>
+    // </View>
   );
 }
 

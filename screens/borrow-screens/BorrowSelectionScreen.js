@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  ScrollView,
+} from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import SelectionComponent from "../../components/SelectionComponent";
@@ -11,10 +19,11 @@ import Constants from "expo-constants";
 
 export default function BorrowSelectionScreen({ navigation, route }) {
   // Stall name from scanning QR code
-  const { stall } = route.params;
+  const { stallid } = route.params;
   const userData = useContext(UserContext);
   const uid = userData.id;
 
+  // console.log(stallid);
   //Temporary data
   // const cupQuota = 3;
   // const containerQuota = 5;
@@ -28,6 +37,7 @@ export default function BorrowSelectionScreen({ navigation, route }) {
   const [borrowedContainer, setBorrowedContainer] = useState(0);
   const [hasContainers, setContainersBoolean] = useState(false);
   const [hasCups, setCupsBoolean] = useState(false);
+  const [stall, setStallName] = useState(null);
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
 
@@ -35,7 +45,12 @@ export default function BorrowSelectionScreen({ navigation, route }) {
   useEffect(() => {
     setQuotas(setCupQuota, setContainerQuota);
     getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer);
-    setStallDetails(stall, setContainersBoolean, setCupsBoolean);
+    setStallDetails(
+      stallid,
+      setContainersBoolean,
+      setCupsBoolean,
+      setStallName
+    );
     console.log("Setting up stall and quota details");
   }, []);
 
@@ -101,38 +116,36 @@ export default function BorrowSelectionScreen({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Image source={require("../../assets/AppImages/borrowHeader.png")} />
-      {/* <Text style={globalStyles.header}>Borrow</Text> */}
-      <View style={styles.box}>
-        <Text style={styles.storeName}>{stall}</Text>
-        <Text style={styles.text}>
-          Choose the number of {renderText()} you are borrowing
-        </Text>
-        <SelectionComponent
-          hasContainers={hasContainers}
-          hasCups={hasCups}
-          cupQuota={cupQuota - borrowedCup}
-          containerQuota={containerQuota - borrowedContainer}
-          numCups={numCups}
-          numContainers={numContainers}
-          setCupNum={setCupNum}
-          setContainerNum={setContainerNum}
-        />
-        {renderNextButton()}
-        {/* <TouchableOpacity
-          style={[globalStyles.button, { width: "90%" }]}
-          onPress={() =>
-            navigation.navigate("Success Screen", {
-              numCups: numCups,
-              numContainers: numContainers,
-            })
-          }
-        > 
-          <Text style={globalStyles.buttonText}>Submit</Text>
-        </TouchableOpacity>*/}
-      </View>
-      <FooterText />
+    <View style={{ marginTop: Constants.statusBarHeight }}>
+      <ScrollView
+        style={{ backgroundColor: colors.white }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.container}>
+          <Image
+            source={require("../../assets/AppImages/borrowHeader.png")}
+            style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+          />
+          <View style={styles.box}>
+            <Text style={styles.storeName}>{stall}</Text>
+            <Text style={styles.text}>
+              Choose the number of {renderText()} you are borrowing
+            </Text>
+            <SelectionComponent
+              hasContainers={hasContainers}
+              hasCups={hasCups}
+              cupQuota={cupQuota - borrowedCup}
+              containerQuota={containerQuota - borrowedContainer}
+              numCups={numCups}
+              numContainers={numContainers}
+              setCupNum={setCupNum}
+              setContainerNum={setContainerNum}
+            />
+            {renderNextButton()}
+          </View>
+          <FooterText />
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -147,11 +160,8 @@ export default function BorrowSelectionScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
-    padding: 40,
-    marginTop: Constants.statusBarHeight,
+    paddingHorizontal: 40,
   },
   box: {
     borderWidth: 2,

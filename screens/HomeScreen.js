@@ -48,8 +48,11 @@ export default function HomeScreen({ navigation }) {
               </Text>
             </View>
             <View style={styles.coinsContainer}>
-              <MaterialIcons name="attach-money" size={24} color="black" />
-              <Text style={styles.boldText}>{userData.coin}</Text>
+              <Image
+                source={require("../assets/AppImages/coin.png")}
+                style={{ height: 30, width: 30, marginRight: 10 }}
+              />
+              <Text style={styles.boldText}>0</Text>
             </View>
             <View style={styles.settingsContainer}>
               <TouchableOpacity
@@ -215,6 +218,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     justifyContent: "center",
     alignItems: "center",
+    height: 150,
     // marginTop: Platform.OS === "android" ? Constants.statusBarHeight + 20 : 0,
     // marginTop: Constants.statusBarHeight,
     marginBottom: 32,

@@ -3,17 +3,19 @@ import moment from "moment";
 
 // Set stall details
 export function setStallDetails(
-  stallName,
+  stallid,
   setContainersBoolean,
-  setCupsBoolean
+  setCupsBoolean,
+  setStallName
 ) {
   firebase
     .firestore()
     .collection("stalls")
-    .doc(stallName)
+    .doc(stallid)
     .get()
     .then((document) => {
       if (document.exists) {
+        setStallName(document.data().stallName);
         setContainersBoolean(document.data().hasContainer);
         setCupsBoolean(document.data().hasCup);
       } else {

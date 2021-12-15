@@ -142,17 +142,6 @@ export default function BorrowSelectionScreen({ navigation, route }) {
               setContainerNum={setContainerNum}
             />
             {renderNextButton()}
-            {/* <TouchableOpacity
-          style={[globalStyles.button, { width: "90%" }]}
-          onPress={() =>
-            navigation.navigate("Success Screen", {
-              numCups: numCups,
-              numContainers: numContainers,
-            })
-          }
-        > 
-          <Text style={globalStyles.buttonText}>Submit</Text>
-        </TouchableOpacity>*/}
           </View>
           <FooterText />
         </View>

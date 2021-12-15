@@ -43,86 +43,107 @@ export default class Leaderboard extends Component {
     const MainDataTable = this.nameConstraint(this.state.MainDataTable);
 
     return (
-      <View style={{ flex: 1, backgroundColor: colors.white }}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {/*Progress Circle*/}
-          <View style={styles.progressCircle}>
-            <ProgressCircle
-              percent={80} //container
-              radius={70}
-              borderWidth={8}
-              color={colors.red} //border color of container
-              shadowColor={colors.black} //border color of cup
-              bgColor={colors.white}
-            >
-              <Text style={{ fontSize: 30, fontWeight: "bold" }}>132</Text>
-            </ProgressCircle>
-
-            {/*Legend*/}
-            <View style={styles.legend}>
-              <View style={{ flexDirection: "row" }}>
-                <View
-                  style={[styles.square, { backgroundColor: colors.red }]}
-                ></View>
-                <Text>Containers</Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <View
-                  style={[styles.square, { backgroundColor: colors.black }]}
-                ></View>
-                <Text>Cups</Text>
-              </View>
-            </View>
-          </View>
-
-          {/*Crown icon + total count text*/}
-          <View style={styles.container}>
-            <Text style={[styles.boldText, { paddingLeft: 10 }]}>Ranking:</Text>
-            <View style={styles.headerWrapper}>
-              <View style={styles.headerIcon}>
-                <Image source={require("../assets/AppImages/crown.png")} />
-                <Text style={[styles.boldText, { marginLeft: 10 }]}>#11</Text>
-              </View>
-
-              <Text
-                style={[styles.text, { textAlign: "center", marginTop: 10 }]}
-              >
-                We have saved a total of{"\n"}
-                <Text style={[styles.boldText, { fontSize: 24 }]}>132</Text>
-                {"\n"}
-                containers and cups!
-              </Text>
-            </View>
-          </View>
-
-          {/*Table*/}
-          <View>
-            <Table>
-              <Row
-                data={this.state.HeaderTable}
-                style={styles.TableHeader}
-                textStyle={styles.TableHeaderText}
-              />
-              <Row
-                data={FirstTable}
-                style={{ backgroundColor: "#FFD700" }}
-                textStyle={styles.TableText}
-              />
-              <Row
-                data={SecondTable}
-                style={{ backgroundColor: "#C0C0C0" }}
-                textStyle={styles.TableText}
-              />
-              <Row
-                data={ThirdTable}
-                style={{ backgroundColor: "#C9AE5D" }}
-                textStyle={styles.TableText}
-              />
-              <Rows data={MainDataTable} textStyle={styles.TableText} />
-            </Table>
-          </View>
-        </ScrollView>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: colors.white,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "coral",
+            height: 40,
+            width: "80%",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 20,
+          }}
+        >
+          <Text>Feature coming soon! Stay tuned {";)"}</Text>
+        </View>
       </View>
+      // <View style={{ flex: 1, backgroundColor: colors.white }}>
+      //   <ScrollView showsVerticalScrollIndicator={false}>
+      //     {/*Progress Circle*/}
+      //     <View style={styles.progressCircle}>
+      //       <ProgressCircle
+      //         percent={80} //container
+      //         radius={70}
+      //         borderWidth={8}
+      //         color={colors.red} //border color of container
+      //         shadowColor={colors.black} //border color of cup
+      //         bgColor={colors.white}
+      //       >
+      //         <Text style={{ fontSize: 30, fontWeight: "bold" }}>132</Text>
+      //       </ProgressCircle>
+
+      //       {/*Legend*/}
+      //       <View style={styles.legend}>
+      //         <View style={{ flexDirection: "row" }}>
+      //           <View
+      //             style={[styles.square, { backgroundColor: colors.red }]}
+      //           ></View>
+      //           <Text>Containers</Text>
+      //         </View>
+      //         <View style={{ flexDirection: "row" }}>
+      //           <View
+      //             style={[styles.square, { backgroundColor: colors.black }]}
+      //           ></View>
+      //           <Text>Cups</Text>
+      //         </View>
+      //       </View>
+      //     </View>
+
+      //     {/*Crown icon + total count text*/}
+      //     <View style={styles.container}>
+      //       <Text style={[styles.boldText, { paddingLeft: 10 }]}>Ranking:</Text>
+      //       <View style={styles.headerWrapper}>
+      //         <View style={styles.headerIcon}>
+      //           <Image source={require("../assets/AppImages/crown.png")} />
+      //           <Text style={[styles.boldText, { marginLeft: 10 }]}>#11</Text>
+      //         </View>
+
+      //         <Text
+      //           style={[styles.text, { textAlign: "center", marginTop: 10 }]}
+      //         >
+      //           We have saved a total of{"\n"}
+      //           <Text style={[styles.boldText, { fontSize: 24 }]}>132</Text>
+      //           {"\n"}
+      //           containers and cups!
+      //         </Text>
+      //       </View>
+      //     </View>
+
+      //     {/*Table*/}
+      //     <View>
+      //       <Table>
+      //         <Row
+      //           data={this.state.HeaderTable}
+      //           style={styles.TableHeader}
+      //           textStyle={styles.TableHeaderText}
+      //         />
+      //         <Row
+      //           data={FirstTable}
+      //           style={{ backgroundColor: "#FFD700" }}
+      //           textStyle={styles.TableText}
+      //         />
+      //         <Row
+      //           data={SecondTable}
+      //           style={{ backgroundColor: "#C0C0C0" }}
+      //           textStyle={styles.TableText}
+      //         />
+      //         <Row
+      //           data={ThirdTable}
+      //           style={{ backgroundColor: "#C9AE5D" }}
+      //           textStyle={styles.TableText}
+      //         />
+      //         <Rows data={MainDataTable} textStyle={styles.TableText} />
+      //       </Table>
+      //     </View>
+      //   </ScrollView>
+      // </View>
     );
   }
 }

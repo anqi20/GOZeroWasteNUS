@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,22 +11,36 @@ import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { Icon } from "react-native-elements";
+import { UserContext } from "../../assets/UserContext";
+import { getBorrowedNum } from "./ReturnApi";
 
 export default function ReturnStatusScreen({ navigation }) {
-  const storeName = data[2].storeName;
-  const numContainers = data[2].numContainers;
-  const numCups = data[2].numCups;
+  const userData = useContext(UserContext);
+  const uid = userData.id;
+
+  // Location currently hardcoded, to be changed when linked up with machine
+  const locationName = data[2].locationName;
+  const [borrowedCup, setBorrowedCup] = useState(0);
+  const [borrowedContainer, setBorrowedContainer] = useState(0);
+
+  useEffect(() => {
+    getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer);
+    console.log("Setting up current user's borrowed items number");
+  }, []);
+
+  // const numContainers = data[2].numContainers;
+  // const numCups = data[2].numCups;
 
   //Can change the initial state count to test if the interface works
-  const [returnedContainers, setContainerCount] = useState(0);
-  const [returnedCups, setCupCount] = useState(0);
+  const [returnedContainers, setContainerCount] = useState(1);
+  const [returnedCups, setCupCount] = useState(1);
 
   function renderText() {
-    if (numContainers > 0 && numCups > 0) {
+    if (borrowedContainer > 0 && borrowedCup > 0) {
       return <Text style={styles.text}>containers/cups</Text>;
-    } else if (numContainers > 0) {
+    } else if (borrowedContainer > 0) {
       return <Text style={styles.text}>containers</Text>;
-    } else if (numCups > 0) {
+    } else if (borrowedCup > 0) {
       return <Text style={styles.text}>cups</Text>;
     }
   }
@@ -50,7 +64,7 @@ export default function ReturnStatusScreen({ navigation }) {
       >
         <Text style={styles.boldText}>
           {/* {returnedContainers}{" "} */}
-          {numContainers}{" "}
+          {borrowedContainer - returnedContainers}{" "}
           <Text style={[styles.text, { fontWeight: "normal" }]}>
             {" "}
             remaining
@@ -81,7 +95,7 @@ export default function ReturnStatusScreen({ navigation }) {
       >
         <Text style={styles.boldText}>
           {/* {returnedCups}{" "} */}
-          {numCups}{" "}
+          {borrowedCup - returnedCups}{" "}
           <Text style={[styles.text, { fontWeight: "normal" }]}>remaining</Text>
         </Text>
         <Cup />
@@ -90,16 +104,16 @@ export default function ReturnStatusScreen({ navigation }) {
   }
 
   function renderContent() {
-    if (numContainers > 0 && numCups > 0) {
+    if (borrowedContainer > 0 && borrowedCup > 0) {
       return (
         <View>
           <ContainerCounter />
           <CupCounter />
         </View>
       );
-    } else if (numContainers > 0) {
+    } else if (borrowedContainer > 0) {
       return <ContainerCounter />;
-    } else if (numCups > 0) {
+    } else if (borrowedCup > 0) {
       return <CupCounter />;
     }
   }
@@ -147,7 +161,7 @@ export default function ReturnStatusScreen({ navigation }) {
             navigation.navigate("Return Success Screen", {
               numCups: returnedCups,
               numContainers: returnedContainers,
-              location: storeName,
+              location: locationName,
             })
           }
         >
@@ -163,7 +177,7 @@ export default function ReturnStatusScreen({ navigation }) {
 
       {/* <Text style={globalStyles.header}>Return</Text> */}
       <View style={styles.box}>
-        <Text style={styles.storeName}>{storeName}</Text>
+        <Text style={styles.locationName}>{locationName}</Text>
         <Text style={styles.text}>
           Drop the {renderText()} in the holes that are flashing green now!
         </Text>
@@ -193,9 +207,9 @@ export default function ReturnStatusScreen({ navigation }) {
 
 // Data for testing different interfaces
 const data = [
-  { storeName: "Vegetarian Store", numContainers: 2, numCups: 0 },
-  { storeName: "Fruit Juice Store", numContainers: 0, numCups: 3 },
-  { storeName: "Hong Kong Store", numContainers: 3, numCups: 4 },
+  { locationName: "TechnoEdge Canteen", numContainers: 2, numCups: 0 },
+  { locationName: "E4", numContainers: 0, numCups: 3 },
+  { locationName: "SDE4", numContainers: 3, numCups: 4 },
 ];
 
 const styles = StyleSheet.create({
@@ -212,7 +226,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 40,
   },
-  storeName: {
+  locationName: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 30,

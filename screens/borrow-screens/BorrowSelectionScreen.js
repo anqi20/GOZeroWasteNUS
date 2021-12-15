@@ -11,10 +11,11 @@ import Constants from "expo-constants";
 
 export default function BorrowSelectionScreen({ navigation, route }) {
   // Stall name from scanning QR code
-  const { stall } = route.params;
+  const { stallid } = route.params;
   const userData = useContext(UserContext);
   const uid = userData.id;
 
+  // console.log(stallid);
   //Temporary data
   // const cupQuota = 3;
   // const containerQuota = 5;
@@ -28,6 +29,7 @@ export default function BorrowSelectionScreen({ navigation, route }) {
   const [borrowedContainer, setBorrowedContainer] = useState(0);
   const [hasContainers, setContainersBoolean] = useState(false);
   const [hasCups, setCupsBoolean] = useState(false);
+  const [stall, setStallName] = useState(null);
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
 
@@ -35,7 +37,12 @@ export default function BorrowSelectionScreen({ navigation, route }) {
   useEffect(() => {
     setQuotas(setCupQuota, setContainerQuota);
     getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer);
-    setStallDetails(stall, setContainersBoolean, setCupsBoolean);
+    setStallDetails(
+      stallid,
+      setContainersBoolean,
+      setCupsBoolean,
+      setStallName
+    );
     console.log("Setting up stall and quota details");
   }, []);
 

@@ -4,13 +4,12 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
   Image,
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import colors from "../assets/colors";
-import { Icon } from "react-native-elements";
 import moment from "moment";
+import { renderAllDates } from "../screens/BasicApi";
 
 const CARD_WIDTH = Dimensions.get("window").width - 40;
 const CARD_HEIGHT = 200;
@@ -25,20 +24,25 @@ function CardItem({ item, index, containerDate, cupDate }) {
 }
 
 function renderDate(dates) {
-  //console.log("Container Date:");
-  //var date = dates[0].toDate().toDateString();
-  //console.log(date)
-
-  //dates[0] = oldest date 
-
   var currDate = moment(new Date());
-  var earlistDueDate = moment(new Date("08/10/2021"));
+
+  // Check if there are any entries in the dates 
+  if(dates.length == 0) {
+    return (
+      <Text style={{fontSize: 18}}></Text>    // To prevent formatting issues 
+    )
+  } else {
+    var earlistDueDate = moment(dates[0].date, "DD/MM/YYYY");
+  }
+
   var duration = moment.duration(earlistDueDate.diff(currDate));
   var daysDiff = duration.asDays();
 
   if (daysDiff > 3) {
     // Due date more than 3 days away from today
-    return null;
+    return (
+      <Text style={{fontSize: 18}}></Text>    // To prevent formatting issues 
+    )
   } else if (daysDiff <= 3 && daysDiff > 0) {
     // Due date is 3 days away from today (exclusive)
     return (
@@ -57,8 +61,16 @@ function renderDate(dates) {
 }
 
 function renderContent({ item, containerDate, cupDate }) {
-  var containerNum = containerDate.length; 
-  var cupNum = cupDate.length; 
+  var containerNum = 0;
+  var cupNum = 0;
+
+  // Get collective number of containers and cups borrowed 
+  for(let i=0; i<containerDate.length; i++) {
+    containerNum += containerDate[i].numContainer;
+  }
+  for(let i=0; i<cupDate.length; i++) {
+    cupNum += cupDate[i].numCup;
+  }
 
   if (item.title === "Items borrowed:") {
     return (
@@ -88,9 +100,7 @@ function renderContent({ item, containerDate, cupDate }) {
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
           <Text>Return by:{"\n"}</Text>
-          <Text>({moment("23-08-21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
-          <Text>({moment("24-8-21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
-          <Text>({moment("26-8-21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+          {renderAllDates(containerDate)}
         </View>
       </View>
     );
@@ -103,9 +113,7 @@ function renderContent({ item, containerDate, cupDate }) {
         </View>
         <View style={{ marginLeft: 30, flex: 1 }}>
           <Text>Return by:{"\n"}</Text>
-          <Text>({moment("23-08-21", "DD-MM-YY").format("ddd")}) 23/08/21</Text>
-          <Text>({moment("24-8-21", "DD-MM-YY").format("ddd")}) 24/08/21</Text>
-          <Text>({moment("26-8-21", "DD-MM-YY").format("ddd")}) 26/08/21</Text>
+          {renderAllDates(cupDate)}
         </View>
       </View>
     );

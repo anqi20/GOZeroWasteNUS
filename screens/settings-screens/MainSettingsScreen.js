@@ -86,7 +86,7 @@ const tabs = [
   // },
   {
     id: "0",
-    title: "Participating vendors",
+    title: "Participating stalls",
   },
   {
     id: "1",

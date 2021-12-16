@@ -22,11 +22,10 @@ export default function LoginScreen({ navigation, route }) {
       .string()
       .label("Email")
       .matches(
-        /e[0-9][0-9][0-9][0-9][0-9][0-9][0-9](@u.nus.edu)/,
+        /(@u.nus.edu|@nus.edu.sg|@u.yale-nus.edu.sg|@u.duke.nus.edu)$/,
         "Please enter a valid NUS email"
       )
-      .required("Please enter your email")
-      .length(18, "Please enter a valid NUS email"),
+      .required("Please enter your email"),
     password: yup
       .string()
       .label("Password")

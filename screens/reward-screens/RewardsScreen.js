@@ -1,19 +1,28 @@
-import React from "react";
-
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Image,
-  SafeAreaView,
-} from "react-native";
-import { Icon } from "react-native-elements";
+import React, { useEffect, useState, useContext } from "react";
+import { StyleSheet, View, Text, Dimensions, Image, SafeAreaView } from "react-native";
 import colors from "../../assets/colors";
 import RewardListView from "../../components/RewardListView";
 import Announcements from "../../components/Announcements";
+import { UserContext } from "../../assets/UserContext";
+import { setAnnouncementDetail, setUserDetails } from "../BasicApi";
 
 export default function RewardsScreen({ navigation }) {
+  const [hasAnnouncement, setBoolean] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
+  const [coins, setCoins] = useState(0);
+  const userData = useContext(UserContext);
+  const uid = userData.id;
+
+  /*useEffect(() => {
+    setAnnouncementDetail(setAnnouncement);
+    if(announcement != "") {
+      setBoolean(true);
+    } else {
+      setBoolean(false);
+    }
+    setUserDetails(uid, setCoins);
+  })*/
+
   return (
     <View
       style={{
@@ -43,7 +52,7 @@ export default function RewardsScreen({ navigation }) {
     //     <View>
     //       <Announcements
     //         header={true}
-    //         text="Return 1 reusables to get x2 coins today!"
+    //         text={announcement}
     //       />
     //     </View>
 
@@ -51,7 +60,7 @@ export default function RewardsScreen({ navigation }) {
     //     <View style={styles.box}>
     //       <Text style={styles.text}>Return reusables to collect coins!</Text>
     //       <View style={styles.icon}>
-    //         <Text style={[styles.blackNumber, { marginRight: 25 }]}>3</Text>
+    //         <Text style={[styles.blackNumber, { marginRight: 25 }]}>{coins}</Text>
     //         <Image
     //           source={require("../../assets/AppImages/coin.png")}
     //           style={{ height: 30, width: 30 }}

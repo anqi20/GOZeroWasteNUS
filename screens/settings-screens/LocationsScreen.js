@@ -21,7 +21,7 @@ export default function LocationsScreen() {
     <View style={styles.container}>
 
       <Image 
-        source={require('../../assets/icons/location.png')}
+        source={require('../../assets/AppImages/location.png')}
         style={styles.mainMap}
       />
 
@@ -77,16 +77,16 @@ const data = [
   {
     id: "1",
     location: "TechnoEdge Canteen", 
-    picture: require("../../assets/icons/location.png"),
+    picture: require("../../assets/AppImages/location.png"),
   }, 
   {
     id: "2",
     location: "E4", 
-    picture: require("../../assets/icons/location.png"),
+    picture: require("../../assets/AppImages/location.png"),
   }, 
   {
     id: "3",
     location: "SDE4", 
-    picture: require("../../assets/icons/location.png"),
+    picture: require("../../assets/AppImages/location.png"),
   }, 
 ];

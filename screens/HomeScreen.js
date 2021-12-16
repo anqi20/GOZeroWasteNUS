@@ -75,19 +75,10 @@ export default function HomeScreen({ navigation }) {
         ) : null}
 
         {/* Icons */}
-        {/*<View style={{flexDirection: "row", justifyContent: "center"}}> 
-          <View style={{alignItems: "center"}}>
-            <TouchableOpacity 
-              style={[styles.topIconBox2]}
-              onPress={() => navigation.navigate("Borrow")}
-            >
-              <Text>Image here</Text>*/}
-
         <View
           style={{
             flex: 1,
             flexDirection: "row",
-            alignItems: "center",
             justifyContent: "space-between",
             marginHorizontal: 20,
             marginBottom: 32,
@@ -99,17 +90,11 @@ export default function HomeScreen({ navigation }) {
                 source={require("../assets/AppImages/borrowIcon.png")}
                 style={styles.topIconBox}
               />
-
             </TouchableOpacity>
-            <Text style={[styles.boldText2, {alignSelf: "center"}]}>Borrow</Text>
+            <Text style={[styles.boldText2, { textAlign: "center" }]}>
+              Borrow
+            </Text>
           </View>
-
-          {/*<View style={{alignItems: "center"}}>
-            <TouchableOpacity 
-              style={[styles.topIconBox2, {marginHorizontal: 15}]}
-              onPress={() => navigation.navigate("BYO Stack")}
-            >
-              <Text>Image here</Text>*/}
 
           <View style={styles.topIcon}>
             <TouchableOpacity onPress={() => navigation.navigate("BYO Stack")}>
@@ -117,17 +102,9 @@ export default function HomeScreen({ navigation }) {
                 source={require("../assets/AppImages/byoIcon.png")}
                 style={styles.topIconBox}
               />
-
             </TouchableOpacity>
             <Text style={[styles.boldText2]}>I have my own</Text>
           </View>
-
-          {/*<View style={{alignItems: "center"}}>
-            <TouchableOpacity 
-              style={[styles.topIconBox2]}
-              onPress={() => navigation.navigate("Return")}
-            >
-              <Text>Image here</Text>*/}
 
           <View style={styles.topIcon}>
             <TouchableOpacity onPress={() => navigation.navigate("Return")}>
@@ -135,27 +112,30 @@ export default function HomeScreen({ navigation }) {
                 source={require("../assets/AppImages/returnIcon.png")}
                 style={styles.topIconBox}
               />
-                  
             </TouchableOpacity>
-            <Text style={[styles.boldText2, {alignSelf: "center"}]}>Return</Text>
+            <Text style={[styles.boldText2, { alignSelf: "center" }]}>
+              Return
+            </Text>
           </View>
         </View>
 
         {/* Due reusables scroll view */}
-        <CarouselView 
-          containerDate={userData.containerDate} 
-          cupDate={userData.cupDate} 
+        <CarouselView
+          containerDate={userData.containerDate}
+          cupDate={userData.cupDate}
         />
 
         {/* Quick navigation icons */}
         <View style={styles.navigationIcons}>
           <View style={styles.quickNav}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Stats Screen", {
-                containerDate: userData.containerDate,
-                cupDate: userData.cupDate, 
-                coin: userData.coin,
-              })}
+              onPress={() =>
+                navigation.navigate("Stats Screen", {
+                  containerDate: userData.containerDate,
+                  cupDate: userData.cupDate,
+                  coin: userData.coin,
+                })
+              }
               style={styles.quickNavButton}
             >
               <Image
@@ -201,7 +181,6 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
             <Text style={styles.text}>Tutorial</Text>
           </View>
-
         </View>
       </ScrollView>
     </View>
@@ -266,17 +245,9 @@ const styles = StyleSheet.create({
   topIcon: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
   topIconBox: {
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: colors.black,
-  },
-  topIconBox2: {
-    flex: 1,
-    height: 80,
-    width: (Dimensions.get("window").width - 80)/3,
     borderWidth: 2,
     borderColor: colors.black,
   },

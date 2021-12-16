@@ -47,8 +47,11 @@ export default function HomeStack() {
         component={LocationsScreen}
         options={{ title: "Locations" }}
       />
-      <Stack.Screen name="Tutorial Screen" component={TutorialScreen} />
-
+      <Stack.Screen
+        name="Tutorial Screen"
+        component={TutorialScreen}
+        options={{ title: "Tutorial" }}
+      />
     </Stack.Navigator>
   );
 }

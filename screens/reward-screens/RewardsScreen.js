@@ -13,7 +13,7 @@ export default function RewardsScreen({ navigation }) {
   const userData = useContext(UserContext);
   const uid = userData.id;
 
-  useEffect(() => {
+  /*useEffect(() => {
     setAnnouncementDetail(setAnnouncement);
     if(announcement != "") {
       setBoolean(true);
@@ -21,44 +21,63 @@ export default function RewardsScreen({ navigation }) {
       setBoolean(false);
     }
     setUserDetails(uid, setCoins);
-  })
+  })*/
 
   return (
-    <View style={styles.container}>
-      {/*Top container: Announcements + Coins*/}
-      <View style={styles.topContainer}>
-        {/*Annoucements*/}
-        {hasAnnouncement ? (
-          <View>
-            <Announcements
-              header={true}
-              text={announcement}
-            />
-          </View>
-        ) : null}
-
-        {/*Coins*/}
-        <View style={styles.box}>
-          <Text style={styles.text}>Return reusables to collect coins!</Text>
-          <View style={styles.icon}>
-            <Text style={[styles.blackNumber, { marginRight: 25 }]}>{coins}</Text>
-            <Image
-              source={require("../../assets/AppImages/coin.png")}
-              style={{ height: 30, width: 30 }}
-            />
-
-            {/* <Icon name="coins" type="font-awesome-5" size={25} color="black" /> */}
-          </View>
-        </View>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: colors.white,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: "coral",
+          height: 40,
+          width: "80%",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 20,
+        }}
+      >
+        <Text>Feature coming soon! Stay tuned {";)"}</Text>
       </View>
-
-      <View style={styles.line} />
-
-      {/*List of rewards*/}
-      <SafeAreaView style={{flex: 1}}>
-        <RewardListView />
-      </SafeAreaView>
     </View>
+    // <View style={styles.container}>
+    //   {/*Top container: Announcements + Coins*/}
+    //   <View style={styles.topContainer}>
+    //     {/*Annoucements*/}
+    //     <View>
+    //       <Announcements
+    //         header={true}
+    //         text={announcement}
+    //       />
+    //     </View>
+
+    //     {/*Coins*/}
+    //     <View style={styles.box}>
+    //       <Text style={styles.text}>Return reusables to collect coins!</Text>
+    //       <View style={styles.icon}>
+    //         <Text style={[styles.blackNumber, { marginRight: 25 }]}>{coins}</Text>
+    //         <Image
+    //           source={require("../../assets/AppImages/coin.png")}
+    //           style={{ height: 30, width: 30 }}
+    //         />
+
+    //         {/* <Icon name="coins" type="font-awesome-5" size={25} color="black" /> */}
+    //       </View>
+    //     </View>
+    //   </View>
+
+    //   <View style={styles.line} />
+
+    //   {/*List of rewards*/}
+    //   <SafeAreaView style={{flex: 1}}>
+    //     <RewardListView />
+    //   </SafeAreaView>
+    // </View>
   );
 }
 

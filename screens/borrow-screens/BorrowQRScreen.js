@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Linking,
   Image,
+  Dimensions,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -37,7 +38,7 @@ export default function BorrowQRScreen({ navigation }) {
   const handleBarCodeScanned = ({ type, data }) => {
     // console.log(typeof data);
     setScanned(true);
-    navigation.navigate("Selection Screen", { stall: data });
+    navigation.navigate("Selection Screen", { stallid: data });
     setScanned(false);
   };
 
@@ -77,40 +78,52 @@ export default function BorrowQRScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image source={require("../../assets/AppImages/borrowHeader.png")} />
-      <View style={styles.box}>
-        <TouchableOpacity
+      <Image
+        source={require("../../assets/AppImages/borrowHeader.png")}
+        style={{ width: Dimensions.get("window").width }}
+      />
+      <View
+        style={{
+          flex: 1,
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View style={styles.box}>
+          {/* <TouchableOpacity
           onPress={() => navigation.navigate("QR Generator")}
           style={styles.imagePlaceholder}
         >
           <Text>(QR generator)</Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity
+        </TouchableOpacity> */}
+          {/* <TouchableOpacity
           onPress={() => navigation.navigate("Unsuccess Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Unsuccessful Screen)</Text>
         </TouchableOpacity> */}
-        {/* <TouchableOpacity
+          {/* <TouchableOpacity
           onPress={() => navigation.navigate("Quota Exceeded")}
           style={styles.imagePlaceholder}
         >
           <Text>(Quota exceeded screen)</Text>
         </TouchableOpacity> */}
-        {/* <TouchableOpacity
+          {/* <TouchableOpacity
           onPress={() => navigation.navigate("Selection Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Selection screen)</Text>
         </TouchableOpacity> */}
 
-        <Text style={styles.text}>Scan the QR code!</Text>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={styles.qr}
-        />
+          <Text style={styles.text}>Scan the QR code!</Text>
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={styles.qr}
+          />
+        </View>
+        <FooterText />
       </View>
-      <FooterText />
     </View>
   );
 }
@@ -120,8 +133,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
-    padding: 40,
+    // justifyContent: "center",
+    paddingHorizontal: 40,
     marginTop: Constants.statusBarHeight,
   },
   box: {

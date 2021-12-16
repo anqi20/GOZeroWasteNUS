@@ -34,26 +34,18 @@ export default function SuccessBox({
             <Text>You have returned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numContainers}</Text>
-              <Icon name="cube" type="font-awesome" size={48} color="black" />
+              <Image source={require("../assets/AppImages/container.png")} />
             </View>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCups}</Text>
-              <Icon
-                name="cup"
-                type="material-community"
-                size={48}
-                color="black"
-              />
+
+              <Image source={require("../assets/AppImages/cup.png")} />
             </View>
             <Text>You have earned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCoins}</Text>
-              <Icon
-                name="coins"
-                type="font-awesome-5"
-                size={48}
-                color="black"
-              />
+
+              <Image source={require("../assets/AppImages/coin.png")} />
             </View>
           </View>
         );
@@ -63,22 +55,14 @@ export default function SuccessBox({
             <Text>You have returned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCups}</Text>
-              <Icon
-                name="cup"
-                type="material-community"
-                size={48}
-                color="black"
-              />
+
+              <Image source={require("../assets/AppImages/cup.png")} />
             </View>
             <Text>You have earned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCoins}</Text>
-              <Icon
-                name="coins"
-                type="font-awesome-5"
-                size={48}
-                color="black"
-              />
+
+              <Image source={require("../assets/AppImages/coin.png")} />
             </View>
           </View>
         );
@@ -88,17 +72,13 @@ export default function SuccessBox({
             <Text>You have returned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numContainers}</Text>
-              <Icon name="cube" type="font-awesome" size={48} color="black" />
+              <Image source={require("../assets/AppImages/container.png")} />
             </View>
             <Text>You have earned:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCoins}</Text>
-              <Icon
-                name="coins"
-                type="font-awesome-5"
-                size={48}
-                color="black"
-              />
+
+              <Image source={require("../assets/AppImages/coin.png")} />
             </View>
           </View>
         );
@@ -117,12 +97,8 @@ export default function SuccessBox({
             </View>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCups}</Text>
-              <Icon
-                name="cup"
-                type="material-community"
-                size={48}
-                color="black"
-              />
+
+              <Image source={require("../assets/AppImages/cup.png")} />
             </View>
           </View>
         );
@@ -178,14 +154,12 @@ export default function SuccessBox({
     >
       <View style={styles.box}>
         <View style={{ alignSelf: "center" }}>
-          <Animatable.Text
+          <Animatable.Image
             animation="bounce"
-            easing="linear"
             iterationCount="infinite"
-            direction="alternate"
-          >
-            <MaterialIcons name="celebration" size={60} color="black" />{" "}
-          </Animatable.Text>
+            style={{ height: 70, width: 70, marginBottom: 10 }}
+            source={require("../assets/AppImages/celebration.png")}
+          />
         </View>
         <Icon
           containerStyle={{ marginBottom: 20 }}

@@ -76,20 +76,20 @@ const styles = StyleSheet.create({
 });
 
 const tabs = [
+  // {
+  //   id: "0",
+  //   title: "Edit account details",
+  // },
+  // {
+  //   id: "1",
+  //   title: "Logs",
+  // },
   {
     id: "0",
-    title: "Edit account details",
-  },
-  {
-    id: "1",
-    title: "Logs",
-  },
-  {
-    id: "2",
     title: "Participating stalls",
   },
   {
-    id: "3",
+    id: "1",
     title: "Terms and conditions",
   },
   // {

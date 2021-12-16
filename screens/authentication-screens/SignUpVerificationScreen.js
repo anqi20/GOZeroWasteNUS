@@ -35,7 +35,7 @@ export default function SignUpVerificationScreen({ navigation }) {
             navigation.navigate("Sign Up Success");
           } else {
             setError(
-              "Please ensure you have validated your email then try again."
+              "Please ensure you have validated your email then try again. Remember to check your junk mail!"
             );
           }
         })

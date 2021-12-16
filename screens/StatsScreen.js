@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import colors from "../assets/colors";
 import moment from "moment";
-import { TabView, TabBar } from 'react-native-tab-view';
+import { TabView, TabBar } from "react-native-tab-view";
 import Leaderboard from "../components/Leaderboard";
 import { renderAllDates } from "./BasicApi";
 
@@ -42,18 +42,24 @@ export default function StatsScreen({ route }) {
     { key: "second", title: "Leaderboard" },
   ]);
 
-  const containerDate = route.params.containerDate
-  const cupDate = route.params.cupDate
+  const containerDate = route.params.containerDate;
+  const cupDate = route.params.cupDate;
   const coin = route.params.coin;
 
   const renderScene = ({ route }) => {
-    switch(route.key) {
-      case "first": 
-        return <ReturnDatesTab containerDate={containerDate} cupDate={cupDate} coin={coin} />
-      case "second": 
-        return <Leaderboard />
+    switch (route.key) {
+      case "first":
+        return (
+          <ReturnDatesTab
+            containerDate={containerDate}
+            cupDate={cupDate}
+            coin={coin}
+          />
+        );
+      case "second":
+        return <Leaderboard />;
     }
-  }
+  };
 
   return (
     <TabView

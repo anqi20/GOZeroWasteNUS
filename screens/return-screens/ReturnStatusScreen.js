@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,28 +11,36 @@ import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { Icon } from "react-native-elements";
-//import { UserContext } from "../../assets/UserContext";
+import { UserContext } from "../../assets/UserContext";
+import { getBorrowedNum } from "./ReturnApi";
 
 export default function ReturnStatusScreen({ navigation }) {
-  const machineName = data[1].machineName;
-  const numContainers = data[1].numContainers;
-  const numCups = data[1].numCups;
+  const userData = useContext(UserContext);
+  const uid = userData.id;
 
-  //Get user data from database
-  //const userData = useContext(UserContext);
-  //const numContainers = userData.containerDate.length;
-  //const numCups = userData.cupDate.length;
+  // Location currently hardcoded, to be changed when linked up with machine
+  const machineName = data[2].machineName;
+  const [borrowedCup, setBorrowedCup] = useState(0);
+  const [borrowedContainer, setBorrowedContainer] = useState(0);
+
+  useEffect(() => {
+    getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer);
+    console.log("Setting up current user's borrowed items number");
+  }, []);
+
+  // const numContainers = data[2].numContainers;
+  // const numCups = data[2].numCups;
 
   //Can change the initial state count to test if the interface works
-  const [returnedContainers, setContainerCount] = useState(0);
-  const [returnedCups, setCupCount] = useState(0);
+  const [returnedContainers, setContainerCount] = useState(1);
+  const [returnedCups, setCupCount] = useState(1);
 
   function renderText() {
-    if (numContainers > 0 && numCups > 0) {
+    if (borrowedContainer > 0 && borrowedCup > 0) {
       return <Text style={styles.text}>containers/cups</Text>;
-    } else if (numContainers > 0) {
+    } else if (borrowedContainer > 0) {
       return <Text style={styles.text}>containers</Text>;
-    } else if (numCups > 0) {
+    } else if (borrowedCup > 0) {
       return <Text style={styles.text}>cups</Text>;
     }
   }
@@ -56,7 +64,7 @@ export default function ReturnStatusScreen({ navigation }) {
       >
         <Text style={styles.boldText}>
           {/* {returnedContainers}{" "} */}
-          {numContainers}{" "}
+          {borrowedContainer - returnedContainers}{" "}
           <Text style={[styles.text, { fontWeight: "normal" }]}>
             {" "}
             remaining
@@ -87,7 +95,7 @@ export default function ReturnStatusScreen({ navigation }) {
       >
         <Text style={styles.boldText}>
           {/* {returnedCups}{" "} */}
-          {numCups}{" "}
+          {borrowedCup - returnedCups}{" "}
           <Text style={[styles.text, { fontWeight: "normal" }]}>remaining</Text>
         </Text>
         <Cup />
@@ -96,16 +104,16 @@ export default function ReturnStatusScreen({ navigation }) {
   }
 
   function renderContent() {
-    if (numContainers > 0 && numCups > 0) {
+    if (borrowedContainer > 0 && borrowedCup > 0) {
       return (
         <View>
           <ContainerCounter />
           <CupCounter />
         </View>
       );
-    } else if (numContainers > 0) {
+    } else if (borrowedContainer > 0) {
       return <ContainerCounter />;
-    } else if (numCups > 0) {
+    } else if (borrowedCup > 0) {
       return <CupCounter />;
     }
   }
@@ -199,9 +207,9 @@ export default function ReturnStatusScreen({ navigation }) {
 
 // Data for testing different interfaces
 const data = [
-  { machineName: "Vegetarian Store", numContainers: 2, numCups: 0 },
-  { machineName: "Fruit Juice Store", numContainers: 0, numCups: 3 },
-  { machineName: "Hong Kong Store", numContainers: 3, numCups: 4 },
+  { machineName: "TechnoEdge Canteen", numContainers: 2, numCups: 0 },
+  { machineName: "E4", numContainers: 0, numCups: 3 },
+  { machineName: "SDE4", numContainers: 3, numCups: 4 },
 ];
 
 const styles = StyleSheet.create({

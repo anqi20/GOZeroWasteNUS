@@ -56,20 +56,64 @@ export default function MainTabNavigator({ route }) {
     <UserContext.Provider value={route.params}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
+          tabBarIcon: ({ focused }) => {
             if (route.name === "Home") {
-              iconName = focused ? "home" : "home-outline";
+              if (focused) {
+                return (
+                  <Image
+                    source={require("../assets/AppImages/focusedHome.png")}
+                  />
+                );
+              } else {
+                return (
+                  <Image
+                    source={require("../assets/AppImages/unfocusedHome.png")}
+                  />
+                );
+              }
             } else if (route.name === "Borrow") {
-              iconName = focused ? "camera" : "camera-outline";
+              if (focused) {
+                return (
+                  <Image
+                    source={require("../assets/AppImages/focusedBorrow.png")}
+                  />
+                );
+              } else {
+                return (
+                  <Image
+                    source={require("../assets/AppImages/unfocusedBorrow.png")}
+                  />
+                );
+              }
             } else if (route.name === "Return") {
-              iconName = focused ? "qr-code-sharp" : "qr-code-outline";
+              if (focused) {
+                return (
+                  <Image
+                    source={require("../assets/AppImages/focusedReturn.png")}
+                  />
+                );
+              } else {
+                return (
+                  <Image
+                    source={require("../assets/AppImages/unfocusedReturn.png")}
+                  />
+                );
+              }
             } else if (route.name === "Reward") {
-              iconName = focused ? "gift" : "gift-outline";
+              if (focused) {
+                return (
+                  <Image
+                    source={require("../assets/AppImages/focusedReward.png")}
+                  />
+                );
+              } else {
+                return (
+                  <Image
+                    source={require("../assets/AppImages/unfocusedReward.png")}
+                  />
+                );
+              }
             }
-
-            return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
         tabBarOptions={{
@@ -78,7 +122,7 @@ export default function MainTabNavigator({ route }) {
           activeTintColor: "#EE8066",
           safeAreaInsets:{
             bottom: 0,
-          }
+          },
         }}
       >
         <Tab.Screen name="Home" component={ModalHomeStack} />

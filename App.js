@@ -158,6 +158,7 @@ export default function App() {
             userNum: 0,
             numCup: 0,
             numContainer: 0,
+            // numReturn: 0,
           });
           // Add logs collection to each user
           firebase

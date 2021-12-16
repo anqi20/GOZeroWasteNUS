@@ -16,21 +16,24 @@ import colors from "../assets/colors";
 import CarouselView from "../components/CarouselView";
 import { UserContext } from "../assets/UserContext";
 import Announcements from "../components/Announcements";
+import { getCoins } from "./HomeApi";
 import { setAnnouncementDetail } from "./BasicApi";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
   const [hasAnnouncement, setBoolean] = useState(false);
   const [announcement, setAnnouncement] = useState("");
+  const [coins, setCoins] = useState(0);
 
   useEffect(() => {
+    getCoins(userData.id, setCoins);
     setAnnouncementDetail(setAnnouncement);
-    if(announcement != "") {
+    if (announcement != "") {
       setBoolean(true);
     } else {
       setBoolean(false);
     }
-  })
+  });
 
   //Feedback form website
   const website = "https://forms.gle/o846pa7z4Xan2m6P8";
@@ -40,7 +43,13 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-    <View style={{ flex:1, marginTop: Constants.statusBarHeight, backgroundColor: colors.white }}>
+    <View
+      style={{
+        flex: 1,
+        marginTop: Constants.statusBarHeight,
+        backgroundColor: colors.white,
+      }}
+    >
       <ScrollView
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}
@@ -62,7 +71,7 @@ export default function HomeScreen({ navigation }) {
                 source={require("../assets/AppImages/coin.png")}
                 style={{ height: 30, width: 30, marginRight: 10 }}
               />
-              <Text style={styles.boldText}>0</Text>
+              <Text style={styles.boldText}>{coins}</Text>
             </View>
             <View style={styles.settingsContainer}>
               <TouchableOpacity
@@ -77,17 +86,14 @@ export default function HomeScreen({ navigation }) {
         {/* Announcements */}
         {hasAnnouncement ? (
           <View style={{ alignItems: "center", marginBottom: 32 }}>
-            <Announcements
-              header={true}
-              text={announcement}
-            />
+            <Announcements header={true} text={announcement} />
           </View>
         ) : null}
 
         {/* Icons */}
-        <View style={{flexDirection: "row", justifyContent: "center"}}> 
-          <View style={{alignItems: "center"}}>
-            <TouchableOpacity 
+        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+          <View style={{ alignItems: "center" }}>
+            <TouchableOpacity
               style={[styles.topIconBox2]}
               onPress={() => navigation.navigate("Borrow")}
             >
@@ -96,12 +102,14 @@ export default function HomeScreen({ navigation }) {
                 style={styles.topIconBox}
               />
             </TouchableOpacity>
-            <Text style={[styles.boldText2, {alignSelf: "center"}]}>Borrow</Text>
+            <Text style={[styles.boldText2, { textAlign: "center" }]}>
+              Borrow
+            </Text>
           </View>
 
-          <View style={{alignItems: "center"}}>
-            <TouchableOpacity 
-              style={[styles.topIconBox2, {marginHorizontal: 15}]}
+          <View style={{ alignItems: "center" }}>
+            <TouchableOpacity
+              style={[styles.topIconBox2, { marginHorizontal: 15 }]}
               onPress={() => navigation.navigate("BYO Stack")}
             >
               <Image
@@ -112,35 +120,39 @@ export default function HomeScreen({ navigation }) {
             <Text style={[styles.boldText2]}>I have my own</Text>
           </View>
 
-          <View style={{alignItems: "center"}}>
-            <TouchableOpacity 
+          <View style={{ alignItems: "center" }}>
+            <TouchableOpacity
               style={[styles.topIconBox2]}
               onPress={() => navigation.navigate("Return")}
             >
               <Image
                 source={require("../assets/AppImages/returnIcon.png")}
                 style={styles.topIconBox}
-              /> 
+              />
             </TouchableOpacity>
-            <Text style={[styles.boldText2, {alignSelf: "center"}]}>Return</Text>
+            <Text style={[styles.boldText2, { alignSelf: "center" }]}>
+              Return
+            </Text>
           </View>
         </View>
 
         {/* Due reusables scroll view */}
-        <CarouselView 
-          containerDate={userData.containerDate} 
-          cupDate={userData.cupDate} 
+        <CarouselView
+          containerDate={userData.containerDate}
+          cupDate={userData.cupDate}
         />
 
         {/* Quick navigation icons */}
         <View style={styles.navigationIcons}>
           <View style={styles.quickNav}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Stats Screen", {
-                containerDate: userData.containerDate,
-                cupDate: userData.cupDate, 
-                coin: userData.coin,
-              })}
+              onPress={() =>
+                navigation.navigate("Stats Screen", {
+                  containerDate: userData.containerDate,
+                  cupDate: userData.cupDate,
+                  coin: userData.coin,
+                })
+              }
               style={styles.quickNavButton}
             >
               <Image
@@ -186,7 +198,6 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
             <Text style={styles.text}>Tutorial</Text>
           </View>
-
         </View>
       </ScrollView>
     </View>
@@ -251,7 +262,6 @@ const styles = StyleSheet.create({
   topIcon: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
   topIconBox: {
     borderRadius: 10,
@@ -261,7 +271,7 @@ const styles = StyleSheet.create({
   topIconBox2: {
     flex: 1,
     height: 80,
-    width: (Dimensions.get("window").width - 80)/3,
+    width: (Dimensions.get("window").width - 80) / 3,
     //borderWidth: 2,
     //borderColor: colors.black,
   },

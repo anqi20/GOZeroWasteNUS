@@ -5,7 +5,7 @@ import LogsScreen from "./LogsScreen";
 import TutorialScreen from "./TutorialScreen";
 import FeedbackScreen from "./FeedbackScreen";
 import LocationsScreen from "./LocationsScreen";
-import VendorsScreen from "./VendorsScreen";
+import StallsScreen from "./StallsScreen";
 import TermsScreen from "./TermsScreen";
 import TerminateAccountScreen from "./TerminateAccountScreen";
 import MainSettingsScreen from "./MainSettingsScreen";
@@ -47,8 +47,8 @@ export default function SettingsStack() {
         component={LocationsScreen}
       ></Stack.Screen>
       <Stack.Screen
-        name="Participating vendors"
-        component={VendorsScreen}
+        name="Participating stalls"
+        component={StallsScreen}
       ></Stack.Screen>
       <Stack.Screen
         name="Terms and conditions"

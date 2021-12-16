@@ -9,6 +9,7 @@ import { UserContext } from "../assets/UserContext";
 import ModalRewardStack from "./reward-screens/ModalRewardStack";
 import firebase from "../database/firebaseDB";
 import { Image } from "react-native";
+import { getCoins } from "./HomeApi";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,21 +23,7 @@ export default function MainTabNavigator({ route }) {
   useEffect(() => {
     console.log("Getting current number of coins");
     // console.log(route.params);
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(route.params.id)
-      .get()
-      .then((document) => {
-        if (document.exists) {
-          setCoins(document.data().coin);
-        } else {
-          console.log("No such document");
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting coin details: ", error);
-      });
+    getCoins(route.params.id, setCoins);
   }, []);
 
   // Currently hardcoded, may change in the future

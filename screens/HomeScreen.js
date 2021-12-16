@@ -17,10 +17,14 @@ import { Icon } from "react-native-elements";
 import CarouselView from "../components/CarouselView";
 import { UserContext } from "../assets/UserContext";
 import Announcements from "../components/Announcements";
+import { getCoins } from "./HomeApi";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
   const [hasAnnouncement, setBoolean] = useState(true);
+  const [coins, setCoins] = useState(0);
+
+  useEffect(() => getCoins(userData.id, setCoins), []);
 
   //Feedback form website
   const website = "https://forms.gle/o846pa7z4Xan2m6P8";
@@ -52,7 +56,7 @@ export default function HomeScreen({ navigation }) {
                 source={require("../assets/AppImages/coin.png")}
                 style={{ height: 30, width: 30, marginRight: 10 }}
               />
-              <Text style={styles.boldText}>0</Text>
+              <Text style={styles.boldText}>{coins}</Text>
             </View>
             <View style={styles.settingsContainer}>
               <TouchableOpacity

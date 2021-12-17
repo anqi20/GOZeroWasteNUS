@@ -42,6 +42,7 @@ export default function SignUpVerificationScreen({ navigation }) {
         .catch((error) => console.log(error));
     } else {
       console.log("No user found");
+      setError("Ensure you have not signed up with this account before!");
     }
   }
 
@@ -60,6 +61,7 @@ export default function SignUpVerificationScreen({ navigation }) {
         });
     } else {
       console.log("No user");
+      setError("Ensure you have not signed up with this account before!");
     }
   }
 
@@ -78,6 +80,15 @@ export default function SignUpVerificationScreen({ navigation }) {
       {showError == "" ? null : (
         <Text style={styles.errorText}>{showError}</Text>
       )}
+      {showError ==
+      "Ensure you have not signed up with this account before!" ? (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Log In Screen")}
+          style={globalStyles.button}
+        >
+          <Text style={globalStyles.buttonText}>Back to log in</Text>
+        </TouchableOpacity>
+      ) : null}
       <TouchableOpacity onPress={validateEmail} style={globalStyles.button}>
         <Text style={globalStyles.buttonText}>Continue</Text>
       </TouchableOpacity>

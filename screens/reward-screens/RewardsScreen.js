@@ -1,10 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, View, Text, Dimensions, Image, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import colors from "../../assets/colors";
 import RewardListView from "../../components/RewardListView";
 import Announcements from "../../components/Announcements";
 import { UserContext } from "../../assets/UserContext";
-import { setAnnouncementDetail, setUserDetails } from "../BasicApi";
+import { setAnnouncementDetail, getCoins } from "../BasicApi";
 
 export default function RewardsScreen({ navigation }) {
   const [hasAnnouncement, setBoolean] = useState(false);
@@ -20,7 +27,7 @@ export default function RewardsScreen({ navigation }) {
     } else {
       setBoolean(false);
     }
-    setUserDetails(uid, setCoins);
+    getCoins(uid, setCoins);
   })*/
 
   return (

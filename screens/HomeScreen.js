@@ -62,7 +62,7 @@ export default function HomeScreen({ navigation }) {
                 source={require("../assets/AppImages/coin.png")}
                 style={{ height: 30, width: 30, marginRight: 10 }}
               />
-              <Text style={styles.boldText}>0</Text>
+              <Text style={styles.boldText}>{userData.coin}</Text>
             </View>
             <View style={styles.settingsContainer}>
               <TouchableOpacity

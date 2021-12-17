@@ -1,20 +1,23 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import colors from "../assets/colors";
 
 const data = [
   {
+    image: require("../assets/AppImages/onboardImage1.png"),
     title: "Why Borrow ",
     title2: "reusables from us?",
     text: "We understand bringing and washing your own reusables from home may be a hassle.",
   },
   {
+    image: require("../assets/AppImages/onboardImage2.png"), 
     title: "Why Use ",
     title2: "reusables?",
     text: "We are building a NUS wide-movement to achieve Singapore's first disposable free mass canteen. It is in your hands.",
   },
   {
+    image: require("../assets/AppImages/onboardImage3.png"), 
     title: "Why Return ",
     title2: "our reusables?",
     text: "Returning our reusables will help keep costs low for our stallholders. The return points are convenient too!",
@@ -24,10 +27,11 @@ const data = [
 const endMsg = "That's why UGO."
 
 export default function OnboardingScreen({ navigation }) {
+
   const renderItem = ({ item }) => {
     return (
       <View style={styles.slide}>
-        <Text style={styles.image}>Image</Text>
+        <Image style={styles.image} source={item.image} />
         <View style={styles.titleWrapper}>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.title2}>{item.title2}</Text>

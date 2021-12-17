@@ -52,6 +52,24 @@ export default function HomeScreen({ navigation }) {
     Linking.openURL(`${website}`);
   }
 
+  function renderCarouselView(updatedUserData, userData) {
+    if (updatedUserData == undefined) {
+      return (
+        <CarouselView
+          containerDate={userData.containerDate}
+          cupDate={userData.cupDate}
+        />
+      )
+    } else {
+      return (
+        <CarouselView
+          containerDate={updatedUserData.containerDate}
+          cupDate={updatedUserData.cupDate}
+        />
+      )
+    }
+  }
+
   return (
     <View
       style={{
@@ -147,10 +165,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         {/* Due reusables scroll view */}
-        <CarouselView
-          containerDate={updatedUserData.containerDate}
-          cupDate={updatedUserData.cupDate}
-        />
+        {renderCarouselView(updatedUserData, userData)}
 
         {/* Quick navigation icons */}
         <View style={styles.navigationIcons}>

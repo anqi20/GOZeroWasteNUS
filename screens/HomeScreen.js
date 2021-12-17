@@ -16,8 +16,7 @@ import colors from "../assets/colors";
 import CarouselView from "../components/CarouselView";
 import { UserContext } from "../assets/UserContext";
 import Announcements from "../components/Announcements";
-import { getCoins } from "./HomeApi";
-import { setAnnouncementDetail } from "./BasicApi";
+import { setAnnouncementDetail, getCoins } from "./BasicApi";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);

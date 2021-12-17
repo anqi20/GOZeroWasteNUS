@@ -139,6 +139,7 @@ export default function App() {
         .auth()
         .createUserWithEmailAndPassword(data.email, data.password)
         .then((cred) => {
+          setValidated(false); // Set validated to false on sign up
           const uid = cred.user.uid;
           // Add user's profile information in firestore
           firebase.firestore().collection("users").doc(uid).set({

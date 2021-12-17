@@ -23,7 +23,7 @@ export function getCoins(uid, setCoins) {
 }
 
 // Get user details
-export function setUserDetails(uid, setCoins) {
+export function getUpdatedUserData(uid, updateUserData) {
   firebase
     .firestore()
     .collection("users")
@@ -31,7 +31,7 @@ export function setUserDetails(uid, setCoins) {
     .get()
     .then((document) => {
       if (document.exists) {
-        setCoins(document.data().coin);
+        updateUserData(document.data());
       } else {
         console.log("No such document");
       }
@@ -65,7 +65,8 @@ export function renderAllDates(dates) {
     return (
       <View>
         <Text>
-          ({moment(dates[0].date, "DD-MM-YY").format("ddd")}) {dates[0].date}
+          ({moment(dates[0].dueDate, "DD/MM/YYYY").format("ddd")}){" "}
+          {dates[0].dueDate}
         </Text>
       </View>
     );
@@ -73,10 +74,12 @@ export function renderAllDates(dates) {
     return (
       <View>
         <Text>
-          ({moment(dates[0].date, "DD-MM-YY").format("ddd")}) {dates[0].date}
+          ({moment(dates[0].dueDate, "DD/MM/YYYY").format("ddd")}){" "}
+          {dates[0].dueDate}
         </Text>
         <Text>
-          ({moment(dates[1].date, "DD-MM-YY").format("ddd")}) {dates[1].date}
+          ({moment(dates[1].dueDate, "DD/MM/YYYY").format("ddd")}){" "}
+          {dates[1].dueDate}
         </Text>
       </View>
     );
@@ -84,13 +87,16 @@ export function renderAllDates(dates) {
     return (
       <View>
         <Text>
-          ({moment(dates[0].date, "DD-MM-YY").format("ddd")}) {dates[0].date}
+          ({moment(dates[0].dueDate, "DD/MM/YYYY").format("ddd")}){" "}
+          {dates[0].dueDate}
         </Text>
         <Text>
-          ({moment(dates[1].date, "DD-MM-YY").format("ddd")}) {dates[1].date}
+          ({moment(dates[1].dueDate, "DD/MM/YYYY").format("ddd")}){" "}
+          {dates[1].dueDate}
         </Text>
         <Text>
-          ({moment(dates[2].date, "DD-MM-YY").format("ddd")}) {dates[2].date}
+          ({moment(dates[2].dueDate, "DD/MM/YYYY").format("ddd")}){" "}
+          {dates[2].dueDate}
         </Text>
       </View>
     );

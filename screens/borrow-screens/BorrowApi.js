@@ -71,6 +71,7 @@ export function getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer) {
 // Helper function for uploadBorrowData
 function addCupDates(uid, cups, setError) {
   const currDate = moment().format("DD/MM/YYYY");
+  const dueDate = moment().add(7, "d").format("DD/MM/YYYY"); // Due date is 7 days away from borrow date
   const currTime = moment().format("hh:mm a");
   const userRef = firebase.firestore().collection("users").doc(uid);
   userRef
@@ -85,6 +86,7 @@ function addCupDates(uid, cups, setError) {
                 time: currTime,
                 numCups: cups,
                 date: currDate,
+                dueDate: dueDate,
               },
             ],
           },
@@ -98,6 +100,7 @@ function addCupDates(uid, cups, setError) {
                 time: currTime,
                 numCups: cups,
                 date: currDate,
+                dueDate: dueDate,
               },
               ...retrievedData,
             ],
@@ -117,6 +120,7 @@ function addCupDates(uid, cups, setError) {
 // Helper function for uploadBorrowData
 function addContainerDates(uid, containers, setError) {
   const currDate = moment().format("DD/MM/YYYY");
+  const dueDate = moment().add(7, "d").format("DD/MM/YYYY"); // Due date is 7 days away from borrow date
   const currTime = moment().format("hh:mm a");
   const userRef = firebase.firestore().collection("users").doc(uid);
   userRef
@@ -131,6 +135,7 @@ function addContainerDates(uid, containers, setError) {
                 time: currTime,
                 numContainers: containers,
                 date: currDate,
+                dueDate: dueDate,
               },
             ],
           },
@@ -140,7 +145,12 @@ function addContainerDates(uid, containers, setError) {
         userRef.set(
           {
             containerDate: [
-              { time: currTime, numContainers: containers, date: currDate },
+              {
+                time: currTime,
+                numContainers: containers,
+                date: currDate,
+                dueDate: dueDate,
+              },
               ...retrievedData,
             ],
           },

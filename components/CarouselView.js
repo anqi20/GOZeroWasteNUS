@@ -1,11 +1,5 @@
 import React, { useState, useRef } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import colors from "../assets/colors";
 import moment from "moment";
@@ -18,21 +12,21 @@ function CardItem({ item, index, containerDate, cupDate }) {
   return (
     <View style={styles.cardContainer} key={index}>
       <Text style={styles.header}>{item.title}</Text>
-      {renderContent({item, containerDate, cupDate})}
+      {renderContent({ item, containerDate, cupDate })}
     </View>
   );
 }
 
 function renderDate(dates) {
-  var currDate = moment(new Date());
+  var currDate = moment();
 
-  // Check if there are any entries in the dates 
-  if(dates.length == 0) {
+  // Check if there are any entries in the dates
+  if (dates.length == 0) {
     return (
-      <Text style={{fontSize: 18}}></Text>    // To prevent formatting issues 
-    )
+      <Text style={{ fontSize: 18 }}></Text> // To prevent formatting issues
+    );
   } else {
-    var earlistDueDate = moment(dates[0].date, "DD/MM/YYYY");
+    var earlistDueDate = moment(dates[0].dueDate, "DD/MM/YYYY");
   }
 
   var duration = moment.duration(earlistDueDate.diff(currDate));
@@ -41,8 +35,8 @@ function renderDate(dates) {
   if (daysDiff > 3) {
     // Due date more than 3 days away from today
     return (
-      <Text style={{fontSize: 18}}></Text>    // To prevent formatting issues 
-    )
+      <Text style={{ fontSize: 18 }}></Text> // To prevent formatting issues
+    );
   } else if (daysDiff <= 3 && daysDiff > 0) {
     // Due date is 3 days away from today (exclusive)
     return (
@@ -64,12 +58,12 @@ function renderContent({ item, containerDate, cupDate }) {
   var containerNum = 0;
   var cupNum = 0;
 
-  // Get collective number of containers and cups borrowed 
-  for(let i=0; i<containerDate.length; i++) {
-    containerNum += containerDate[i].numContainer;
+  // Get collective number of containers and cups borrowed
+  for (let i = 0; i < containerDate.length; i++) {
+    containerNum += containerDate[i].numContainers;
   }
-  for(let i=0; i<cupDate.length; i++) {
-    cupNum += cupDate[i].numCup;
+  for (let i = 0; i < cupDate.length; i++) {
+    cupNum += cupDate[i].numCups;
   }
 
   if (item.title === "Items borrowed:") {
@@ -123,13 +117,20 @@ function renderContent({ item, containerDate, cupDate }) {
 export default function CarouselView({ containerDate, cupDate }) {
   const [index, setIndex] = useState(0);
   const isCarousel = useRef(null);
-  
+
   return (
     <View style={styles.carouselContainer}>
       <Carousel
         ref={isCarousel}
         data={data}
-        renderItem={({ item, index }) => <CardItem item={item} index={index} containerDate={containerDate} cupDate={cupDate} />}
+        renderItem={({ item, index }) => (
+          <CardItem
+            item={item}
+            index={index}
+            containerDate={containerDate}
+            cupDate={cupDate}
+          />
+        )}
         sliderWidth={CARD_WIDTH}
         itemWidth={CARD_WIDTH}
         itemHeight={CARD_HEIGHT}

@@ -16,24 +16,34 @@ import colors from "../assets/colors";
 import CarouselView from "../components/CarouselView";
 import { UserContext } from "../assets/UserContext";
 import Announcements from "../components/Announcements";
-import { getCoins } from "./HomeApi";
-import { setAnnouncementDetail } from "./BasicApi";
+import {
+  setAnnouncementDetail,
+  getCoins,
+  getUpdatedUserData,
+} from "./BasicApi";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
+  const uid = userData.id;
   const [hasAnnouncement, setBoolean] = useState(false);
   const [announcement, setAnnouncement] = useState("");
   const [coins, setCoins] = useState(0);
+  const [updatedUserData, updateUserData] = useState(null);
 
-  useEffect(() => {
-    getCoins(userData.id, setCoins);
-    setAnnouncementDetail(setAnnouncement);
-    if (announcement != "") {
-      setBoolean(true);
-    } else {
-      setBoolean(false);
-    }
-  });
+  useFocusEffect(
+    React.useCallback(() => {
+      getUpdatedUserData(uid, updateUserData);
+      getCoins(uid, setCoins);
+      setAnnouncementDetail(setAnnouncement);
+      if (announcement != "") {
+        setBoolean(true);
+      } else {
+        setBoolean(false);
+      }
+      console.log("Updating home screen data");
+    }, [])
+  );
 
   //Feedback form website
   const website = "https://forms.gle/o846pa7z4Xan2m6P8";
@@ -138,8 +148,8 @@ export default function HomeScreen({ navigation }) {
 
         {/* Due reusables scroll view */}
         <CarouselView
-          containerDate={userData.containerDate}
-          cupDate={userData.cupDate}
+          containerDate={updatedUserData.containerDate}
+          cupDate={updatedUserData.cupDate}
         />
 
         {/* Quick navigation icons */}
@@ -148,9 +158,9 @@ export default function HomeScreen({ navigation }) {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Stats Screen", {
-                  containerDate: userData.containerDate,
-                  cupDate: userData.cupDate,
-                  coin: userData.coin,
+                  containerDate: updatedUserData.containerDate,
+                  cupDate: updatedUserData.cupDate,
+                  coin: updatedUserData.coin,
                 })
               }
               style={styles.quickNavButton}

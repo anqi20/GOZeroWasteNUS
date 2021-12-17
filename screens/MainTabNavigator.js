@@ -9,7 +9,7 @@ import { UserContext } from "../assets/UserContext";
 import ModalRewardStack from "./reward-screens/ModalRewardStack";
 import firebase from "../database/firebaseDB";
 import { Image } from "react-native";
-import { getCoins } from "./HomeApi";
+import { getCoins } from "./BasicApi";
 
 const Tab = createBottomTabNavigator();
 
@@ -44,70 +44,34 @@ export default function MainTabNavigator({ route }) {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => {
+            let iconName;
+
             if (route.name === "Home") {
-              if (focused) {
-                return (
-                  <Image
-                    source={require("../assets/AppImages/focusedHome.png")}
-                  />
-                );
-              } else {
-                return (
-                  <Image
-                    source={require("../assets/AppImages/unfocusedHome.png")}
-                  />
-                );
-              }
+              iconName = focused
+                ? require("../assets/AppImages/focusedHome.png")
+                : require("../assets/AppImages/unfocusedHome.png");
             } else if (route.name === "Borrow") {
-              if (focused) {
-                return (
-                  <Image
-                    source={require("../assets/AppImages/focusedBorrow.png")}
-                  />
-                );
-              } else {
-                return (
-                  <Image
-                    source={require("../assets/AppImages/unfocusedBorrow.png")}
-                  />
-                );
-              }
+              iconName = focused
+                ? require("../assets/AppImages/focusedBorrow.png")
+                : require("../assets/AppImages/unfocusedBorrow.png");
             } else if (route.name === "Return") {
-              if (focused) {
-                return (
-                  <Image
-                    source={require("../assets/AppImages/focusedReturn.png")}
-                  />
-                );
-              } else {
-                return (
-                  <Image
-                    source={require("../assets/AppImages/unfocusedReturn.png")}
-                  />
-                );
-              }
+              iconName = focused
+                ? require("../assets/AppImages/focusedReturn.png")
+                : require("../assets/AppImages/unfocusedReturn.png");
             } else if (route.name === "Reward") {
-              if (focused) {
-                return (
-                  <Image
-                    source={require("../assets/AppImages/focusedReward.png")}
-                  />
-                );
-              } else {
-                return (
-                  <Image
-                    source={require("../assets/AppImages/unfocusedReward.png")}
-                  />
-                );
-              }
+              iconName = focused
+                ? require("../assets/AppImages/focusedReward.png")
+                : require("../assets/AppImages/unfocusedReward.png");
             }
+
+            return <Image source={iconName} />;
           },
         })}
         tabBarOptions={{
           inactiveBackgroundColor: "black",
           activeBackgroundColor: "black",
           activeTintColor: "#EE8066",
-          safeAreaInsets:{
+          safeAreaInsets: {
             bottom: 0,
           },
         }}

@@ -122,7 +122,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : null}
-      styles={styles.container}
+      style={styles.container}
       keyboardVerticalOffset={headerHeight + 70}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -365,7 +365,6 @@ const faculty = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
     backgroundColor: "white",
   },
   text: {

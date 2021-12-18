@@ -40,17 +40,17 @@ export default function HomeStack() {
       <Stack.Screen
         name="Stats Screen"
         component={StatsScreen}
-        options={{ title: "My Stats" }}
+        options={{ title: "My Stats", headerBackTitleVisible: false }}
       />
       <Stack.Screen
         name="Locations Screen"
         component={LocationsScreen}
-        options={{ title: "Locations" }}
+        options={{ title: "Locations", headerBackTitleVisible: false }}
       />
       <Stack.Screen
         name="Tutorial Screen"
         component={TutorialScreen}
-        options={{ title: "Tutorial" }}
+        options={{ title: "Tutorial", headerBackTitleVisible: false }}
       />
     </Stack.Navigator>
   );

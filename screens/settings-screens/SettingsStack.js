@@ -20,7 +20,7 @@ export default function SettingsStack() {
       <Stack.Screen
         name="Main settings screen"
         component={MainSettingsScreen}
-        options={{ title: "Settings" }}
+        options={{ title: "Settings", headerBackTitleVisible: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Edit account details"
@@ -57,12 +57,12 @@ export default function SettingsStack() {
       <Stack.Screen
         name="Terminate my account"
         component={TerminateAccountScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, headerBackTitleVisible: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Account terminated"
         component={TerminateConfirmationScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, headerBackTitleVisible: false }}
       ></Stack.Screen>
     </Stack.Navigator>
   );

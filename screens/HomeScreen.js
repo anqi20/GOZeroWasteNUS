@@ -11,7 +11,6 @@ import {
   Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Constants from "expo-constants";
 import colors from "../assets/colors";
 import CarouselView from "../components/CarouselView";
 import { UserContext } from "../assets/UserContext";
@@ -22,7 +21,6 @@ import {
   getUpdatedUserData,
 } from "./BasicApi";
 import { useFocusEffect } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
@@ -342,7 +340,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   text: {
-    fontSize: 18,
+    fontSize: 15,
   },
   boldText: {
     fontSize: 18,

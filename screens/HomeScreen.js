@@ -27,7 +27,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
   const uid = userData.id;
-  const [hasAnnouncement, setBoolean] = useState(false);
   const [announcement, setAnnouncement] = useState("");
   const [coins, setCoins] = useState(0);
   const [updatedUserData, updateUserData] = useState(null);
@@ -37,11 +36,6 @@ export default function HomeScreen({ navigation }) {
       getUpdatedUserData(uid, updateUserData);
       getCoins(uid, setCoins);
       setAnnouncementDetail(setAnnouncement);
-      if (announcement != "") {
-        setBoolean(true);
-      } else {
-        setBoolean(false);
-      }
       console.log("Updating home screen data");
     }, [])
   );
@@ -89,7 +83,7 @@ export default function HomeScreen({ navigation }) {
             style={styles.quickNavButton}
           />
         </TouchableOpacity>
-      )
+      );
     } else {
       return (
         <TouchableOpacity
@@ -107,7 +101,7 @@ export default function HomeScreen({ navigation }) {
             style={styles.quickNavButton}
           />
         </TouchableOpacity>
-      )
+      );
     }
   }
 
@@ -147,7 +141,7 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         {/* Announcements */}
-        {hasAnnouncement ? (
+        {announcement != "" ? (
           <View style={{ alignItems: "center", marginBottom: 32 }}>
             <Announcements header={true} text={announcement} />
           </View>
@@ -253,8 +247,6 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
-    backgroundColor: colors.white,
   },
   headerContainer: {
     flex: 1,

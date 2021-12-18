@@ -22,6 +22,7 @@ import {
   getUpdatedUserData,
 } from "./BasicApi";
 import { useFocusEffect } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen({ navigation }) {
   const userData = useContext(UserContext);
@@ -59,25 +60,19 @@ export default function HomeScreen({ navigation }) {
           containerDate={userData.containerDate}
           cupDate={userData.cupDate}
         />
-      )
+      );
     } else {
       return (
         <CarouselView
           containerDate={updatedUserData.containerDate}
           cupDate={updatedUserData.cupDate}
         />
-      )
+      );
     }
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        marginTop: Constants.statusBarHeight,
-        backgroundColor: colors.white,
-      }}
-    >
+    <View style={{ flex: 1 }}>
       <ScrollView
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}

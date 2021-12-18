@@ -8,6 +8,7 @@ import firebase from "./database/firebaseDB";
 import { ActivityIndicator } from "react-native";
 import { AuthContext, authContext } from "./assets/AuthContext";
 import { LogBox } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 LogBox.ignoreLogs(["Setting a timer"]);
 
@@ -215,33 +216,35 @@ export default function App() {
   }
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {console.log(isValidated)}
-        {user && isValidated ? (
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Main Tab Navigator"
-              component={MainTabNavigator}
-              options={{
-                headerShown: false,
-              }}
-              initialParams={user}
-            />
-          </Stack.Navigator>
-        ) : (
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Auth Stack"
-              component={AuthStack}
-              options={{
-                animationTypeForReplace: "pop",
-                headerShown: false,
-              }}
-            />
-          </Stack.Navigator>
-        )}
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <SafeAreaProvider>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer>
+          {console.log(isValidated)}
+          {user && isValidated ? (
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Main Tab Navigator"
+                component={MainTabNavigator}
+                options={{
+                  headerShown: false,
+                }}
+                initialParams={user}
+              />
+            </Stack.Navigator>
+          ) : (
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Auth Stack"
+                component={AuthStack}
+                options={{
+                  animationTypeForReplace: "pop",
+                  headerShown: false,
+                }}
+              />
+            </Stack.Navigator>
+          )}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </SafeAreaProvider>
   );
 }

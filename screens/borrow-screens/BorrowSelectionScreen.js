@@ -116,7 +116,7 @@ export default function BorrowSelectionScreen({ navigation, route }) {
   }
 
   return (
-    <View style={{ marginTop: Constants.statusBarHeight }}>
+    <View style={{ flex: 1 }}>
       <ScrollView
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}

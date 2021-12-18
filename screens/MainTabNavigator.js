@@ -10,6 +10,7 @@ import ModalRewardStack from "./reward-screens/ModalRewardStack";
 import firebase from "../database/firebaseDB";
 import { Image } from "react-native";
 import { getCoins } from "./BasicApi";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,51 +41,53 @@ export default function MainTabNavigator({ route }) {
   const hasBadge = renderRewardsBadge();
 
   return (
-    <UserContext.Provider value={route.params}>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused }) => {
-            let iconName;
+    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+      <UserContext.Provider value={route.params}>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused }) => {
+              let iconName;
 
-            if (route.name === "Home") {
-              iconName = focused
-                ? require("../assets/AppImages/focusedHome.png")
-                : require("../assets/AppImages/unfocusedHome.png");
-            } else if (route.name === "Borrow") {
-              iconName = focused
-                ? require("../assets/AppImages/focusedBorrow.png")
-                : require("../assets/AppImages/unfocusedBorrow.png");
-            } else if (route.name === "Return") {
-              iconName = focused
-                ? require("../assets/AppImages/focusedReturn.png")
-                : require("../assets/AppImages/unfocusedReturn.png");
-            } else if (route.name === "Reward") {
-              iconName = focused
-                ? require("../assets/AppImages/focusedReward.png")
-                : require("../assets/AppImages/unfocusedReward.png");
-            }
+              if (route.name === "Home") {
+                iconName = focused
+                  ? require("../assets/AppImages/focusedHome.png")
+                  : require("../assets/AppImages/unfocusedHome.png");
+              } else if (route.name === "Borrow") {
+                iconName = focused
+                  ? require("../assets/AppImages/focusedBorrow.png")
+                  : require("../assets/AppImages/unfocusedBorrow.png");
+              } else if (route.name === "Return") {
+                iconName = focused
+                  ? require("../assets/AppImages/focusedReturn.png")
+                  : require("../assets/AppImages/unfocusedReturn.png");
+              } else if (route.name === "Reward") {
+                iconName = focused
+                  ? require("../assets/AppImages/focusedReward.png")
+                  : require("../assets/AppImages/unfocusedReward.png");
+              }
 
-            return <Image source={iconName} />;
-          },
-        })}
-        tabBarOptions={{
-          inactiveBackgroundColor: "black",
-          activeBackgroundColor: "black",
-          activeTintColor: "#EE8066",
-          safeAreaInsets: {
-            bottom: 0,
-          },
-        }}
-      >
-        <Tab.Screen name="Home" component={ModalHomeStack} />
-        <Tab.Screen name="Borrow" component={BorrowStack} />
-        <Tab.Screen name="Return" component={ReturnStack} />
-        <Tab.Screen
-          name="Reward"
-          component={ModalRewardStack}
-          options={{ tabBarBadge: hasBadge }}
-        />
-      </Tab.Navigator>
-    </UserContext.Provider>
+              return <Image source={iconName} />;
+            },
+          })}
+          tabBarOptions={{
+            inactiveBackgroundColor: "black",
+            activeBackgroundColor: "black",
+            activeTintColor: "#EE8066",
+            safeAreaInsets: {
+              bottom: 0,
+            },
+          }}
+        >
+          <Tab.Screen name="Home" component={ModalHomeStack} />
+          <Tab.Screen name="Borrow" component={BorrowStack} />
+          <Tab.Screen name="Return" component={ReturnStack} />
+          <Tab.Screen
+            name="Reward"
+            component={ModalRewardStack}
+            options={{ tabBarBadge: hasBadge }}
+          />
+        </Tab.Navigator>
+      </UserContext.Provider>
+    </SafeAreaView>
   );
 }

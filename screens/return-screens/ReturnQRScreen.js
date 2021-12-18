@@ -55,7 +55,7 @@ export default function ReturnQRScreen({ navigation }) {
       style={{
         flex: 1,
         backgroundColor: colors.white,
-        marginTop: Constants.statusBarHeight,
+        // marginTop: Constants.statusBarHeight,
       }}
     >
       <Image

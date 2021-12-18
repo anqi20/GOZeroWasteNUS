@@ -7,6 +7,7 @@ import {
   Linking,
   Image,
   Dimensions,
+  Platform,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -20,9 +21,9 @@ If we are using expo application, our package name will be host.exp.exponent.
 If we are using the published version of our application (standalone build)
  then we get the package name we defined in the app.json file.
 */
-const pkg = Constants.manifest.releaseChannel
-  ? Constants.manifest.android.package
-  : "host.exp.exponent";
+// const pkg = Constants.manifest.releaseChannel
+//   ? Constants.manifest.android.package
+//   : "host.exp.exponent";
 
 export default function BYOScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -34,6 +35,23 @@ export default function BYOScreen({ navigation }) {
       setHasPermission(status === "granted");
     })();
   }, []);
+
+  function renderSettingsButton() {
+    if (Platform.OS === "ios") {
+      return (
+        <TouchableOpacity
+          style={[globalStyles.button, , { width: "80%" }]}
+          onPress={() => {
+            Linking.openURL("app-settings:");
+          }}
+        >
+          <Text style={globalStyles.buttonText}>Go to settings</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return null;
+    }
+  }
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
@@ -57,21 +75,7 @@ export default function BYOScreen({ navigation }) {
         <Text style={{ fontSize: 32, textAlign: "center", marginBottom: 30 }}>
           Please allow camera access to use the borrow function.
         </Text>
-        <TouchableOpacity
-          style={[globalStyles.button, , { width: "80%" }]}
-          onPress={() => {
-            if (Platform.OS === "ios") {
-              Linking.openURL("app-settings:");
-            } else {
-              IntentLauncher.startActivityAsync(
-                IntentLauncher.ACTION_APPLICATION_DETAILS_SETTINGS,
-                { data: "package:" + pkg }
-              );
-            }
-          }}
-        >
-          <Text style={globalStyles.buttonText}>Go to settings</Text>
-        </TouchableOpacity>
+        {renderSettingsButton()}
       </View>
     );
   }
@@ -122,11 +126,11 @@ export default function BYOScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     alignItems: "center",
     // justifyContent: "center",
     paddingHorizontal: 40,
-    marginTop: Constants.statusBarHeight,
+    // marginTop: Constants.statusBarHeight,
   },
   box: {
     width: "100%",

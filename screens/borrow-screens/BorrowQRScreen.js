@@ -20,9 +20,9 @@ If we are using expo application, our package name will be host.exp.exponent.
 If we are using the published version of our application (standalone build)
  then we get the package name we defined in the app.json file.
 */
-const pkg = Constants.manifest.releaseChannel
-  ? Constants.manifest.android.package
-  : "host.exp.exponent";
+// const pkg = Constants.manifest.releaseChannel
+//   ? Constants.manifest.android.package
+//   : "host.exp.exponent";
 
 export default function BorrowQRScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -42,6 +42,23 @@ export default function BorrowQRScreen({ navigation }) {
     setScanned(false);
   };
 
+  function renderSettingsButton() {
+    if (Platform.OS == "ios") {
+      return (
+        <TouchableOpacity
+          style={[globalStyles.button, , { width: "80%" }]}
+          onPress={() => {
+            Linking.openURL("app-settings:");
+          }}
+        >
+          <Text style={globalStyles.buttonText}>Go to settings</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return null;
+    }
+  }
+
   if (hasPermission === null) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -57,21 +74,7 @@ export default function BorrowQRScreen({ navigation }) {
         <Text style={{ fontSize: 32, textAlign: "center", marginBottom: 30 }}>
           Please allow camera access to use the borrow function.
         </Text>
-        <TouchableOpacity
-          style={[globalStyles.button, , { width: "80%" }]}
-          onPress={() => {
-            if (Platform.OS === "ios") {
-              Linking.openURL("app-settings:");
-            } else {
-              IntentLauncher.startActivityAsync(
-                IntentLauncher.ACTION_APPLICATION_DETAILS_SETTINGS,
-                { data: "package:" + pkg }
-              );
-            }
-          }}
-        >
-          <Text style={globalStyles.buttonText}>Go to settings</Text>
-        </TouchableOpacity>
+        {renderSettingsButton()}
       </View>
     );
   }
@@ -135,7 +138,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
     paddingHorizontal: 40,
-    marginTop: Constants.statusBarHeight,
+    // marginTop: Constants.statusBarHeight,
   },
   box: {
     width: "100%",

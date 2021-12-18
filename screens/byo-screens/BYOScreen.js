@@ -126,11 +126,11 @@ export default function BYOScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     alignItems: "center",
     // justifyContent: "center",
     paddingHorizontal: 40,
-    marginTop: Constants.statusBarHeight,
+    // marginTop: Constants.statusBarHeight,
   },
   box: {
     width: "100%",

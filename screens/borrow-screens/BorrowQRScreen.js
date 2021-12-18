@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
     paddingHorizontal: 40,
-    marginTop: Constants.statusBarHeight,
+    // marginTop: Constants.statusBarHeight,
   },
   box: {
     width: "100%",

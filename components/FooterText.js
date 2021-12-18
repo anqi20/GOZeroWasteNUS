@@ -24,8 +24,9 @@ export default function FooterText() {
         <TouchableOpacity onPress={goToSite}>
           <Text style={styles.clickable}>feedback to us</Text>
         </TouchableOpacity>{" "}
-        or call the helpdesk{"\n"}
-        @1234 5678!
+        or email us at ugonus.246@gmail.com!
+        {/*or call the helpdesk{"\n"}*/}
+        {/*@1234 5678!*/}
       </Text>
     </View>
   );

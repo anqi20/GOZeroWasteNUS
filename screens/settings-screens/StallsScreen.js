@@ -51,10 +51,6 @@ const sample = [
     location: "TechnoEdge", 
     stalls: ["Mixed Rice", "Vegetarian", "Fruits"]
   },
-  {
-    location: "TechnoEdge", 
-    stalls: ["Mixed Rice", "Vegetarian", "Fruits"]
-  },
 ]
 
 const styles = StyleSheet.create({

@@ -17,13 +17,13 @@ export default function SignUpStack() {
       <Stack.Screen
         name="Sign Up Detail Screen"
         component={SignUpDetailScreen}
-        options={{ headerShown: false }}
+        options={{ title: "Sign Up" }}
         initialParams={signUp}
       ></Stack.Screen>
       <Stack.Screen
         name="Sign Up Verification Screen"
         component={SignUpVerificationScreen}
-        options={{ headerShown: false }}
+        options={{ title: "Sign Up" }}
       ></Stack.Screen>
       <Stack.Screen
         name="Sign Up Success"

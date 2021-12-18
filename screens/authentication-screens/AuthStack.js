@@ -18,18 +18,19 @@ export default function AuthStack() {
       <Stack.Screen
         name="Log In Screen"
         component={LoginScreen}
-        options={{ title: "Log In" }}
+        options={{ title: "Log In", headerBackTitleVisible: false }}
         // options={{ headerShown: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Sign Up Stack"
         component={SignUpStack}
-        options={{ title: "Sign Up" }}
-        // options={{ headerShown: false }}
+        //options={{ title: "Sign Up" }}
+        options={{ headerShown: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Forgot Password Stack"
         component={ForgotPasswordStack}
+        options={{ title: "Forgot your password?" }}
         // options={{ headerShown: false }}
       ></Stack.Screen>
     </Stack.Navigator>

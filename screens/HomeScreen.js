@@ -10,7 +10,7 @@ import {
   ImageBackground,
   Dimensions,
 } from "react-native";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import colors from "../assets/colors";
 import CarouselView from "../components/CarouselView";
@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   function renderCarouselView(updatedUserData, userData) {
-    if (updatedUserData == undefined) {
+    if (updatedUserData == null) {
       return (
         <CarouselView
           containerDate={userData.containerDate}
@@ -71,8 +71,48 @@ export default function HomeScreen({ navigation }) {
     }
   }
 
+  function renderStatsIcon(updatedUserData, userData) {
+    if (updatedUserData == null) {
+      return (
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Stats Screen", {
+              containerDate: userData.containerDate,
+              cupDate: userData.cupDate,
+              coin: userData.coin,
+            })
+          }
+          style={styles.quickNavButton}
+        >
+          <Image
+            source={require("../assets/AppImages/statsIcon.png")}
+            style={styles.quickNavButton}
+          />
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Stats Screen", {
+              containerDate: updatedUserData.containerDate,
+              cupDate: updatedUserData.cupDate,
+              coin: updatedUserData.coin,
+            })
+          }
+          style={styles.quickNavButton}
+        >
+          <Image
+            source={require("../assets/AppImages/statsIcon.png")}
+            style={styles.quickNavButton}
+          />
+        </TouchableOpacity>
+      )
+    }
+  }
+
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <ScrollView
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}
@@ -165,21 +205,7 @@ export default function HomeScreen({ navigation }) {
         {/* Quick navigation icons */}
         <View style={styles.navigationIcons}>
           <View style={styles.quickNav}>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Stats Screen", {
-                  containerDate: updatedUserData.containerDate,
-                  cupDate: updatedUserData.cupDate,
-                  coin: updatedUserData.coin,
-                })
-              }
-              style={styles.quickNavButton}
-            >
-              <Image
-                source={require("../assets/AppImages/statsIcon.png")}
-                style={styles.quickNavButton}
-              />
-            </TouchableOpacity>
+            {renderStatsIcon(updatedUserData, userData)}
             <Text style={styles.text}>Stats</Text>
           </View>
 
@@ -225,6 +251,11 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: Constants.statusBarHeight,
+    backgroundColor: colors.white,
+  },
   headerContainer: {
     flex: 1,
   },

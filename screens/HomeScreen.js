@@ -146,7 +146,7 @@ export default function HomeScreen({ navigation }) {
         ) : null}
 
         {/* Icons */}
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 32 }}>
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
               style={[styles.topIconBox2]}
@@ -157,9 +157,6 @@ export default function HomeScreen({ navigation }) {
                 style={styles.topIconBox}
               />
             </TouchableOpacity>
-            <Text style={[styles.boldText2, { textAlign: "center" }]}>
-              Borrow
-            </Text>
           </View>
 
           <View style={{ alignItems: "center" }}>
@@ -172,7 +169,6 @@ export default function HomeScreen({ navigation }) {
                 style={styles.topIconBox}
               />
             </TouchableOpacity>
-            <Text style={[styles.boldText2]}>I have my own</Text>
           </View>
 
           <View style={{ alignItems: "center" }}>
@@ -185,9 +181,6 @@ export default function HomeScreen({ navigation }) {
                 style={styles.topIconBox}
               />
             </TouchableOpacity>
-            <Text style={[styles.boldText2, { alignSelf: "center" }]}>
-              Return
-            </Text>
           </View>
         </View>
 

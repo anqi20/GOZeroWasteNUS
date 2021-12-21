@@ -38,7 +38,7 @@ export default function TermsScreen() {
         use, please also review these terms regularly to ensure that you are updated as to any changes. 
         By continuing to access or use the Service after any revisions become effective, you agree to be 
         bound by the revised terms. Queries relating to these Terms of Use may be directed to 
-        ugonus.246@gmail.com 
+        gozerowastenus@gmail.com 
         {"\n"}
       </Text>
 
@@ -273,7 +273,7 @@ export default function TermsScreen() {
       <Text style={styles.headerText}>12. Contact Information</Text>
       <Text style={styles.text}>
         Queries and feedback relating to GO Zero Waste and these Terms of Use 
-        may be directed to ugonus.246@gmail.com 
+        may be directed to gozerowastenus@gmail.com 
         {"\n"}
       </Text>
       </ScrollView>

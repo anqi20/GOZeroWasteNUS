@@ -39,7 +39,7 @@ export default function HomeScreen({ navigation }) {
   );
 
   //Feedback form website
-  const website = "https://forms.gle/o846pa7z4Xan2m6P8";
+  const website = "https://forms.gle/T1JyVMQLbU5geX1V9";
 
   function goToSite() {
     Linking.openURL(`${website}`);

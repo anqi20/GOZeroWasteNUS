@@ -7,10 +7,21 @@ import Leaderboard from "../components/Leaderboard";
 import { renderAllDates } from "./BasicApi";
 
 function ReturnDatesTab({ containerDate, cupDate, coin }) {
+  var containerNum = 0;
+  var cupNum = 0;
+
+  // Get collective number of containers and cups borrowed
+  for (let i = 0; i < containerDate.length; i++) {
+    containerNum += containerDate[i].numContainers;
+  }
+  for (let i = 0; i < cupDate.length; i++) {
+    cupNum += cupDate[i].numCups;
+  }
+
   return (
   <View style={{ flex: 1, backgroundColor: colors.white }}>
     <View style={styles.contentContainer}>
-      <Text style={[styles.redNumber, { marginRight: 25 }]}>{containerDate.length}</Text>
+      <Text style={[styles.redNumber, { marginRight: 25 }]}>{containerNum}</Text>
       <Image source={require("../assets/AppImages/container.png")} />
       <View style={{ marginLeft: 30 }}>
         <Text>Return by:{"\n"}</Text>
@@ -19,7 +30,7 @@ function ReturnDatesTab({ containerDate, cupDate, coin }) {
     </View>
 
     <View style={styles.contentContainer}>
-      <Text style={styles.redNumber}>{cupDate.length}</Text>
+      <Text style={styles.redNumber}>{cupNum}</Text>
       <Image source={require("../assets/AppImages/cup.png")} />
       <View style={{ marginLeft: 30 }}>
         <Text>Return by:{"\n"}</Text>

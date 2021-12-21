@@ -20,9 +20,11 @@ import { AuthContext } from "../../assets/AuthContext";
 export default function ForgotPasswordScreen({ navigation }) {
   const { forgotPassword } = useContext(AuthContext);
 
+  let timeout; 
   const [email, setEmail] = useState("");
   const [statusMsg, setStatusMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  //const [time, setTime] = useState(null);
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -44,7 +46,12 @@ export default function ForgotPasswordScreen({ navigation }) {
             validationSchema={validationSchema}
             onSubmit={(values) => {
               // navigation.navigate("Forgot Password Verification Screen");
-              forgotPassword({ email, setStatusMsg, setErrorMsg });
+              if(timeout) {
+                clearTimeout(timeout);
+              }
+              timeout = setTimeout(() => {
+                forgotPassword({ email, setStatusMsg, setErrorMsg })
+              }, 10000); //timeout for 10 seconds 
             }}
           >
             {({ setFieldValue, handleSubmit, errors, isValid }) => (
@@ -126,6 +133,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginHorizontal: 30,
     marginTop: 90,
+    fontSize: 18,
   },
   errorMsg: {
     color: colors.black,

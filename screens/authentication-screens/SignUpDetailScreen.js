@@ -172,7 +172,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
                 />
                 <Input
                   containerStyle={globalStyles.inputContainerNormal}
-                  placeholder="First Name (Family Name)"
+                  placeholder="First Name"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<FontAwesome5 name="user-alt" size={24} />}
                   onChangeText={(value) => {
@@ -185,7 +185,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
 
                 <Input
                   containerStyle={globalStyles.inputContainerNormal}
-                  placeholder="Last Name"
+                  placeholder="Last Name (Family Name)"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<FontAwesome5 name="user-alt" size={24} />}
                   onChangeText={(value) => {

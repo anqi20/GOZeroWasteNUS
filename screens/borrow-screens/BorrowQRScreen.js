@@ -100,12 +100,12 @@ export default function BorrowQRScreen({ navigation }) {
         >
           <Text>(QR generator)</Text>
         </TouchableOpacity> */}
-          {/* <TouchableOpacity
+          {/*<TouchableOpacity
           onPress={() => navigation.navigate("Unsuccess Screen")}
           style={styles.imagePlaceholder}
         >
           <Text>(Unsuccessful Screen)</Text>
-        </TouchableOpacity> */}
+          </TouchableOpacity> */}
           {/* <TouchableOpacity
           onPress={() => navigation.navigate("Quota Exceeded")}
           style={styles.imagePlaceholder}

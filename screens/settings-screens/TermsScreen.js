@@ -43,19 +43,17 @@ export default function TermsScreen() {
           {"\n"}
         </Text>
 
-        {/*Updates to Term of Use*/}
-        <Text style={styles.headerText}>1. Updates to Terms of Use</Text>
-        <Text style={styles.text}>
-          OED reserves the right to modify these Terms of Use from time to time
-          to reflect changes in our fast-changing environment. Although OED will
-          inform Users of changes to these terms of use, please also review
-          these terms regularly to ensure that you are updated as to any
-          changes. By continuing to access or use the Service after any
-          revisions become effective, you agree to be bound by the revised
-          terms. Queries relating to these Terms of Use may be directed to
-          gozerowastenus@gmail.com
-          {"\n"}
-        </Text>
+      {/*Updates to Term of Use*/}
+      <Text style={styles.headerText}>1. Updates to Terms of Use</Text>
+      <Text style={styles.text}>
+        OED reserves the right to modify these Terms of Use from time to time to reflect changes 
+        in our fast-changing environment. Although OED will inform Users of changes to these terms of 
+        use, please also review these terms regularly to ensure that you are updated as to any changes. 
+        By continuing to access or use the Service after any revisions become effective, you agree to be 
+        bound by the revised terms. Queries relating to these Terms of Use may be directed to 
+        gozerowastenus@gmail.com 
+        {"\n"}
+      </Text>
 
         {/*Relevant Policies and Guidelines*/}
         <Text style={styles.headerText}>
@@ -340,13 +338,14 @@ export default function TermsScreen() {
           {"\n"}
         </Text>
 
-        {/*Contact Information*/}
-        <Text style={styles.headerText}>12. Contact Information</Text>
-        <Text style={styles.text}>
-          Queries and feedback relating to GO Zero Waste and these Terms of Use
-          may be directed to may be directed to gozerowastenus@gmail.com
-          {"\n"}
-        </Text>
+      {/*Contact Information*/}
+      <Text style={styles.headerText}>12. Contact Information</Text>
+      <Text style={styles.text}>
+        Queries and feedback relating to GO Zero Waste and these Terms of Use 
+        may be directed to gozerowastenus@gmail.com 
+        {"\n"}
+      </Text>
+
       </ScrollView>
     </View>
   );

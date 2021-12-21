@@ -21,7 +21,7 @@ export default function Announcements({header, text}) {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get("window").width - 15,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     paddingVertical: 15,
     borderRadius: 15,
     borderColor: colors.black,
@@ -36,5 +36,6 @@ const styles = StyleSheet.create({
   text: {
     justifyContent: "center", 
     alignItems: "center",
+    fontSize: 16,
   }
 })

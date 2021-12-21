@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image, Dimensions } from "react-native";
 import UnsuccessBox from "../../components/UnsuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -11,7 +11,10 @@ export default function BYOUnsuccessfulScreen() {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.container}>
-        <Text style={globalStyles.header}>I have my own</Text>
+      <Image
+        source={require("../../assets/AppImages/byoHeader.png")}
+        style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+      />
         <UnsuccessBox />
       </View>
     </ScrollView>
@@ -21,7 +24,5 @@ export default function BYOUnsuccessfulScreen() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    paddingHorizontal: 40,
-    justifyContent: "center",
   },
 });

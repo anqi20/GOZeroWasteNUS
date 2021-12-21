@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, ScrollView } from "react-native";
+import { StyleSheet, Text, ScrollView, Image, Dimensions } from "react-native";
 import UnsuccessBox from "../../components/UnsuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -8,7 +8,10 @@ export default function BorrowUnsuccessfulScreen() {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Text style={globalStyles.header}>Borrow</Text>
+      <Image
+        source={require("../../assets/AppImages/borrowHeader.png")}
+        style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+      />
       <UnsuccessBox />
     </ScrollView>
   );
@@ -17,6 +20,5 @@ export default function BorrowUnsuccessfulScreen() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    paddingHorizontal: 40,
   },
 });

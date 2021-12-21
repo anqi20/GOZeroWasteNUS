@@ -24,7 +24,7 @@ const data = [
   },
 ];
 
-const endMsg = "That's why UGO."
+const endMsg = "That's why GO Zero Waste."
 
 export default function OnboardingScreen({ navigation }) {
 

@@ -35,7 +35,7 @@ export default function SignUpVerificationScreen({ navigation }) {
             navigation.navigate("Sign Up Success");
           } else {
             setError(
-              "Please ensure you have validated your email then try again. Remember to check your junk mail!"
+              "Please ensure you have validated your email. Remember to check your junk mail!"
             );
           }
         })
@@ -56,7 +56,7 @@ export default function SignUpVerificationScreen({ navigation }) {
         })
         .catch((error) => {
           setError(
-            "Please check your email again or try resending again after 1 minute."
+            "Please check your email again or try resending again after 10 minutes."
           );
         });
     } else {
@@ -74,7 +74,8 @@ export default function SignUpVerificationScreen({ navigation }) {
         style={{ alignSelf: "center", marginBottom: 10 }}
       />
       <Text style={styles.text}>
-        A validation email has been sent!{"\n"}Please check your email and
+        A validation email from noreply@renuse-83e58.firebaseapp.com has been sent!{"\n"}{"\n"}
+        Please check your email and
         validate your account to continue.
       </Text>
       {showError == "" ? null : (
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     textAlign: "center",
-    fontSize: 14,
+    fontSize: 18,
     margin: 20,
     color: colors.red,
   },

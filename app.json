@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "reNuse",
-    "slug": "reNuse",
+    "name": "GOZeroWaste",
+    "slug": "GOZeroWaste",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/icon.png",
@@ -17,7 +17,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anqi20.gozerowaste"
     },
     "android": {
       "adaptiveIcon": {

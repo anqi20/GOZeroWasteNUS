@@ -45,7 +45,7 @@ export default function HomeStack() {
       <Stack.Screen
         name="Locations Screen"
         component={LocationsScreen}
-        options={{ title: "Locations", headerBackTitleVisible: false }}
+        options={{ title: "Return Locations", headerBackTitleVisible: false }}
       />
       <Stack.Screen
         name="Tutorial Screen"

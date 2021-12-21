@@ -188,13 +188,13 @@ export default function HomeScreen({ navigation }) {
         {renderCarouselView(updatedUserData, userData)}
 
         {/* Quick navigation icons */}
-        <View style={styles.navigationIcons}>
-          <View style={styles.quickNav}>
+        <View style={styles.navigationIcons} >
+          <View> 
             {renderStatsIcon(updatedUserData, userData)}
-            <Text style={styles.text}>Stats</Text>
+            <Text>My Stats</Text>
           </View>
 
-          <View style={styles.quickNav}>
+          <View>
             <TouchableOpacity
               onPress={() => navigation.navigate("Locations Screen")}
               style={styles.quickNavButton}
@@ -204,10 +204,10 @@ export default function HomeScreen({ navigation }) {
                 style={styles.quickNavButton}
               />
             </TouchableOpacity>
-            <Text style={styles.text}>Location</Text>
+            <Text>Return Locations</Text>
           </View>
 
-          <View style={styles.quickNav}>
+          <View>
             <TouchableOpacity onPress={goToSite} style={styles.quickNavButton}>
               <Image
                 source={require("../assets/AppImages/feedbackIcon.png")}
@@ -217,7 +217,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.text}>Feedback</Text>
           </View>
 
-          <View style={styles.quickNav}>
+          <View>
             <TouchableOpacity
               onPress={() => navigation.navigate("Tutorial Screen")}
               style={styles.quickNavButton}
@@ -230,6 +230,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.text}>Tutorial</Text>
           </View>
         </View>
+
       </ScrollView>
     </View>
   );
@@ -293,10 +294,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 30,
   },
-  topIcon: {
-    flex: 1,
-    alignItems: "center",
-  },
   topIconBox: {
     borderRadius: 10,
     borderWidth: 2,
@@ -306,31 +303,21 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 80,
     width: (Dimensions.get("window").width - 80) / 3,
-    //borderWidth: 2,
-    //borderColor: colors.black,
-  },
-  boldText2: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 20,
   },
   navigationIcons: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginHorizontal: 20,
+    marginHorizontal: 25,
     marginBottom: 32,
-  },
-  quickNav: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
   quickNavButton: {
     height: 60,
     width: 60,
     marginBottom: 8,
+    justifyContent: "center",
+    alignSelf: "center",
   },
   text: {
     fontSize: 15,

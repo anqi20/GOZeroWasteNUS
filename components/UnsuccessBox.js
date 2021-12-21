@@ -10,6 +10,7 @@ export default function UnsuccessBox() {
   const navigation = useNavigation();
 
   return (
+    <View style={{paddingHorizontal: 40}}>
     <View style={styles.box}>
       <Image
         source={require("../assets/AppImages/cross.png")}
@@ -50,6 +51,7 @@ export default function UnsuccessBox() {
       >
         <Text style={globalStyles.buttonText}>Back</Text>
       </TouchableOpacity>
+    </View>
     </View>
   );
 }

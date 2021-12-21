@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, Text, ScrollView } from "react-native";
+import { StyleSheet, Text, ScrollView, Image, Dimensions } from "react-native";
 import SuccessBox from "../../components/SuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -27,7 +27,10 @@ export default function BYOSuccessScreen({ route }) {
   } else {
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <Text style={globalStyles.header}>BYO</Text>
+        <Image
+          source={require("../../assets/AppImages/byoHeader.png")}
+          style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+        />
         <SuccessBox
           numCups={numCups}
           numContainers={numContainers}
@@ -42,6 +45,5 @@ export default function BYOSuccessScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    paddingHorizontal: 40,
   },
 });

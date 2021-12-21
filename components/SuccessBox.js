@@ -149,7 +149,7 @@ export default function SuccessBox({
 
   return (
     <ScrollView
-      style={{ backgroundColor: colors.white }}
+      style={{ backgroundColor: colors.white, paddingHorizontal: 40 }}
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.box}>

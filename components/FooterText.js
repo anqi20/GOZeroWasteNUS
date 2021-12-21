@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function FooterText() {
   const navigation = useNavigation();
-  const website = "https://forms.gle/o846pa7z4Xan2m6P8";
+  const website = "https://forms.gle/T1JyVMQLbU5geX1V9";
 
   function goToSite() {
     Linking.openURL(`${website}`);
@@ -24,7 +24,7 @@ export default function FooterText() {
         <TouchableOpacity onPress={goToSite}>
           <Text style={styles.clickable}>feedback to us</Text>
         </TouchableOpacity>{" "}
-        or email us at ugonus.246@gmail.com!
+        or email us at gozerowastenus@gmail.com!
         {/*or call the helpdesk{"\n"}*/}
         {/*@1234 5678!*/}
       </Text>

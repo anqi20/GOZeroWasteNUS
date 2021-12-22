@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import firebase from "../database/firebaseDB";
 import moment from "moment";
+import { Alert, BackHandler } from "react-native";
 
 // Get user's coins
 export function getCoins(uid, setCoins) {
@@ -104,3 +105,14 @@ export function renderAllDates(dates) {
     <Text></Text>;
   }
 }
+
+export const backActionHandler = () => {
+  Alert.alert("Alert!", "Are you sure you want to exit app?", [
+    {
+      text: "Cancel",
+      onPress: () => null,
+    },
+    { text: "YES", onPress: () => BackHandler.exitApp() },
+  ]);
+  return true;
+};

@@ -96,17 +96,17 @@ export default function BYOScreen({ navigation }) {
       >
         <View style={styles.box}>
           {/* <TouchableOpacity
-          onPress={() => navigation.navigate("BYO Unsuccessful Screen")}
-          style={styles.imagePlaceholder}
-        >
-          <Text>(Unsuccessful Screen)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("BYO Selection Screen")}
-          style={styles.imagePlaceholder}
-        >
-          <Text>(Selection screen)</Text>
-        </TouchableOpacity>  */}
+            onPress={() => navigation.navigate("BYO Unsuccessful Screen")}
+            style={styles.imagePlaceholder}
+          >
+            <Text>(Unsuccessful Screen)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("BYO Selection Screen")}
+            style={styles.imagePlaceholder}
+          >
+            <Text>(Selection screen)</Text>
+          </TouchableOpacity> */}
           <Text style={styles.text}>Scan the QR code!</Text>
           <BarCodeScanner
             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}

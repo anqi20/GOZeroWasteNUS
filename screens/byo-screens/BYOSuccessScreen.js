@@ -6,6 +6,8 @@ import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { uploadByoData, updateCoins } from "./BYOApi";
 import { UserContext } from "../../assets/UserContext";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function BYOSuccessScreen({ route }) {
   const { numCups, numContainers } = route.params;
@@ -15,6 +17,9 @@ export default function BYOSuccessScreen({ route }) {
 
   // Can change the value of coins earned accordingly
   const coinsEarned = numCups + numContainers;
+
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
 
   useEffect(() => {
     uploadByoData(uid, numCups, numContainers, setError);

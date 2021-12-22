@@ -16,6 +16,8 @@ import firebase from "../../database/firebaseDB";
 import { setStallDetails, setQuotas, getBorrowedNum } from "./BorrowApi";
 import { UserContext } from "../../assets/UserContext";
 import Constants from "expo-constants";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function BorrowSelectionScreen({ navigation, route }) {
   // Stall name from scanning QR code
@@ -40,6 +42,9 @@ export default function BorrowSelectionScreen({ navigation, route }) {
   const [stall, setStallName] = useState(null);
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
+
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
 
   // Set up stall details / quotas on intial render
   useEffect(() => {

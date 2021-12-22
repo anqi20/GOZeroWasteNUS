@@ -14,6 +14,8 @@ import SelectionComponent from "../../components/SelectionComponent";
 import FooterText from "../../components/FooterText";
 import Constants from "expo-constants";
 import { setStallDetails, setQuotas } from "../borrow-screens/BorrowApi";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function BYOSelectionScreen({ navigation, route }) {
   //Based on this store name, grab data from firebase
@@ -35,6 +37,9 @@ export default function BYOSelectionScreen({ navigation, route }) {
   const [stall, setStallName] = useState(null);
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
+
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
 
   useEffect(() => {
     setQuotas(setCupQuota, setContainerQuota);

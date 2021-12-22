@@ -6,11 +6,17 @@ import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
 import { uploadBorrowData } from "./BorrowApi";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function BorrowSuccessfulScreen({ route, navigation }) {
   const userData = useContext(UserContext);
   const { numCups, numContainers } = route.params;
   const [hasError, setError] = useState(false);
+
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
+
   // console.log(userData.id);
   useEffect(() => {
     uploadBorrowData(userData.id, numCups, numContainers, setError);

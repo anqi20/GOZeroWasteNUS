@@ -10,48 +10,50 @@ export default function UnsuccessBox() {
   const navigation = useNavigation();
 
   return (
-    <View style={{paddingHorizontal: 40}}>
-    <View style={styles.box}>
-      <Image
-        source={require("../assets/AppImages/cross.png")}
-        style={{ alignSelf: "center", marginBottom: 10 }}
-      />
-      <Text style={[styles.header, { marginBottom: 20 }]}>Oops!</Text>
-      <Text style={styles.warningText}>Oops, there seems to be an error!</Text>
+    <View style={{ paddingHorizontal: 40 }}>
+      <View style={styles.box}>
+        <Image
+          source={require("../assets/AppImages/cross.png")}
+          style={{ alignSelf: "center", marginBottom: 10 }}
+        />
+        <Text style={[styles.header, { marginBottom: 20 }]}>Oops!</Text>
+        <Text style={styles.warningText}>
+          Oops, there seems to be an error!
+        </Text>
 
-      <View style={styles.icons}>
-        <Icon
-          containerStyle={{ marginVertical: 15, marginRight: 80 }}
-          name="phone"
-          type="Feather"
-          color="#0CF574"
-          size={40}
-        />
-        <Icon
-          containerStyle={{ marginVertical: 15 }}
-          name="email"
-          type="MaterialIcons"
-          color="#0CF574"
-          size={40}
-        />
+        <View style={styles.icons}>
+          <Icon
+            containerStyle={{ marginVertical: 15, marginRight: 80 }}
+            name="phone"
+            type="Feather"
+            color="#0CF574"
+            size={40}
+          />
+          <Icon
+            containerStyle={{ marginVertical: 15 }}
+            name="email"
+            type="MaterialIcons"
+            color="#0CF574"
+            size={40}
+          />
+        </View>
+
+        <FooterText />
+
+        <Text style={styles.warningText}>
+          We apologise for the inconvenience!
+        </Text>
+
+        <TouchableOpacity
+          style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
+          onPress={() => {
+            navigation.dispatch(StackActions.popToTop());
+            navigation.navigate("Home Screen");
+          }}
+        >
+          <Text style={globalStyles.buttonText}>Back</Text>
+        </TouchableOpacity>
       </View>
-
-      <FooterText />
-
-      <Text style={styles.warningText}>
-        We apologise for the inconvenience!
-      </Text>
-
-      <TouchableOpacity
-        style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
-        onPress={() => {
-          navigation.dispatch(StackActions.popToTop());
-          navigation.navigate("Home Screen");
-        }}
-      >
-        <Text style={globalStyles.buttonText}>Back</Text>
-      </TouchableOpacity>
-    </View>
     </View>
   );
 }
@@ -71,6 +73,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 20,
     justifyContent: "center",
+    marginBottom: 30,
   },
   warningText: {
     fontSize: 18,

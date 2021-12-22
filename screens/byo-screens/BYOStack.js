@@ -9,26 +9,26 @@ const Stack = createStackNavigator();
 
 export default function BYOStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator options={{ gestureEnabled: false }}>
       <Stack.Screen
         name="BYO Screen"
         component={BYOScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen
         name="BYO Selection Screen"
         component={BYOSelectionScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen
         name="BYO Unsuccessful Screen"
         component={BYOUnsuccessfulScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen
         name="BYO Success Screen"
         component={BYOSuccessScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
     </Stack.Navigator>
   );

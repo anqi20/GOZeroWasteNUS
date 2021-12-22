@@ -18,7 +18,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tsh22.gozerowaste"
+      "bundleIdentifier": "com.tsh22.gozerowaste",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan QR codes to allow users to borrow reusables and earn rewards from bringing their own reusables."
+      }
     },
     "android": {
       "adaptiveIcon": {

@@ -20,11 +20,19 @@ import { AuthContext } from "../../assets/AuthContext";
 export default function ForgotPasswordScreen({ navigation }) {
   const { forgotPassword } = useContext(AuthContext);
 
-  let timeout; 
   const [email, setEmail] = useState("");
   const [statusMsg, setStatusMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  //const [time, setTime] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+
+  // Ensure button can only be pressed every 10 seconds
+  function handleButtonClicked() {
+    forgotPassword({ email, setStatusMsg, setErrorMsg });
+    setDisabled(true);
+    setTimeout(() => {
+      setDisabled(false);
+    }, 10000);
+  }
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -34,7 +42,7 @@ export default function ForgotPasswordScreen({ navigation }) {
         /(@u.nus.edu|@nus.edu.sg|@u.yale-nus.edu.sg|@u.duke.nus.edu)$/,
         "Please enter a valid NUS email"
       )
-      .required("Please enter your email")
+      .required("Please enter your email"),
   });
 
   return (
@@ -44,15 +52,7 @@ export default function ForgotPasswordScreen({ navigation }) {
           <Formik
             initialValues={{ email: "" }}
             validationSchema={validationSchema}
-            onSubmit={(values) => {
-              // navigation.navigate("Forgot Password Verification Screen");
-              if(timeout) {
-                clearTimeout(timeout);
-              }
-              timeout = setTimeout(() => {
-                forgotPassword({ email, setStatusMsg, setErrorMsg })
-              }, 10000); //timeout for 10 seconds 
-            }}
+            onSubmit={handleButtonClicked}
           >
             {({ setFieldValue, handleSubmit, errors, isValid }) => (
               <View>
@@ -75,7 +75,7 @@ export default function ForgotPasswordScreen({ navigation }) {
                 <TouchableOpacity
                   style={globalStyles.buttonTop}
                   onPress={handleSubmit}
-                  disabled={!isValid}
+                  disabled={disabled}
                 >
                   <Text style={globalStyles.buttonText}>
                     Send password reset email
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     textAlign: "center",
     marginHorizontal: 30,
-    marginTop: 90,
+    marginTop: 60,
     fontSize: 18,
   },
   errorMsg: {

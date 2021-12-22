@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 
 export default function HomeStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator options={{ gestureEnabled: false }}>
       <Stack.Screen
         name="Home Screen"
         component={HomeScreen}
@@ -25,7 +25,7 @@ export default function HomeStack() {
       <Stack.Screen
         name="BYO Stack"
         component={BYOStack}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       {/* <Stack.Screen
         name="Rewards Screen"

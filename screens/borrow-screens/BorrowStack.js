@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 
 export default function BorrowStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator options={{ gestureEnabled: false }}>
       <Stack.Screen
         name="Borrow QR Screen"
         component={BorrowQRScreen}
@@ -20,22 +20,22 @@ export default function BorrowStack() {
       <Stack.Screen
         name="Selection Screen"
         component={BorrowSelectionScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Success Screen"
         component={BorrowSuccessfulScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Quota Exceeded"
         component={BorrowExceededScreen}
         options={{ headerShown: false }}
-      ></Stack.Screen>
+      ></Stack.Screen> */}
       <Stack.Screen
         name="Unsuccess Screen"
         component={BorrowUnsuccessfulScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="QR Generator"

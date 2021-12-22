@@ -95,24 +95,29 @@ export default function BYOScreen({ navigation }) {
         }}
       >
         <View style={styles.box}>
-          
-        <TouchableOpacity
-          onPress={() => navigation.navigate("BYO Unsuccessful Screen")}
-          style={styles.imagePlaceholder}
-        >
-          <Text>(Unsuccessful Screen)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("BYO Selection Screen")}
-          style={styles.imagePlaceholder}
-        >
-          <Text>(Selection screen)</Text>
-        </TouchableOpacity> 
+          {/* <TouchableOpacity
+            onPress={() => navigation.navigate("BYO Unsuccessful Screen")}
+            style={styles.imagePlaceholder}
+          >
+            <Text>(Unsuccessful Screen)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("BYO Selection Screen")}
+            style={styles.imagePlaceholder}
+          >
+            <Text>(Selection screen)</Text>
+          </TouchableOpacity> */}
           <Text style={styles.text}>Scan the QR code!</Text>
           <BarCodeScanner
             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
             style={styles.qr}
           />
+          <TouchableOpacity
+            onPress={() => navigation.popToTop()}
+            style={[globalStyles.buttonTop, { marginTop: 30, width: "80%" }]}
+          >
+            <Text style={globalStyles.buttonText}>Back to Home </Text>
+          </TouchableOpacity>
         </View>
         <FooterText />
       </View>

@@ -142,6 +142,12 @@ export default function BorrowSelectionScreen({ navigation, route }) {
               setContainerNum={setContainerNum}
             />
             {renderNextButton()}
+            <TouchableOpacity
+              onPress={() => navigation.popToTop()}
+              style={[globalStyles.button, { width: "90%" }]}
+            >
+              <Text style={globalStyles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
           </View>
           <FooterText />
         </View>

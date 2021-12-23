@@ -72,48 +72,154 @@ export function awardWelcomeGift() {
   }
 }
 
-// Get and manipulate return date data
+// Get and manipulate return date data for cups
+// Update dates, cupReturned, numCup fields
 function handleCupReturn(uid, numCups, setError) {
-  return null;
-  // const userRef = firebase.firestore().collection("users").doc(uid);
-  // userRef
-  //   .get()
-  //   .then((document) => {
-  //     if (document.exists) {
-  //       const borrowData = document.data().cupDate;
-  //       console.log(`Overall borrow data in cup return loop ${borrowData}`);
-  //       // If there are still returned cups to subtract from borrow data
+  const userRef = firebase.firestore().collection("users").doc(uid);
+  userRef
+    .get()
+    .then((document) => {
+      if (document.exists) {
+        const borrowData = document.data().cupDate;
 
-  //       while (numCups > 0) {
-  //         const currData = borrowData[0];
-  //         console.log(`Current data in cup return loop ${currData}`);
-  //         if (currData.numCups <= numCups) {
-  //           // If there are equal/more cups returned than in currData, remove entire entry
+        // Update total numCup field
+        userRef.update({
+          numCup: firebase.firestore.FieldValue.increment(-numCups),
+        });
 
-  //         } else {
-  //           // If there are less cups returned than in currData, just update numCups field
-  //           userRef.set({
-  //             cupDate: [{
-  //               time: currData.time,
-  //               numCups: currData.numCups - numCups,
-  //               date: currData.date,
-  //             }, ...]
-  //           });
-  //         }
-  //       }
-  //     } else {
-  //       console.log("No such document");
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log("Error handling cup return data: ", error);
-  //     // setError(true);
-  //   });
+        // Update cupReturned field
+        userRef.update({
+          cupReturned: firebase.firestore.FieldValue.increment(numCups),
+        });
+
+        // console.log("Overall borrow data in cup return loop:");
+        // console.log(borrowData);
+        // If there are still returned cups to subtract from borrow data
+        while (numCups > 0) {
+          const currData = borrowData.shift();
+          // console.log("Current data in cup return loop:");
+          // console.log(currData);
+          if (currData.numCups <= numCups) {
+            // If there are equal/more cups returned than in currData, remove entire entry
+            console.log("Removing entire current entry");
+            userRef.update({
+              cupDate: firebase.firestore.FieldValue.arrayRemove({
+                date: currData.date,
+                time: currData.time,
+                dueDate: currData.dueDate,
+                numCups: currData.numCups,
+              }),
+            });
+            numCups -= currData.numCups;
+          } else {
+            // If there are less cups returned than in currData, just update numCups field
+            borrowData.shift(); // Removing the first entry in the overall borrow data
+            // console.log("Remaining data:");
+            // console.log(borrowData);
+            console.log("Updating numCups field in current entry");
+            userRef.set(
+              {
+                cupDate: [
+                  {
+                    date: currData.date,
+                    time: currData.time,
+                    dueDate: currData.dueDate,
+                    numCups: currData.numCups - numCups,
+                  },
+                  ...borrowData,
+                ],
+              },
+              { merge: true }
+            );
+            numCups = 0;
+          }
+        }
+      } else {
+        console.log("No such document");
+      }
+    })
+    .catch((error) => {
+      console.log("Error handling cup return data: ", error);
+      // setError(true);
+    });
+}
+
+// Get and manipulate return date data for containers
+// Update dates, containerReturned, numContainer fields
+function handleContainerReturn(uid, numContainers, setError) {
+  const userRef = firebase.firestore().collection("users").doc(uid);
+  userRef
+    .get()
+    .then((document) => {
+      if (document.exists) {
+        const borrowData = document.data().containerDate;
+
+        // Update total numContainer field
+        userRef.update({
+          numContainer: firebase.firestore.FieldValue.increment(-numContainers),
+        });
+
+        // Update containerReturned field
+        userRef.update({
+          containerReturned:
+            firebase.firestore.FieldValue.increment(numContainers),
+        });
+
+        // console.log("Overall borrow data in container return loop:");
+        // console.log(borrowData);
+        // If there are still returned cups to subtract from borrow data
+        while (numContainers > 0) {
+          // console.log("Overall borrow data in container return loop:");
+          // console.log(borrowData);
+          const currData = borrowData.shift();
+          // console.log("Current data in container return loop:");
+          // console.log(currData);
+          if (currData.numContainers <= numContainers) {
+            // If there are equal/more containers returned than in currData, remove entire entry
+            console.log("Removing entire current entry");
+            userRef.update({
+              containerDate: firebase.firestore.FieldValue.arrayRemove({
+                date: currData.date,
+                time: currData.time,
+                dueDate: currData.dueDate,
+                numContainers: currData.numContainers,
+              }),
+            });
+            numContainers -= currData.numContainers;
+          } else {
+            // If there are less containers returned than in currData, just update numContainers field
+            borrowData.shift(); // Removing the first entry in the overall borrow data
+            // console.log("Remaining data:");
+            // console.log(borrowData);
+            // console.log("Updating numCups field in current entry");
+            userRef.set(
+              {
+                containerDate: [
+                  {
+                    date: currData.date,
+                    time: currData.time,
+                    dueDate: currData.dueDate,
+                    numContainers: currData.numContainers - numContainers,
+                  },
+                  ...borrowData,
+                ],
+              },
+              { merge: true }
+            );
+            numContainers = 0;
+          }
+        }
+      } else {
+        console.log("No such document");
+      }
+    })
+    .catch((error) => {
+      console.log("Error handling container return data: ", error);
+      // setError(true);
+    });
 }
 
 export function updateReturnData(uid, numCups, numContainers, setError) {
-  // Reduce numContainer
-  // Reduce numCup
-  // Get rid of dates that have already been returned
-  return null;
+  handleCupReturn(uid, numCups, setError);
+  handleContainerReturn(uid, numContainers, setError);
 }

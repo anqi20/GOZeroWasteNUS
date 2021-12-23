@@ -6,6 +6,8 @@ import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
 import { updateCoins, updateReturnData } from "./ReturnApi";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function ReturnSuccessfulScreen({ route }) {
   const userData = useContext(UserContext);
@@ -16,11 +18,14 @@ export default function ReturnSuccessfulScreen({ route }) {
   // Can change the value of coins earned accordingly
   const coinsEarned = numCups + numContainers;
 
-  // useEffect(() => {
-  //   updateCoins(uid, coinsEarned);
-  //   awardWelcomeGift(); // Only decreases welcomeThreshold when eligible
-  //   updateReturnData(uid, numCups, numContainers, setError);
-  // }, []);
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
+
+  useEffect(() => {
+    updateCoins(uid, coinsEarned);
+    // awardWelcomeGift(); // Only decreases welcomeThreshold when eligible
+    updateReturnData(uid, numCups, numContainers, setError);
+  }, []);
 
   if (hasError) {
     navigation.navigate("Return Unsuccess Screen");

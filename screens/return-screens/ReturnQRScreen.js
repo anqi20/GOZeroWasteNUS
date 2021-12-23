@@ -76,6 +76,18 @@ export default function ReturnQRScreen({ navigation }) {
         >
           <Text>Feature coming soon! Stay tuned {";)"}</Text>
         </View>
+        {/* TEST VALUES */}
+        {/* <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Return Success Screen", {
+              numCups: 2,
+              numContainers: 2,
+              location: "E4",
+            })
+          }
+        >
+          <Text>Success Screen</Text>
+        </TouchableOpacity> */}
       </View>
     </View>
     // <View style={{ marginTop: Constants.statusBarHeight }}>

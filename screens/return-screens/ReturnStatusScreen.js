@@ -13,6 +13,8 @@ import FooterText from "../../components/FooterText";
 import { Icon } from "react-native-elements";
 import { UserContext } from "../../assets/UserContext";
 import { getBorrowedNum } from "./ReturnApi";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function ReturnStatusScreen({ navigation }) {
   const userData = useContext(UserContext);
@@ -22,6 +24,9 @@ export default function ReturnStatusScreen({ navigation }) {
   const machineName = data[2].machineName;
   const [borrowedCup, setBorrowedCup] = useState(0);
   const [borrowedContainer, setBorrowedContainer] = useState(0);
+
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
 
   useEffect(() => {
     getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer);

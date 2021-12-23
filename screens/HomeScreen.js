@@ -118,7 +118,7 @@ export default function HomeScreen({ navigation }) {
             <View style={styles.welcomeContainer}>
               <Text style={styles.text}>Hi,</Text>
               <Text style={[styles.boldText, { fontSize: 36 }]}>
-                {userData !== undefined ? userData.lastName : "Anonymous"}
+                {userData !== undefined ? userData.firstName : "Anonymous"}
               </Text>
             </View>
             <View style={styles.coinsContainer}>
@@ -146,7 +146,13 @@ export default function HomeScreen({ navigation }) {
         ) : null}
 
         {/* Icons */}
-        <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 32 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            marginBottom: 32,
+          }}
+        >
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
               style={[styles.topIconBox2]}
@@ -188,8 +194,8 @@ export default function HomeScreen({ navigation }) {
         {renderCarouselView(updatedUserData, userData)}
 
         {/* Quick navigation icons */}
-        <View style={styles.navigationIcons} >
-          <View> 
+        <View style={styles.navigationIcons}>
+          <View>
             {renderStatsIcon(updatedUserData, userData)}
             <Text>My Stats</Text>
           </View>
@@ -230,7 +236,6 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.text}>Tutorial</Text>
           </View>
         </View>
-
       </ScrollView>
     </View>
   );

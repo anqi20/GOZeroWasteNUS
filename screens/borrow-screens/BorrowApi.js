@@ -72,7 +72,7 @@ export function getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer) {
 function addCupDates(uid, cups, setError) {
   const currDate = moment().format("DD/MM/YYYY");
   const dueDate = moment().add(7, "d").format("DD/MM/YYYY"); // Due date is 7 days away from borrow date
-  const currTime = moment().format("hh:mm a");
+  const currTime = moment().format("hh:mm:ss a");
   const userRef = firebase.firestore().collection("users").doc(uid);
   userRef
     .get()
@@ -96,13 +96,13 @@ function addCupDates(uid, cups, setError) {
         userRef.set(
           {
             cupDate: [
+              ...retrievedData,
               {
                 time: currTime,
                 numCups: cups,
                 date: currDate,
                 dueDate: dueDate,
               },
-              ...retrievedData,
             ],
           },
           { merge: true }
@@ -121,7 +121,7 @@ function addCupDates(uid, cups, setError) {
 function addContainerDates(uid, containers, setError) {
   const currDate = moment().format("DD/MM/YYYY");
   const dueDate = moment().add(7, "d").format("DD/MM/YYYY"); // Due date is 7 days away from borrow date
-  const currTime = moment().format("hh:mm a");
+  const currTime = moment().format("hh:mm:ss a");
   const userRef = firebase.firestore().collection("users").doc(uid);
   userRef
     .get()
@@ -145,13 +145,13 @@ function addContainerDates(uid, containers, setError) {
         userRef.set(
           {
             containerDate: [
+              ...retrievedData,
               {
                 time: currTime,
                 numContainers: containers,
                 date: currDate,
                 dueDate: dueDate,
               },
-              ...retrievedData,
             ],
           },
           { merge: true }

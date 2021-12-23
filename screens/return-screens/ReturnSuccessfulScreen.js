@@ -16,11 +16,11 @@ export default function ReturnSuccessfulScreen({ route }) {
   // Can change the value of coins earned accordingly
   const coinsEarned = numCups + numContainers;
 
-  // useEffect(() => {
-  //   updateCoins(uid, coinsEarned);
-  //   awardWelcomeGift(); // Only decreases welcomeThreshold when eligible
-  //   updateReturnData(uid, numCups, numContainers, setError);
-  // }, []);
+  useEffect(() => {
+    updateCoins(uid, coinsEarned);
+    // awardWelcomeGift(); // Only decreases welcomeThreshold when eligible
+    updateReturnData(uid, numCups, numContainers, setError);
+  }, []);
 
   if (hasError) {
     navigation.navigate("Return Unsuccess Screen");

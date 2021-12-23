@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 export default function ReturnStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator options={{ gestureEnabled: false }}>
       <Stack.Screen
         name="Return QR Screen"
         component={ReturnQRScreen}
@@ -18,17 +18,17 @@ export default function ReturnStack() {
       <Stack.Screen
         name="Return Status Screen"
         component={ReturnStatusScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Return Success Screen"
         component={ReturnSuccessfulScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Return Unsuccess Screen"
         component={ReturnUnsuccessfulScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
     </Stack.Navigator>
   );

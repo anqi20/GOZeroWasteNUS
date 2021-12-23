@@ -6,6 +6,8 @@ import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
 import { updateCoins, updateReturnData } from "./ReturnApi";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function ReturnSuccessfulScreen({ route }) {
   const userData = useContext(UserContext);
@@ -15,6 +17,9 @@ export default function ReturnSuccessfulScreen({ route }) {
   const [hasError, setError] = useState(false);
   // Can change the value of coins earned accordingly
   const coinsEarned = numCups + numContainers;
+
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
 
   useEffect(() => {
     updateCoins(uid, coinsEarned);

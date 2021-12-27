@@ -45,7 +45,7 @@ export default function ReturnQRScreen({ navigation }) {
 
   return (
     
-    <View style={{ marginTop: Constants.statusBarHeight }}>
+    <View>
       <ScrollView
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}
@@ -53,7 +53,7 @@ export default function ReturnQRScreen({ navigation }) {
         <View style={styles.container}>
           <Image
             source={require("../../assets/AppImages/returnHeader.png")}
-            style={{ width: Dimensions.get("window").width }}
+            style={{ width: Dimensions.get("window").width+4 }}
           />
           <View style={styles.box}>
             <Image source={require("../../assets/AppImages/returnPicture.png")} />

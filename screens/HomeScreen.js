@@ -104,7 +104,6 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
       <ScrollView
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}
@@ -237,21 +236,17 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
       </ScrollView>
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   headerContainer: {
     flex: 1,
   },
   header: {
     flex: 1,
     flexDirection: "row",
-    width: Dimensions.get("window").width,
+    width: Dimensions.get("screen").width+2,
     justifyContent: "center",
     alignItems: "center",
     height: 150,
@@ -259,6 +254,7 @@ const styles = StyleSheet.create({
     // marginTop: Constants.statusBarHeight,
     marginBottom: 32,
     padding: 20,
+    backgroundColor: 'red'
   },
   welcomeContainer: {
     flex: 1,

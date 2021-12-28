@@ -49,7 +49,7 @@ export default function StallsScreen() {
 const sample = [
   {
     location: "TechnoEdge", 
-    stalls: ["Mixed Rice", "Vegetarian", "Fruits"]
+    stalls: ["Mixed Rice", "Vegetarian", "Fresh fruits & juices"]
   },
 ]
 

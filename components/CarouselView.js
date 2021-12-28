@@ -156,9 +156,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   cardContainer: {
-    backgroundColor: colors.white,
-    borderWidth: 2,
-    borderColor: colors.black,
+    backgroundColor: colors.backgroundGrey,
     borderRadius: 20,
     height: CARD_HEIGHT,
     width: CARD_WIDTH,

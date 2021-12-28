@@ -83,7 +83,7 @@ export default function BorrowQRScreen({ navigation }) {
     <View style={styles.container}>
       <Image
         source={require("../../assets/AppImages/borrowHeader.png")}
-        style={{ width: Dimensions.get("window").width }}
+        style={{ width: Dimensions.get("window").width+4 }}
       />
       <View
         style={{

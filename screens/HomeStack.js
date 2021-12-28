@@ -32,11 +32,6 @@ export default function HomeStack() {
         component={RewardsScreen}
         options={{ title: "Your Rewards" }}
       /> */}
-      {/* <Stack.Screen
-        name="Rewards Screen"
-        component={ModalRewardStack}
-        options={{ title: "Your Rewards" }}
-      /> */}
       <Stack.Screen
         name="Stats Screen"
         component={StatsScreen}

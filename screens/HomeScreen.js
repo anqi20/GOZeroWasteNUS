@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -154,7 +154,7 @@ export default function HomeScreen({ navigation }) {
         >
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
-              style={[styles.topIconBox2]}
+              style={[styles.topIconBox2, styles.shadow]}
               onPress={() => navigation.navigate("Borrow")}
             >
               <Image
@@ -166,7 +166,7 @@ export default function HomeScreen({ navigation }) {
 
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
-              style={[styles.topIconBox2, { marginHorizontal: 15 }]}
+              style={[styles.topIconBox2, styles.shadow, { marginHorizontal: 15 }]}
               onPress={() => navigation.navigate("BYO Stack")}
             >
               <Image
@@ -178,7 +178,7 @@ export default function HomeScreen({ navigation }) {
 
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
-              style={[styles.topIconBox2]}
+              style={[styles.topIconBox2, styles.shadow]}
               onPress={() => navigation.navigate("Return")}
             >
               <Image
@@ -254,7 +254,6 @@ const styles = StyleSheet.create({
     // marginTop: Constants.statusBarHeight,
     marginBottom: 32,
     padding: 20,
-    backgroundColor: 'red'
   },
   welcomeContainer: {
     flex: 1,
@@ -297,8 +296,8 @@ const styles = StyleSheet.create({
   },
   topIconBox: {
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: colors.black,
+    //borderWidth: 2,
+    //borderColor: colors.black,
   },
   topIconBox2: {
     flex: 1,

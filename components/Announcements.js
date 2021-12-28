@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
-  FlatList,
-  TouchableOpacity,
   Dimensions,
 } from "react-native";
 import colors from "../assets/colors";
@@ -24,9 +22,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderRadius: 15,
-    borderColor: colors.black,
-    borderWidth: 2,
-    backgroundColor: colors.white,
+    backgroundColor: colors.backgroundGrey,
   },
   headerText: {
     fontWeight: "bold",

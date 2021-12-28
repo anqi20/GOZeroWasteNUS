@@ -39,7 +39,7 @@ const guide = [
   {
     id: "2",
     image: require("../../assets/TutorialImages/borrow2.png"),
-    text: "2. Here, you can select the number of reusables you would like to borrow. Take note that there is a quota to how many you can borrow!",
+    text: "2. Here, you can select the number of reusables you would like to borrow. Take note that you can only borrow 2 reusables at a time!",
   },
   {
     id: "3",
@@ -49,7 +49,7 @@ const guide = [
   {
     id: "4",
     image: require("../../assets/TutorialImages/borrow4.png"),
-    text: "4. You have successfully made your first borrow! You can now go back to the Home screen!",
+    text: "4. You have successfully borrowed a reusable! You can now go back to the Home screen!",
   },
 ];
 

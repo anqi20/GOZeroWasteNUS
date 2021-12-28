@@ -90,7 +90,7 @@ const tabs = [
   },
   {
     id: "1",
-    title: "Terms and conditions",
+    title: "Terms and Conditions",
   },
   {id: 2,
   title: "Feedback to us!"}

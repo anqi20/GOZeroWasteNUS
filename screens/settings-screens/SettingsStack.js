@@ -51,7 +51,7 @@ export default function SettingsStack() {
         component={StallsScreen}
       ></Stack.Screen>
       <Stack.Screen
-        name="Terms and conditions"
+        name="Terms and Conditions"
         component={TermsScreen}
       ></Stack.Screen>
       <Stack.Screen

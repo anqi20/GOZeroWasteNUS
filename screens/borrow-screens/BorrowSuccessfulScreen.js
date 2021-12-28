@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, ScrollView, Image, Dimensions } from "react-native";
+import { StyleSheet, View, ScrollView, Image, Dimensions } from "react-native";
 import SuccessBox from "../../components/SuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -8,6 +8,7 @@ import { UserContext } from "../../assets/UserContext";
 import { uploadBorrowData } from "./BorrowApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
+import * as Animatable from "react-native-animatable";
 
 export default function BorrowSuccessfulScreen({ route, navigation }) {
   const userData = useContext(UserContext);
@@ -30,9 +31,21 @@ export default function BorrowSuccessfulScreen({ route, navigation }) {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Image
           source={require("../../assets/AppImages/borrowHeader.png")}
-          style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+          style={{ width: Dimensions.get("window").width, marginBottom: 10 }}
         />
-        <SuccessBox numCups={numCups} numContainers={numContainers} />
+        <View style={{ alignSelf: "center" }}>
+          <Animatable.Image
+            animation="bounce"
+            iterationCount="infinite"
+            style={{ height: 70, width: 70, marginBottom: 10 }}
+            source={require("../../assets/AppImages/celebration.png")}
+          />
+        </View>
+        <SuccessBox
+          numCups={numCups}
+          numContainers={numContainers}
+          header={"Successful!"}
+        />
         <FooterText />
       </ScrollView>
     );

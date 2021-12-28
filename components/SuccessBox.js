@@ -22,6 +22,7 @@ export default function SuccessBox({
   text,
   location,
   numCoins,
+  header,
 }) {
   const navigation = useNavigation();
 
@@ -153,14 +154,6 @@ export default function SuccessBox({
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.box}>
-        <View style={{ alignSelf: "center" }}>
-          <Animatable.Image
-            animation="bounce"
-            iterationCount="infinite"
-            style={{ height: 70, width: 70, marginBottom: 10 }}
-            source={require("../assets/AppImages/celebration.png")}
-          />
-        </View>
         <Icon
           containerStyle={{ marginBottom: 20 }}
           name="checkcircle"
@@ -169,7 +162,7 @@ export default function SuccessBox({
           size={80}
         />
 
-        <Text style={[styles.header, { marginBottom: 20 }]}>Successful!</Text>
+        <Text style={[styles.header, { marginBottom: 20 }]}>{header}</Text>
 
         <View style={styles.underlined}>
           <Text style={{ color: colors.darkGrey, fontSize: 18 }}>

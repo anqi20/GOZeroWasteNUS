@@ -147,7 +147,13 @@ export default function SelectionComponent({
     <View style={styles.container}>
       {renderSelector()}
       {isOverQuota ? (
-        <Text style={{ color: colors.red, textAlign: "center" }}>
+        <Text
+          style={{
+            color: colors.red,
+            textAlign: "center",
+            marginHorizontal: 20,
+          }}
+        >
           You cannot select more than this number. {"("}For borrows{")"} Return
           the ones you have to borrow more!
         </Text>

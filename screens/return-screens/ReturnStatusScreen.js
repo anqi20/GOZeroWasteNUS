@@ -38,7 +38,7 @@ export default function ReturnStatusScreen({ navigation }) {
 
   //Can change the initial state count to test if the interface works
   const [returnedContainers, setContainerCount] = useState(1);
-  const [returnedCups, setCupCount] = useState(1);
+  const [returnedCups, setCupCount] = useState(0);
 
   function renderText() {
     if (borrowedContainer > 0 && borrowedCup > 0) {
@@ -180,12 +180,18 @@ export default function ReturnStatusScreen({ navigation }) {
     <ScrollView style={styles.container}>
       <Image source={require("../../assets/AppImages/returnHeader.png")} />
 
-      {/* <Text style={globalStyles.header}>Return</Text> */}
       <View style={styles.box}>
-        <Text style={styles.machineName}>{machineName}</Text>
-        <Text style={styles.text}>
-          Drop the {renderText()} in the holes that are flashing green now!
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 18,
+            textAlign: "center",
+            marginBottom: 10,
+          }}
+        >
+          Drop the {renderText()} in the respective holes now!
         </Text>
+        <Text style={styles.text}>The numbers will update accordingly</Text>
 
         {renderContent()}
         <View
@@ -196,15 +202,40 @@ export default function ReturnStatusScreen({ navigation }) {
             borderRadius: 20,
           }}
         >
-          <Text style={styles.text}>- Please do not stack the reusables. </Text>
-          <Text style={styles.text}>
-            - Please return the lid and reusable together.
-          </Text>
+          <Text style={styles.text}>- Please drop one reusable at a time.</Text>
+          <Text style={styles.text}>- Cover the reusable with its lid.</Text>
+          <Text style={styles.text}>- Empty any remnants in the dustbin</Text>
         </View>
         {renderNextButton()}
+        <TouchableOpacity
+          onPress={() => navigation.popToTop()}
+          style={[globalStyles.button, { width: "90%" }]}
+        >
+          <Text style={globalStyles.buttonText}>Cancel</Text>
+        </TouchableOpacity>
       </View>
       <View style={{ marginHorizontal: 40 }}>
-        <FooterText />
+        {/* Footer text */}
+        <View
+          style={{
+            flex: 1,
+            marginVertical: 20,
+          }}
+        >
+          <Text style={globalStyles.footerText}>
+            Numbers not updating?{" "}
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Return Error Screen", {
+                  errorType: "Sorry that there seems to be an issue!",
+                  location: "",
+                })
+              }
+            >
+              <Text style={globalStyles.clickable}>Please click here!</Text>
+            </TouchableOpacity>
+          </Text>
+        </View>
       </View>
     </ScrollView>
   );

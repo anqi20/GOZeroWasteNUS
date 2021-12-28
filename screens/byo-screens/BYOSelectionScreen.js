@@ -128,7 +128,7 @@ export default function BYOSelectionScreen({ navigation, route }) {
           <View style={styles.box}>
             <Text style={styles.storeName}>{stall}</Text>
             <Text style={styles.text}>
-              Choose the number of {renderText()} you are borrowing
+              Choose the number of {renderText()} you have brought
             </Text>
             <SelectionComponent
               hasContainers={hasContainers}

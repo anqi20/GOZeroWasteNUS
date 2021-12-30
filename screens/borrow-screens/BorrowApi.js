@@ -198,3 +198,59 @@ export function uploadBorrowData(uid, numCups, numContainers, setError) {
     return null;
   }
 }
+
+export function addBorrowToLogs(uid, numCups, numContainers, stall) {
+  const currTime = moment().format("hh:mm:ss a");
+  const currDate = moment().format("DD/MM/YYYY");
+  const userRef = firebase
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .collection("logs")
+    .doc("logsDoc");
+  userRef
+    .get()
+    .then((document) => {
+      const retrievedData = document.data().logsArray;
+      if (retrievedData == undefined) {
+        userRef.set(
+          {
+            logsArray: [
+              {
+                container: numContainers,
+                cup: numCups,
+                description: "",
+                location: stall,
+                time: currTime,
+                date: currDate,
+                type: "borrow",
+              },
+            ],
+          },
+          { merge: true }
+        );
+      } else {
+        userRef.set(
+          {
+            logsArray: [
+              ...retrievedData,
+              {
+                container: numContainers,
+                cup: numCups,
+                description: "",
+                location: stall,
+                time: currTime,
+                date: currDate,
+                type: "borrow",
+              },
+            ],
+          },
+          { merge: true }
+        );
+      }
+      console.log("Borrow data successfully added to logs!");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}

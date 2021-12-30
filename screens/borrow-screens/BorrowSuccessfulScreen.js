@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, ScrollView, Image, Dimensions } from "react-native";
+import { StyleSheet, View, ScrollView, Image, Dimensions } from "react-native";
 import SuccessBox from "../../components/SuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
-import { uploadBorrowData } from "./BorrowApi";
+import { uploadBorrowData, addBorrowToLogs } from "./BorrowApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
+import * as Animatable from "react-native-animatable";
 
 export default function BorrowSuccessfulScreen({ route, navigation }) {
   const userData = useContext(UserContext);
-  const { numCups, numContainers } = route.params;
+  const { numCups, numContainers, stall } = route.params;
   const [hasError, setError] = useState(false);
 
   // Prevent back button action on Android
@@ -20,6 +21,7 @@ export default function BorrowSuccessfulScreen({ route, navigation }) {
   // console.log(userData.id);
   useEffect(() => {
     uploadBorrowData(userData.id, numCups, numContainers, setError);
+    addBorrowToLogs(userData.id, numCups, numContainers, stall);
   }, []);
 
   if (hasError) {
@@ -32,7 +34,20 @@ export default function BorrowSuccessfulScreen({ route, navigation }) {
           source={require("../../assets/AppImages/borrowHeader.png")}
           style={{ width: Dimensions.get("window").width+4, marginBottom: 50 }}
         />
-        <SuccessBox numCups={numCups} numContainers={numContainers} />
+        <View style={{ alignSelf: "center" }}>
+          <Animatable.Image
+            animation="bounce"
+            iterationCount="infinite"
+            style={{ height: 70, width: 70, marginBottom: 10 }}
+            source={require("../../assets/AppImages/celebration.png")}
+          />
+        </View>
+        <SuccessBox
+          numCups={numCups}
+          numContainers={numContainers}
+          location={stall}
+          header={"Successful!"}
+        />
         <FooterText />
       </ScrollView>
     );

@@ -65,4 +65,15 @@ export const globalStyles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  footerText: {
+    fontSize: 18,
+    color: colors.darkGrey,
+    textAlign: "center",
+    margin: 20,
+  },
+  clickable: {
+    fontSize: 18,
+    color: colors.darkGrey,
+    textDecorationLine: "underline",
+  },
 });

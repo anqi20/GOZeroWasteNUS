@@ -1,15 +1,23 @@
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, Text, ScrollView, Image, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Image,
+  Dimensions,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import SuccessBox from "../../components/SuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
-import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
-import { updateCoins, updateReturnData } from "./ReturnApi";
+import { updateCoins, updateReturnData, addReturnToLogs } from "./ReturnApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
+import * as Animatable from "react-native-animatable";
 
-export default function ReturnSuccessfulScreen({ route }) {
+export default function ReturnSuccessfulScreen({ navigation, route }) {
   const userData = useContext(UserContext);
   const uid = userData.id;
 
@@ -25,6 +33,7 @@ export default function ReturnSuccessfulScreen({ route }) {
     updateCoins(uid, coinsEarned);
     // awardWelcomeGift(); // Only decreases welcomeThreshold when eligible
     updateReturnData(uid, numCups, numContainers, setError);
+    addReturnToLogs(uid, numCups, numContainers, location);
   }, []);
 
   if (hasError) {
@@ -36,14 +45,44 @@ export default function ReturnSuccessfulScreen({ route }) {
         <Image
           source={require("../../assets/AppImages/returnHeader.png")}
           style={{ width: Dimensions.get("window").width+4, alignSelf: "center", marginBottom: 50 }}
+
         />
+        <View style={{ alignSelf: "center" }}>
+          <Animatable.Image
+            animation="bounce"
+            iterationCount="infinite"
+            style={{ height: 70, width: 70, marginBottom: 10 }}
+            source={require("../../assets/AppImages/celebration.png")}
+          />
+        </View>
         <SuccessBox
           numCups={numCups}
           numContainers={numContainers}
           location={location}
           numCoins={coinsEarned}
+          header={"Successful!"}
         />
-        <FooterText />
+        {/* Footer text */}
+        <View
+          style={{
+            flex: 1,
+            marginVertical: 20,
+          }}
+        >
+          <Text style={globalStyles.footerText}>
+            Numbers shown are wrong?{" "}
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Return Error Screen", {
+                  errorType: "Sorry that there seems to be an issue!",
+                  location: location,
+                })
+              }
+            >
+              <Text style={globalStyles.clickable}>Please click here!</Text>
+            </TouchableOpacity>
+          </Text>
+        </View>
       </ScrollView>
     );
   }

@@ -1,5 +1,12 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+} from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
@@ -44,7 +51,46 @@ export default function ReturnQRScreen({ navigation }) {
   }
 
   return (
-    
+    // <View
+    //   style={{
+    //     flex: 1,
+    //     backgroundColor: colors.white,
+    //     // marginTop: Constants.statusBarHeight,
+    //   }}
+    // >
+    //   <Image
+    //     source={require("../../assets/AppImages/returnHeader.png")}
+    //     style={{ width: "100%" }}
+    //   />
+
+    //   <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    //     <View
+    //       style={{
+    //         backgroundColor: "coral",
+    //         height: 40,
+    //         width: "80%",
+    //         justifyContent: "center",
+    //         alignItems: "center",
+    //         borderRadius: 20,
+    //       }}
+    //     >
+    //       <Text>Feature coming soon! Stay tuned {";)"}</Text>
+    //     </View>
+    //     {/* TEST VALUES */}
+    //     {/* <TouchableOpacity
+    //       onPress={() =>
+    //         navigation.navigate("Return Success Screen", {
+    //           numCups: 2,
+    //           numContainers: 2,
+    //           location: "E4",
+    //         })
+    //       }
+    //     >
+    //       <Text>Success Screen</Text>
+    //     </TouchableOpacity> */}
+    //   </View>
+    // </View>
+
     <View>
       <ScrollView
         style={{ backgroundColor: colors.white }}
@@ -53,10 +99,12 @@ export default function ReturnQRScreen({ navigation }) {
         <View style={styles.container}>
           <Image
             source={require("../../assets/AppImages/returnHeader.png")}
-            style={{ width: Dimensions.get("window").width+4 }}
+            style={{ width: Dimensions.get("window").width + 4 }}
           />
           <View style={styles.box}>
-            <Image source={require("../../assets/AppImages/returnPicture.png")} />
+            <Image
+              source={require("../../assets/AppImages/returnPicture.png")}
+            />
 
             <TouchableOpacity
               onPress={() => navigation.navigate("Return Unsuccess Screen")}
@@ -64,19 +112,36 @@ export default function ReturnQRScreen({ navigation }) {
             >
               <Text>(Unsuccessful Screen)</Text>
             </TouchableOpacity>
-
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => navigation.navigate("Return Status Screen")}
               style={{ margin: 10, backgroundColor: "lightgrey" }}
             >
               <Text>(Status Screen)</Text>
-            </TouchableOpacity>
-
+            </TouchableOpacity> */}
             <Text style={styles.text}>Flash the QR code!</Text>
             {renderUserQr()}
           </View>
-          <View style={{ flex: 1 }}>
-            <FooterText />
+
+          {/* Footer text */}
+          <View
+            style={{
+              flex: 1,
+              marginVertical: 20,
+            }}
+          >
+            <Text style={globalStyles.footerText}>
+              QR code not scanning?{" "}
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Return Error Screen", {
+                    errorType: "Sorry that the QR code isn't working!",
+                    location: "",
+                  })
+                }
+              >
+                <Text style={globalStyles.clickable}>Please click here!</Text>
+              </TouchableOpacity>
+            </Text>
           </View>
         </View>
       </ScrollView>

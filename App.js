@@ -157,7 +157,7 @@ export default function App() {
             containerReturned: 0,
             cupDate: [],
             cupReturned: 0,
-            userNum: 0,
+            // userNum: 0,
             numCup: 0,
             numContainer: 0,
             // numReturn: 0,
@@ -168,8 +168,8 @@ export default function App() {
             .collection("users")
             .doc(uid)
             .collection("logs")
-            .doc("initialDoc")
-            .set({ new: 0 });
+            .doc("logsDoc")
+            .set({ logsArray: [] });
           // Set total users count to increment by 1 for each sign in
           firebase
             .firestore()

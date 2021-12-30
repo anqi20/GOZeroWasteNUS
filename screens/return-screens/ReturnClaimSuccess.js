@@ -1,21 +1,20 @@
-import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, View, ScrollView, Image, Dimensions } from "react-native";
+import React, { useContext, useState, useEffect } from "react";
+import { StyleSheet, Text, ScrollView, Image, Dimensions } from "react-native";
 import SuccessBox from "../../components/SuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
-import { uploadByoData, updateCoins, addByoToLogs } from "./BYOApi";
 import { UserContext } from "../../assets/UserContext";
+import { updateCoins, updateReturnData, addClaimToLogs } from "./ReturnApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
-import * as Animatable from "react-native-animatable";
 
-export default function BYOSuccessScreen({ route }) {
-  const { numCups, numContainers, stall } = route.params;
+export default function ReturnClaimSuccess({ route }) {
   const userData = useContext(UserContext);
   const uid = userData.id;
-  const [hasError, setError] = useState(false);
 
+  const { numCups, numContainers, location } = route.params;
+  const [hasError, setError] = useState(false);
   // Can change the value of coins earned accordingly
   const coinsEarned = numCups + numContainers;
 
@@ -23,34 +22,28 @@ export default function BYOSuccessScreen({ route }) {
   useBackHandler(backActionHandler);
 
   useEffect(() => {
-    uploadByoData(uid, numCups, numContainers, setError);
     updateCoins(uid, coinsEarned);
-    addByoToLogs(uid, numCups, numContainers, stall);
+    // awardWelcomeGift(); // Only decreases welcomeThreshold when eligible
+    updateReturnData(uid, numCups, numContainers, setError);
+    addClaimToLogs(uid, numCups, numContainers, location);
   }, []);
 
   if (hasError) {
-    navigation.navigate("BYO Unsuccessful Screen");
+    navigation.navigate("Return Unsuccess Screen");
     return null;
   } else {
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Image
-          source={require("../../assets/AppImages/byoHeader.png")}
-          style={{ width: Dimensions.get("window").width+4, marginBottom: 50 }}
+          source={require("../../assets/AppImages/returnHeader.png")}
+          style={{ width: Dimensions.get("window").width, marginBottom: 20 }}
         />
-        <View style={{ alignSelf: "center" }}>
-          <Animatable.Image
-            animation="bounce"
-            iterationCount="infinite"
-            style={{ height: 70, width: 70, marginBottom: 10 }}
-            source={require("../../assets/AppImages/celebration.png")}
-          />
-        </View>
         <SuccessBox
           numCups={numCups}
           numContainers={numContainers}
           numCoins={coinsEarned}
-          header={"Successful!"}
+          header={"Your claim is noted!"}
+          text={"Please note this claim is subject to your own integrity."}
         />
         <FooterText />
       </ScrollView>

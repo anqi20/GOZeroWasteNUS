@@ -16,6 +16,7 @@ import { UserContext } from "../../assets/UserContext";
 import { getBorrowedNum } from "./ReturnApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
+import * as Animatable from "react-native-animatable";
 
 export default function ReturnStatusScreen({ navigation }) {
   const userData = useContext(UserContext);
@@ -37,9 +38,28 @@ export default function ReturnStatusScreen({ navigation }) {
   // const numContainers = data[2].numContainers;
   // const numCups = data[2].numCups;
 
-  //Can change the initial state count to test if the interface works
+  // Can change the initial state count to test if the interface works
   const [returnedContainers, setContainerCount] = useState(1);
-  const [returnedCups, setCupCount] = useState(1);
+  const [returnedCups, setCupCount] = useState(0);
+  const [animateCup, setAnimateCup] = useState(false);
+  const [animateContainer, setAnimateContainer] = useState(false);
+
+  // Monitors returnedContainers and returnedCups so icons animate on state change
+  useEffect(() => {
+    if (returnedCups) {
+      setAnimateContainer(false);
+      setAnimateCup(true);
+      console.log("returned cups count changed");
+    }
+  }, [returnedCups]);
+
+  useEffect(() => {
+    if (returnedContainers) {
+      setAnimateCup(false);
+      setAnimateContainer(true);
+      console.log("returned containers count changed");
+    }
+  }, [returnedContainers]);
 
   function renderText() {
     if (borrowedContainer > 0 && borrowedCup > 0) {
@@ -51,15 +71,62 @@ export default function ReturnStatusScreen({ navigation }) {
     }
   }
 
-  function ContainerCounter() {
-    function Cube() {
-      return (
-        <Image
-          source={require("../../assets/AppImages/container.png")}
-          style={{ marginLeft: 10 }}
-        />
-      );
+  // To test how changes in number causes the number to bounce
+  function TestButton() {
+    return null;
+    // return (
+    //   <View>
+    //     <TouchableOpacity onPress={() => setCupCount(returnedCups + 1)}>
+    //       <Text>Increment Cup</Text>
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       onPress={() => setContainerCount(returnedContainers + 1)}
+    //     >
+    //       <Text>Increment Container</Text>
+    //     </TouchableOpacity>
+    //   </View>
+    // );
+  }
+
+  function AnimatedIcon({ isCup }) {
+    if (isCup) {
+      if (animateCup) {
+        return (
+          <Animatable.Image
+            animation="bounce"
+            style={{ marginLeft: 10 }}
+            source={require("../../assets/AppImages/cup.png")}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require("../../assets/AppImages/cup.png")}
+            style={{ marginLeft: 10 }}
+          />
+        );
+      }
+    } else {
+      if (animateContainer) {
+        return (
+          <Animatable.Image
+            animation="bounce"
+            style={{ marginLeft: 10 }}
+            source={require("../../assets/AppImages/container.png")}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={require("../../assets/AppImages/container.png")}
+            style={{ marginLeft: 10 }}
+          />
+        );
+      }
     }
+  }
+
+  function ContainerCounter() {
     return (
       <View
         style={{
@@ -69,28 +136,18 @@ export default function ReturnStatusScreen({ navigation }) {
         }}
       >
         <Text style={styles.boldText}>
-          {/* {returnedContainers}{" "} */}
           {borrowedContainer - returnedContainers}{" "}
           <Text style={[styles.text, { fontWeight: "normal" }]}>
             {" "}
             remaining
           </Text>
         </Text>
-        <Cube />
+        <AnimatedIcon isCup={false} />
       </View>
     );
   }
 
   function CupCounter() {
-    function Cup() {
-      return (
-        <Image
-          source={require("../../assets/AppImages/cup.png")}
-          style={{ marginLeft: 10 }}
-        />
-      );
-    }
-
     return (
       <View
         style={{
@@ -100,11 +157,10 @@ export default function ReturnStatusScreen({ navigation }) {
         }}
       >
         <Text style={styles.boldText}>
-          {/* {returnedCups}{" "} */}
           {borrowedCup - returnedCups}{" "}
           <Text style={[styles.text, { fontWeight: "normal" }]}>remaining</Text>
         </Text>
-        <Cup />
+        <AnimatedIcon isCup={true} />
       </View>
     );
   }
@@ -179,19 +235,28 @@ export default function ReturnStatusScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Image 
-        source={require("../../assets/AppImages/returnHeader.png")} 
-        style={{ width: Dimensions.get("window").width+4, alignSelf: 'center' }}
+      <Image
+        source={require("../../assets/AppImages/returnHeader.png")}
+        style={{
+          width: Dimensions.get("window").width + 4,
+          alignSelf: "center",
+        }}
       />
 
-      {/* <Text style={globalStyles.header}>Return</Text> */}
       <View style={styles.box}>
-        <Text style={styles.machineName}>{machineName}</Text>
-        <Text style={styles.text}>
-          Drop the {renderText()} in the holes that are flashing green now!
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 18,
+            textAlign: "center",
+            marginBottom: 10,
+          }}
+        >
+          Drop the {renderText()} in the respective holes now!
         </Text>
-
+        <Text style={styles.text}>The numbers will update accordingly</Text>
         {renderContent()}
+        <TestButton />
         <View
           style={{
             margin: 15,
@@ -200,15 +265,40 @@ export default function ReturnStatusScreen({ navigation }) {
             borderRadius: 20,
           }}
         >
-          <Text style={styles.text}>- Please do not stack the reusables. </Text>
-          <Text style={styles.text}>
-            - Please return the lid and reusable together.
-          </Text>
+          <Text style={styles.text}>- Please drop one reusable at a time.</Text>
+          <Text style={styles.text}>- Cover the reusable with its lid.</Text>
+          <Text style={styles.text}>- Empty any remnants in the dustbin</Text>
         </View>
         {renderNextButton()}
+        <TouchableOpacity
+          onPress={() => navigation.popToTop()}
+          style={[globalStyles.button, { width: "90%" }]}
+        >
+          <Text style={globalStyles.buttonText}>Cancel</Text>
+        </TouchableOpacity>
       </View>
       <View style={{ marginHorizontal: 40 }}>
-        <FooterText />
+        {/* Footer text */}
+        <View
+          style={{
+            flex: 1,
+            marginVertical: 20,
+          }}
+        >
+          <Text style={globalStyles.footerText}>
+            Numbers not updating?{" "}
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Return Error Screen", {
+                  errorType: "Sorry that there seems to be an issue!",
+                  location: machineName,
+                })
+              }
+            >
+              <Text style={globalStyles.clickable}>Please click here!</Text>
+            </TouchableOpacity>
+          </Text>
+        </View>
       </View>
     </ScrollView>
   );
@@ -224,7 +314,6 @@ const data = [
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    
   },
   box: {
     borderWidth: 2,

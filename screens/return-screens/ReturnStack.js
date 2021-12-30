@@ -4,6 +4,8 @@ import ReturnQRScreen from "./ReturnQRScreen";
 import ReturnStatusScreen from "./ReturnStatusScreen";
 import ReturnSuccessfulScreen from "./ReturnSuccessfulScreen";
 import ReturnUnsuccessfulScreen from "./ReturnUnsuccessfulScreen";
+import ReturnErrorScreen from "./ReturnErrorScreen";
+import ReturnClaimSuccess from "./ReturnClaimSuccess";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +32,16 @@ export default function ReturnStack() {
         component={ReturnUnsuccessfulScreen}
         options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
+      <Stack.Screen
+        name="Return Error Screen"
+        component={ReturnErrorScreen}
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
+      <Stack.Screen
+        name="Return Claim Success Screen"
+        component={ReturnClaimSuccess}
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
     </Stack.Navigator>
   );
 }

@@ -136,7 +136,7 @@ export default function CarouselView({ containerDate, cupDate }) {
         itemHeight={CARD_HEIGHT}
         onSnapToItem={(index) => setIndex(index)}
         useScrollView={true}
-        loop={true}
+        loop={false}
       />
       <Pagination
         dotsLength={data.length}

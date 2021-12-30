@@ -48,7 +48,7 @@ export default function MainSettingsScreen({ navigation }) {
             </View>
           );
         }}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={renderSeparator}
       />
       <View style={{ flex: 1, justifyContent: "center" }}>
@@ -92,8 +92,8 @@ const tabs = [
     id: "1",
     title: "Terms and Conditions",
   },
-  {id: 2,
-  title: "Feedback to us!"}
+  // {id: 2,
+  // title: "Feedback to us!"}
   // {
   //   id: "4",
   //   title: "Terminate my account",

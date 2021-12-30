@@ -39,7 +39,7 @@ export default function ReturnStatusScreen({ navigation }) {
   // const numCups = data[2].numCups;
 
   // Can change the initial state count to test if the interface works
-  const [returnedContainers, setContainerCount] = useState(0);
+  const [returnedContainers, setContainerCount] = useState(1);
   const [returnedCups, setCupCount] = useState(0);
   const [animateCup, setAnimateCup] = useState(false);
   const [animateContainer, setAnimateContainer] = useState(false);
@@ -235,9 +235,12 @@ export default function ReturnStatusScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Image 
-        source={require("../../assets/AppImages/returnHeader.png")} 
-        style={{ width: Dimensions.get("window").width+4, alignSelf: 'center' }}
+      <Image
+        source={require("../../assets/AppImages/returnHeader.png")}
+        style={{
+          width: Dimensions.get("window").width + 4,
+          alignSelf: "center",
+        }}
       />
 
       <View style={styles.box}>
@@ -311,7 +314,6 @@ const data = [
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    
   },
   box: {
     borderWidth: 2,

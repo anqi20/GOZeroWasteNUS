@@ -55,7 +55,7 @@ function ReturnClaim({ location }) {
               {
                 width: "90%",
                 backgroundColor: colors.lightGrey,
-                marginBottom: 30,
+                marginBottom: 10,
               },
             ]}
             onPress={changeState}
@@ -80,7 +80,7 @@ function ReturnClaim({ location }) {
         <TouchableOpacity
           style={[
             globalStyles.button,
-            { width: "90%", marginBottom: 30, alignSelf: "center" },
+            { width: "90%", marginBottom: 10, alignSelf: "center" },
           ]}
           onPress={() =>
             navigation.navigate("Return Claim Success Screen", {
@@ -127,6 +127,15 @@ function ReturnClaim({ location }) {
         setContainerNum={setContainerNum}
       />
       {renderNextButton()}
+      <TouchableOpacity
+        onPress={() => navigation.popToTop()}
+        style={[
+          globalStyles.button,
+          { width: "90%", alignSelf: "center", marginBottom: 30 },
+        ]}
+      >
+        <Text style={globalStyles.buttonText}>Cancel</Text>
+      </TouchableOpacity>
     </View>
   );
 }

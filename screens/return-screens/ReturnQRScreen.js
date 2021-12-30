@@ -111,12 +111,12 @@ export default function ReturnQRScreen({ navigation }) {
             >
               <Text>(Unsuccessful Screen)</Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => navigation.navigate("Return Status Screen")}
               style={{ margin: 10, backgroundColor: "lightgrey" }}
             >
               <Text>(Status Screen)</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Text style={styles.text}>Flash the QR code!</Text>
             {renderUserQr()}
           </View>

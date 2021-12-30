@@ -114,7 +114,7 @@ function ReturnClaim({ location }) {
         editable={false}
       />
       <Text style={[styles.text, { marginBottom: 0 }]}>
-        Then, enter how many reusables you have returned!
+        Then, select how many reusables you have returned!
       </Text>
       <SelectionComponent
         hasContainers={true}

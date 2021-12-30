@@ -228,7 +228,7 @@ export default function ReturnStatusScreen({ navigation }) {
               onPress={() =>
                 navigation.navigate("Return Error Screen", {
                   errorType: "Sorry that there seems to be an issue!",
-                  location: "",
+                  location: machineName,
                 })
               }
             >

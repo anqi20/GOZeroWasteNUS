@@ -1,4 +1,5 @@
 import firebase from "../../database/firebaseDB";
+import moment from "moment";
 
 export function uploadByoData(uid, numCups, numContainers, setError) {
   const userRef = firebase.firestore().collection("users").doc(uid);
@@ -26,4 +27,60 @@ export function updateCoins(uid, coinsEarned) {
       setError(true);
     });
   console.log("Updated coins earned!");
+}
+
+export function addByoToLogs(uid, numCups, numContainers, stall) {
+  const currTime = moment().format("hh:mm:ss a");
+  const currDate = moment().format("DD/MM/YYYY");
+  const userRef = firebase
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .collection("logs")
+    .doc("logsDoc");
+  userRef
+    .get()
+    .then((document) => {
+      const retrievedData = document.data().logsArray;
+      if (retrievedData == undefined) {
+        userRef.set(
+          {
+            logsArray: [
+              {
+                container: numContainers,
+                cup: numCups,
+                description: "",
+                location: stall,
+                time: currTime,
+                date: currDate,
+                type: "byo",
+              },
+            ],
+          },
+          { merge: true }
+        );
+      } else {
+        userRef.set(
+          {
+            logsArray: [
+              ...retrievedData,
+              {
+                container: numContainers,
+                cup: numCups,
+                description: "",
+                location: stall,
+                time: currTime,
+                date: currDate,
+                type: "byo",
+              },
+            ],
+          },
+          { merge: true }
+        );
+      }
+      console.log("BYO data successfully added to logs!");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }

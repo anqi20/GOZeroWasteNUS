@@ -16,11 +16,13 @@ import { getBorrowedNum } from "../borrow-screens/BorrowApi";
 import { UserContext } from "../../assets/UserContext";
 import { useNavigation } from "@react-navigation/native";
 
-function ReturnClaim() {
+function ReturnClaim({ location }) {
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
   const [borrowedCup, setBorrowedCup] = useState(0);
   const [borrowedContainer, setBorrowedContainer] = useState(0);
+
+  // console.log(location);
 
   const userData = useContext(UserContext);
   const uid = userData.id;
@@ -76,11 +78,15 @@ function ReturnClaim() {
     } else {
       return (
         <TouchableOpacity
-          style={[globalStyles.button, { width: "90%", marginBottom: 30 }]}
+          style={[
+            globalStyles.button,
+            { width: "90%", marginBottom: 30, alignSelf: "center" },
+          ]}
           onPress={() =>
             navigation.navigate("Return Claim Success Screen", {
               numCups: numCups,
               numContainers: numContainers,
+              location: location,
             })
           }
         >
@@ -126,7 +132,8 @@ function ReturnClaim() {
 }
 
 export default function ReturnErrorScreen({ navigation, route }) {
-  const { errorType } = route.params;
+  const { errorType, location } = route.params;
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text
@@ -145,7 +152,7 @@ export default function ReturnErrorScreen({ navigation, route }) {
         style={styles.icon}
       />
       <View style={styles.box}>
-        <ReturnClaim />
+        <ReturnClaim location={location} />
       </View>
     </ScrollView>
   );

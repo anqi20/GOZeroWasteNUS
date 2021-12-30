@@ -12,7 +12,7 @@ import SuccessBox from "../../components/SuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import { UserContext } from "../../assets/UserContext";
-import { updateCoins, updateReturnData } from "./ReturnApi";
+import { updateCoins, updateReturnData, addReturnToLogs } from "./ReturnApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
 import * as Animatable from "react-native-animatable";
@@ -33,6 +33,7 @@ export default function ReturnSuccessfulScreen({ navigation, route }) {
     updateCoins(uid, coinsEarned);
     // awardWelcomeGift(); // Only decreases welcomeThreshold when eligible
     updateReturnData(uid, numCups, numContainers, setError);
+    addReturnToLogs(uid, numCups, numContainers, location);
   }, []);
 
   if (hasError) {

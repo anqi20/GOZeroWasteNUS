@@ -5,7 +5,7 @@ import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
-import { updateCoins, updateReturnData } from "./ReturnApi";
+import { updateCoins, updateReturnData, addClaimToLogs } from "./ReturnApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
 
@@ -13,7 +13,7 @@ export default function ReturnClaimSuccess({ route }) {
   const userData = useContext(UserContext);
   const uid = userData.id;
 
-  const { numCups, numContainers } = route.params;
+  const { numCups, numContainers, location } = route.params;
   const [hasError, setError] = useState(false);
   // Can change the value of coins earned accordingly
   const coinsEarned = numCups + numContainers;
@@ -25,6 +25,7 @@ export default function ReturnClaimSuccess({ route }) {
     updateCoins(uid, coinsEarned);
     // awardWelcomeGift(); // Only decreases welcomeThreshold when eligible
     updateReturnData(uid, numCups, numContainers, setError);
+    addClaimToLogs(uid, numCups, numContainers, location);
   }, []);
 
   if (hasError) {

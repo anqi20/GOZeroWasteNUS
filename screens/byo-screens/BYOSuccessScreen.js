@@ -4,14 +4,14 @@ import SuccessBox from "../../components/SuccessBox";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
-import { uploadByoData, updateCoins } from "./BYOApi";
+import { uploadByoData, updateCoins, addByoToLogs } from "./BYOApi";
 import { UserContext } from "../../assets/UserContext";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
 import * as Animatable from "react-native-animatable";
 
 export default function BYOSuccessScreen({ route }) {
-  const { numCups, numContainers } = route.params;
+  const { numCups, numContainers, stall } = route.params;
   const userData = useContext(UserContext);
   const uid = userData.id;
   const [hasError, setError] = useState(false);
@@ -25,6 +25,7 @@ export default function BYOSuccessScreen({ route }) {
   useEffect(() => {
     uploadByoData(uid, numCups, numContainers, setError);
     updateCoins(uid, coinsEarned);
+    addByoToLogs(uid, numCups, numContainers, stall);
   }, []);
 
   if (hasError) {

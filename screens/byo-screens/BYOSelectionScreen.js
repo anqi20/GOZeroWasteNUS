@@ -104,6 +104,7 @@ export default function BYOSelectionScreen({ navigation, route }) {
             navigation.navigate("BYO Success Screen", {
               numCups: numCups,
               numContainers: numContainers,
+              stall: stall,
             })
           }
         >

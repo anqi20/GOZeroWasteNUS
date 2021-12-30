@@ -1,4 +1,5 @@
 import firebase from "../../database/firebaseDB";
+import moment from "moment";
 
 // Get number of reusables that are already borrowed
 export function getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer) {
@@ -222,4 +223,116 @@ function handleContainerReturn(uid, numContainers, setError) {
 export function updateReturnData(uid, numCups, numContainers, setError) {
   handleCupReturn(uid, numCups, setError);
   handleContainerReturn(uid, numContainers, setError);
+}
+
+export function addReturnToLogs(uid, numCups, numContainers, location) {
+  const currTime = moment().format("hh:mm:ss a");
+  const currDate = moment().format("DD/MM/YYYY");
+  const userRef = firebase
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .collection("logs")
+    .doc("logsDoc");
+  userRef
+    .get()
+    .then((document) => {
+      const retrievedData = document.data().logsArray;
+      if (retrievedData == undefined) {
+        userRef.set(
+          {
+            logsArray: [
+              {
+                container: numContainers,
+                cup: numCups,
+                description: "",
+                location: location,
+                time: currTime,
+                date: currDate,
+                type: "return",
+              },
+            ],
+          },
+          { merge: true }
+        );
+      } else {
+        userRef.set(
+          {
+            logsArray: [
+              ...retrievedData,
+              {
+                container: numContainers,
+                cup: numCups,
+                description: "",
+                location: location,
+                time: currTime,
+                date: currDate,
+                type: "return",
+              },
+            ],
+          },
+          { merge: true }
+        );
+      }
+      console.log("Return data successfully added to logs!");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export function addClaimToLogs(uid, numCups, numContainers, location) {
+  const currTime = moment().format("hh:mm:ss a");
+  const currDate = moment().format("DD/MM/YYYY");
+  const userRef = firebase
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .collection("logs")
+    .doc("logsDoc");
+  userRef
+    .get()
+    .then((document) => {
+      const retrievedData = document.data().logsArray;
+      if (retrievedData == undefined) {
+        userRef.set(
+          {
+            logsArray: [
+              {
+                container: numContainers,
+                cup: numCups,
+                description: "",
+                location: location,
+                time: currTime,
+                date: currDate,
+                type: "claim",
+              },
+            ],
+          },
+          { merge: true }
+        );
+      } else {
+        userRef.set(
+          {
+            logsArray: [
+              ...retrievedData,
+              {
+                container: numContainers,
+                cup: numCups,
+                description: "",
+                location: location,
+                time: currTime,
+                date: currDate,
+                type: "claim",
+              },
+            ],
+          },
+          { merge: true }
+        );
+      }
+      console.log("Return claim data successfully added to logs!");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }

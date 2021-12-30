@@ -111,6 +111,7 @@ export default function BorrowSelectionScreen({ navigation, route }) {
             navigation.navigate("Success Screen", {
               numCups: numCups,
               numContainers: numContainers,
+              stall: stall,
             })
           }
         >

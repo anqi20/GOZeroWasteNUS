@@ -5,14 +5,14 @@ import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
-import { uploadBorrowData } from "./BorrowApi";
+import { uploadBorrowData, addBorrowToLogs } from "./BorrowApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
 import * as Animatable from "react-native-animatable";
 
 export default function BorrowSuccessfulScreen({ route, navigation }) {
   const userData = useContext(UserContext);
-  const { numCups, numContainers } = route.params;
+  const { numCups, numContainers, stall } = route.params;
   const [hasError, setError] = useState(false);
 
   // Prevent back button action on Android
@@ -21,6 +21,7 @@ export default function BorrowSuccessfulScreen({ route, navigation }) {
   // console.log(userData.id);
   useEffect(() => {
     uploadBorrowData(userData.id, numCups, numContainers, setError);
+    addBorrowToLogs(userData.id, numCups, numContainers, stall);
   }, []);
 
   if (hasError) {
@@ -44,6 +45,7 @@ export default function BorrowSuccessfulScreen({ route, navigation }) {
         <SuccessBox
           numCups={numCups}
           numContainers={numContainers}
+          location={stall}
           header={"Successful!"}
         />
         <FooterText />

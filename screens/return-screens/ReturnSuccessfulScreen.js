@@ -44,7 +44,8 @@ export default function ReturnSuccessfulScreen({ navigation, route }) {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Image
           source={require("../../assets/AppImages/returnHeader.png")}
-          style={{ width: Dimensions.get("window").width, marginBottom: 10 }}
+          style={{ width: Dimensions.get("window").width+4, alignSelf: "center", marginBottom: 50 }}
+
         />
         <View style={{ alignSelf: "center" }}>
           <Animatable.Image

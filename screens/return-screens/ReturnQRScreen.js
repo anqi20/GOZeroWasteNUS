@@ -1,12 +1,5 @@
 import React, { useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
@@ -90,6 +83,7 @@ export default function ReturnQRScreen({ navigation }) {
     //     </TouchableOpacity> */}
     //   </View>
     // </View>
+    
     <View>
       <ScrollView
         style={{ backgroundColor: colors.white }}
@@ -98,13 +92,11 @@ export default function ReturnQRScreen({ navigation }) {
         <View style={styles.container}>
           <Image
             source={require("../../assets/AppImages/returnHeader.png")}
-            style={{ width: Dimensions.get("window").width }}
+            style={{ width: Dimensions.get("window").width+4 }}
           />
           <View style={styles.box}>
-            {/*<View style={styles.imagePlaceholder} />*/}
-            <Image
-              source={require("../../assets/AppImages/returnPicture.png")}
-            />
+            <Image source={require("../../assets/AppImages/returnPicture.png")} />
+
             <TouchableOpacity
               onPress={() => navigation.navigate("Return Unsuccess Screen")}
               style={{ margin: 10, backgroundColor: "lightgrey" }}
@@ -175,7 +167,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   qrPlaceholder: {
-    backgroundColor: colors.lightGrey,
+    backgroundColor: colors.white,
     width: "70%",
     aspectRatio: 1,
     justifyContent: "center",

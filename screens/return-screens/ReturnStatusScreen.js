@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Dimensions,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -234,7 +235,10 @@ export default function ReturnStatusScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Image source={require("../../assets/AppImages/returnHeader.png")} />
+      <Image 
+        source={require("../../assets/AppImages/returnHeader.png")} 
+        style={{ width: Dimensions.get("window").width+4, alignSelf: 'center' }}
+      />
 
       <View style={styles.box}>
         <Text
@@ -307,6 +311,7 @@ const data = [
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
+    
   },
   box: {
     borderWidth: 2,

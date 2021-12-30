@@ -130,7 +130,7 @@ export default function BorrowSelectionScreen({ navigation, route }) {
         <View style={styles.container}>
           <Image
             source={require("../../assets/AppImages/borrowHeader.png")}
-            style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+            style={{ width: Dimensions.get("window").width+4, marginBottom: 50 }}
           />
           <View style={styles.box}>
             <Text style={styles.storeName}>{stall}</Text>

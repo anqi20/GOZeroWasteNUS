@@ -36,7 +36,7 @@ export default function BYOSuccessScreen({ route }) {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Image
           source={require("../../assets/AppImages/byoHeader.png")}
-          style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+          style={{ width: Dimensions.get("window").width+4, marginBottom: 50 }}
         />
         <View style={{ alignSelf: "center" }}>
           <Animatable.Image

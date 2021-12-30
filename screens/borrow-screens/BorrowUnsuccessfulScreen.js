@@ -14,7 +14,7 @@ export default function BorrowUnsuccessfulScreen() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Image
         source={require("../../assets/AppImages/borrowHeader.png")}
-        style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+        style={{ width: Dimensions.get("window").width+4, marginBottom: 50 }}
       />
       <UnsuccessBox />
     </ScrollView>

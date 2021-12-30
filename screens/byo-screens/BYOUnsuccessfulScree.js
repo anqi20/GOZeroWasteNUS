@@ -25,7 +25,7 @@ export default function BYOUnsuccessfulScreen() {
       <View style={styles.container}>
         <Image
           source={require("../../assets/AppImages/byoHeader.png")}
-          style={{ width: Dimensions.get("window").width, marginBottom: 50 }}
+          style={{ width: Dimensions.get("window").width+4, marginBottom: 50 }}
         />
         <UnsuccessBox />
       </View>

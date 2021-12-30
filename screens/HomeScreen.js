@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -104,7 +104,6 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
       <ScrollView
         style={{ backgroundColor: colors.white }}
         showsVerticalScrollIndicator={false}
@@ -155,7 +154,7 @@ export default function HomeScreen({ navigation }) {
         >
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
-              style={[styles.topIconBox2]}
+              style={[styles.topIconBox2, styles.shadow]}
               onPress={() => navigation.navigate("Borrow")}
             >
               <Image
@@ -167,7 +166,7 @@ export default function HomeScreen({ navigation }) {
 
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
-              style={[styles.topIconBox2, { marginHorizontal: 15 }]}
+              style={[styles.topIconBox2, styles.shadow, { marginHorizontal: 15 }]}
               onPress={() => navigation.navigate("BYO Stack")}
             >
               <Image
@@ -179,7 +178,7 @@ export default function HomeScreen({ navigation }) {
 
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
-              style={[styles.topIconBox2]}
+              style={[styles.topIconBox2, styles.shadow]}
               onPress={() => navigation.navigate("Return")}
             >
               <Image
@@ -237,21 +236,17 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
       </ScrollView>
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   headerContainer: {
     flex: 1,
   },
   header: {
     flex: 1,
     flexDirection: "row",
-    width: Dimensions.get("window").width,
+    width: Dimensions.get("screen").width+2,
     justifyContent: "center",
     alignItems: "center",
     height: 150,
@@ -301,8 +296,8 @@ const styles = StyleSheet.create({
   },
   topIconBox: {
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: colors.black,
+    //borderWidth: 2,
+    //borderColor: colors.black,
   },
   topIconBox2: {
     flex: 1,

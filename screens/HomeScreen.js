@@ -104,138 +104,142 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-      <ScrollView
-        style={{ backgroundColor: colors.white }}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Header */}
-        <View style={styles.headerContainer}>
-          <ImageBackground
-            source={require("../assets/AppImages/homeHeader.png")}
-            style={styles.header}
-          >
-            <View style={styles.welcomeContainer}>
-              <Text style={styles.text}>Hi,</Text>
-              <Text style={[styles.boldText, { fontSize: 36 }]}>
-                {userData !== undefined ? userData.firstName : "Anonymous"}
-              </Text>
-            </View>
-            <View style={styles.coinsContainer}>
-              <Image
-                source={require("../assets/AppImages/coin.png")}
-                style={{ height: 30, width: 30, marginRight: 10 }}
-              />
-              <Text style={styles.boldText}>{coins}</Text>
-            </View>
-            <View style={styles.settingsContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("Settings Stack")}
-              >
-                <Ionicons name="settings-outline" size={40} color="black" />
-              </TouchableOpacity>
-            </View>
-          </ImageBackground>
-        </View>
-
-        {/* Announcements */}
-        {announcement != "" ? (
-          <View style={{ alignItems: "center", marginBottom: 32 }}>
-            <Announcements header={true} text={announcement} />
-          </View>
-        ) : null}
-
-        {/* Icons */}
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            marginBottom: 32,
-          }}
+    <ScrollView
+      style={{ backgroundColor: colors.white }}
+      showsVerticalScrollIndicator={false}
+    >
+      {/* Header */}
+      <View style={styles.headerContainer}>
+        <ImageBackground
+          source={require("../assets/AppImages/homeHeader.png")}
+          style={styles.header}
         >
-          <View style={{ alignItems: "center" }}>
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.text}>Hi,</Text>
+            <Text style={[styles.boldText, { fontSize: 36 }]}>
+              {userData !== undefined ? userData.firstName : "Anonymous"}
+            </Text>
+          </View>
+          <View style={styles.coinsContainer}>
+            <Image
+              source={require("../assets/AppImages/coin.png")}
+              style={{ height: 30, width: 30, marginRight: 10 }}
+            />
+            <Text style={styles.boldText}>{coins}</Text>
+          </View>
+          <View style={styles.settingsContainer}>
             <TouchableOpacity
-              style={[styles.topIconBox2, styles.shadow]}
-              onPress={() => navigation.navigate("Borrow")}
+              onPress={() => navigation.navigate("Settings Stack")}
             >
-              <Image
-                source={require("../assets/AppImages/borrowIcon.png")}
-                style={styles.topIconBox}
-              />
+              <Ionicons name="settings-outline" size={40} color="black" />
             </TouchableOpacity>
           </View>
+        </ImageBackground>
+      </View>
 
-          <View style={{ alignItems: "center" }}>
-            <TouchableOpacity
-              style={[styles.topIconBox2, styles.shadow, { marginHorizontal: 15 }]}
-              onPress={() => navigation.navigate("BYO Stack")}
-            >
-              <Image
-                source={require("../assets/AppImages/byoIcon.png")}
-                style={styles.topIconBox}
-              />
-            </TouchableOpacity>
-          </View>
+      {/* Announcements */}
+      {announcement != "" ? (
+        <View style={{ alignItems: "center", marginBottom: 32 }}>
+          <Announcements header={true} text={announcement} />
+        </View>
+      ) : null}
 
-          <View style={{ alignItems: "center" }}>
-            <TouchableOpacity
-              style={[styles.topIconBox2, styles.shadow]}
-              onPress={() => navigation.navigate("Return")}
-            >
-              <Image
-                source={require("../assets/AppImages/returnIcon.png")}
-                style={styles.topIconBox}
-              />
-            </TouchableOpacity>
-          </View>
+      {/* Icons */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginBottom: 32,
+        }}
+      >
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            style={[styles.topIconBox2, styles.shadow]}
+            onPress={() => navigation.navigate("Borrow")}
+          >
+            <Image
+              source={require("../assets/AppImages/borrowIcon.png")}
+              style={styles.topIconBox}
+            />
+          </TouchableOpacity>
         </View>
 
-        {/* Due reusables scroll view */}
-        {renderCarouselView(updatedUserData, userData)}
-
-        {/* Quick navigation icons */}
-        <View style={styles.navigationIcons}>
-          <View>
-            {renderStatsIcon(updatedUserData, userData)}
-            <Text>My Stats</Text>
-          </View>
-
-          <View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Locations Screen")}
-              style={styles.quickNavButton}
-            >
-              <Image
-                source={require("../assets/AppImages/locationIcon.png")}
-                style={styles.quickNavButton}
-              />
-            </TouchableOpacity>
-            <Text>Return Locations</Text>
-          </View>
-
-          <View>
-            <TouchableOpacity onPress={goToSite} style={styles.quickNavButton}>
-              <Image
-                source={require("../assets/AppImages/feedbackIcon.png")}
-                style={styles.quickNavButton}
-              />
-            </TouchableOpacity>
-            <Text style={styles.text}>Feedback</Text>
-          </View>
-
-          <View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Tutorial Screen")}
-              style={styles.quickNavButton}
-            >
-              <Image
-                source={require("../assets/AppImages/tutorialIcon.png")}
-                style={styles.quickNavButton}
-              />
-            </TouchableOpacity>
-            <Text style={styles.text}>Tutorial</Text>
-          </View>
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            style={[
+              styles.topIconBox2,
+              styles.shadow,
+              { marginHorizontal: 15 },
+            ]}
+            onPress={() => navigation.navigate("BYO Stack")}
+          >
+            <Image
+              source={require("../assets/AppImages/byoIcon.png")}
+              style={styles.topIconBox}
+            />
+          </TouchableOpacity>
         </View>
-      </ScrollView>
+
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            style={[styles.topIconBox2, styles.shadow]}
+            onPress={() => navigation.navigate("Return")}
+          >
+            <Image
+              source={require("../assets/AppImages/returnIcon.png")}
+              style={styles.topIconBox}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* Due reusables scroll view */}
+      {renderCarouselView(updatedUserData, userData)}
+
+      {/* Quick navigation icons */}
+      <View style={styles.navigationIcons}>
+        <View>
+          {renderStatsIcon(updatedUserData, userData)}
+          <Text>My Stats</Text>
+        </View>
+
+        <View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Locations Screen")}
+            style={styles.quickNavButton}
+          >
+            <Image
+              source={require("../assets/AppImages/locationIcon.png")}
+              style={styles.quickNavButton}
+            />
+          </TouchableOpacity>
+          <Text>Return Locations</Text>
+        </View>
+
+        <View>
+          <TouchableOpacity onPress={goToSite} style={styles.quickNavButton}>
+            <Image
+              source={require("../assets/AppImages/feedbackIcon.png")}
+              style={styles.quickNavButton}
+            />
+          </TouchableOpacity>
+          <Text style={styles.text}>Feedback</Text>
+        </View>
+
+        <View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Tutorial Screen")}
+            style={styles.quickNavButton}
+          >
+            <Image
+              source={require("../assets/AppImages/tutorialIcon.png")}
+              style={styles.quickNavButton}
+            />
+          </TouchableOpacity>
+          <Text style={styles.text}>Tutorial</Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -246,7 +250,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: "row",
-    width: Dimensions.get("screen").width+2,
+    width: Dimensions.get("screen").width + 2,
     justifyContent: "center",
     alignItems: "center",
     height: 150,
@@ -338,7 +342,7 @@ const styles = StyleSheet.create({
       width: 5,
       height: 5,
     },
-
-    elevation: 10,
+    backgroundColor: "transparent",
+    elevation: 8,
   },
 });

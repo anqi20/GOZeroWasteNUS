@@ -300,8 +300,8 @@ const styles = StyleSheet.create({
   },
   topIconBox: {
     borderRadius: 10,
-    //borderWidth: 2,
-    //borderColor: colors.black,
+    height: 80,
+    width: (Dimensions.get("window").width - 80) / 3,
   },
   topIconBox2: {
     flex: 1,

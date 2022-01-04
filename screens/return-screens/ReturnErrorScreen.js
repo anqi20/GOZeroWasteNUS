@@ -109,7 +109,7 @@ function ReturnClaim({ location }) {
           <Text
             style={[
               globalStyles.buttonText,
-              { textAlign: "center", marginHorizontal: 10 },
+              { textAlign: "center", marginHorizontal: 10, color: "black" },
             ]}
           >
             {" "}

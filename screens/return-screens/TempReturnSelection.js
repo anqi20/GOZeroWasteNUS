@@ -102,7 +102,12 @@ function ReturnClaim({ location }) {
             })
           }
         >
-          <Text style={[globalStyles.buttonText, { textAlign: "center" }]}>
+          <Text
+            style={[
+              globalStyles.buttonText,
+              { textAlign: "center", color: "black" },
+            ]}
+          >
             I declare that I’m returning the above number of reusables
           </Text>
         </TouchableOpacity>

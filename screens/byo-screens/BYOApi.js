@@ -12,6 +12,14 @@ export function uploadByoData(uid, numCups, numContainers, setError) {
       console.log(error);
       setError(true);
     });
+
+  const overallRef = firebase
+    .firestore()
+    .collection("overall")
+    .doc("overallStats");
+  overallRef.update({
+    totalBYOs: firebase.firestore.FieldValue.increment(numContainers + numCups),
+  });
   console.log("Updated byo count!");
 }
 

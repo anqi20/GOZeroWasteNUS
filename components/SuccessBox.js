@@ -32,7 +32,7 @@ export default function SuccessBox({
       if (numCups > 0 && numContainers > 0) {
         return (
           <View>
-            <Text>You have returned:</Text>
+            <Text>Reusables:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numContainers}</Text>
               <Image source={require("../assets/AppImages/container.png")} />
@@ -53,7 +53,7 @@ export default function SuccessBox({
       } else if (numCups > 0) {
         return (
           <View>
-            <Text>You have returned:</Text>
+            <Text>Reusables:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numCups}</Text>
 
@@ -70,7 +70,7 @@ export default function SuccessBox({
       } else if (numContainers > 0) {
         return (
           <View>
-            <Text>You have returned:</Text>
+            <Text>Reusables:</Text>
             <View style={styles.variableContent}>
               <Text style={styles.number}>{numContainers}</Text>
               <Image source={require("../assets/AppImages/container.png")} />

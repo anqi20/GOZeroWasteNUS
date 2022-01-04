@@ -184,6 +184,15 @@ function updateTotalContainers(uid, numContainers) {
 
 // Upload date that each item is borrowed
 export function uploadBorrowData(uid, numCups, numContainers, setError) {
+  const overallRef = firebase
+    .firestore()
+    .collection("overall")
+    .doc("overallStats");
+  overallRef.update({
+    totalBorrows: firebase.firestore.FieldValue.increment(
+      numContainers + numCups
+    ),
+  });
   if (numCups > 0 && numContainers > 0) {
     // Both cups and containers are selected
     addCupDates(uid, numCups, setError);

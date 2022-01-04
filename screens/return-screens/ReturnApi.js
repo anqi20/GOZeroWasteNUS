@@ -89,9 +89,9 @@ function handleCupReturn(uid, numCups, setError) {
         });
 
         // Update cupReturned field
-        userRef.update({
-          cupReturned: firebase.firestore.FieldValue.increment(numCups),
-        });
+        // userRef.update({
+        //   cupReturned: firebase.firestore.FieldValue.increment(numCups),
+        // });
 
         // console.log("Overall borrow data in cup return loop:");
         // console.log(borrowData);
@@ -161,10 +161,10 @@ function handleContainerReturn(uid, numContainers, setError) {
         });
 
         // Update containerReturned field
-        userRef.update({
-          containerReturned:
-            firebase.firestore.FieldValue.increment(numContainers),
-        });
+        // userRef.update({
+        //   containerReturned:
+        //     firebase.firestore.FieldValue.increment(numContainers),
+        // });
 
         // console.log("Overall borrow data in container return loop:");
         // console.log(borrowData);
@@ -221,6 +221,16 @@ function handleContainerReturn(uid, numContainers, setError) {
 }
 
 export function updateReturnData(uid, numCups, numContainers, setError) {
+  const overallRef = firebase
+    .firestore()
+    .collection("overall")
+    .doc("overallStats");
+  overallRef.update({
+    totalReturns: firebase.firestore.FieldValue.increment(
+      numContainers + numCups
+    ),
+  });
+
   handleCupReturn(uid, numCups, setError);
   handleContainerReturn(uid, numContainers, setError);
 }

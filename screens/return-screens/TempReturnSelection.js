@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Dimensions,
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
@@ -63,12 +64,7 @@ function ReturnClaim({ location }) {
             ]}
             onPress={changeState}
           >
-            <Text
-              style={[
-                globalStyles.buttonText,
-                { textAlign: "center", marginHorizontal: 10 },
-              ]}
-            >
+            <Text style={[globalStyles.buttonText, { textAlign: "center" }]}>
               I declare that I’m returning the above number of reusables
             </Text>
           </TouchableOpacity>
@@ -94,8 +90,8 @@ function ReturnClaim({ location }) {
               width: "90%",
               marginBottom: 10,
               alignSelf: "center",
-              backgroundColor: "coral",
               height: 60,
+              backgroundColor: "coral",
             },
           ]}
           onPress={() =>
@@ -109,10 +105,9 @@ function ReturnClaim({ location }) {
           <Text
             style={[
               globalStyles.buttonText,
-              { textAlign: "center", marginHorizontal: 10, color: "black" },
+              { textAlign: "center", color: "black" },
             ]}
           >
-            {" "}
             I declare that I’m returning the above number of reusables
           </Text>
         </TouchableOpacity>
@@ -155,31 +150,25 @@ function ReturnClaim({ location }) {
   );
 }
 
-export default function ReturnErrorScreen({ navigation, route }) {
-  const { errorType, location } = route.params;
+export default function TempReturnSelection({ navigation, route }) {
+  const { location } = route.params;
 
   // Prevent back button action on Android
   useBackHandler(backActionHandler);
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Text
-        style={{
-          textAlign: "center",
-          fontSize: 32,
-          marginTop: 40,
-          fontWeight: "bold",
-          marginHorizontal: 20,
-        }}
-      >
-        {errorType}
-      </Text>
-      <Image
-        source={require("../../assets/AppImages/sadSmile.png")}
-        style={styles.icon}
-      />
-      <View style={styles.box}>
-        <ReturnClaim location={location} />
+    <ScrollView
+      style={{ backgroundColor: colors.white }}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.container}>
+        <Image
+          source={require("../../assets/AppImages/returnHeader.png")}
+          style={{ width: Dimensions.get("window").width + 4 }}
+        />
+        <View style={styles.box}>
+          <ReturnClaim location={location} />
+        </View>
       </View>
     </ScrollView>
   );
@@ -187,7 +176,9 @@ export default function ReturnErrorScreen({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    flex: 1,
+    alignItems: "center",
+    paddingHorizontal: 40,
   },
   box: {
     borderWidth: 2,

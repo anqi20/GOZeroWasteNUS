@@ -42,8 +42,7 @@ export default function ReturnClaimSuccess({ route }) {
           numCups={numCups}
           numContainers={numContainers}
           numCoins={coinsEarned}
-          header={"Your claim is noted!"}
-          text={"Please note this claim is subject to your own integrity."}
+          header={"Thank you for returning!"}
         />
         <FooterText />
       </ScrollView>

@@ -302,11 +302,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     //borderWidth: 2,
     //borderColor: colors.black,
+    height: 80,
+    width: (Dimensions.get("window").width - 80) / 3,
   },
   topIconBox2: {
     flex: 1,
-    height: 80,
-    width: (Dimensions.get("window").width - 80) / 3,
+    // height: 80,
+    // width: (Dimensions.get("window").width - 80) / 3,
   },
   navigationIcons: {
     flex: 1,

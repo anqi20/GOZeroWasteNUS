@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,15 +9,17 @@ import {
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
-import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
 import QRCode from "react-native-qrcode-svg";
 import moment from "moment";
-import Constants from "expo-constants";
 import { ScrollView } from "react-native-gesture-handler";
+import firebase from "../../database/firebaseDB";
+import { getLocationChangeFromMachine } from "./ReturnApi";
 
 export default function ReturnQRScreen({ navigation }) {
   const userData = useContext(UserContext);
+  const [location, setLocation] = useState("");
+  const [locationStatus, setLocationStatus] = useState(false);
   const uid = userData.id;
   const windowWidth = Dimensions.get("window").width - 50;
   const currTime = moment();
@@ -26,6 +28,17 @@ export default function ReturnQRScreen({ navigation }) {
   const legalStartTime = moment("07:00", "HH:mm");
   const legalEndTime = moment("21:00", "HH:mm");
   // console.log(currTime.isBetween(legalStartTime, legalEndTime));
+
+  getLocationChangeFromMachine(uid, setLocationStatus);
+
+  if(locationStatus) {
+    const userRef = firebase.firestore().collection("users").doc(uid)
+    userRef.update({
+      location: "returning"
+    })
+    setLocationStatus(false);
+    navigation.navigate("Return Status Screen");
+  }
 
   function renderUserQr() {
     // if (currTime.isBetween(legalStartTime, legalEndTime)) {
@@ -54,46 +67,6 @@ export default function ReturnQRScreen({ navigation }) {
   }
 
   return (
-    // <View
-    //   style={{
-    //     flex: 1,
-    //     backgroundColor: colors.white,
-    //     // marginTop: Constants.statusBarHeight,
-    //   }}
-    // >
-    //   <Image
-    //     source={require("../../assets/AppImages/returnHeader.png")}
-    //     style={{ width: "100%" }}
-    //   />
-
-    //   <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    //     <View
-    //       style={{
-    //         backgroundColor: "coral",
-    //         height: 40,
-    //         width: "80%",
-    //         justifyContent: "center",
-    //         alignItems: "center",
-    //         borderRadius: 20,
-    //       }}
-    //     >
-    //       <Text>Feature coming soon! Stay tuned {";)"}</Text>
-    //     </View>
-    //     {/* TEST VALUES */}
-    //     {/* <TouchableOpacity
-    //       onPress={() =>
-    //         navigation.navigate("Return Success Screen", {
-    //           numCups: 2,
-    //           numContainers: 2,
-    //           location: "E4",
-    //         })
-    //       }
-    //     >
-    //       <Text>Success Screen</Text>
-    //     </TouchableOpacity> */}
-    //   </View>
-    // </View>
-
     <View>
       <ScrollView
         style={{ backgroundColor: colors.white }}

@@ -10,10 +10,8 @@ import {
 } from "react-native";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
-import FooterText from "../../components/FooterText";
-import { Icon } from "react-native-elements";
 import { UserContext } from "../../assets/UserContext";
-import { getBorrowedNum } from "./ReturnApi";
+import { getBorrowedNum, getReturnChangeFromMachine } from "./ReturnApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
 import * as Animatable from "react-native-animatable";
@@ -35,14 +33,14 @@ export default function ReturnStatusScreen({ navigation }) {
     console.log("Setting up current user's borrowed items number");
   }, []);
 
-  // const numContainers = data[2].numContainers;
-  // const numCups = data[2].numCups;
-
   // Can change the initial state count to test if the interface works
-  const [returnedContainers, setContainerCount] = useState(1);
+  const [returnedContainers, setContainerCount] = useState(0);
   const [returnedCups, setCupCount] = useState(0);
   const [animateCup, setAnimateCup] = useState(false);
   const [animateContainer, setAnimateContainer] = useState(false);
+
+  //Check if there are returns at the machines 
+  getReturnChangeFromMachine(uid, setContainerCount, setCupCount);
 
   // Monitors returnedContainers and returnedCups so icons animate on state change
   useEffect(() => {
@@ -219,12 +217,13 @@ export default function ReturnStatusScreen({ navigation }) {
       return (
         <TouchableOpacity
           style={[globalStyles.button, { width: "90%" }]}
-          onPress={() =>
+          onPress={() => {
+            
             navigation.navigate("Return Success Screen", {
               numCups: returnedCups,
               numContainers: returnedContainers,
               location: machineName,
-            })
+            })}
           }
         >
           <Text style={globalStyles.buttonText}>Next</Text>

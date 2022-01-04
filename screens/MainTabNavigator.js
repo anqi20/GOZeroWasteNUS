@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import BorrowStack from "./borrow-screens/BorrowStack";
 import ReturnStack from "./return-screens/ReturnStack";
 import ModalHomeStack from "./ModalHomeStack";
-import { Ionicons } from "@expo/vector-icons";
 import { UserContext } from "../assets/UserContext";
 // import RewardsScreen from "./reward-screens/RewardsScreen";
 import ModalRewardStack from "./reward-screens/ModalRewardStack";
-import firebase from "../database/firebaseDB";
 import { Image } from "react-native";
 import { getCoins } from "./BasicApi";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -67,13 +65,14 @@ export default function MainTabNavigator({ route }) {
                   : require("../assets/AppImages/unfocusedReward.png");
               }
 
-              return <Image source={iconName} />;
+              return <Image source={iconName} style={{width: 30, height: 30}} />;
             },
           })}
           tabBarOptions={{
             inactiveBackgroundColor: "black",
             activeBackgroundColor: "black",
             activeTintColor: "#EE8066",
+
             safeAreaInsets: {
               bottom: 0,
             },

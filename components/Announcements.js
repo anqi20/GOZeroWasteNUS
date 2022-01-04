@@ -1,19 +1,18 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import colors from "../assets/colors";
 
-export default function Announcements({header, text}) {
+export default function Announcements({ header, text }) {
   return (
     <View style={styles.container}>
-      {header? <Text style={styles.headerText}>Announcements:</Text>: <View/>}
+      {header ? (
+        <Text style={styles.headerText}>Thank you for using the app!</Text>
+      ) : (
+        <View />
+      )}
       <Text style={styles.text}>{text}</Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -30,8 +29,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   text: {
-    justifyContent: "center", 
+    justifyContent: "center",
     alignItems: "center",
     fontSize: 16,
-  }
-})
+  },
+});

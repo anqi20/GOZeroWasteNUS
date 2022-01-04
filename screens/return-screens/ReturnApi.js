@@ -349,7 +349,7 @@ export function addClaimToLogs(uid, numCups, numContainers, location) {
 
 //Check if the user is logged in on the return machines 
 //Locations: SDE4, TechnoEdge, E4
-export function getLocationChangeFromMachine(uid, setLocation) {
+export function getLocationChangeFromMachine(uid, setLocationStatus, setLocation) {
   firebase
   .firestore()
   .collection("users")
@@ -358,7 +358,8 @@ export function getLocationChangeFromMachine(uid, setLocation) {
     let userLocation = doc.data().location;
     console.log("Current location of user: ", userLocation)
     if(userLocation == "SDE4" || userLocation == "TechnoEdge" || userLocation == "E4") {
-      setLocation(true);
+      setLocationStatus(true);
+      setLocation(userLocation);
     }
   })
 }

@@ -29,7 +29,7 @@ export default function ReturnQRScreen({ navigation }) {
   const legalEndTime = moment("21:00", "HH:mm");
   // console.log(currTime.isBetween(legalStartTime, legalEndTime));
 
-  getLocationChangeFromMachine(uid, setLocationStatus);
+  getLocationChangeFromMachine(uid, setLocationStatus, setLocation);
 
   if(locationStatus) {
     const userRef = firebase.firestore().collection("users").doc(uid)
@@ -37,22 +37,22 @@ export default function ReturnQRScreen({ navigation }) {
       location: "returning"
     })
     setLocationStatus(false);
-    navigation.navigate("Return Status Screen");
+    navigation.navigate("Temp Return Selection Screen", { location: location });
   }
 
   function renderUserQr() {
     // if (currTime.isBetween(legalStartTime, legalEndTime)) {
     // Returning within legal time limits
     return (
-      <TouchableOpacity
+      //<TouchableOpacity
         // onPress={() => navigation.navigate("Return Status Screen")}
-        onPress={() =>
-          navigation.navigate("Temp Return Selection Screen", { location: "" })
-        }
-        style={styles.qrPlaceholder}
-      >
+        // onPress={() =>
+        //  navigation.navigate("Temp Return Selection Screen", { location: "" })
+        //}
+        //style={styles.qrPlaceholder}
+      //>
         <QRCode value={uid} size={windowWidth - 150} />
-      </TouchableOpacity>
+      //</TouchableOpacity>
     );
     // } else {
     //   // Returning out of legal time limits

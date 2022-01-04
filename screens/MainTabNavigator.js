@@ -18,24 +18,25 @@ export default function MainTabNavigator({ route }) {
   // {
   //   console.log(route.params);
   // }
-  const [coins, setCoins] = useState(0);
+  // const [coins, setCoins] = useState(0);
 
   // Get number of coins in user's account
-  useEffect(() => {
-    console.log("Getting current number of coins");
-    // console.log(route.params);
-    getCoins(route.params.id, setCoins);
-  }, []);
+  // useEffect(() => {
+  //   console.log("Getting current number of coins");
+  //   // console.log(route.params);
+  //   getCoins(route.params.id, setCoins);
+  // }, []);
 
   // Currently hardcoded, may change in the future
   function renderRewardsBadge() {
     // console.log(coins);
-    const coin = coins;
-    if (coin >= 50) {
-      return true;
-    } else {
-      return null;
-    }
+    // const coin = coins;
+    // if (coin >= 50) {
+    //   return true;
+    // } else {
+    //   return null;
+    // }
+    return null;
   }
 
   const hasBadge = renderRewardsBadge();

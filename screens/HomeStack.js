@@ -6,6 +6,7 @@ import StatsScreen from "./StatsScreen";
 import TutorialScreen from "./settings-screens/TutorialScreen";
 import LocationsScreen from "./settings-screens/LocationsScreen";
 import BYOStack from "./byo-screens/BYOStack";
+import TutorialStack from "./settings-screens/TutorialStack";
 
 const Stack = createStackNavigator();
 
@@ -43,9 +44,13 @@ export default function HomeStack() {
         options={{ title: "Return Locations", headerBackTitleVisible: false }}
       />
       <Stack.Screen
-        name="Tutorial Screen"
-        component={TutorialScreen}
-        options={{ title: "Tutorial", headerBackTitleVisible: false }}
+        name="Tutorial Stack"
+        component={TutorialStack}
+        options={{
+          title: "Tutorial",
+          headerBackTitleVisible: false,
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );

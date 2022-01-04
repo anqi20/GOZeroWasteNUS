@@ -11,6 +11,7 @@ import TerminateAccountScreen from "./TerminateAccountScreen";
 import MainSettingsScreen from "./MainSettingsScreen";
 import ChangePasswordScreen from "./ChangePasswordScreen";
 import TerminateConfirmationScreen from "./TerminateConfirmationScreen";
+import TutorialStack from "./TutorialStack";
 
 const Stack = createStackNavigator();
 
@@ -30,14 +31,12 @@ export default function SettingsStack() {
         name="Change password"
         component={ChangePasswordScreen}
       ></Stack.Screen>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="How to use?"
         component={TutorialScreen}
-      ></Stack.Screen>
-      <Stack.Screen 
-        name="Logs" 
-        component={LogsScreen}
-      ></Stack.Screen>
+      ></Stack.Screen> */}
+      <Stack.Screen name="How to use?" component={TutorialStack} />
+      <Stack.Screen name="Logs" component={LogsScreen}></Stack.Screen>
       <Stack.Screen
         name="Feedback to us!"
         component={FeedbackScreen}

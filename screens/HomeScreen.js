@@ -228,7 +228,7 @@ export default function HomeScreen({ navigation }) {
 
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Tutorial Screen")}
+            onPress={() => navigation.navigate("Tutorial Stack")}
             style={styles.quickNavButton}
           >
             <Image

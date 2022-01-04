@@ -32,9 +32,11 @@ export default function ReturnQRScreen({ navigation }) {
     // Returning within legal time limits
     return (
       <TouchableOpacity
-        // onPress={() => navigation.navigate("Return Status Screen")}
+        onPress={() => navigation.navigate("Return Status Screen")}
         onPress={() =>
-          navigation.navigate("Temp Return Selection Screen", { location: "" })
+          navigation.navigate("Temp Return Selection Screen", {
+            location: "",
+          })
         }
         style={styles.qrPlaceholder}
       >

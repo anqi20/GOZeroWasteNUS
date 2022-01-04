@@ -28,31 +28,31 @@ export default function ReturnQRScreen({ navigation }) {
   // console.log(currTime.isBetween(legalStartTime, legalEndTime));
 
   function renderUserQr() {
-    // if (currTime.isBetween(legalStartTime, legalEndTime)) {
-    // Returning within legal time limits
-    return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Return Status Screen")}
-        onPress={() =>
-          navigation.navigate("Temp Return Selection Screen", {
-            location: "",
-          })
-        }
-        style={styles.qrPlaceholder}
-      >
-        <QRCode value={uid} size={windowWidth - 150} />
-      </TouchableOpacity>
-    );
-    // } else {
-    //   // Returning out of legal time limits
-    //   return (
-    //     <View style={styles.qrPlaceholder}>
-    //       <Text style={styles.text}>
-    //         Please try again tomorrow from {"\n"} 07:00 to 21:00!
-    //       </Text>
-    //     </View>
-    //   );
-    // }
+    if (currTime.isBetween(legalStartTime, legalEndTime)) {
+      // Returning within legal time limits
+      return (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Return Status Screen")}
+          onPress={() =>
+            navigation.navigate("Temp Return Selection Screen", {
+              location: "",
+            })
+          }
+          style={styles.qrPlaceholder}
+        >
+          <QRCode value={uid} size={windowWidth - 150} />
+        </TouchableOpacity>
+      );
+    } else {
+      // Returning out of legal time limits
+      return (
+        <View style={styles.qrPlaceholder}>
+          <Text style={styles.text}>
+            Please try again tomorrow from {"\n"} 07:00 to 21:00!
+          </Text>
+        </View>
+      );
+    }
   }
 
   return (

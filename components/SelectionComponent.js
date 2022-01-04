@@ -154,8 +154,8 @@ export default function SelectionComponent({
             marginHorizontal: 20,
           }}
         >
-          You cannot select more than this number. {"("}For borrows{")"} Return
-          the ones you have to borrow more!
+          You cannot select more than this number. If you are borrowing, please
+          return first to borrow again!
         </Text>
       ) : null}
     </View>

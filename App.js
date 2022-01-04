@@ -158,6 +158,7 @@ export default function App() {
             cupDate: [],
             cupReturned: 0,
             // userNum: 0,
+            location: "",
             numCup: 0,
             numContainer: 0,
             // numReturn: 0,

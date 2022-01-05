@@ -14,7 +14,7 @@ import QRCode from "react-native-qrcode-svg";
 import moment from "moment";
 import { ScrollView } from "react-native-gesture-handler";
 import firebase from "../../database/firebaseDB";
-import { getLocationChangeFromMachine } from "./ReturnApi";
+// import { getLocationChangeFromMachine } from "./ReturnApi";
 
 export default function ReturnQRScreen({ navigation }) {
   const userData = useContext(UserContext);
@@ -29,32 +29,62 @@ export default function ReturnQRScreen({ navigation }) {
   const legalEndTime = moment("21:00", "HH:mm");
   // console.log(currTime.isBetween(legalStartTime, legalEndTime));
 
-  getLocationChangeFromMachine(uid, setLocationStatus, setLocation);
+  // getLocationChangeFromMachine(uid, setLocationStatus, setLocation);
 
-  if(locationStatus) {
-    const userRef = firebase.firestore().collection("users").doc(uid)
-    userRef.update({
-      location: "returning"
-    })
-    setLocationStatus(false);
-    navigation.navigate("Temp Return Selection Screen", { location: location });
-  }
+  // Runs when document field location changes
+  useEffect(() => {
+    const unsubscribe = firebase
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .onSnapshot((doc) => {
+        let userLocation = doc.data().location;
+        console.log("Current location of user: ", userLocation);
+        if (
+          userLocation == "SDE4" ||
+          userLocation == "TechnoEdge" ||
+          userLocation == "E4"
+        ) {
+          setLocationStatus(true);
+          setLocation(userLocation);
+        } else {
+          // console.log("I'm here");
+        }
+      });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  // Runs only when locationStatus changes
+  useEffect(() => {
+    if (locationStatus) {
+      const userRef = firebase.firestore().collection("users").doc(uid);
+      userRef.update({
+        location: "returning",
+      });
+      setLocationStatus(false);
+      navigation.navigate("Temp Return Selection Screen", {
+        location: location,
+      });
+    }
+  }, [locationStatus]);
 
   function renderUserQr() {
     if (currTime.isBetween(legalStartTime, legalEndTime)) {
       // Returning within legal time limits
       return (
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Return Status Screen")}
-          onPress={() =>
-            navigation.navigate("Temp Return Selection Screen", {
-              location: "",
-            })
-          }
-          style={styles.qrPlaceholder}
-        >
-          <QRCode value={uid} size={windowWidth - 150} />
-        </TouchableOpacity>
+        // <TouchableOpacity
+        //   onPress={() => navigation.navigate("Return Status Screen")}
+        //   onPress={() =>
+        //     navigation.navigate("Temp Return Selection Screen", {
+        //       location: "",
+        //     })
+        //   }
+        //   style={styles.qrPlaceholder}
+        // >
+        <QRCode value={uid} size={windowWidth - 150} />
+        // </TouchableOpacity>
       );
     } else {
       // Returning out of legal time limits

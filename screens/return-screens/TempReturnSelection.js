@@ -152,6 +152,7 @@ function ReturnClaim({ location }) {
 
 export default function TempReturnSelection({ navigation, route }) {
   const { location } = route.params;
+  // console.log(location);
 
   // Prevent back button action on Android
   useBackHandler(backActionHandler);

@@ -347,25 +347,29 @@ export function addClaimToLogs(uid, numCups, numContainers, location) {
     });
 }
 
-//Check if the user is logged in on the return machines 
+//Check if the user is logged in on the return machines
 //Locations: SDE4, TechnoEdge, E4
-export function getLocationChangeFromMachine(uid, setLocationStatus, setLocation) {
-  firebase
-  .firestore()
-  .collection("users")
-  .doc(uid)
-  .onSnapshot((doc) => {
-    let userLocation = doc.data().location;
-    console.log("Current location of user: ", userLocation)
-    if(userLocation == "SDE4" || userLocation == "TechnoEdge" || userLocation == "E4") {
-      setLocationStatus(true);
-      setLocation(userLocation);
-    }
-  })
-}
+// export function getLocationChangeFromMachine(uid, setLocationStatus, setLocation) {
+//   firebase
+//   .firestore()
+//   .collection("users")
+//   .doc(uid)
+//   .onSnapshot((doc) => {
+//     let userLocation = doc.data().location;
+//     console.log("Current location of user: ", userLocation)
+//     if(userLocation == "SDE4" || userLocation == "TechnoEdge" || userLocation == "E4") {
+//       setLocationStatus(true);
+//       setLocation(userLocation);
+//     }
+//   })
+// }
 
-//Check if the user is returning at the return machines 
-export function getReturnChangeFromMachine(uid, setContainerCount, setCupCount) {
+//Check if the user is returning at the return machines
+export function getReturnChangeFromMachine(
+  uid,
+  setContainerCount,
+  setCupCount
+) {
   firebase
     .firestore()
     .collection("users")
@@ -373,13 +377,13 @@ export function getReturnChangeFromMachine(uid, setContainerCount, setCupCount) 
     .onSnapshot((doc) => {
       setContainerCount(doc.data().containerReturned);
       setCupCount(doc.data().cupReturned);
-    })
+    });
 }
 
-//Return transaction has ended, to clear the location 
+//Return transaction has ended, to clear the location
 export function clearReturnLocation(uid) {
-  const userRef = firebase.firestore().collection("users").doc(uid)
+  const userRef = firebase.firestore().collection("users").doc(uid);
   userRef.update({
-    location: ""
-  })
+    location: "",
+  });
 }

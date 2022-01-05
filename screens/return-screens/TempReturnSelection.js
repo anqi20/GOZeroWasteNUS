@@ -18,6 +18,7 @@ import { UserContext } from "../../assets/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
+import { clearReturnLocation } from "./ReturnApi";
 
 function ReturnClaim({ location }) {
   const [numCups, setCupNum] = useState(0);
@@ -138,7 +139,10 @@ function ReturnClaim({ location }) {
       />
       {renderNextButton()}
       <TouchableOpacity
-        onPress={() => navigation.popToTop()}
+        onPress={() => {
+          clearReturnLocation(uid);
+          navigation.popToTop();
+        }}
         style={[
           globalStyles.button,
           { width: "90%", alignSelf: "center", marginBottom: 30 },

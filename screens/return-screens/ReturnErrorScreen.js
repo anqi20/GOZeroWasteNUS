@@ -123,13 +123,13 @@ function ReturnClaim({ location }) {
   return (
     <View>
       <Text style={[styles.text, { marginBottom: 10 }]}>
-        Step 1: Select number of reusables to return!
+        Step 1: Select number of reusables to return.
       </Text>
       <Text style={[styles.text, { marginBottom: 10, marginTop: 0 }]}>
         Step 2: Drop all of them into the bin.
       </Text>
       <Text style={[styles.text, { marginBottom: 0, marginTop: 0 }]}>
-        Step 3: Click on the orange button below to confirm!
+        Step 3: Click on the orange button below to confirm.
       </Text>
       <SelectionComponent
         hasContainers={true}

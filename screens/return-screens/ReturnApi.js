@@ -365,20 +365,20 @@ export function addClaimToLogs(uid, numCups, numContainers, location) {
 // }
 
 //Check if the user is returning at the return machines
-export function getReturnChangeFromMachine(
-  uid,
-  setContainerCount,
-  setCupCount
-) {
-  firebase
-    .firestore()
-    .collection("users")
-    .doc(uid)
-    .onSnapshot((doc) => {
-      setContainerCount(doc.data().containerReturned);
-      setCupCount(doc.data().cupReturned);
-    });
-}
+// export function getReturnChangeFromMachine(
+//   uid,
+//   setContainerCount,
+//   setCupCount
+// ) {
+//   firebase
+//     .firestore()
+//     .collection("users")
+//     .doc(uid)
+//     .onSnapshot((doc) => {
+//       setContainerCount(doc.data().containerReturned);
+//       setCupCount(doc.data().cupReturned);
+//     });
+// }
 
 //Return transaction has ended, to clear the location
 export function clearReturnLocation(uid) {

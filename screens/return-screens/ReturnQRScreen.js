@@ -138,7 +138,7 @@ export default function ReturnQRScreen({ navigation }) {
             }}
           >
             <Text style={globalStyles.footerText}>
-              QR code not scanning?{" "}
+              QR code not scanning?{"\n"}Try brightening your screen!{"\n"}
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("Return Error Screen", {
@@ -147,7 +147,9 @@ export default function ReturnQRScreen({ navigation }) {
                   })
                 }
               >
-                <Text style={globalStyles.clickable}>Please click here!</Text>
+                <Text style={[globalStyles.clickable, { marginTop: 10 }]}>
+                  Otherwise, please click here!
+                </Text>
               </TouchableOpacity>
             </Text>
           </View>

@@ -11,6 +11,7 @@ import { LogBox } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 LogBox.ignoreLogs(["Setting a timer"]);
+LogBox.ignoreAllLogs();
 
 const Stack = createStackNavigator();
 

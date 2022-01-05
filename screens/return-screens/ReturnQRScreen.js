@@ -91,7 +91,8 @@ export default function ReturnQRScreen({ navigation }) {
       return (
         <View style={styles.qrPlaceholder}>
           <Text style={styles.text}>
-            Please try again tomorrow from {"\n"} 07:00 to 21:00!
+            To help our cleaners, please return only between 8am to 6.30pm.
+            Thank you!
           </Text>
         </View>
       );

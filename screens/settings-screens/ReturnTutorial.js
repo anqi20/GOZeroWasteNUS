@@ -62,11 +62,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "black",
     borderRadius: 20,
-    height: 580,
+    // height: 580,
     width: "80%",
     margin: 10,
     alignSelf: "center",
     justifyContent: "center",
+    flexGrow: 1,
   },
   image: {
     aspectRatio: 9 / 16,

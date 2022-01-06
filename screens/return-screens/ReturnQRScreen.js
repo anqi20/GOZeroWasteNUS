@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 20,
     alignSelf: "center",
+    marginTop: 20,
   },
   text: {
     fontSize: 18,

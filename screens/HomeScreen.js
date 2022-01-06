@@ -300,13 +300,16 @@ const styles = StyleSheet.create({
   },
   topIconBox: {
     borderRadius: 10,
-    height: 80,
+    height: undefined,
+    aspectRatio: 10 / 8,
     width: (Dimensions.get("window").width - 80) / 3,
   },
   topIconBox2: {
     flex: 1,
-    // height: 80,
-    // width: (Dimensions.get("window").width - 80) / 3,
+    height: 80,
+    height: undefined,
+    aspectRatio: 10 / 8,
+    width: (Dimensions.get("window").width - 80) / 3,
   },
   navigationIcons: {
     flex: 1,

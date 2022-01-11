@@ -63,10 +63,8 @@ export default function SignUpDetailScreen({ navigation, route }) {
       .label("Password")
       .required("Please enter your new password")
       .min(8, "Password must have at least 8 characters")
-      .matches(/[0-9]/, "Password must contain at least a capital letter, small letter, number and special character.")
-      .matches(/[A-Z]/, "Password must contain at least a capital letter, small letter, number and special character.")
-      .matches(/[a-z]/, "Password must contain at least a capital letter, small letter, number and special character.")
-      .matches(/[^(0-9,A-Z,a-z)]/, "Password must contain at least a capital letter, small letter, number and special character."),
+      .matches(/[0-9]/, "Password must contain at least a number and special character.")
+      .matches(/[^0-9,A-Z,a-z]/, "Password must contain at least a number and special character."),
     confirmPassword: yup
       .string()
       .label("confirmPassword")
@@ -224,7 +222,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
                 <Text style={globalStyles.inputError}>{errors.gender}</Text>
 
                 {/*Date of Birth*/}
-                <TouchableOpacity
+                {/*<TouchableOpacity
                   style={styles.dOBContainer}
                   onPress={showDatePicker}
                 >
@@ -265,7 +263,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
                     );
                   }}
                 />
-                <Text style={globalStyles.inputError}>{errors.dOB}</Text>
+                <Text style={globalStyles.inputError}>{errors.dOB}</Text> */}
 
                 <RNPickerSelect
                   onValueChange={(value) => {

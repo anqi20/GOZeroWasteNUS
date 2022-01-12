@@ -38,8 +38,9 @@ export default function HomeScreen({ navigation }) {
     }, [])
   );
 
-  //Feedback form website
-  const website = "https://forms.gle/T1JyVMQLbU5geX1V9";
+  //FAQ website
+  const website =
+    "https://docs.google.com/document/d/1MLsVsaaVgOEG4SrGs11geIoWn3UDyh1pALTaRbsKMlU/edit?usp=sharing";
 
   function goToSite() {
     Linking.openURL(`${website}`);
@@ -200,7 +201,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.navigationIcons}>
         <View>
           {renderStatsIcon(updatedUserData, userData)}
-          <Text>My Stats</Text>
+          <Text style={{ textAlign: "center" }}>My Stats</Text>
         </View>
 
         <View>
@@ -213,7 +214,7 @@ export default function HomeScreen({ navigation }) {
               style={styles.quickNavButton}
             />
           </TouchableOpacity>
-          <Text>Return Locations</Text>
+          <Text style={{ textAlign: "center" }}>Return Locations</Text>
         </View>
 
         <View>
@@ -223,7 +224,7 @@ export default function HomeScreen({ navigation }) {
               style={styles.quickNavButton}
             />
           </TouchableOpacity>
-          <Text style={styles.text}>Feedback</Text>
+          <Text style={{ textAlign: "center" }}>FAQ</Text>
         </View>
 
         <View>
@@ -236,7 +237,7 @@ export default function HomeScreen({ navigation }) {
               style={styles.quickNavButton}
             />
           </TouchableOpacity>
-          <Text style={styles.text}>Tutorial</Text>
+          <Text style={{ textAlign: "center" }}>Tutorial</Text>
         </View>
       </View>
     </ScrollView>

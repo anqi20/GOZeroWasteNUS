@@ -44,6 +44,13 @@ export default function SignUpDetailScreen({ navigation, route }) {
   };
 
   const validationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .label("email")
+      .required("Please enter your nus email")
+      .matches(/(@u.nus.edu|@nus.edu.sg|@u.yale-nus.edu.sg|@u.duke.nus.edu|@partner.nus.edu.sg)$/, 
+        "Please enter a valid NUS email"
+      ),
     firstName: yup
       .string()
       .label("firstName")
@@ -63,8 +70,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
       .label("Password")
       .required("Please enter your new password")
       .min(8, "Password must have at least 8 characters")
-      .matches(/[0-9]/, "Password must contain at least a number."),
-      //.matches(/[^0-9,A-Z,a-z]/, "Password must contain at least a number and special character."),
+      .matches(/[0-9]|[^0-9,A-Z,a-z]/, "Password must contain at least a number."),
     confirmPassword: yup
       .string()
       .label("confirmPassword")
@@ -168,6 +174,8 @@ export default function SignUpDetailScreen({ navigation, route }) {
                   }}
                   // editable={false}
                 />
+                <Text style={globalStyles.inputError}>{errors.email}</Text>
+
                 <Input
                   containerStyle={globalStyles.inputContainerNormal}
                   placeholder="First Name"

@@ -10,6 +10,7 @@ import {
 import { globalStyles } from "../../assets/globalStyles";
 import firebase from "../../database/firebaseDB";
 import { AuthContext } from "../../assets/AuthContext";
+import colors from "../../assets/colors";
 
 function renderSeparator() {
   return (
@@ -60,6 +61,7 @@ export default function MainSettingsScreen({ navigation }) {
         >
           <Text style={globalStyles.buttonText}>Log out</Text>
         </TouchableOpacity>
+        <Text style={styles.versionNumber}>v2.0.1</Text>
       </View>
     </SafeAreaView>
   );
@@ -72,6 +74,11 @@ const styles = StyleSheet.create({
   },
   listCell: {
     padding: 10,
+  },
+  versionNumber: {
+    padding: 10,
+    alignSelf: "center",
+    color: colors.darkGrey,
   },
 });
 

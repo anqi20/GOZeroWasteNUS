@@ -1,4 +1,4 @@
-# iReuse
+# GOZeroWasteNUS
 
 ## Machine Documentation
 

@@ -25,8 +25,8 @@ export default function ReturnQRScreen({ navigation }) {
   const currTime = moment();
   // const currTime = moment("00:00", "HH:mm"); // Testing
   // Time that people are allowed to return in moment format for comparison
-  const legalStartTime = moment("07:00", "HH:mm");
-  const legalEndTime = moment("21:00", "HH:mm");
+  const legalStartTime = moment("08:00", "HH:mm");
+  const legalEndTime = moment("18:30", "HH:mm");
   // console.log(currTime.isBetween(legalStartTime, legalEndTime));
 
   // getLocationChangeFromMachine(uid, setLocationStatus, setLocation);

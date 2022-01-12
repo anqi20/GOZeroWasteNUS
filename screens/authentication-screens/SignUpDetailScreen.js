@@ -63,8 +63,8 @@ export default function SignUpDetailScreen({ navigation, route }) {
       .label("Password")
       .required("Please enter your new password")
       .min(8, "Password must have at least 8 characters")
-      .matches(/[0-9]/, "Password must contain at least a number and special character.")
-      .matches(/[^0-9,A-Z,a-z]/, "Password must contain at least a number and special character."),
+      .matches(/[0-9]/, "Password must contain at least a number."),
+      //.matches(/[^0-9,A-Z,a-z]/, "Password must contain at least a number and special character."),
     confirmPassword: yup
       .string()
       .label("confirmPassword")

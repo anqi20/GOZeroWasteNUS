@@ -11,7 +11,8 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function FooterText() {
   const navigation = useNavigation();
-  const website = "https://forms.gle/T1JyVMQLbU5geX1V9";
+  const website =
+    "https://docs.google.com/document/d/1MLsVsaaVgOEG4SrGs11geIoWn3UDyh1pALTaRbsKMlU/edit?usp=sharing";
 
   function goToSite() {
     Linking.openURL(`${website}`);

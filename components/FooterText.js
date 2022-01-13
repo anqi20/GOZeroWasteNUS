@@ -23,7 +23,7 @@ export default function FooterText() {
       <Text style={styles.subtitle}>
         If there is any error, please{" "}
         <TouchableOpacity onPress={goToSite}>
-          <Text style={styles.clickable}>feedback to us</Text>
+          <Text style={styles.clickable}>check our FAQ</Text>
         </TouchableOpacity>{" "}
         or email us at gozerowastenus@gmail.com!
         {/*or call the helpdesk{"\n"}*/}

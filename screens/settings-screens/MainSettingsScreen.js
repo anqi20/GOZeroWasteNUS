@@ -61,7 +61,7 @@ export default function MainSettingsScreen({ navigation }) {
         >
           <Text style={globalStyles.buttonText}>Log out</Text>
         </TouchableOpacity>
-        <Text style={styles.versionNumber}>v2.0.1</Text>
+        <Text style={styles.versionNumber}>v2.2.2</Text>
       </View>
     </SafeAreaView>
   );

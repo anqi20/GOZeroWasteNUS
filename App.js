@@ -48,6 +48,13 @@ export default function App() {
           .catch((error) => {
             setLoading(false);
           });
+
+        // Add uid to logs on log in (TEMPORARY)
+        usersRef
+          .doc(user.uid)
+          .collection("logs")
+          .doc("logsDoc")
+          .set({ id: user.uid }, { merge: true });
       } else {
         setLoading(false);
         setUser(null);
@@ -171,7 +178,7 @@ export default function App() {
             .doc(uid)
             .collection("logs")
             .doc("logsDoc")
-            .set({ logsArray: [] });
+            .set({ logsArray: [], id: uid });
           // Set total users count to increment by 1 for each sign in
           firebase
             .firestore()

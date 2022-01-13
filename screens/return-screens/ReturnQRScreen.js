@@ -27,6 +27,11 @@ export default function ReturnQRScreen({ navigation }) {
   // Time that people are allowed to return in moment format for comparison
   const legalStartTime = moment("08:00", "HH:mm");
   const legalEndTime = moment("18:30", "HH:mm");
+  const weekday = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  const currDay = moment().format("ddd");
+  // const currDay = moment().weekday(6).format("ddd"); // Testing
+  console.log(currDay);
+  // console.log(weekday.includes(currDay));
   // console.log(currTime.isBetween(legalStartTime, legalEndTime));
 
   // getLocationChangeFromMachine(uid, setLocationStatus, setLocation);
@@ -71,8 +76,11 @@ export default function ReturnQRScreen({ navigation }) {
   }, [locationStatus]);
 
   function renderUserQr() {
-    if (currTime.isBetween(legalStartTime, legalEndTime)) {
-      // Returning within legal time limits
+    if (
+      currTime.isBetween(legalStartTime, legalEndTime) &&
+      weekday.includes(currDay)
+    ) {
+      // Returning within legal time limits and only on weekdays
       return (
         // <TouchableOpacity
         //   onPress={() => navigation.navigate("Return Status Screen")}
@@ -91,8 +99,8 @@ export default function ReturnQRScreen({ navigation }) {
       return (
         <View style={styles.qrPlaceholder}>
           <Text style={styles.text}>
-            To help our cleaners, please return only between 8am to 6.30pm.
-            Thank you!
+            To help our cleaners, please return only on weekdays between 8am to
+            6.30pm. Thank you!
           </Text>
         </View>
       );

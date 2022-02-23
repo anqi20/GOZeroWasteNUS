@@ -14,17 +14,28 @@ import firebase from "../../database/firebaseDB";
 export default function QRGenerator() {
   const windowWidth = Dimensions.get("window").width;
 
-  const stallid = "FAByoA5GowOWKoAUSDpD";
-  const stallName = "Fresh fruits & juices";
+  // const stallid = "FAByoA5GowOWKoAUSDpD";
+  // const stallName = "Fresh fruits & juices";
+
   // const stallid = "J4aHfgen0ecTeAHjkx8m";
   // const stallName = "Mixed Vegetable";
+
   // const stallid = "S8ON5f6uGU9pR1lDeALN";
   // const stallName = "Vegetarian";
+
+  // const stallid = "0RvXVDyHsjpL4RBnAVxS";
+  // const stallName = "Taiwanese";
+
+  // const stallid = "S8gSZn3xemdXS0Fk3zU9";
+  // const stallName = "Chicken Rice";
+
+  const stallid = "Wed14pYhIIMkjBVEYN3Q";
+  const stallName = "Indian";
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{stallName}</Text>
-      <Text style={styles.text}>{stallid}</Text>
+      {/* <Text style={styles.text}>{stallid}</Text> */}
       <QRCode value={stallid} size={windowWidth - 50} />
     </View>
   );

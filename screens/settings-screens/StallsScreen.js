@@ -10,35 +10,35 @@ export default function StallsScreen() {
 
   const _renderHeader = (section) => (
     <View style={styles.locations}>
-        <Text style={styles.locationsText}>{section.location}</Text>
+      <Text style={styles.locationsText}>{section.location}</Text>
     </View>
-  )
+  );
 
   const _renderContent = (section) => {
     return section.stalls.map((item, index) => {
-      return(
+      return (
         <View style={styles.stalls}>
           <Text style={styles.stallsText}>{item}</Text>
         </View>
-      )
-    })
-  }
+      );
+    });
+  };
 
   const _updateSections = (activeSections) => {
     setState({ activeSections });
-  }
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <Accordion 
-            sections = {sample}
-            activeSections = {state.activeSections}
-            renderHeader = {_renderHeader}
-            renderContent = {_renderContent}
-            onChange = {_updateSections}
-            keyExtractor = {(item) => item.id}
+          <Accordion
+            sections={sample}
+            activeSections={state.activeSections}
+            renderHeader={_renderHeader}
+            renderContent={_renderContent}
+            onChange={_updateSections}
+            keyExtractor={(item) => item.id}
           />
         </View>
       </ScrollView>
@@ -48,10 +48,17 @@ export default function StallsScreen() {
 
 const sample = [
   {
-    location: "TechnoEdge", 
-    stalls: ["Mixed Rice", "Vegetarian", "Fresh fruits & juices"]
+    location: "TechnoEdge",
+    stalls: [
+      "Mixed Rice",
+      "Vegetarian",
+      "Fresh fruits & juices",
+      "Taiwanese",
+      "Indian",
+      "Chicken Rice",
+    ],
   },
-]
+];
 
 const styles = StyleSheet.create({
   container: {

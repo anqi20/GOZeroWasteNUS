@@ -17,14 +17,14 @@ import { UserContext } from "../../assets/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
+import RNPickerSelect from "react-native-picker-select";
 
-function ReturnClaim({ location }) {
+function ReturnClaim() {
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
   const [borrowedCup, setBorrowedCup] = useState(0);
   const [borrowedContainer, setBorrowedContainer] = useState(0);
-
-  // console.log(location);
+  const [location, setLocation] = useState("");
 
   const userData = useContext(UserContext);
   const uid = userData.id;
@@ -44,43 +44,36 @@ function ReturnClaim({ location }) {
 
     if (numContainers == 0 && numCups == 0) {
       return (
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
+        <View style={styles.errorView}>
           <TouchableOpacity
-            style={[
-              globalStyles.button,
-              {
-                width: "90%",
-                backgroundColor: colors.lightGrey,
-                marginBottom: 10,
-                height: 60,
-              },
-            ]}
+            style={[globalStyles.button, styles.errorButton]}
             onPress={changeState}
           >
-            <Text
-              style={[
-                globalStyles.buttonText,
-                { textAlign: "center", marginHorizontal: 10 },
-              ]}
-            >
+            <Text style={[globalStyles.buttonText, styles.errorButtonText]}>
               I declare that I’m returning the above number of reusables
             </Text>
           </TouchableOpacity>
           {isPressed ? (
-            <Text
-              style={{
-                color: colors.red,
-                marginBottom: 20,
-                textAlign: "center",
-              }}
-            >
+            <Text style={styles.errorText}>
               Please select at least 1 item to proceed.
+            </Text>
+          ) : null}
+        </View>
+      );
+    } else if(location == "") {
+      return (
+        <View style={styles.errorView}>
+          <TouchableOpacity
+            style={[globalStyles.button, styles.errorButton]}
+            onPress={changeState}
+          >
+            <Text style={[globalStyles.buttonText, styles.errorButtonText]}>
+              I declare that I’m returning the above number of reusables
+            </Text>
+          </TouchableOpacity>
+          {isPressed ? (
+            <Text style={styles.errorText}>
+              Please select your location.
             </Text>
           ) : null}
         </View>
@@ -141,7 +134,29 @@ function ReturnClaim({ location }) {
         setCupNum={setCupNum}
         setContainerNum={setContainerNum}
       />
-      {renderNextButton()}
+      
+      <View style={styles.locationSelection}>
+        <Text style={{fontSize: 18}}>
+          Location: 
+        </Text>
+        <View style={{paddingHorizontal: 20}}>
+          <RNPickerSelect 
+            onValueChange={(location) => {
+              setLocation(location)
+              console.log("Location: ", location);
+            }}
+            items={locations}
+            placeholder={{
+              label: "Select location",
+              value: "",
+            }}
+            useNativeAndroidPickerStyle={false}
+            style={{...pickerSelectStyles, placeholder: styles.dropdownPlaceholder}}
+          />
+        </View>
+      </View>
+
+      {renderNextButton(location)}
       <TouchableOpacity
         onPress={() => navigation.popToTop()}
         style={[
@@ -156,7 +171,7 @@ function ReturnClaim({ location }) {
 }
 
 export default function ReturnErrorScreen({ navigation, route }) {
-  const { errorType, location } = route.params;
+  const { errorType } = route.params;
 
   // Prevent back button action on Android
   useBackHandler(backActionHandler);
@@ -179,11 +194,17 @@ export default function ReturnErrorScreen({ navigation, route }) {
         style={styles.icon}
       />
       <View style={styles.box}>
-        <ReturnClaim location={location} />
+        <ReturnClaim />
       </View>
     </ScrollView>
   );
 }
+
+const locations = [
+  {value: "ClaimE4", label: "E4"},
+  {value: "ClaimSDE4", label: "SDE4"},
+  {value: "ClaimTechnoEdge", label: "TechnoEdge"},  
+]
 
 const styles = StyleSheet.create({
   container: {
@@ -217,5 +238,49 @@ const styles = StyleSheet.create({
     margin: 30,
     fontSize: 18,
     textAlign: "center",
+  },
+  errorText: {
+    color: colors.red,
+    marginBottom: 20,
+    textAlign: "center",
+  }, 
+  errorButton: {
+    width: "90%",
+    backgroundColor: colors.lightGrey,
+    marginBottom: 10,
+    height: 60,
+  },
+  errorView: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+  errorButtonText: {
+    textAlign: "center", 
+    marginHorizontal: 10,
+  },
+  locationSelection: {
+    flexDirection: "row",
+    marginHorizontal: 50,
+    marginBottom: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderBottomWidth: 1.5,
+    borderColor: "#aeb3b8",
+  },
+  dropdownPlaceholder: {
+    color: colors.darkGrey,
+    fontSize: 18,
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    color: colors.black,
+    fontSize: 18,
+  },
+  inputAndroid: {
+    color: colors.black,
+    fontSize: 18,
   },
 });

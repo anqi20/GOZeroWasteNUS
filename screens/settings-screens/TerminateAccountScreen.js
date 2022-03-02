@@ -6,20 +6,23 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from "react-native";
 import { Input } from "react-native-elements";
 import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
-import { Entypo } from "@expo/vector-icons";
+import firebase from "../../database/firebaseDB";
 
 export default function TerminateAccountScreen({ navigation }) {
   const [isMatching, setMatching] = useState(false);
   const [showError, setShow] = useState(false);
 
+  const user = firebase.auth().currentUser;
+
   function onPress() {
     if (isMatching) {
       setShow(false);
-      navigation.navigate("Account terminated");
+      navigation.navigate("Account terminated", { user: user });
     } else {
       setShow(true);
     }
@@ -36,12 +39,11 @@ export default function TerminateAccountScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Entypo
-          name="emoji-sad"
-          size={60}
-          color="black"
-          style={{ textAlign: "center", marginBottom: 20 }}
+        <Image
+          source={require("../../assets/AppImages/sadSmile.png")}
+          style={styles.sadSmile}
         />
+
         <Text style={styles.boldText}>
           Are you sure you want to terminate your account?
         </Text>
@@ -104,5 +106,11 @@ const styles = StyleSheet.create({
   },
   terminateContainer: {
     marginVertical: 20,
+  },
+  sadSmile: {
+    alignSelf: "center",
+    marginBottom: 20,
+    height: 60,
+    width: 60,
   },
 });

@@ -101,8 +101,8 @@ const tabs = [
   },
   // {id: 2,
   // title: "Feedback to us!"}
-  // {
-  //   id: "4",
-  //   title: "Terminate my account",
-  // },
+  {
+    id: "2",
+    title: "Terminate my account",
+  },
 ];

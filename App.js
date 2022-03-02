@@ -63,6 +63,32 @@ export default function App() {
   }, []);
 
   const authContext = {
+    terminateAccount: (data) => {
+      const usersRef = firebase.firestore().collection("users");
+      // Remove user data
+      usersRef
+        .doc(data.uid)
+        .delete()
+        .then(() => {
+          console.log(`Document ${data.uid} successfully deleted!`);
+
+          // Remove auth for user
+          data.user
+            .delete()
+            .then(() => {
+              setUser(null);
+              setValidated(false);
+              console.log(`User ${data.uid} account terminated!`);
+            })
+            .catch((error) => {
+              console.log(error);
+              console.log("Error terminating account");
+            });
+        })
+        .catch((error) => {
+          console.error("Error removing document: ", error);
+        });
+    },
     signUpSuccess: () => {
       if (!isValidated) {
         console.log("sign up success");
@@ -228,7 +254,7 @@ export default function App() {
     <SafeAreaProvider>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
-          {console.log(isValidated)}
+          {console.log(`Authentication check isValidated? : ${isValidated}`)}
           {user && isValidated ? (
             <Stack.Navigator>
               <Stack.Screen

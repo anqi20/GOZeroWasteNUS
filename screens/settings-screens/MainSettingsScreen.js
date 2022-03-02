@@ -61,7 +61,7 @@ export default function MainSettingsScreen({ navigation }) {
         >
           <Text style={globalStyles.buttonText}>Log out</Text>
         </TouchableOpacity>
-        <Text style={styles.versionNumber}>v2.2.2</Text>
+        <Text style={styles.versionNumber}>v2.2.3</Text>
       </View>
     </SafeAreaView>
   );
@@ -101,8 +101,8 @@ const tabs = [
   },
   // {id: 2,
   // title: "Feedback to us!"}
-  // {
-  //   id: "4",
-  //   title: "Terminate my account",
-  // },
+  {
+    id: "2",
+    title: "Terminate my account",
+  },
 ];

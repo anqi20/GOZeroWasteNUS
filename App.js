@@ -81,8 +81,7 @@ export default function App() {
               console.log(`User ${data.uid} account terminated!`);
             })
             .catch((error) => {
-              console.log(error);
-              console.log("Error terminating account");
+              console.log("Error terminating account: ", error);
             });
         })
         .catch((error) => {

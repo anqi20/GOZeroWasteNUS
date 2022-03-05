@@ -12,6 +12,7 @@ export default function TerminateConfirmationScreen({ navigation, route }) {
 
   function terminate() {
     return terminateAccount({ user, uid });
+    // return null;
   }
 
   return (

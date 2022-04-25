@@ -14,10 +14,15 @@ export default function ReturnStack() {
   return (
     <Stack.Navigator options={{ gestureEnabled: false }}>
       <Stack.Screen
+        name="Temp Return Selection Screen"
+        component={TempReturnSelection}
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
+      {/* <Stack.Screen
         name="Return QR Screen"
         component={ReturnQRScreen}
         options={{ headerShown: false }}
-      ></Stack.Screen>
+      ></Stack.Screen> */}
       <Stack.Screen
         name="Return Status Screen"
         component={ReturnStatusScreen}
@@ -41,11 +46,6 @@ export default function ReturnStack() {
       <Stack.Screen
         name="Return Claim Success Screen"
         component={ReturnClaimSuccess}
-        options={{ headerShown: false, gestureEnabled: false }}
-      />
-      <Stack.Screen
-        name="Temp Return Selection Screen"
-        component={TempReturnSelection}
         options={{ headerShown: false, gestureEnabled: false }}
       />
     </Stack.Navigator>

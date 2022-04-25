@@ -32,7 +32,10 @@ export default function BorrowSuccessfulScreen({ route, navigation }) {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Image
           source={require("../../assets/AppImages/borrowHeader.png")}
-          style={{ width: Dimensions.get("window").width+4, marginBottom: 50 }}
+          style={{
+            width: Dimensions.get("window").width + 4,
+            marginBottom: 50,
+          }}
         />
         <View style={{ alignSelf: "center" }}>
           <Animatable.Image
@@ -47,6 +50,7 @@ export default function BorrowSuccessfulScreen({ route, navigation }) {
           numContainers={numContainers}
           location={stall}
           header={"Successful!"}
+          isReturn={false}
         />
         <FooterText />
       </ScrollView>

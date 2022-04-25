@@ -5,7 +5,12 @@ import colors from "../../assets/colors";
 import { globalStyles } from "../../assets/globalStyles";
 import FooterText from "../../components/FooterText";
 import { UserContext } from "../../assets/UserContext";
-import { updateCoins, updateReturnData, addClaimToLogs, clearReturnLocation } from "./ReturnApi";
+import {
+  updateCoins,
+  updateReturnData,
+  addClaimToLogs,
+  clearReturnLocation,
+} from "./ReturnApi";
 import { useBackHandler } from "@react-native-community/hooks";
 import { backActionHandler } from "../BasicApi";
 
@@ -44,6 +49,7 @@ export default function ReturnClaimSuccess({ route }) {
           numContainers={numContainers}
           numCoins={coinsEarned}
           header={"Thank you for returning!"}
+          isReturn={true}
         />
         <FooterText />
       </ScrollView>

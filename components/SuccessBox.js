@@ -12,7 +12,11 @@ import { Icon } from "react-native-elements";
 import colors from "../assets/colors";
 import moment from "moment";
 import { globalStyles } from "../assets/globalStyles";
-import { useNavigation, StackActions } from "@react-navigation/native";
+import {
+  useNavigation,
+  StackActions,
+  CommonActions,
+} from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -23,6 +27,7 @@ export default function SuccessBox({
   location,
   numCoins,
   header,
+  isReturn,
 }) {
   const navigation = useNavigation();
 
@@ -188,7 +193,14 @@ export default function SuccessBox({
         <TouchableOpacity
           style={[globalStyles.button, { width: "100%", alignSelf: "center" }]}
           onPress={() => {
-            navigation.dispatch(StackActions.popToTop());
+            if (isReturn) {
+              // Ensures that previous state of initial screen is cleared
+              navigation.dispatch(
+                StackActions.replace("Temp Return Selection Screen")
+              );
+            } else {
+              navigation.dispatch(StackActions.popToTop());
+            }
             navigation.navigate("Home Screen");
           }}
         >

@@ -34,22 +34,12 @@ const guide = [
   {
     id: "1",
     image: require("../../assets/TutorialImages/return1.png"),
-    text: "1. Start by flashing the QR code on the screen to the bin's scanner.",
+    text: "1. Select the number of reusables you want to return and the return location before dropping them into the bins then clicking the orange button to continue. Note that you can only return up to the number of borrowed reusables.",
   },
   {
     id: "2",
     image: require("../../assets/TutorialImages/return2.png"),
-    text: "2. Select the number of reusables you want to return before dropping them into the bins then clicking the orange button to continue. Note that you can only return up to the number of borrowed reusables.",
-  },
-  {
-    id: "3",
-    image: require("../../assets/TutorialImages/return3.png"),
-    text: "3. You have successfully returned your reusables! You can now go back to the Home Screen!",
-  },
-  {
-    id: "4",
-    image: require("../../assets/TutorialImages/return4.png"),
-    text: "If you encounter any issues with the QR code, click the text at the bottom of the screen to continue the return process!",
+    text: "2. You have successfully returned your reusables! You can now go back to the Home Screen!",
   },
 ];
 

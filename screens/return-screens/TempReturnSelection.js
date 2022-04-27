@@ -21,21 +21,29 @@ import { backActionHandler } from "../BasicApi";
 import RNPickerSelect from "react-native-picker-select";
 import { useFocusEffect } from "@react-navigation/native";
 
-function ReturnClaim() {
+export default function TempReturnSelection() {
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
+
   const [numCups, setCupNum] = useState(0);
   const [numContainers, setContainerNum] = useState(0);
   const [borrowedCup, setBorrowedCup] = useState(0);
   const [borrowedContainer, setBorrowedContainer] = useState(0);
   const [location, setLocation] = useState("");
+  const [isPressed, setPress] = useState(false);
+
+  const currTime = moment();
+  // const currTime = moment("00:00", "HH:mm");
+
+  // Time that people are allowed to return in moment format for comparison
+  const legalStartTime = moment("08:00", "HH:mm");
+  const legalEndTime = moment("18:30", "HH:mm");
+  const weekday = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  const currDay = moment().format("ddd");
 
   const userData = useContext(UserContext);
   const uid = userData.id;
   const navigation = useNavigation();
-
-  // useEffect(() => {
-  //   getBorrowedNum(uid, setBorrowedCup, setBorrowedContainer);
-  //   console.log("Setting up current user's borrowed items number");
-  // }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -45,8 +53,6 @@ function ReturnClaim() {
   );
 
   function renderNextButton() {
-    const [isPressed, setPress] = useState(false);
-
     function changeState() {
       setPress(true);
     }
@@ -120,71 +126,84 @@ function ReturnClaim() {
     }
   }
 
-  return (
-    <View>
-      <Text style={[styles.text, { marginBottom: 10 }]}>
-        Step 1: Select number of reusables to return.
-      </Text>
-      <Text style={[styles.text, { marginBottom: 10, marginTop: 0 }]}>
-        Step 2: Drop all of them into the bin.
-      </Text>
-      <Text style={[styles.text, { marginBottom: 0, marginTop: 0 }]}>
-        Step 3: Click on the orange button below to confirm.
-      </Text>
-      <SelectionComponent
-        hasContainers={true}
-        hasCups={true}
-        cupQuota={borrowedCup}
-        containerQuota={borrowedContainer}
-        numCups={numCups}
-        numContainers={numContainers}
-        setCupNum={setCupNum}
-        setContainerNum={setContainerNum}
-      />
+  // Returning within legal time limits and only on weekdays
+  if (
+    currTime.isBetween(legalStartTime, legalEndTime) &&
+    weekday.includes(currDay)
+  ) {
+    return (
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <Image
+          source={require("../../assets/AppImages/returnHeader.png")}
+          style={{ width: Dimensions.get("window").width + 4 }}
+        />
+        <View style={styles.box}>
+          <View>
+            <Text style={[styles.text, { marginBottom: 10 }]}>
+              Step 1: Select number of reusables to return.
+            </Text>
+            <Text style={[styles.text, { marginBottom: 10, marginTop: 0 }]}>
+              Step 2: Drop all of them into the bin.
+            </Text>
+            <Text style={[styles.text, { marginBottom: 0, marginTop: 0 }]}>
+              Step 3: Click on the orange button below to confirm.
+            </Text>
+            <SelectionComponent
+              hasContainers={true}
+              hasCups={true}
+              cupQuota={borrowedCup}
+              containerQuota={borrowedContainer}
+              numCups={numCups}
+              numContainers={numContainers}
+              setCupNum={setCupNum}
+              setContainerNum={setContainerNum}
+            />
 
-      <View style={styles.locationSelection}>
-        <Text style={{ fontSize: 18 }}>Location:</Text>
-        <View style={{ paddingHorizontal: 20 }}>
-          <RNPickerSelect
-            onValueChange={(location) => {
-              setLocation(location);
-              // console.log("Location: ", location);
-            }}
-            value={location}
-            items={locations}
-            placeholder={{
-              label: "Select location",
-              value: "",
-            }}
-            useNativeAndroidPickerStyle={false}
-            style={{
-              ...pickerSelectStyles,
-              placeholder: styles.dropdownPlaceholder,
-            }}
-          />
+            <View style={styles.locationSelection}>
+              <Text style={{ fontSize: 18 }}>Location:</Text>
+              <View style={{ paddingHorizontal: 20 }}>
+                <RNPickerSelect
+                  onValueChange={(location) => {
+                    setLocation(location);
+                    // console.log("Location: ", location);
+                  }}
+                  value={location}
+                  items={locations}
+                  placeholder={{
+                    label: "Select location",
+                    value: "",
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                  style={{
+                    ...pickerSelectStyles,
+                    placeholder: styles.dropdownPlaceholder,
+                  }}
+                />
+              </View>
+            </View>
+
+            {renderNextButton(location)}
+          </View>
+        </View>
+      </ScrollView>
+    );
+  } else {
+    // Returning out of legal time limits
+    return (
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        <Image
+          source={require("../../assets/AppImages/returnHeader.png")}
+          style={{ width: Dimensions.get("window").width + 4 }}
+        />
+        <View style={styles.box}>
+          <Text style={styles.text}>
+            To help our cleaners, please return only on weekdays between 8am to
+            6.30pm. Thank you!
+          </Text>
         </View>
       </View>
-
-      {renderNextButton(location)}
-    </View>
-  );
-}
-
-export default function ReturnErrorScreen({ navigation, route }) {
-  // Prevent back button action on Android
-  useBackHandler(backActionHandler);
-
-  return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Image
-        source={require("../../assets/AppImages/returnHeader.png")}
-        style={{ width: Dimensions.get("window").width + 4 }}
-      />
-      <View style={styles.box}>
-        <ReturnClaim />
-      </View>
-    </ScrollView>
-  );
+    );
+  }
 }
 
 const locations = [

@@ -21,10 +21,7 @@ export default function LoginScreen({ navigation, route }) {
     email: yup
       .string()
       .label("Email")
-      .matches(
-        /(@u.nus.edu|@nus.edu.sg|@u.yale-nus.edu.sg|@u.duke.nus.edu|@partner.nus.edu.sg)$/,
-        "Please enter a valid NUS email"
-      )
+      .email()
       .required("Please enter your email"),
     password: yup
       .string()
@@ -59,9 +56,9 @@ export default function LoginScreen({ navigation, route }) {
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
-                  label="NUS email"
+                  label="Email"
                   labelStyle={globalStyles.inputLabel}
-                  placeholder="e1234567@u.nus.edu"
+                  placeholder="abc@gmail.com"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
                   onChangeText={(value) => {

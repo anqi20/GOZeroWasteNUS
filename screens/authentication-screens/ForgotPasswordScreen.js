@@ -24,6 +24,7 @@ export default function ForgotPasswordScreen({ navigation }) {
   const [statusMsg, setStatusMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const [showEmailError, setEmailError] = useState(false);
 
   // Ensure button can only be pressed every 10 seconds
   function handleButtonClicked() {
@@ -34,14 +35,21 @@ export default function ForgotPasswordScreen({ navigation }) {
     }, 10000);
   }
 
+  function validateEmail(email) {
+    const blockEmails = ["@u.nus.edu", "@nus.edu.sg", "@u.yale-nus.edu.sg", "@u.duke.nus.edu", "@partner.nus.edu.sg"]
+
+    if(blockEmails.some(v => email.includes(v))) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+  }
+
   const validationSchema = yup.object().shape({
     email: yup
       .string()
       .label("Email")
-      .matches(
-        /(@u.nus.edu|@nus.edu.sg|@u.yale-nus.edu.sg|@u.duke.nus.edu)$/,
-        "Please enter a valid NUS email"
-      )
+      .email()
       .required("Please enter your email"),
   });
 
@@ -53,24 +61,31 @@ export default function ForgotPasswordScreen({ navigation }) {
             initialValues={{ email: "" }}
             validationSchema={validationSchema}
             onSubmit={handleButtonClicked}
+            isSubmitting={!showEmailError}
           >
             {({ setFieldValue, handleSubmit, errors, isValid }) => (
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
-                  label="NUS email"
+                  label="Email"
                   labelStyle={globalStyles.inputLabel}
-                  placeholder="e1234567@u.nus.edu"
+                  placeholder="abc@gmail.com"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
                   onChangeText={(value) => {
                     setFieldValue("email", value);
                     setEmail(value);
+                    validateEmail(value);
                   }}
                   autoCapitalize="none"
                 />
 
                 <Text style={globalStyles.inputError}>{errors.email}</Text>
+                {showEmailError ? (
+                  <Text style={globalStyles.inputError}>
+                    Please use your personal email.
+                  </Text>
+                ) : null}
 
                 <TouchableOpacity
                   style={globalStyles.buttonTop}

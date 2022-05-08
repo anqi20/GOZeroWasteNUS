@@ -31,6 +31,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDateConfirmed, setDateConfirmed] = useState(false);
+  const [showEmailError, setEmailError] = useState(false);
 
   const headerHeight = useHeaderHeight();
 
@@ -46,11 +47,9 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const validationSchema = yup.object().shape({
     email: yup
       .string()
-      .label("email")
-      .required("Please enter your nus email")
-      .matches(/(@u.nus.edu|@nus.edu.sg|@u.yale-nus.edu.sg|@u.duke.nus.edu|@partner.nus.edu.sg)$/, 
-        "Please enter a valid NUS email"
-      ),
+      .label("Email")
+      .required("Please enter your personal email")
+      .email(),
     firstName: yup
       .string()
       .label("firstName")
@@ -99,6 +98,16 @@ export default function SignUpDetailScreen({ navigation, route }) {
       return null;
     } else {
       return null;
+    }
+  }
+
+  function validateEmail(email) {
+    const blockEmails = ["@u.nus.edu", "@nus.edu.sg", "@u.yale-nus.edu.sg", "@u.duke.nus.edu", "@partner.nus.edu.sg"]
+
+    if(blockEmails.some(v => email.includes(v))) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
     }
   }
 
@@ -162,7 +171,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
-                  placeholder="NUS email"
+                  placeholder="Personal Email"
                   // defaultValue={email}
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
@@ -171,10 +180,15 @@ export default function SignUpDetailScreen({ navigation, route }) {
                     setErrorMsg("");
                     setEmail(value);
                     setFieldValue("email", value);
+                    validateEmail(value);
                   }}
-                  // editable={false}
                 />
                 <Text style={globalStyles.inputError}>{errors.email}</Text>
+                {showEmailError ? (
+                  <Text style={globalStyles.inputError}>
+                    Please use your personal email.
+                  </Text>
+                ) : null}
 
                 <Input
                   containerStyle={globalStyles.inputContainerNormal}

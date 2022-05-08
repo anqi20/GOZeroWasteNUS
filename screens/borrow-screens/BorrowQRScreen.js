@@ -83,7 +83,7 @@ export default function BorrowQRScreen({ navigation }) {
     <View style={styles.container}>
       <Image
         source={require("../../assets/AppImages/borrowHeader.png")}
-        style={{ width: Dimensions.get("window").width+4 }}
+        style={{ width: Dimensions.get("window").width + 4 }}
       />
       <View
         style={{
@@ -95,11 +95,11 @@ export default function BorrowQRScreen({ navigation }) {
       >
         <View style={styles.box}>
           {/* <TouchableOpacity
-          onPress={() => navigation.navigate("QR Generator")}
-          style={styles.imagePlaceholder}
-        >
-          <Text>(QR generator)</Text>
-        </TouchableOpacity> */}
+            onPress={() => navigation.navigate("QR Generator")}
+            style={styles.imagePlaceholder}
+          >
+            <Text>(QR generator)</Text>
+          </TouchableOpacity> */}
           {/*<TouchableOpacity
           onPress={() => navigation.navigate("Unsuccess Screen")}
           style={styles.imagePlaceholder}

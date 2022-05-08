@@ -2,7 +2,7 @@
   "expo": {
     "name": "GOZeroWaste",
     "slug": "GOZeroWaste",
-    "version": "2.2.3",
+    "version": "2.2.4",
     "orientation": "portrait",
     "icon": "./assets/icons/icon.png",
     "splash": {
@@ -29,7 +29,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.tsh22.gozerowaste",
-      "versionCode": 6
+      "versionCode": 7
     },
     "web": {
       "favicon": "./assets/icons/favicon.png"

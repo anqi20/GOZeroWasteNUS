@@ -3,8 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { globalStyles } from "../../assets/globalStyles";
 import colors from "../../assets/colors";
 import { AuthContext } from "../../assets/AuthContext";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function SignUpSuccess() {
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
+
   const { signUpSuccess } = useContext(AuthContext);
 
   return (

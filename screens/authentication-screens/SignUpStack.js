@@ -23,12 +23,13 @@ export default function SignUpStack() {
       <Stack.Screen
         name="Sign Up Verification Screen"
         component={SignUpVerificationScreen}
-        options={{ title: "Sign Up" }}
+        // options={{ title: "Sign Up" }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Sign Up Success"
         component={SignUpSuccess}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
       {/* <Stack.Screen
         name="Sign Up Screen"

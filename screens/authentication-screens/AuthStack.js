@@ -25,7 +25,7 @@ export default function AuthStack() {
         name="Sign Up Stack"
         component={SignUpStack}
         //options={{ title: "Sign Up" }}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       ></Stack.Screen>
       <Stack.Screen
         name="Forgot Password Stack"

@@ -25,10 +25,18 @@ export default function ForgotPasswordScreen({ navigation }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [showEmailError, setEmailError] = useState(false);
+  const [submit, setSubmit] = useState(false);
+
+  // useEffect(() => {
+  //   if (submit == true && errorMsg == "") {
+
+  //   }
+  //   setSubmit(false);
+  // }, [submit]);
 
   // Ensure button can only be pressed every 10 seconds
   function handleButtonClicked() {
-    forgotPassword({ email, setStatusMsg, setErrorMsg });
+    forgotPassword({ email, setStatusMsg, setErrorMsg, setSubmit });
     setDisabled(true);
     setTimeout(() => {
       setDisabled(false);

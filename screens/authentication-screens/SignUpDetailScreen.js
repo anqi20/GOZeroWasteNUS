@@ -69,7 +69,10 @@ export default function SignUpDetailScreen({ navigation, route }) {
       .label("Password")
       .required("Please enter your new password")
       .min(8, "Password must have at least 8 characters")
-      .matches(/[0-9]|[^0-9,A-Z,a-z]/, "Password must contain at least a number."),
+      .matches(
+        /[0-9]|[^0-9,A-Z,a-z]/,
+        "Password must contain at least a number."
+      ),
     confirmPassword: yup
       .string()
       .label("confirmPassword")
@@ -91,27 +94,28 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [enteredDOB, setDOB] = useState(" ");
   const [enteredFaculty, setFaculty] = useState(" ");
   const [errorMsg, setErrorMsg] = useState("");
+  const [submit, setSubmit] = useState(false);
 
-  function noErrorsNavigate() {
-    if (errorMsg == "") {
+  useEffect(() => {
+    console.log("Submit: ", submit)
+    if (submit == true && errorMsg == "") {
       navigation.navigate("Sign Up Verification Screen");
-      return null;
-    } else {
-      return null;
     }
-  }
+    setSubmit(false);
+  }, [submit]);
 
   function validateEmail(email) {
     const blockEmails = ["@u.nus.edu", "@nus.edu.sg", "@u.yale-nus.edu.sg", "@u.duke.nus.edu", "@partner.nus.edu.sg"]
 
     if(blockEmails.some(v => email.includes(v))) {
       setEmailError(true);
+      setSubmit(false)
     } else {
       setEmailError(false);
     }
   }
 
-  function createUser(callback) {
+  function createUser() {
     const email = enteredEmail;
     const password = enteredPassword;
     const firstName = enteredFN;
@@ -128,8 +132,8 @@ export default function SignUpDetailScreen({ navigation, route }) {
       dateOfBirth,
       faculty,
       setErrorMsg,
+      setSubmit,
     });
-    callback(); // Callback, ensures error message is set before navigate executes
   }
 
   return (
@@ -158,7 +162,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
             onSubmit={(values) => {
               // console.log(values);
               // setEnteredData(values);
-              createUser(noErrorsNavigate);
+              createUser();
             }}
           >
             {({
@@ -242,50 +246,6 @@ export default function SignUpDetailScreen({ navigation, route }) {
                   }}
                 />
                 <Text style={globalStyles.inputError}>{errors.gender}</Text>
-
-                {/*Date of Birth*/}
-                {/*<TouchableOpacity
-                  style={styles.dOBContainer}
-                  onPress={showDatePicker}
-                >
-                  <Icon
-                    name="calendar"
-                    type="material-community"
-                    size={24}
-                    color="black"
-                  />
-                  {isDateConfirmed ? (
-                    <Text style={styles.dOBText}>
-                      {moment(date).format("DD/MM/YYYY")}
-                    </Text>
-                  ) : (
-                    <Text style={styles.dOBPlaceholderText}>Date of Birth</Text>
-                  )}
-                </TouchableOpacity>
-                <View style={styles.dOBLine} />
-
-                <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode="date"
-                  onConfirm={(date) => {
-                    hideDatePicker();
-                    setDate(date);
-                    setFieldValue("dOB", moment(date).format("DD/MM/YYYY"));
-                    setDateConfirmed(true);
-                    setDOB(moment(date).format("DD/MM/YYYY"));
-                  }}
-                  onCancel={hideDatePicker}
-                  date={date}
-                  onChange={(event, selectedDate) => {
-                    const currentDate = selectedDate || date;
-                    setDate(currentDate);
-                    setFieldValue(
-                      "incidentDate",
-                      moment(selectedDate).format("DD/MM/YYYY")
-                    );
-                  }}
-                />
-                <Text style={globalStyles.inputError}>{errors.dOB}</Text> */}
 
                 <RNPickerSelect
                   onValueChange={(value) => {

@@ -61,7 +61,11 @@ export default function SettingsStack() {
       <Stack.Screen
         name="Account terminated"
         component={TerminateConfirmationScreen}
-        options={{ headerShown: false, headerBackTitleVisible: false }}
+        options={{
+          headerShown: false,
+          headerBackTitleVisible: false,
+          gestureEnabled: false,
+        }}
       ></Stack.Screen>
     </Stack.Navigator>
   );

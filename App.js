@@ -18,20 +18,11 @@ const Stack = createStackNavigator();
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [isValidated, setValidated] = useState(false);
 
-  /* 
-  isValidated initial state set as true
-  When app first starts up, if user is previously logged in, user is not null
-  and condition for main screens will be satisfied.
-  However if user is not previously logged in, user will be null and
-  only auth stack will be shown despite isValidated being set to true.
-  This state variable is to ensure navigation to sign up validation screens.
-  */
-  const [isValidated, setValidated] = useState(true);
-
-  // Monitors authentication state for persistent log in.
-  // On initial loading of the app, if user is previously logged in, this
-  // function will get the user data
+  /* Monitors authentication state for persistent log in.
+   On initial loading of the app, if user is previously logged in, this
+   function will get the user data */
   useEffect(() => {
     console.log("Getting user data on startup");
     const usersRef = firebase.firestore().collection("users");
@@ -48,6 +39,9 @@ export default function App() {
           .catch((error) => {
             setLoading(false);
           });
+
+        console.log(`Email isValidated?: ${user.emailVerified}`);
+        setValidated(user.emailVerified);
 
         // Add uid to logs on log in (TEMPORARY)
         usersRef
@@ -125,11 +119,18 @@ export default function App() {
               if (!firestoreDocument.exists) {
                 console.log("User's document does not exist anymore.");
                 return;
+              } else if (response.user.emailVerified == false) {
+                // Checks if the user has been verified
+                setValidated(false);
+                data.setErrorMsg(
+                  "Please check your inbox and verify your email before trying again! "
+                );
+              } else {
+                const userData = firestoreDocument.data();
+                setUser(userData);
+                setValidated(true);
+                console.log("User is logged in!");
               }
-              const userData = firestoreDocument.data();
-              setUser(userData);
-              setValidated(true);
-              console.log("User is logged in!");
             })
             .catch((error) => {
               console.log(error);
@@ -159,7 +160,6 @@ export default function App() {
         .signOut()
         .then(() => {
           setUser(null);
-          setValidated(false);
           console.log("User is logged out!");
         })
         .catch((error) => {
@@ -173,7 +173,6 @@ export default function App() {
         .auth()
         .createUserWithEmailAndPassword(data.email, data.password)
         .then((cred) => {
-          setValidated(false); // Set validated to false on sign up
           const uid = cred.user.uid;
           // Add user's profile information in firestore
           firebase.firestore().collection("users").doc(uid).set({
@@ -190,11 +189,9 @@ export default function App() {
             containerReturned: 0,
             cupDate: [],
             cupReturned: 0,
-            // userNum: 0,
             location: "",
             numCup: 0,
             numContainer: 0,
-            // numReturn: 0,
           });
           // Add logs collection to each user
           firebase
@@ -231,6 +228,7 @@ export default function App() {
         })
         .then(() => {
           console.log("User Account created!");
+          data.setSubmit(true);
         })
         .catch((error) => {
           console.log(error);
@@ -253,7 +251,9 @@ export default function App() {
     <SafeAreaProvider>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
-          {console.log(`Authentication check isValidated? : ${isValidated}`)}
+          {console.log(
+            `Authentication screen check isValidated? : ${isValidated}`
+          )}
           {user && isValidated ? (
             <Stack.Navigator>
               <Stack.Screen

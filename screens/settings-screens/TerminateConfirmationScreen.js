@@ -3,8 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { globalStyles } from "../../assets/globalStyles";
 import firebase from "../../database/firebaseDB";
 import { AuthContext } from "../../assets/AuthContext";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function TerminateConfirmationScreen({ navigation, route }) {
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
+
   const { user } = route.params;
   const { terminateAccount } = useContext(AuthContext);
 

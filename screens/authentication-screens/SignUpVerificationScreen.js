@@ -5,11 +5,11 @@ import {
   Text,
   View,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
+  Alert,
   ScrollView,
 } from "react-native";
+import Constants from "expo-constants";
+
 import { Formik } from "formik";
 import { Input } from "react-native-elements";
 import { globalStyles } from "../../assets/globalStyles";
@@ -18,19 +18,27 @@ import colors from "../../assets/colors";
 import { AuthContext } from "../../assets/AuthContext";
 import firebase from "../../database/firebaseDB";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import FooterText from "../../components/FooterText";
+import { useBackHandler } from "@react-native-community/hooks";
+import { backActionHandler } from "../BasicApi";
 
 export default function SignUpVerificationScreen({ navigation }) {
+  // Prevent back button action on Android
+  useBackHandler(backActionHandler);
+
+  const { terminateAccount } = useContext(AuthContext);
   const [showError, setError] = useState("");
+  const user = firebase.auth().currentUser;
+  const uid = firebase.auth().currentUser.uid;
 
   function validateEmail() {
-    const currUser = firebase.auth().currentUser;
-    if (currUser !== null) {
+    if (user !== null) {
       console.log("User id: " + firebase.auth().currentUser.uid);
-      currUser
+      user
         .reload()
         .then(() => {
-          console.log(`Is user verified: ${currUser.emailVerified}`);
-          if (currUser.emailVerified) {
+          console.log(`Is user verified: ${user.emailVerified}`);
+          if (user.emailVerified) {
             setError("");
             navigation.navigate("Sign Up Success");
           } else {
@@ -47,12 +55,13 @@ export default function SignUpVerificationScreen({ navigation }) {
   }
 
   function resendEmail() {
-    const currUser = firebase.auth().currentUser;
-    if (currUser !== null) {
-      currUser
+    if (user !== null) {
+      user
         .sendEmailVerification()
         .then(() => {
+          setError("");
           console.log("Email verification resent!");
+          Alert.alert("Email verification resent!");
         })
         .catch((error) => {
           setError(
@@ -66,46 +75,58 @@ export default function SignUpVerificationScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <MaterialCommunityIcons
-        name="email"
-        size={60}
-        color="black"
-        style={{ alignSelf: "center", marginBottom: 10 }}
-      />
-      <Text style={styles.text}>
-        A validation email from noreply@renuse-83e58.firebaseapp.com has been sent!{"\n"}{"\n"}
-        Please check your email and
-        validate your account to continue.
-      </Text>
-      {showError == "" ? null : (
-        <Text style={styles.errorText}>{showError}</Text>
-      )}
-      {showError ==
-      "Ensure you have not signed up with this account before!" ? (
+    <View style={{ flex: 1 }}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <MaterialCommunityIcons
+          name="email"
+          size={60}
+          color="black"
+          style={{ alignSelf: "center", marginBottom: 10 }}
+        />
+        <Text style={styles.text}>
+          A validation email from noreply@renuse-83e58.firebaseapp.com has been
+          sent to {firebase.auth().currentUser.email}!{"\n"}
+          {"\n"}
+          Please check your email and validate your account to continue.
+        </Text>
+        {showError == "" ? null : (
+          <Text style={styles.errorText}>{showError}</Text>
+        )}
+        {showError ==
+        "Ensure you have not signed up with this account before!" ? (
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Log In Screen")}
+            style={globalStyles.button}
+          >
+            <Text style={globalStyles.buttonText}>Back to log in</Text>
+          </TouchableOpacity>
+        ) : null}
+        <TouchableOpacity onPress={validateEmail} style={globalStyles.button}>
+          <Text style={globalStyles.buttonText}>Continue</Text>
+        </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Log In Screen")}
+          onPress={() => {
+            terminateAccount({ user, uid });
+            navigation.goBack();
+          }}
           style={globalStyles.button}
         >
-          <Text style={globalStyles.buttonText}>Back to log in</Text>
+          <Text style={globalStyles.buttonText}>Edit email</Text>
         </TouchableOpacity>
-      ) : null}
-      <TouchableOpacity onPress={validateEmail} style={globalStyles.button}>
-        <Text style={globalStyles.buttonText}>Continue</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={resendEmail}>
-        <Text style={styles.resendText}>Resend validation email</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={resendEmail}>
+          <Text style={styles.resendText}>Resend validation email</Text>
+        </TouchableOpacity>
+        <FooterText />
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     padding: 20,
-    justifyContent: "center",
+    marginTop: Constants.statusBarHeight,
   },
   text: {
     textAlign: "center",

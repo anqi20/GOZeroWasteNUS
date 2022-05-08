@@ -44,13 +44,6 @@ export default function SignUpDetailScreen({ navigation, route }) {
   };
 
   const validationSchema = yup.object().shape({
-    email: yup
-      .string()
-      .label("email")
-      .required("Please enter your nus email")
-      .matches(/(@u.nus.edu|@nus.edu.sg|@u.yale-nus.edu.sg|@u.duke.nus.edu|@partner.nus.edu.sg)$/, 
-        "Please enter a valid NUS email"
-      ),
     firstName: yup
       .string()
       .label("firstName")
@@ -70,7 +63,10 @@ export default function SignUpDetailScreen({ navigation, route }) {
       .label("Password")
       .required("Please enter your new password")
       .min(8, "Password must have at least 8 characters")
-      .matches(/[0-9]|[^0-9,A-Z,a-z]/, "Password must contain at least a number."),
+      .matches(
+        /[0-9]|[^0-9,A-Z,a-z]/,
+        "Password must contain at least a number."
+      ),
     confirmPassword: yup
       .string()
       .label("confirmPassword")
@@ -92,17 +88,16 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [enteredDOB, setDOB] = useState(" ");
   const [enteredFaculty, setFaculty] = useState(" ");
   const [errorMsg, setErrorMsg] = useState("");
+  const [submit, setSubmit] = useState(false);
 
-  function noErrorsNavigate() {
-    if (errorMsg == "") {
+  useEffect(() => {
+    if (submit == true && errorMsg == "") {
       navigation.navigate("Sign Up Verification Screen");
-      return null;
-    } else {
-      return null;
     }
-  }
+    setSubmit(false);
+  }, [submit]);
 
-  function createUser(callback) {
+  function createUser() {
     const email = enteredEmail;
     const password = enteredPassword;
     const firstName = enteredFN;
@@ -119,8 +114,8 @@ export default function SignUpDetailScreen({ navigation, route }) {
       dateOfBirth,
       faculty,
       setErrorMsg,
+      setSubmit,
     });
-    callback(); // Callback, ensures error message is set before navigate executes
   }
 
   return (
@@ -149,7 +144,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
             onSubmit={(values) => {
               // console.log(values);
               // setEnteredData(values);
-              createUser(noErrorsNavigate);
+              createUser();
             }}
           >
             {({
@@ -162,7 +157,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
-                  placeholder="NUS email"
+                  placeholder="Email (Non-NUS)"
                   // defaultValue={email}
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}

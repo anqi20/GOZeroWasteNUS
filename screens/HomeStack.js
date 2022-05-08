@@ -21,7 +21,7 @@ export default function HomeStack() {
       <Stack.Screen
         name="Settings Stack"
         component={SettingsStack}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen
         name="BYO Stack"

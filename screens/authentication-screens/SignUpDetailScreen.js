@@ -31,7 +31,6 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDateConfirmed, setDateConfirmed] = useState(false);
-  const [showEmailError, setEmailError] = useState(false);
 
   const headerHeight = useHeaderHeight();
 
@@ -94,22 +93,31 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [enteredDOB, setDOB] = useState(" ");
   const [enteredFaculty, setFaculty] = useState(" ");
   const [errorMsg, setErrorMsg] = useState("");
-  const [submit, setSubmit] = useState(false);
+
+  const [canSubmit, setSubmit] = useState(false);
+  const [showEmailError, setEmailError] = useState(false);
 
   useEffect(() => {
-    console.log("Submit: ", submit)
-    if (submit == true && errorMsg == "") {
+    console.log(`canSubmit & continue with signup: ${canSubmit}`);
+    console.log(`hasEmailError: ${showEmailError}`);
+
+    if (canSubmit == true && showEmailError == false) {
       navigation.navigate("Sign Up Verification Screen");
+      setSubmit(false);
     }
-    setSubmit(false);
-  }, [submit]);
+  }, [canSubmit, showEmailError]);
 
   function validateEmail(email) {
-    const blockEmails = ["@u.nus.edu", "@nus.edu.sg", "@u.yale-nus.edu.sg", "@u.duke.nus.edu", "@partner.nus.edu.sg"]
+    const blockEmails = [
+      "@u.nus.edu",
+      "@nus.edu.sg",
+      "@u.yale-nus.edu.sg",
+      "@u.duke.nus.edu",
+      "@partner.nus.edu.sg",
+    ];
 
-    if(blockEmails.some(v => email.includes(v))) {
+    if (blockEmails.some((v) => email.includes(v))) {
       setEmailError(true);
-      setSubmit(false)
     } else {
       setEmailError(false);
     }
@@ -162,7 +170,9 @@ export default function SignUpDetailScreen({ navigation, route }) {
             onSubmit={(values) => {
               // console.log(values);
               // setEnteredData(values);
-              createUser();
+              if (showEmailError == false) {
+                createUser();
+              }
             }}
           >
             {({

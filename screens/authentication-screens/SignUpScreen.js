@@ -20,12 +20,8 @@ export default function SignUpScreen({ navigation }) {
     email: yup
       .string()
       .label("Email")
-      .matches(
-        /(@u.nus.edu|@nus.edu.sg|@u.yale-nus.edu.sg|@u.duke.nus.edu)$/,
-        "Please enter a valid NUS email"
-      )
-      .required("Please enter your email")
-      .length(18, "Please enter a valid NUS email"),
+      .email()
+      .required("Please enter your email"),
   });
 
   return (
@@ -46,9 +42,9 @@ export default function SignUpScreen({ navigation }) {
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
-                  label="NUS email"
+                  label="Email"
                   labelStyle={globalStyles.inputLabel}
-                  placeholder="e1234567@u.nus.edu"
+                  placeholder="abc@gmail.com"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
                   onChangeText={handleChange("email")}

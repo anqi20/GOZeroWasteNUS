@@ -18,6 +18,11 @@ import { AuthContext } from "../../assets/AuthContext";
 
 export default function LoginScreen({ navigation, route }) {
   const validationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .label("Email")
+      .email()
+      .required("Please enter your email"),
     password: yup
       .string()
       .label("Password")
@@ -51,9 +56,9 @@ export default function LoginScreen({ navigation, route }) {
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
-                  label="NUS email"
+                  label="Email"
                   labelStyle={globalStyles.inputLabel}
-                  placeholder="e1234567@u.nus.edu"
+                  placeholder="abc@gmail.com"
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
                   onChangeText={(value) => {

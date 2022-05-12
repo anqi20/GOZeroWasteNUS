@@ -86,7 +86,7 @@ export default function EditAccountScreen({ navigation }) {
           <View>
             <Input
               containerStyle={globalStyles.inputContainerTop}
-              placeholder="NUS email"
+              placeholder="abc@gmail.com"
               inputStyle={globalStyles.inputInput}
               leftIcon={<Ionicons name="mail" size={24} />}
               autoCapitalize="none"

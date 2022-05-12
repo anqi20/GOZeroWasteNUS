@@ -31,6 +31,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDateConfirmed, setDateConfirmed] = useState(false);
+  const [showEmailError, setEmailError] = useState(false);
 
   const headerHeight = useHeaderHeight();
 
@@ -44,6 +45,11 @@ export default function SignUpDetailScreen({ navigation, route }) {
   };
 
   const validationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .label("Email")
+      .required("Please enter your personal email")
+      .email(),
     firstName: yup
       .string()
       .label("firstName")
@@ -91,11 +97,23 @@ export default function SignUpDetailScreen({ navigation, route }) {
   const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
+    console.log("Submit: ", submit)
     if (submit == true && errorMsg == "") {
       navigation.navigate("Sign Up Verification Screen");
     }
     setSubmit(false);
   }, [submit]);
+
+  function validateEmail(email) {
+    const blockEmails = ["@u.nus.edu", "@nus.edu.sg", "@u.yale-nus.edu.sg", "@u.duke.nus.edu", "@partner.nus.edu.sg"]
+
+    if(blockEmails.some(v => email.includes(v))) {
+      setEmailError(true);
+      setSubmit(false)
+    } else {
+      setEmailError(false);
+    }
+  }
 
   function createUser() {
     const email = enteredEmail;
@@ -157,7 +175,7 @@ export default function SignUpDetailScreen({ navigation, route }) {
               <View>
                 <Input
                   containerStyle={globalStyles.inputContainerTop}
-                  placeholder="Email (Non-NUS)"
+                  placeholder="Personal Email"
                   // defaultValue={email}
                   inputStyle={globalStyles.inputInput}
                   leftIcon={<Ionicons name="mail" size={24} />}
@@ -166,10 +184,15 @@ export default function SignUpDetailScreen({ navigation, route }) {
                     setErrorMsg("");
                     setEmail(value);
                     setFieldValue("email", value);
+                    validateEmail(value);
                   }}
-                  // editable={false}
                 />
                 <Text style={globalStyles.inputError}>{errors.email}</Text>
+                {showEmailError ? (
+                  <Text style={globalStyles.inputError}>
+                    Please use your personal email.
+                  </Text>
+                ) : null}
 
                 <Input
                   containerStyle={globalStyles.inputContainerNormal}
@@ -223,50 +246,6 @@ export default function SignUpDetailScreen({ navigation, route }) {
                   }}
                 />
                 <Text style={globalStyles.inputError}>{errors.gender}</Text>
-
-                {/*Date of Birth*/}
-                {/*<TouchableOpacity
-                  style={styles.dOBContainer}
-                  onPress={showDatePicker}
-                >
-                  <Icon
-                    name="calendar"
-                    type="material-community"
-                    size={24}
-                    color="black"
-                  />
-                  {isDateConfirmed ? (
-                    <Text style={styles.dOBText}>
-                      {moment(date).format("DD/MM/YYYY")}
-                    </Text>
-                  ) : (
-                    <Text style={styles.dOBPlaceholderText}>Date of Birth</Text>
-                  )}
-                </TouchableOpacity>
-                <View style={styles.dOBLine} />
-
-                <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode="date"
-                  onConfirm={(date) => {
-                    hideDatePicker();
-                    setDate(date);
-                    setFieldValue("dOB", moment(date).format("DD/MM/YYYY"));
-                    setDateConfirmed(true);
-                    setDOB(moment(date).format("DD/MM/YYYY"));
-                  }}
-                  onCancel={hideDatePicker}
-                  date={date}
-                  onChange={(event, selectedDate) => {
-                    const currentDate = selectedDate || date;
-                    setDate(currentDate);
-                    setFieldValue(
-                      "incidentDate",
-                      moment(selectedDate).format("DD/MM/YYYY")
-                    );
-                  }}
-                />
-                <Text style={globalStyles.inputError}>{errors.dOB}</Text> */}
 
                 <RNPickerSelect
                   onValueChange={(value) => {

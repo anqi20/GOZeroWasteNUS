@@ -197,12 +197,16 @@ export default function SignUpDetailScreen({ navigation, route }) {
                     validateEmail(value);
                   }}
                 />
-                <Text style={globalStyles.inputError}>{errors.email}</Text>
+                
                 {showEmailError ? (
                   <Text style={globalStyles.inputError}>
-                    Please use your personal email.
+                    Please use your personal email
                   </Text>
-                ) : null}
+                ) : 
+                  <Text style={globalStyles.inputError}>
+                    {errors.email}
+                  </Text>
+                }
 
                 <Input
                   containerStyle={globalStyles.inputContainerNormal}

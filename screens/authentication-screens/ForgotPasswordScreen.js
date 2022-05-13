@@ -16,6 +16,7 @@ import { globalStyles } from "../../assets/globalStyles";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
 import { AuthContext } from "../../assets/AuthContext";
+import FooterText from "../../components/FooterText";
 
 export default function ForgotPasswordScreen({ navigation }) {
   const { forgotPassword } = useContext(AuthContext);
@@ -26,13 +27,6 @@ export default function ForgotPasswordScreen({ navigation }) {
   const [disabled, setDisabled] = useState(false);
   const [showEmailError, setEmailError] = useState(false);
   const [submit, setSubmit] = useState(false);
-
-  // useEffect(() => {
-  //   if (submit == true && errorMsg == "") {
-
-  //   }
-  //   setSubmit(false);
-  // }, [submit]);
 
   // Ensure button can only be pressed every 10 seconds
   function handleButtonClicked() {
@@ -88,12 +82,15 @@ export default function ForgotPasswordScreen({ navigation }) {
                   autoCapitalize="none"
                 />
 
-                <Text style={globalStyles.inputError}>{errors.email}</Text>
                 {showEmailError ? (
                   <Text style={globalStyles.inputError}>
                     Please use your personal email.
                   </Text>
-                ) : null}
+                ) : 
+                  <Text style={globalStyles.inputError}>
+                    {errors.email}
+                  </Text>
+                }
 
                 <TouchableOpacity
                   style={globalStyles.buttonTop}
@@ -130,6 +127,9 @@ export default function ForgotPasswordScreen({ navigation }) {
                     <Text style={styles.errorMsg}>{errorMsg}</Text>
                   </View>
                 )}
+                <View>
+                  <FooterText/>
+                </View>
               </View>
             )}
           </Formik>

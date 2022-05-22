@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import * as yup from "yup";
 import {
   StyleSheet,
@@ -26,7 +26,16 @@ export default function ForgotPasswordScreen({ navigation }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [showEmailError, setEmailError] = useState(false);
-  const [submit, setSubmit] = useState(false);
+  const [canSubmit, setSubmit] = useState(false);
+
+  useEffect(() => {
+    console.log(`canSubmit: ${canSubmit}`);
+    console.log(`hasEmailError: ${showEmailError}`);
+
+    if (canSubmit == true && showEmailError == false) {
+      handleButtonClicked();
+    }
+  }, [canSubmit, showEmailError]);
 
   // Ensure button can only be pressed every 10 seconds
   function handleButtonClicked() {
@@ -38,9 +47,15 @@ export default function ForgotPasswordScreen({ navigation }) {
   }
 
   function validateEmail(email) {
-    const blockEmails = ["@u.nus.edu", "@nus.edu.sg", "@u.yale-nus.edu.sg", "@u.duke.nus.edu", "@partner.nus.edu.sg"]
+    const blockEmails = [
+      "@u.nus.edu",
+      "@nus.edu.sg",
+      "@u.yale-nus.edu.sg",
+      "@u.duke.nus.edu",
+      "@partner.nus.edu.sg",
+    ];
 
-    if(blockEmails.some(v => email.includes(v))) {
+    if (blockEmails.some((v) => email.includes(v))) {
       setEmailError(true);
     } else {
       setEmailError(false);
@@ -62,7 +77,11 @@ export default function ForgotPasswordScreen({ navigation }) {
           <Formik
             initialValues={{ email: "" }}
             validationSchema={validationSchema}
-            onSubmit={handleButtonClicked}
+            onSubmit={(values) => {
+              if (showEmailError == false) {
+                handleButtonClicked();
+              }
+            }}
             isSubmitting={!showEmailError}
           >
             {({ setFieldValue, handleSubmit, errors, isValid }) => (
@@ -86,11 +105,9 @@ export default function ForgotPasswordScreen({ navigation }) {
                   <Text style={globalStyles.inputError}>
                     Please use your personal email.
                   </Text>
-                ) : 
-                  <Text style={globalStyles.inputError}>
-                    {errors.email}
-                  </Text>
-                }
+                ) : (
+                  <Text style={globalStyles.inputError}>{errors.email}</Text>
+                )}
 
                 <TouchableOpacity
                   style={globalStyles.buttonTop}
@@ -128,7 +145,7 @@ export default function ForgotPasswordScreen({ navigation }) {
                   </View>
                 )}
                 <View>
-                  <FooterText/>
+                  <FooterText />
                 </View>
               </View>
             )}

@@ -93,6 +93,7 @@ export default function App() {
         .auth()
         .sendPasswordResetEmail(data.email)
         .then(() => {
+          data.setSubmit(true);
           data.setStatusMsg("Password reset email sent!");
           console.log("Password reset email sent!");
         })

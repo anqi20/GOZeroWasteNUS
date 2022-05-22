@@ -19,6 +19,7 @@
     "expo-barcode-scanner": "~11.1.2",
     "expo-intent-launcher": "~10.0.3",
     "expo-status-bar": "~1.1.0",
+    "expo-updates": "~0.10.15",
     "firebase": "8.2.3",
     "formik": "^2.2.9",
     "moment": "^2.29.1",

@@ -15,6 +15,7 @@ import { globalStyles } from "../../assets/globalStyles";
 import colors from "../../assets/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../../assets/AuthContext";
+import FooterText from "../../components/FooterText";
 
 export default function LoginScreen({ navigation, route }) {
   const validationSchema = yup.object().shape({
@@ -118,6 +119,7 @@ export default function LoginScreen({ navigation, route }) {
               </View>
             )}
           </Formik>
+          <FooterText />
         </ScrollView>
       </TouchableWithoutFeedback>
     </View>

@@ -123,8 +123,19 @@ export default function App() {
               } else if (response.user.emailVerified == false) {
                 // Checks if the user has been verified
                 setValidated(false);
+
+                response.user
+                  .sendEmailVerification()
+                  .then(() => {
+                    console.log(
+                      `Email verification re-sent to ${response.user.email}`
+                    );
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
                 data.setErrorMsg(
-                  "Please check your inbox and verify your email before trying again! "
+                  "Please check your inbox and verify your email before trying again or sign up again with your personal email!"
                 );
               } else {
                 const userData = firestoreDocument.data();
